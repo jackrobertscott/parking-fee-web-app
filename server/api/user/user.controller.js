@@ -80,6 +80,67 @@ exports.changePassword = function(req, res, next) {
 };
 
 /**
+ * Associate a company to user
+ */
+exports.setCompany = function(req, res, next) {
+  var userId = req.user._id;
+  var companyId = String(req.body.company._id);
+
+  User.findById(userId, function (err, user) {
+    user.company = companyId;
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
+ * Make user role 'company'
+ */
+exports.roleCompany = function(req, res, next) {
+  var userId = req.user._id;
+
+  User.findById(userId, function (err, user) {
+    user.role = 'company';
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
+ * Make user role 'inspector'
+ */
+exports.roleInspector = function(req, res, next) {
+  var userId = req.user._id;
+
+  User.findById(userId, function (err, user) {
+    user.role = 'inspector';
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
+ * Make user role 'user'
+ */
+exports.roleUser = function(req, res, next) {
+  var userId = req.user._id;
+
+  User.findById(userId, function (err, user) {
+    user.role = 'user';
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
  * Get my info
  */
 exports.me = function(req, res, next) {

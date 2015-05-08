@@ -93,6 +93,42 @@ angular.module('webApp')
       },
 
       /**
+       * Sets a company association with user
+       *
+       * @param  {Object} company
+       */
+       setCompany: function(company, callback) {
+         var cb = callback || angular.noop;
+         
+         return User.setCompany({ id: currentUser._id }, {
+           company: company
+         }, function(user) {
+           return cb(user);
+         }, function(err) {
+           return cb(err);
+         }).$promise;
+       },
+
+       /**
+        * Sets a company association with user
+        *
+        * @param  {Object} company
+        */
+        setRole: function(role, callback) {
+          var cb = callback || angular.noop;
+
+          // Warning: might need to implement a valid role check here
+          return User.setRole({
+            id: currentUser._id,
+            detail: role
+          }, function(user) {
+            return cb(user);
+          }, function(err) {
+            return cb(err);
+          }).$promise;
+        },
+
+      /**
        * Gets all available info on authenticated user
        *
        * @return {Object} user

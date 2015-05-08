@@ -2,19 +2,31 @@
 
 angular.module('webApp')
   .factory('User', function ($resource) {
-    return $resource('/api/users/:id/:controller', {
+    return $resource('/api/users/:id/:controller/:detail', {
       id: '@_id'
     }, {
       changePassword: {
         method: 'PUT',
         params: {
-          controller:'password'
+          controller: 'password'
         }
       },
       get: {
         method: 'GET',
         params: {
-          id:'me'
+          id: 'me'
+        }
+      },
+      setCompany: {
+        method: 'PUT',
+        params: {
+          controller: 'company'
+        }
+      },
+      setRole: {
+        method: 'PUT',
+        params: {
+          controller: 'role'
         }
       }
 	  });
