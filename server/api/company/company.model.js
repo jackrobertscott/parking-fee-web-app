@@ -6,12 +6,10 @@ var mongoose = require('mongoose'),
 var CompanySchema = new Schema({
   name: String,
   info: String,
+  email: String,
+  phone: Number,
   active: Boolean,
   authenticated: Boolean,
-  contact: {
-    email: String,
-    phone: Number
-  },
   admins: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
@@ -29,5 +27,12 @@ var CompanySchema = new Schema({
     default: Date.now
   }
 });
+
+CompanySchema
+  .path('email')
+  .validate(function(email) {
+    if (authTypes.indexOf(this.provider) !== -1) return true;
+    return email.length;
+  }, 'Email cannot be blank');
 
 module.exports = mongoose.model('Company', CompanySchema);
