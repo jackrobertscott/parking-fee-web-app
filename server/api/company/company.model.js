@@ -7,9 +7,15 @@ var CompanySchema = new Schema({
   name: String,
   info: String,
   email: String,
-  phone: Number,
-  active: Boolean,
-  authenticated: Boolean,
+  phone: String,
+  active: {
+    type: Boolean,
+    default: true
+  },
+  authenticated: {
+    type: Boolean,
+    default: false
+  },
   admins: [{
     type: Schema.Types.ObjectId,
     ref: 'User'

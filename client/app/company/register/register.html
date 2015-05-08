@@ -1,4 +1,5 @@
 <form class="form" name="form" ng-submit="register(form)" novalidate>
+
   <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted, 'has-error': form.name.$invalid && submitted }">
     <label for="companyName">Company Name</label>
     <input type="text" name="name" class="form-control" id="companyName" placeholder="Company Name" ng-model="company.name" required>
@@ -6,6 +7,7 @@
       A company name is required.
     </p>
   </div>
+
   <div class="form-group" ng-class="{ 'has-success': form.phone.$valid && submitted, 'has-error': form.phone.$invalid && submitted }">
     <label for="companyPhone">Contact Phone Number</label>
     <input type="text" name="phone" class="form-control" id="companyPhone" placeholder="Company Phone" ng-model="company.phone" required mongoose-error>
@@ -13,6 +15,7 @@
       A company phone number is required.
     </p>
   </div>
+
   <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted, 'has-error': form.email.$invalid && submitted }">
     <label for="companyEmail">Contact Email Address</label>
     <input type="email" name="email" class="form-control" id="companyEmail" placeholder="Company Email" ng-model="company.email" required mongoose-error>
@@ -23,12 +26,16 @@
       A company email address is required.
     </p>
   </div>
+
   <div class="form-group">
     <label for="companyInfo">Company Information</label>
     <textarea class="form-control" rows="3" id="companyInfo" ng-model="company.info">Text</textarea>
   </div>
+
   <p class="help-block" ng-repeat="error in errors">
     {{ error }}
   </p>
+
   <button type="submit" class="btn btn-default">Submit</button>
+
 </form>
