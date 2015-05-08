@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var Company = require('./company.model');
 
-// Get list of companys
+// Get list of companies
 exports.index = function(req, res) {
   Company.find(function (err, companys) {
     if(err) { return handleError(res, err); }
