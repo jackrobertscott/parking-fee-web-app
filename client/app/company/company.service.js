@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webApp')
-  .factory('Company', function () {
-    return $resource('/api/users/:id', {
+  .factory('Company', function ($resource) {
+    return $resource('/api/companies/:id', {
       id: '@_id'
     }, {
       update: {

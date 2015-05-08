@@ -1,18 +1,19 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('CompanyRegisterCtrl', function ($scope, $http, socket) {
+  .controller('CompanyRegisterCtrl', function ($scope, $http, $state, socket, Company) {
     $scope.company = {};
-    $scope.errors = {};
+    $scope.errors = [];
 
     $scope.register = function() {
-      $http.post('/api/companies', { company: $scope.company })
-        .success(function (data) {
+      var company = new Company($scope.company);
 
-        }).error(function (err) {
-
-        });
-      $scope.company = '';
+      company.$save(function(res) {
+        $scope.company = {};
+        $state.go('company', {id: res._id});
+			}, function(err) {
+				$scope.errors.push(err.data);
+			});
     };
 
     $scope.deleteThing = function(thing) {
