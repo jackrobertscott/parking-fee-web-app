@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
@@ -98,41 +99,18 @@ exports.setCompany = function(req, res, next) {
 /**
  * Make user role 'company'
  */
-exports.roleCompany = function(req, res, next) {
+exports.setRole = function(req, res, next) {
   var userId = req.user._id;
+  var role = String(req.body.detail);
+  var roles = ['user', 'company', 'inspector'];
+
+  // Check if the given role exists
+  if (_.find(roles, role) === undefined) {
+    return res.send(403);
+  }
 
   User.findById(userId, function (err, user) {
-    user.role = 'company';
-    user.save(function(err) {
-      if (err) return validationError(res, err);
-      res.send(200);
-    });
-  });
-};
-
-/**
- * Make user role 'inspector'
- */
-exports.roleInspector = function(req, res, next) {
-  var userId = req.user._id;
-
-  User.findById(userId, function (err, user) {
-    user.role = 'inspector';
-    user.save(function(err) {
-      if (err) return validationError(res, err);
-      res.send(200);
-    });
-  });
-};
-
-/**
- * Make user role 'user'
- */
-exports.roleUser = function(req, res, next) {
-  var userId = req.user._id;
-
-  User.findById(userId, function (err, user) {
-    user.role = 'user';
+    user.role = role;
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);
