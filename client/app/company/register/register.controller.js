@@ -5,22 +5,16 @@ angular.module('webApp')
     $scope.company = {};
     $scope.errors = [];
 
-    $scope.register = function() {
-      var company = new Company($scope.company);
-
-      company.$save(function(res) {
-        $scope.company = {};
-        $state.go('company', {id: res._id});
-			}, function(err) {
-				$scope.errors.push(err.data);
-			});
+    $scope.register = function(form) {
+      $scope.submitted = true;
+      if (form.$valid) {
+        var company = new Company($scope.company);
+        company.$save(function(res) {
+          $scope.company = {};
+          $state.go('company', {id: res._id});
+  			}, function(err) {
+  				$scope.errors.push(err.data.toString());
+  			});
+      }
     };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/companies/' + thing._id);
-    };
-
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('company');
-    });
   });

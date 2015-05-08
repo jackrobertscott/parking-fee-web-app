@@ -31,7 +31,6 @@ var CompanySchema = new Schema({
 CompanySchema
   .path('email')
   .validate(function(email) {
-    if (authTypes.indexOf(this.provider) !== -1) return true;
     return email.length;
   }, 'Email cannot be blank');
 
