@@ -129,7 +129,6 @@ exports.me = function(req, res, next) {
   .exec(function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);
-    console.log("company: "+user.company);
     res.json(user);
   });
 };
