@@ -1,4 +1,4 @@
-<form class="form" name="form" ng-submit="update(form)" novalidate>
+<form class="form" name="form" ng-submit="update(form)" ng-init="find()" novalidate>
 
   <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted, 'has-error': form.name.$invalid && submitted }">
     <label for="companyName">Company Name</label>

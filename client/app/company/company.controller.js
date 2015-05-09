@@ -8,13 +8,19 @@ angular.module('webApp')
 
     /**
      * Set the company object to the users associated company
+     * If the company value is empty then direct to registry
      */
     $scope.find = function() {
       var company = Auth.getCurrentUser().company;
-      if (!company) return;
+      if (!company) {
+        $state.go('companyRegister');
+      }
       $scope.company = Company.get({id: company._id});
     };
 
+    /**
+     * Register a company
+     */
     $scope.register = function(form) {
       $scope.submitted = true;
       reset();
@@ -40,6 +46,9 @@ angular.module('webApp')
       }
     };
 
+    /**
+     * Update a company
+     */
     $scope.update = function(form) {
       $scope.submitted = true;
       reset();
@@ -54,6 +63,9 @@ angular.module('webApp')
       }
     };
 
+    /**
+     * Deactivate a company
+     */
     $scope.deactivate = function() {
       $scope.submitted = true;
       reset();
@@ -67,6 +79,9 @@ angular.module('webApp')
       });
     };
 
+    /**
+     * Reset a errors and message in form
+     */
     var reset = function () {
       $scope.errors = [];
       $scope.message = '';
