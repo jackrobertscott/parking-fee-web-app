@@ -102,10 +102,9 @@ exports.setCompany = function(req, res, next) {
 exports.setRole = function(req, res, next) {
   var userId = req.user._id;
   var role = String(req.body.detail);
-  var roles = ['user', 'company', 'inspector'];
 
   // Check if the given role exists
-  if (_.find(roles, role) === undefined) {
+  if (!_.find(config.userRoles, role)) {
     return res.send(403);
   }
 

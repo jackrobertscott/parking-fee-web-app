@@ -14,8 +14,9 @@ angular.module('webApp')
       var company = Auth.getCurrentUser().company;
       if (!company) {
         $state.go('companyRegister');
+      } else {
+        $scope.company = Company.get({id: company._id});
       }
-      $scope.company = Company.get({id: company._id});
     };
 
     /**
@@ -27,8 +28,10 @@ angular.module('webApp')
 
       if (form.$valid) {
         var user = Auth.getCurrentUser();
-        $scope.company._creator = user._id;
-        $scope.company.admins = [user._id];
+        angular.extend($scope.company, {
+          _creator: user._id,
+          admins: [user._id]
+        });
         var company = new Company($scope.company);
 
         company.$save(function(res) {
