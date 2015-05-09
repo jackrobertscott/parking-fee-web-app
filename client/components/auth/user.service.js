@@ -5,16 +5,16 @@ angular.module('webApp')
     return $resource('/api/users/:id/:controller/:detail', {
       id: '@_id'
     }, {
-      changePassword: {
-        method: 'PUT',
-        params: {
-          controller: 'password'
-        }
-      },
       get: {
         method: 'GET',
         params: {
           id: 'me'
+        }
+      },
+      changePassword: {
+        method: 'PUT',
+        params: {
+          controller: 'password'
         }
       },
       setCompany: {
