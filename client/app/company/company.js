@@ -10,12 +10,12 @@ angular.module('webApp')
       })
       .state('companyRegister', {
         url: '/company/register',
-        templateUrl: 'app/company/register/register.html',
-        controller: 'CompanyRegisterCtrl'
+        templateUrl: 'app/company/company.register.html',
+        controller: 'CompanyCtrl'
       })
       .state('companySettings', {
         url: '/company/settings',
-        templateUrl: 'app/company/settings/settings.html',
-        controller: 'CompanySettingsCtrl'
+        templateUrl: 'app/company/company.settings.html',
+        controller: 'CompanyCtrl'
       });
   });
