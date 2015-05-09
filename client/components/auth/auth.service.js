@@ -119,7 +119,6 @@ angular.module('webApp')
       setRole: function(role, callback) {
         var cb = callback || angular.noop;
 
-        // Warning: might need to implement a valid role check here
         return User.setRole({
           id: currentUser._id,
           detail: role

@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('CompanySettingsCtrl', function ($scope, $state, $stateParams, Company) {
+  .controller('CompanySettingsCtrl', function ($scope, $state, $stateParams, Company, Auth) {
     $scope.errors = [];
     $scope.message = '';
-    $scope.company = Company.get({id: 0}); // Fix!!
+    var companyId = Auth.getCurrentUser().company._id;
+    $scope.company = Company.get({id: companyId});
 
     $scope.update = function(form) {
       // Check form is valid
