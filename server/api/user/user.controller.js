@@ -97,6 +97,26 @@ exports.setCompany = function(req, res, next) {
 };
 
 /**
+ * Associate a vehicle to user
+ */
+exports.addVehicle = function(req, res, next) {
+  var userId = req.user._id;
+  var vehicleId = String(req.body.vehicle._id);
+
+  User.findById(userId, function (err, user) {
+    if (!user.vehicle.length) {
+      user.vehicle = [vehicleId];
+    } else {
+      user.vehicle.push(vehicleId);
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
  * Increase a users role to a higher role
  */
 exports.promote = function(req, res, next) {
@@ -157,7 +177,8 @@ exports.me = function(req, res, next) {
   var userId = req.user._id;
   User.findOne({_id: userId})
   .select('-salt -hashedPassword')
-  .populate('company')
+  .populate('company', '_id')
+  .populate('vehicles', '_id')
   .exec(function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('CompanyCtrl', function ($scope, $state, $stateParams, Company, Auth) {
+  .controller('CompanyCtrl', function ($scope, $state, Company, Auth) {
     $scope.errors = [];
     $scope.message = '';
     $scope.company = {};
@@ -11,8 +11,9 @@ angular.module('webApp')
      * If the company is empty then redirect to registry
      * If on register view but company exists; redirect to settings
      */
-    var find = function() {
+    $scope.find = function() {
       var company = Auth.getCurrentUser().company;
+      
       if ($state.is('companyRegister')) {
         if (company) {
           $state.go('companySettings');
@@ -25,7 +26,7 @@ angular.module('webApp')
         }
       }
     };
-    find();
+    $scope.find();
 
     /**
      * Register a company

@@ -7,5 +7,15 @@ angular.module('webApp')
         url: '/vehicle',
         templateUrl: 'app/vehicle/vehicle.html',
         controller: 'VehicleCtrl'
+      })
+      .state('vehicleRegister', {
+        url: '/vehicle',
+        templateUrl: 'app/vehicle/vehicle.register.html',
+        controller: 'VehicleCtrl'
+      })
+      .state('vehicleSettings', {
+        url: '/vehicle',
+        templateUrl: 'app/vehicle/vehicle.settings.html',
+        controller: 'VehicleCtrl'
       });
   });
