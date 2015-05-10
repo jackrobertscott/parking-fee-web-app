@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 var VehicleSchema = new Schema({
   plate: String,
   make: String,
-  colour: String,
+  color: String,
   type: String,
   info: String,
   active: {

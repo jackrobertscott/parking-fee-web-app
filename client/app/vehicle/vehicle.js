@@ -14,7 +14,7 @@ angular.module('webApp')
         controller: 'VehicleCtrl'
       })
       .state('vehicleSettings', {
-        url: '/vehicle/settings',
+        url: '/vehicle/settings/:id',
         templateUrl: 'app/vehicle/vehicle.settings.html',
         controller: 'VehicleCtrl'
       });

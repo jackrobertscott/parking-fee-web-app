@@ -104,10 +104,10 @@ exports.addVehicle = function(req, res, next) {
   var vehicleId = String(req.body.vehicle._id);
 
   User.findById(userId, function (err, user) {
-    if (!user.vehicle.length) {
-      user.vehicle = [vehicleId];
+    if (!user.vehicles.length) {
+      user.vehicles = [vehicleId];
     } else {
-      user.vehicle.push(vehicleId);
+      user.vehicles.push(vehicleId);
     }
     user.save(function(err) {
       if (err) return validationError(res, err);

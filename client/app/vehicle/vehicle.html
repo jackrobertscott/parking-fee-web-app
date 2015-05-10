@@ -1,13 +1,13 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
-  <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
+  <a href="/vehicle/register">Register a new vehicle</a>
   <ul class="list-group" ng-init="find()">
-    <li class="list-group-item" ng-repeat="vehicle in vehicles" ng-click="edit(vehicle)">
+    <li class="list-group-item" ng-repeat="vehicle in vehicles" ng-click="toSettings(vehicle)">
         <strong>{{vehicle.plate}}</strong><br>
-        <span class="text-muted">{{vehicle.make}}</span>
-        <span class="text-muted">{{vehicle.colour}}</span>
-        <span class="text-muted">{{vehicle.type}}</span>
+        <span class="text-muted">Make: {{vehicle.make}},</span>
+        <span class="text-muted">Colour: {{vehicle.color}},</span>
+        <span class="text-muted">Type: {{vehicle.type}}</span>
         <a ng-click="remove(vehicle)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
     </li>
   </ul>

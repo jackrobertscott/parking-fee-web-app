@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('VehicleCtrl', function ($scope, $state, Vehicle, Auth) {
+  .controller('VehicleCtrl', function ($scope, $state, $stateParams, Vehicle, Auth) {
     $scope.errors = [];
     $scope.message = '';
     $scope.vehicle = {};
@@ -30,15 +30,17 @@ angular.module('webApp')
      */
     $scope.findOne = function() {
       $scope.vehicle = Vehicle.get({
-        id: $state.params('id')
+        id: $stateParams.id
       });
     };
 
     /**
      * Go to the vehicle settings page
      */
-    $scope.edit = function(vehicle) {
-      $state.go('vehicleSettings', { id: vehicle._id });
+    $scope.toSettings = function(vehicle) {
+      $state.go('vehicleSettings', {
+        id: vehicle._id
+      });
     };
 
     /**
