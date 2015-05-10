@@ -4,9 +4,15 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var VehicleSchema = new Schema({
-  name: String,
+  plate: String,
+  make: String,
+  colour: String,
+  type: String,
   info: String,
-  active: Boolean
+  active: {
+    type: Boolean,
+    default: true
+  }
 });
 
 module.exports = mongoose.model('Vehicle', VehicleSchema);

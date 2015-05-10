@@ -35,6 +35,13 @@ angular.module('webApp')
     };
 
     /**
+     * Go to the vehicle settings page
+     */
+    $scope.edit = function(vehicle) {
+      $state.go('vehicleSettings', { id: vehicle._id });
+    };
+
+    /**
      * Register a new vehicle
      */
     $scope.register = function(form) {

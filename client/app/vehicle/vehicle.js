@@ -9,12 +9,12 @@ angular.module('webApp')
         controller: 'VehicleCtrl'
       })
       .state('vehicleRegister', {
-        url: '/vehicle',
+        url: '/vehicle/register',
         templateUrl: 'app/vehicle/vehicle.register.html',
         controller: 'VehicleCtrl'
       })
       .state('vehicleSettings', {
-        url: '/vehicle',
+        url: '/vehicle/settings',
         templateUrl: 'app/vehicle/vehicle.settings.html',
         controller: 'VehicleCtrl'
       });
