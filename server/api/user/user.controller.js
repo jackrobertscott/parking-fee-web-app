@@ -97,19 +97,52 @@ exports.setCompany = function(req, res, next) {
 };
 
 /**
- * Make user role 'company'
+ * Increase a users role to a higher role
  */
-exports.setRole = function(req, res, next) {
+exports.promote = function(req, res, next) {
   var userId = req.user._id;
-  var role = String(req.body.detail);
+  var oldRole = req.user.role;
+  var newRole = String(req.body.role);
 
   // Check if the given role exists
-  if (!_.find(config.userRoles, role)) {
+  if (config.userRoles.indexOf(newRole) === -1) {
     return res.send(403);
   }
 
+  // Already have role higher then requested
+  if (config.userRoles.indexOf(newRole) < config.userRoles.indexOf(oldRole)) {
+    return res.send(200);
+  }
+
   User.findById(userId, function (err, user) {
-    user.role = role;
+    user.role = newRole;
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
+ * Decrease users role to lower role
+ */
+exports.demote = function(req, res, next) {
+  var userId = req.user._id;
+  var oldRole = req.user.role;
+  var newRole = String(req.body.role);
+
+  // Check if the given role exists
+  if (config.userRoles.indexOf(newRole) === -1) {
+    return res.send(403);
+  }
+
+  // Already have role lower then requested
+  if (config.userRoles.indexOf(newRole) > config.userRoles.indexOf(oldRole)) {
+    return res.send(200);
+  }
+
+  User.findById(userId, function (err, user) {
+    user.role = newRole;
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);

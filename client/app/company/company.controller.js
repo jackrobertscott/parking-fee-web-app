@@ -46,7 +46,7 @@ angular.module('webApp')
         company.$save(function(res) {
           Auth.setCompany(res)
           .then(function() {
-            Auth.setRole('company') // Error occuring server side
+            Auth.promote('company')
             .then(function() {
               $scope.company = {};
               $state.go('company');
@@ -76,7 +76,7 @@ angular.module('webApp')
         company.$update(function() {
           $scope.message = 'Details successfully updated';
   			}, function(err) {
-  				$scope.errors.push(err);
+  				$scope.errors.push(err.data);
   			});
       }
     };

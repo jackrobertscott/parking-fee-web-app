@@ -111,17 +111,34 @@ angular.module('webApp')
       },
 
       /**
-       * Sets a company association with user
+       * Promotes a user's role
        *
        * @param  {Object} role
        * @param  {Function} callback    - optional
        */
-      setRole: function(role, callback) {
+      promote: function(role, callback) {
         var cb = callback || angular.noop;
 
-        return User.setRole({
-          id: currentUser._id,
-          detail: role
+        return User.promote({ id: currentUser._id }, {
+          role: role
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      /**
+       * Demotes a user's role
+       *
+       * @param  {Object} role
+       * @param  {Function} callback    - optional
+       */
+      demote: function(role, callback) {
+        var cb = callback || angular.noop;
+
+        return User.demote({ id: currentUser._id }, {
+          role: role
         }, function(user) {
           return cb(user);
         }, function(err) {

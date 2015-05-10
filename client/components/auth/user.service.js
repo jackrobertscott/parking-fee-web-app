@@ -2,7 +2,7 @@
 
 angular.module('webApp')
   .factory('User', function ($resource) {
-    return $resource('/api/users/:id/:controller/:detail', {
+    return $resource('/api/users/:id/:controller', {
       id: '@_id'
     }, {
       get: {
@@ -23,10 +23,16 @@ angular.module('webApp')
           controller: 'company'
         }
       },
-      setRole: {
+      promote: {
         method: 'PUT',
         params: {
-          controller: 'role'
+          controller: 'promote'
+        }
+      },
+      demote: {
+        method: 'PUT',
+        params: {
+          controller: 'demote'
         }
       }
 	  });
