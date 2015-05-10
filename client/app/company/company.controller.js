@@ -8,19 +8,28 @@ angular.module('webApp')
 
     /**
      * Set the company object to the users associated company
-     * If the company value is empty then direct to registry
+     * If the company is empty then redirect to registry
+     * If on register view but company exists; redirect to settings
      */
-    $scope.find = function() {
+    var find = function() {
       var company = Auth.getCurrentUser().company;
-      if (!company) {
-        $state.go('companyRegister');
+      if ($state.is('companyRegister')) {
+        if (company) {
+          $state.go('companySettings');
+        }
       } else {
-        $scope.company = Company.get({id: company._id});
+        if (!company) {
+          $state.go('companyRegister');
+        } else {
+          $scope.company = Company.get({id: company._id});
+        }
       }
     };
+    find();
 
     /**
      * Register a company
+     * Update users company object and user role
      */
     $scope.register = function(form) {
       $scope.submitted = true;
@@ -37,14 +46,20 @@ angular.module('webApp')
         company.$save(function(res) {
           Auth.setCompany(res)
           .then(function() {
-            $scope.company = {};
-            $state.go('company');
+            Auth.setRole('company') // Error occuring server side
+            .then(function() {
+              $scope.company = {};
+              $state.go('company');
+            })
+            .catch(function(err) {
+      				$scope.errors.push(err.data);
+            });
           })
           .catch(function(err) {
-    				$scope.errors.push(err);
+    				$scope.errors.push(err.data);
           });
   			}, function(err) {
-  				$scope.errors.push(err);
+  				$scope.errors.push(err.data);
   			});
       }
     };
@@ -69,17 +84,20 @@ angular.module('webApp')
     /**
      * Deactivate a company
      */
-    $scope.deactivate = function() {
+    $scope.deactivate = function(form) {
       $scope.submitted = true;
       reset();
 
-      var company = $scope.company;
-      company.active = false;
-      company.$update(function() {
-        $scope.message = 'Company deactivated';
-      }, function(err) {
-        $scope.errors.push(err);
-      });
+      if (form.$valid) {
+        var company = $scope.company;
+        company.active = false;
+        company.$update(function() {
+          $scope.company = {};
+          $scope.message = 'Company deactivated';
+        }, function(err) {
+          $scope.errors.push(err);
+        });
+      }
     };
 
     /**
