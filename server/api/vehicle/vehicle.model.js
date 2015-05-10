@@ -9,6 +9,14 @@ var VehicleSchema = new Schema({
   color: String,
   type: String,
   info: String,
+  _creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  },
   active: {
     type: Boolean,
     default: true

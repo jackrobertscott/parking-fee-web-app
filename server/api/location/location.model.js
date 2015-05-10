@@ -6,7 +6,26 @@ var mongoose = require('mongoose'),
 var LocationSchema = new Schema({
   name: String,
   info: String,
-  active: Boolean
+  rate: Number, // Hourly parking rate in cents
+  lots: Number, // Number of parking lots
+  start: Number, // Charging start time (seconds into day)
+  end: Number, // Charing end time (seconds into day)
+  company: {
+    type: Schema.Types.ObjectId,
+    ref: 'Company'
+  },
+  _creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  active: {
+    type: Boolean,
+    default: true
+  }
 });
 
 module.exports = mongoose.model('Location', LocationSchema);

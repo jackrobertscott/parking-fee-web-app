@@ -51,6 +51,7 @@ angular.module('webApp')
       reset();
 
       if (form.$valid) {
+        $scope.vehicle._creator = Auth.getCurrentUser();
         var vehicle = new Vehicle($scope.vehicle);
         vehicle.$save(function (res) {
           Auth.addVehicle(res)
