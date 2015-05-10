@@ -43,7 +43,6 @@ angular.module('webApp')
 
       if (form.$valid) {
         var vehicle = new Vehicle($scope.vehicle);
-
         vehicle.$save(function (res) {
           Auth.addVehicle(res)
           .then(function() {
@@ -65,15 +64,43 @@ angular.module('webApp')
       $scope.submitted = true;
       reset();
 
-      if (form.$valid) {
-        var vehicle = $scope.vehicle;
-        vehicle.$update(function() {
+      if (form.$valid && $scope.vehicle) {
+        $scope.vehicle.$update(function() {
           $scope.message = 'Details successfully updated';
   			}, function(err) {
   				$scope.errors.push(err.data);
   			});
       }
     };
+
+    /**
+     * Remove a vehicle
+     * TODO: should move to archive database instead of delete
+     */
+		$scope.remove = function(vehicle) {
+			if (vehicle) {
+				vehicle.$remove(function (res) {
+          Auth.removeVehicle(res)
+          .catch(function(err) {
+    				$scope.errors.push(err.data);
+          });
+        });
+
+        $scope.vehicles.forEach(function(element, i, array) {
+          if (array[i] === vehicle) {
+						array.splice(i, 1);
+          }
+        });
+			} else {
+				$scope.vehicle.$remove(function(res) {
+          Auth.removeVehicle(res)
+          .catch(function(err) {
+    				$scope.errors.push(err.data);
+          });
+					$state.go('vehicle');
+				});
+			}
+		};
 
     /**
      * Reset a errors and message in form

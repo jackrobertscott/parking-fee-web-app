@@ -117,6 +117,26 @@ exports.addVehicle = function(req, res, next) {
 };
 
 /**
+ * Remove associated vehicle from user
+ */
+exports.removeVehicle = function(req, res, next) {
+  var userId = req.user._id;
+  var vehicleId = String(req.body.vehicle._id);
+
+  User.findById(userId, function (err, user) {
+    user.vehicles.forEach(function(element, i, array) {
+      if (array[i]._id === vehicleId) {
+        array.splice(i, 1);
+      }
+    });
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
  * Increase a users role to a higher role
  */
 exports.promote = function(req, res, next) {

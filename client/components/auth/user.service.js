@@ -26,7 +26,13 @@ angular.module('webApp')
       addVehicle: {
         method: 'PUT',
         params: {
-          controller: 'vehicle'
+          controller: 'addVehicle'
+        }
+      },
+      removeVehicle: {
+        method: 'PUT',
+        params: {
+          controller: 'removeVehicle'
         }
       },
       promote: {

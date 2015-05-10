@@ -129,6 +129,24 @@ angular.module('webApp')
       },
 
       /**
+       * Remove a vehicle association with user
+       *
+       * @param  {Object} vehicle
+       * @param  {Function} callback    - optional
+       */
+      removeVehicle: function(vehicle, callback) {
+        var cb = callback || angular.noop;
+
+        return User.addVehicle({ id: currentUser._id }, {
+         vehicle: vehicle
+        }, function(user) {
+         return cb(user);
+        }, function(err) {
+         return cb(err);
+        }).$promise;
+      },
+
+      /**
        * Promotes a user's role
        *
        * @param  {Object} role
