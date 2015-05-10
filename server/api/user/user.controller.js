@@ -125,7 +125,7 @@ exports.removeVehicle = function(req, res, next) {
 
   User.findById(userId, function (err, user) {
     user.vehicles.forEach(function(element, i, array) {
-      if (array[i]._id === vehicleId) {
+      if (element === vehicleId) {
         array.splice(i, 1);
       }
     });
@@ -195,11 +195,9 @@ exports.demote = function(req, res, next) {
  */
 exports.me = function(req, res, next) {
   var userId = req.user._id;
-  User.findOne({_id: userId})
-  .select('-salt -hashedPassword')
-  .populate('company', '_id')
-  .populate('vehicles', '_id')
-  .exec(function(err, user) { // don't ever give out the password or salt
+  User.findOne({_id: userId},
+  '-salt -hashedPassword',
+  function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);
     res.json(user);

@@ -19,8 +19,12 @@ angular.module('webApp')
       if (!vehicles.length) {
         $scope.message = 'You have no registered vehicles';
       } else {
-        vehicles.forEach(function (vehicle) {
-          $scope.vehicles.push(Vehicle.get({ id: vehicle._id }));
+        vehicles.forEach(function (vehicleId) {
+          Vehicle.get({ id: vehicleId }).$promise
+          .then(function (vehicle) {
+            $scope.vehicles.push(vehicle);
+          })
+          .catch(errorHandler);
         });
       }
     };
@@ -31,7 +35,7 @@ angular.module('webApp')
     $scope.findOne = function() {
       $scope.vehicle = Vehicle.get({
         id: $stateParams.id
-      });
+      }).$promise.catch(errorHandler);
     };
 
     /**
@@ -51,19 +55,15 @@ angular.module('webApp')
       reset();
 
       if (form.$valid) {
-        $scope.vehicle._creator = Auth.getCurrentUser();
+        $scope.vehicle._creator = Auth.getCurrentUser()._id;
         var vehicle = new Vehicle($scope.vehicle);
-        vehicle.$save(function (res) {
-          Auth.addVehicle(res)
+        vehicle.$save(function (vehicle) {
+          Auth.addVehicle(vehicle)
           .then(function() {
             $state.go('vehicle');
           })
-          .catch(function(err) {
-    				$scope.errors.push(err.data);
-          });
-        }, function (err) {
-  				$scope.errors.push(err.data);
-        });
+          .catch(errorHandler);
+        }, errorHandler);
       }
     };
 
@@ -77,9 +77,7 @@ angular.module('webApp')
       if (form.$valid && $scope.vehicle) {
         $scope.vehicle.$update(function() {
           $scope.message = 'Details successfully updated';
-  			}, function(err) {
-  				$scope.errors.push(err.data);
-  			});
+  			}, errorHandler);
       }
     };
 
@@ -89,26 +87,30 @@ angular.module('webApp')
      */
 		$scope.remove = function(vehicle) {
 			if (vehicle) {
-				vehicle.$remove(function (res) {
-          Auth.removeVehicle(res)
-          .catch(function(err) {
-    				$scope.errors.push(err.data);
-          });
-        });
-
+        Auth.removeVehicle(vehicle)
+        .then(function() {
+          vehicle.$remove().$promise.catch(errorHandler);
+        })
+        .catch(errorHandler);
+        // Remove from view
         $scope.vehicles.forEach(function(element, i, array) {
           if (array[i] === vehicle) {
 						array.splice(i, 1);
           }
         });
 			} else {
-				$scope.vehicle.$remove(function(res) {
-          Auth.removeVehicle(res)
-          .catch(function(err) {
-    				$scope.errors.push(err.data);
-          });
-					$state.go('vehicle');
-				});
+				vehicle = $scope.vehicle;
+        Auth.removeVehicle(vehicle)
+        .then(function() {
+          vehicle.$remove().$promise
+          .then(function() {
+            $scope.vehicle = {};
+          })
+          .catch(errorHandler);
+        })
+        .catch(errorHandler);
+        $scope.vehicle = {};
+        $state.go('vehicle');
 			}
 		};
 
@@ -118,5 +120,12 @@ angular.module('webApp')
     var reset = function () {
       $scope.errors = [];
       $scope.message = '';
+    };
+
+    /**
+     * A error handling function
+     */
+    var errorHandler = function (err) {
+      $scope.errors.push(err.data);
     };
   });

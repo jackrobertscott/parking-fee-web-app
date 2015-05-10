@@ -26,6 +26,14 @@ var UserSchema = new Schema({
   company: {
     type: Schema.Types.ObjectId,
     ref: 'Company'
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 });
 

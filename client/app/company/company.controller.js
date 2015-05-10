@@ -12,17 +12,17 @@ angular.module('webApp')
      * If on register view but company exists; redirect to settings
      */
     $scope.find = function() {
-      var company = Auth.getCurrentUser().company;
+      var companyId = Auth.getCurrentUser().company;
 
       if ($state.is('companyRegister')) {
-        if (company) {
+        if (companyId) {
           $state.go('companySettings');
         }
       } else {
-        if (!company) {
-          $state.go('companyRegister');
+        if (companyId) {
+          $scope.company = Company.get({ id: companyId }).$promise.catch(errorHandler);
         } else {
-          $scope.company = Company.get({id: company._id});
+          $state.go('companyRegister');
         }
       }
     };
@@ -51,16 +51,10 @@ angular.module('webApp')
               $scope.company = {};
               $state.go('company');
             })
-            .catch(function(err) {
-      				$scope.errors.push(err.data);
-            });
+            .catch(errorHandler);
           })
-          .catch(function(err) {
-    				$scope.errors.push(err.data);
-          });
-  			}, function(err) {
-  				$scope.errors.push(err.data);
-  			});
+          .catch(errorHandler);
+  			}, errorHandler);
       }
     };
 
@@ -74,9 +68,7 @@ angular.module('webApp')
       if (form.$valid) {
         $scope.company.$update(function() {
           $scope.message = 'Details successfully updated';
-  			}, function(err) {
-  				$scope.errors.push(err.data);
-  			});
+  			}, errorHandler);
       }
     };
 
@@ -92,9 +84,7 @@ angular.module('webApp')
         $scope.company.$remove(function() {
           $scope.company = {};
           $scope.message = 'Company deactivated';
-        }, function(err) {
-          $scope.errors.push(err);
-        });
+        }, errorHandler);
       }
     };
 
@@ -104,5 +94,12 @@ angular.module('webApp')
     var reset = function () {
       $scope.errors = [];
       $scope.message = '';
+    };
+
+    /**
+     * A error handling function
+     */
+    var errorHandler = function (err) {
+      $scope.errors.push(err.data);
     };
   });

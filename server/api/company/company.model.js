@@ -16,6 +16,10 @@ var CompanySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }],
+  locations: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Location'
+  }],
   authenticated: {
     type: Boolean,
     default: false

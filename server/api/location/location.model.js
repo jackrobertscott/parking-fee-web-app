@@ -8,8 +8,8 @@ var LocationSchema = new Schema({
   info: String,
   rate: Number, // Hourly parking rate in cents
   lots: Number, // Number of parking lots
-  start: Number, // Charging start time (seconds into day)
-  end: Number, // Charing end time (seconds into day)
+  start: Date, // Charging start time (seconds into day)
+  end: Date, // Charing end time (seconds into day)
   company: {
     type: Schema.Types.ObjectId,
     ref: 'Company'
