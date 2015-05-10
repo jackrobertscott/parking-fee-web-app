@@ -1,16 +1,12 @@
 'use strict';
 
 angular.module('webApp')
-  .factory('Vehicle', function () {
-    // Service logic
-    // ...
-
-    var meaningOfLife = 42;
-
-    // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
+  .factory('Vehicle', function ($resource) {
+    return $resource('/api/vehicles/:id', {
+      id: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
       }
-    };
+    });
   });
