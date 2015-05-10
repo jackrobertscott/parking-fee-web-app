@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('CompanyCtrl', function ($scope, $state, $stateParams, Company, Auth) {
+  .controller('CompanyCtrl', function ($scope, $state, Company, Auth) {
     $scope.errors = [];
     $scope.message = '';
     $scope.company = {};
@@ -11,8 +11,9 @@ angular.module('webApp')
      * If the company is empty then redirect to registry
      * If on register view but company exists; redirect to settings
      */
-    var find = function() {
+    $scope.find = function() {
       var company = Auth.getCurrentUser().company;
+
       if ($state.is('companyRegister')) {
         if (company) {
           $state.go('companySettings');
@@ -25,7 +26,7 @@ angular.module('webApp')
         }
       }
     };
-    find();
+    $scope.find();
 
     /**
      * Register a company
@@ -42,7 +43,6 @@ angular.module('webApp')
           admins: [user._id]
         });
         var company = new Company($scope.company);
-
         company.$save(function(res) {
           Auth.setCompany(res)
           .then(function() {
@@ -72,8 +72,7 @@ angular.module('webApp')
       reset();
 
       if (form.$valid) {
-        var company = $scope.company;
-        company.$update(function() {
+        $scope.company.$update(function() {
           $scope.message = 'Details successfully updated';
   			}, function(err) {
   				$scope.errors.push(err.data);
@@ -83,15 +82,14 @@ angular.module('webApp')
 
     /**
      * Deactivate a company
+     * TODO: move company to archive database
      */
-    $scope.deactivate = function(form) {
+    $scope.remove = function(form) {
       $scope.submitted = true;
       reset();
 
-      if (form.$valid) {
-        var company = $scope.company;
-        company.active = false;
-        company.$update(function() {
+      if (form.$valid && $scope.company) {
+        $scope.company.$remove(function() {
           $scope.company = {};
           $scope.message = 'Company deactivated';
         }, function(err) {

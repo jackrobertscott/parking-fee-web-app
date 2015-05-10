@@ -14,6 +14,8 @@ router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.post('/', controller.create);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.put('/:id/company', auth.isAuthenticated(), controller.setCompany);
+router.put('/:id/addVehicle', auth.isAuthenticated(), controller.addVehicle);
+router.put('/:id/removeVehicle', auth.isAuthenticated(), controller.removeVehicle);
 router.put('/:id/promote', auth.isAuthenticated(), controller.promote);
 router.put('/:id/demote', auth.isAuthenticated(), controller.demote);
 

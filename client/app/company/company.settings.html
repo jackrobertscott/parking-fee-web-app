@@ -10,7 +10,7 @@
 
   <div class="form-group" ng-class="{ 'has-success': form.phone.$valid && submitted, 'has-error': form.phone.$invalid && submitted }">
     <label for="companyPhone">Contact Phone Number</label>
-    <input type="text" name="phone" class="form-control" id="companyPhone" placeholder="Company Phone" ng-model="company.phone" required mongoose-error>
+    <input type="text" name="phone" class="form-control" id="companyPhone" placeholder="Company Phone" ng-model="company.phone" required>
     <p class="help-block" ng-show="form.phone.$error.required && submitted">
       A company phone number is required.
     </p>
@@ -18,7 +18,7 @@
 
   <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted, 'has-error': form.email.$invalid && submitted }">
     <label for="companyEmail">Contact Email Address</label>
-    <input type="email" name="email" class="form-control" id="companyEmail" placeholder="Company Email" ng-model="company.email" required mongoose-error>
+    <input type="email" name="email" class="form-control" id="companyEmail" placeholder="Company Email" ng-model="company.email" required>
     <p class="help-block" ng-show="form.email.$error.email && submitted">
       Doesn't look like a valid email.
     </p>
