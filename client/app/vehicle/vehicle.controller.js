@@ -14,28 +14,22 @@ angular.module('webApp')
      * Get all vehicles registered to the user
      */
     $scope.find = function() {
-      var vehicles = Auth.getCurrentUser().vehicles;
-
-      if (!vehicles.length) {
-        $scope.message = 'You have no registered vehicles';
-      } else {
-        vehicles.forEach(function (vehicleId) {
-          Vehicle.get({ id: vehicleId }).$promise
-          .then(function (vehicle) {
-            $scope.vehicles.push(vehicle);
-          })
-          .catch(errorHandler);
-        });
-      }
+      Auth.getCurrentUser().vehicles.forEach(function(vehicleId) {
+        Vehicle.get({ id: vehicleId },
+        function (vehicle) {
+          $scope.vehicles.push(vehicle);
+        }, errorHandler);
+      });
     };
 
     /**
      * Find one vehicle by id in state params
      */
     $scope.findOne = function() {
-      $scope.vehicle = Vehicle.get({
-        id: $stateParams.id
-      }).$promise.catch(errorHandler);
+      Vehicle.get({ id: $stateParams.id },
+      function(vehicle) {
+        $scope.vehicle = vehicle;
+      }, errorHandler);
     };
 
     /**
@@ -55,7 +49,9 @@ angular.module('webApp')
       reset();
 
       if (form.$valid) {
-        $scope.vehicle._creator = Auth.getCurrentUser()._id;
+        angular.merge($scope.vehicle, {
+          _creator: Auth.getCurrentUser()._id
+        });
         var vehicle = new Vehicle($scope.vehicle);
         vehicle.$save(function (vehicle) {
           Auth.addVehicle(vehicle)
@@ -102,15 +98,12 @@ angular.module('webApp')
 				vehicle = $scope.vehicle;
         Auth.removeVehicle(vehicle)
         .then(function() {
-          vehicle.$remove().$promise
-          .then(function() {
+          vehicle.$remove(function() {
             $scope.vehicle = {};
-          })
-          .catch(errorHandler);
+            $state.go('vehicle');
+          }, errorHandler);
         })
         .catch(errorHandler);
-        $scope.vehicle = {};
-        $state.go('vehicle');
 			}
 		};
 

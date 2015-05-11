@@ -20,7 +20,10 @@ angular.module('webApp')
         }
       } else {
         if (companyId) {
-          $scope.company = Company.get({ id: companyId }).$promise.catch(errorHandler);
+          Company.get({ id: companyId },
+          function(company) {
+            $scope.company = company;
+          }, errorHandler);
         } else {
           $state.go('companyRegister');
         }
@@ -38,13 +41,13 @@ angular.module('webApp')
 
       if (form.$valid) {
         var user = Auth.getCurrentUser();
-        angular.extend($scope.company, {
+        angular.merge($scope.company, {
           _creator: user._id,
           admins: [user._id]
         });
         var company = new Company($scope.company);
-        company.$save(function(res) {
-          Auth.setCompany(res)
+        company.$save(function(company) {
+          Auth.setCompany(company)
           .then(function() {
             Auth.promote('company')
             .then(function() {
@@ -77,11 +80,11 @@ angular.module('webApp')
      * TODO: move company to archive database
      */
     $scope.remove = function(form) {
+      var company = $scope.company;
       $scope.submitted = true;
       reset();
 
-      if (form.$valid && $scope.company) {
-        var company = $scope.company;
+      if (form.$valid && company) {
         Auth.removeCompany(company)
         .then(function() {
           company.$remove(function() {

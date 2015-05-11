@@ -16,7 +16,10 @@ angular.module('webApp')
       if (!companyId) {
         $state.go('main');
       } else {
-        $scope.locations = Location.query({ company: companyId }).$promise().catch(errorHandler);
+        Location.query({ company: companyId },
+        function(locations) {
+          $scope.locations = locations;
+        }, errorHandler);
       }
     };
 
@@ -24,9 +27,10 @@ angular.module('webApp')
      * Find one location by id in state params
      */
     $scope.findOne = function() {
-      $scope.location = Location.get({
-        id: $stateParams.id
-      }).$promise.catch(errorHandler);
+      Location.get({ id: $stateParams.id },
+      function(location) {
+        $scope.location = location;
+      }, errorHandler);
     };
 
     /**
@@ -47,18 +51,21 @@ angular.module('webApp')
 
       if (form.$valid) {
         var user = Auth.getCurrentUser();
-        var companyId = Auth.getCurrentUser().company;
-        $scope.location._creator = user._id;
-        $scope.location.company = companyId;
+        angular.merge($scope.location, {
+          _creator: user._id,
+          company: user.company
+        });
         var location = new Location($scope.location);
         location.$save(function() {
-          var company = Company.get({ id: company._id });
-          if (!company.locations.length) {
-            company.locations = [location._id];
-          } else {
-            company.locations.push(location._id);
-          }
-          company.$save().$promise.catch(errorHandler);
+          Company.get({ id: user.company },
+          function(company) {
+            if (!company.locations.length) {
+              company.locations = [location._id];
+            } else {
+              company.locations.push(location._id);
+            }
+            company.$save().$promise.catch(errorHandler);
+          }, errorHandler);
         }, errorHandler);
       }
     };
