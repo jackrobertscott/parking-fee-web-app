@@ -51,7 +51,7 @@ angular.module('webApp')
 
       if (form.$valid) {
         var user = Auth.getCurrentUser();
-        angular.merge($scope.location, {
+        angular.extend($scope.location, {
           _creator: user._id,
           company: user.company
         });
@@ -64,7 +64,9 @@ angular.module('webApp')
             } else {
               company.locations.push(location._id);
             }
-            company.$save().$promise.catch(errorHandler);
+            company.$update(function() {
+              $state.go('location');
+            }, errorHandler);
           }, errorHandler);
         }, errorHandler);
       }
@@ -97,7 +99,9 @@ angular.module('webApp')
             }
           });
           company.$update(function() {
-            location.$remove().$promise.catch(errorHandler);
+            location.$remove(function () {
+              $scope.message = 'Vehicle successfully deleted';
+            }, errorHandler);
           }, errorHandler);
         }, errorHandler);
         // Remove from view
@@ -115,10 +119,11 @@ angular.module('webApp')
             }
           });
           company.$update(function() {
-            location.$remove().$promise.catch(errorHandler);
+            location.$remove(function () {
+              $scope.message = 'Vehicle successfully deleted';
+            }, errorHandler);
           }, errorHandler);
         }, errorHandler);
-        $scope.location = {};
         $state.go('location');
  			}
  		};

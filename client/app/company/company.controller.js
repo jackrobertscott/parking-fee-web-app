@@ -25,7 +25,7 @@ angular.module('webApp')
             $scope.company = company;
           }, errorHandler);
         } else {
-          $state.go('companyRegister');
+          $state.go('company');
         }
       }
     };
@@ -41,7 +41,7 @@ angular.module('webApp')
 
       if (form.$valid) {
         var user = Auth.getCurrentUser();
-        angular.merge($scope.company, {
+        angular.extend($scope.company, {
           _creator: user._id,
           admins: [user._id]
         });
@@ -51,7 +51,6 @@ angular.module('webApp')
           .then(function() {
             Auth.promote('company')
             .then(function() {
-              $scope.company = {};
               $state.go('company');
             })
             .catch(errorHandler);
@@ -88,7 +87,6 @@ angular.module('webApp')
         Auth.removeCompany(company)
         .then(function() {
           company.$remove(function() {
-            $scope.company = {};
             $state.go('main');
           }, errorHandler);
         })

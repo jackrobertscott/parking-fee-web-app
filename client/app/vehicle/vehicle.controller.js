@@ -49,7 +49,7 @@ angular.module('webApp')
       reset();
 
       if (form.$valid) {
-        angular.merge($scope.vehicle, {
+        angular.extend($scope.vehicle, {
           _creator: Auth.getCurrentUser()._id
         });
         var vehicle = new Vehicle($scope.vehicle);
@@ -85,7 +85,9 @@ angular.module('webApp')
 			if (vehicle) {
         Auth.removeVehicle(vehicle)
         .then(function() {
-          vehicle.$remove().$promise.catch(errorHandler);
+          vehicle.$remove(function () {
+            $scope.message = 'Vehicle successfully deleted';
+          }, errorHandler);
         })
         .catch(errorHandler);
         // Remove from view
@@ -99,7 +101,6 @@ angular.module('webApp')
         Auth.removeVehicle(vehicle)
         .then(function() {
           vehicle.$remove(function() {
-            $scope.vehicle = {};
             $state.go('vehicle');
           }, errorHandler);
         })
