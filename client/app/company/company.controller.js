@@ -81,10 +81,15 @@ angular.module('webApp')
       reset();
 
       if (form.$valid && $scope.company) {
-        $scope.company.$remove(function() {
-          $scope.company = {};
-          $scope.message = 'Company deactivated';
-        }, errorHandler);
+        var company = $scope.company;
+        Auth.removeCompany(company)
+        .then(function() {
+          company.$remove(function() {
+            $scope.company = {};
+            $state.go('main');
+          }, errorHandler);
+        })
+        .catch(errorHandler);
       }
     };
 

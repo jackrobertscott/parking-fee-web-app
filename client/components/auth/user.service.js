@@ -23,16 +23,22 @@ angular.module('webApp')
           controller: 'company'
         }
       },
+      removeCompany: {
+        method: 'DELETE',
+        params: {
+          controller: 'company'
+        }
+      },
       addVehicle: {
         method: 'PUT',
         params: {
-          controller: 'addVehicle'
+          controller: 'vehicle'
         }
       },
       removeVehicle: {
-        method: 'PUT',
+        method: 'DELETE',
         params: {
-          controller: 'removeVehicle'
+          controller: 'vehicle'
         }
       },
       promote: {
