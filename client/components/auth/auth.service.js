@@ -93,6 +93,59 @@ angular.module('webApp')
       },
 
       /**
+       * Gets all available info on authenticated user
+       *
+       * @return {Object} user
+       */
+      getCurrentUser: function() {
+        return currentUser;
+      },
+
+      /**
+       * Check if a user is logged in
+       *
+       * @return {Boolean}
+       */
+      isLoggedIn: function() {
+        return currentUser.hasOwnProperty('role');
+      },
+
+      /**
+       * Waits for currentUser to resolve before checking if user is logged in
+       */
+      isLoggedInAsync: function(cb) {
+        if (currentUser.hasOwnProperty('$promise')) {
+          currentUser.$promise.then(function() {
+            cb(true);
+          }).catch(function() {
+            cb(false);
+          });
+        } else if (currentUser.hasOwnProperty('role')) {
+          cb(true);
+        } else {
+          cb(false);
+        }
+      },
+
+      /**
+       * Check if a user is an admin
+       *
+       * @return {Boolean}
+       */
+      isAdmin: function() {
+        return currentUser.role === 'admin';
+      },
+
+      /**
+       * Get auth token
+       */
+      getToken: function() {
+        return $cookieStore.get('token');
+      },
+
+      // Added functions
+
+      /**
        * Sets a company association with user
        *
        * @param  {Object} company
@@ -198,57 +251,7 @@ angular.module('webApp')
         }, function(err) {
           return cb(err);
         }).$promise;
-      },
-
-      /**
-       * Gets all available info on authenticated user
-       *
-       * @return {Object} user
-       */
-      getCurrentUser: function() {
-        return currentUser;
-      },
-
-      /**
-       * Check if a user is logged in
-       *
-       * @return {Boolean}
-       */
-      isLoggedIn: function() {
-        return currentUser.hasOwnProperty('role');
-      },
-
-      /**
-       * Waits for currentUser to resolve before checking if user is logged in
-       */
-      isLoggedInAsync: function(cb) {
-        if (currentUser.hasOwnProperty('$promise')) {
-          currentUser.$promise.then(function() {
-            cb(true);
-          }).catch(function() {
-            cb(false);
-          });
-        } else if (currentUser.hasOwnProperty('role')) {
-          cb(true);
-        } else {
-          cb(false);
-        }
-      },
-
-      /**
-       * Check if a user is an admin
-       *
-       * @return {Boolean}
-       */
-      isAdmin: function() {
-        return currentUser.role === 'admin';
-      },
-
-      /**
-       * Get auth token
-       */
-      getToken: function() {
-        return $cookieStore.get('token');
       }
+
     };
   });

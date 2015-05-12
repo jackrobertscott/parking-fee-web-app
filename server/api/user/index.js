@@ -14,6 +14,8 @@ router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 
+// Added routes
+
 router.put('/:id/company', auth.isAuthenticated(), controller.setCompany);
 router.delete('/:id/company', auth.hasRole('admin'), controller.setCompany);
 router.put('/:id/vehicle', auth.isAuthenticated(), controller.addVehicle);
