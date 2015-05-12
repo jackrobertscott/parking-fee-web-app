@@ -8,11 +8,12 @@ var auth = require('../../auth/auth.service');
 var router = express.Router();
 
 router.get('/', auth.hasRole('admin'), controller.index);
-router.get('/me', auth.isAuthenticated(), controller.me);
-router.get('/:id', auth.isAuthenticated(), controller.show);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
-router.post('/', controller.create);
+router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
+router.get('/:id', auth.isAuthenticated(), controller.show);
+router.post('/', controller.create);
+
 router.put('/:id/company', auth.isAuthenticated(), controller.setCompany);
 router.delete('/:id/company', auth.hasRole('admin'), controller.setCompany);
 router.put('/:id/vehicle', auth.isAuthenticated(), controller.addVehicle);
