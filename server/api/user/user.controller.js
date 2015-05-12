@@ -85,12 +85,77 @@ exports.changePassword = function(req, res, next) {
  */
 exports.setCompany = function(req, res, next) {
   var userId = req.user._id;
-  var companyId = String(req.body.company._id);
+  var companyId = req.body.company._id;
 
   User.findById(userId, function (err, user) {
+    if (err) return res.send(500, err);
+    if (!user) return res.send(401);
     user.company = companyId;
     user.save(function(err) {
-      if (err) return validationError(res, err);
+      if (err) return res.send(500, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
+ * Associate a company to user
+ */
+exports.removeCompany = function(req, res, next) {
+  var companyId = req.body.company._id;
+
+  User.find({ company: companyId },
+  function (err, users) {
+    if (err) return res.send(500, err);
+    users.forEach(function(user, i, array) {
+      user.company = null;
+      user.save(function(err) {
+        if (err) return res.send(500, err);
+      });
+    });
+    res.send(200);
+  });
+};
+
+/**
+ * Associate a vehicle to user
+ */
+exports.addVehicle = function(req, res, next) {
+  var userId = req.user._id;
+  var vehicleId = req.body.vehicle._id;
+
+  User.findById(userId, function (err, user) {
+    if (err) return res.send(500, err);
+    if (!user) return res.send(401);
+    if (!user.vehicles.length) {
+      user.vehicles = [vehicleId];
+    } else {
+      user.vehicles.push(vehicleId);
+    }
+    user.save(function(err) {
+      if (err) return res.send(500, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
+ * Remove associated vehicle from user
+ */
+exports.removeVehicle = function(req, res, next) {
+  var userId = req.user._id;
+  var vehicleId = req.body.vehicle._id;
+
+  User.findById(userId, function (err, user) {
+    if (err) return res.send(500, err);
+    if (!user) return res.send(401);
+    user.vehicles.forEach(function(element, i, array) {
+      if (element === vehicleId) {
+        array.splice(i, 1);
+      }
+    });
+    user.save(function(err) {
+      if (err) return res.send(500, err);
       res.send(200);
     });
   });
@@ -101,7 +166,7 @@ exports.setCompany = function(req, res, next) {
  */
 exports.promote = function(req, res, next) {
   var userId = req.user._id;
-  var oldRole = req.user.role;
+  var oldRole = String(req.user.role);
   var newRole = String(req.body.role);
 
   // Check if the given role exists
@@ -115,9 +180,11 @@ exports.promote = function(req, res, next) {
   }
 
   User.findById(userId, function (err, user) {
+    if (err) return res.send(500, err);
+    if (!user) return res.send(401);
     user.role = newRole;
     user.save(function(err) {
-      if (err) return validationError(res, err);
+      if (err) return res.send(500, err);
       res.send(200);
     });
   });
@@ -128,7 +195,7 @@ exports.promote = function(req, res, next) {
  */
 exports.demote = function(req, res, next) {
   var userId = req.user._id;
-  var oldRole = req.user.role;
+  var oldRole = String(req.user.role);
   var newRole = String(req.body.role);
 
   // Check if the given role exists
@@ -142,9 +209,11 @@ exports.demote = function(req, res, next) {
   }
 
   User.findById(userId, function (err, user) {
+    if (err) return res.send(500, err);
+    if (!user) return res.send(401);
     user.role = newRole;
     user.save(function(err) {
-      if (err) return validationError(res, err);
+      if (err) return res.send(500, err);
       res.send(200);
     });
   });
@@ -155,10 +224,9 @@ exports.demote = function(req, res, next) {
  */
 exports.me = function(req, res, next) {
   var userId = req.user._id;
-  User.findOne({_id: userId})
-  .select('-salt -hashedPassword')
-  .populate('company')
-  .exec(function(err, user) { // don't ever give out the password or salt
+  User.findOne({_id: userId},
+  '-salt -hashedPassword',
+  function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);
     res.json(user);

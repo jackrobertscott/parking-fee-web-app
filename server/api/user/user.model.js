@@ -19,9 +19,21 @@ var UserSchema = new Schema({
   twitter: {},
   google: {},
   github: {},
+  vehicles: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Vehicle'
+  }],
   company: {
     type: Schema.Types.ObjectId,
     ref: 'Company'
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 });
 

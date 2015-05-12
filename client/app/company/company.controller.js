@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('CompanyCtrl', function ($scope, $state, $stateParams, Company, Auth) {
+  .controller('CompanyCtrl', function ($scope, $state, Company, Auth) {
     $scope.errors = [];
     $scope.message = '';
     $scope.company = {};
@@ -11,21 +11,25 @@ angular.module('webApp')
      * If the company is empty then redirect to registry
      * If on register view but company exists; redirect to settings
      */
-    var find = function() {
-      var company = Auth.getCurrentUser().company;
+    $scope.find = function() {
+      var companyId = Auth.getCurrentUser().company;
+
       if ($state.is('companyRegister')) {
-        if (company) {
+        if (companyId) {
           $state.go('companySettings');
         }
       } else {
-        if (!company) {
-          $state.go('companyRegister');
+        if (companyId) {
+          Company.get({ id: companyId },
+          function(company) {
+            $scope.company = company;
+          }, errorHandler);
         } else {
-          $scope.company = Company.get({id: company._id});
+          $state.go('company');
         }
       }
     };
-    find();
+    $scope.find();
 
     /**
      * Register a company
@@ -42,25 +46,17 @@ angular.module('webApp')
           admins: [user._id]
         });
         var company = new Company($scope.company);
-
-        company.$save(function(res) {
-          Auth.setCompany(res)
+        company.$save(function(company) {
+          Auth.setCompany(company)
           .then(function() {
             Auth.promote('company')
             .then(function() {
-              $scope.company = {};
               $state.go('company');
             })
-            .catch(function(err) {
-      				$scope.errors.push(err.data);
-            });
+            .catch(errorHandler);
           })
-          .catch(function(err) {
-    				$scope.errors.push(err.data);
-          });
-  			}, function(err) {
-  				$scope.errors.push(err.data);
-  			});
+          .catch(errorHandler);
+  			}, errorHandler);
       }
     };
 
@@ -72,31 +68,29 @@ angular.module('webApp')
       reset();
 
       if (form.$valid) {
-        var company = $scope.company;
-        company.$update(function() {
+        $scope.company.$update(function() {
           $scope.message = 'Details successfully updated';
-  			}, function(err) {
-  				$scope.errors.push(err.data);
-  			});
+  			}, errorHandler);
       }
     };
 
     /**
      * Deactivate a company
+     * TODO: move company to archive database
      */
-    $scope.deactivate = function(form) {
+    $scope.remove = function(form) {
+      var company = $scope.company;
       $scope.submitted = true;
       reset();
 
-      if (form.$valid) {
-        var company = $scope.company;
-        company.active = false;
-        company.$update(function() {
-          $scope.company = {};
-          $scope.message = 'Company deactivated';
-        }, function(err) {
-          $scope.errors.push(err);
-        });
+      if (form.$valid && company) {
+        Auth.removeCompany(company)
+        .then(function() {
+          company.$remove(function() {
+            $state.go('main');
+          }, errorHandler);
+        })
+        .catch(errorHandler);
       }
     };
 
@@ -106,5 +100,12 @@ angular.module('webApp')
     var reset = function () {
       $scope.errors = [];
       $scope.message = '';
+    };
+
+    /**
+     * A error handling function
+     */
+    var errorHandler = function (err) {
+      $scope.errors.push(err.data);
     };
   });

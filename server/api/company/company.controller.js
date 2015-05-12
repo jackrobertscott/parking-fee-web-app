@@ -5,9 +5,9 @@ var Company = require('./company.model');
 
 // Get list of companies
 exports.index = function(req, res) {
-  Company.find(function (err, companys) {
+  Company.find(function (err, companies) {
     if (err) { return handleError(res, err); }
-    return res.json(200, companys);
+    return res.json(200, companies);
   });
 };
 

@@ -111,6 +111,60 @@ angular.module('webApp')
       },
 
       /**
+       * Sets a company association with user
+       *
+       * @param  {Object} company
+       * @param  {Function} callback    - optional
+       */
+      removeCompany: function(company, callback) {
+        var cb = callback || angular.noop;
+
+        return User.removeCompany({ id: currentUser._id }, {
+         company: company
+        }, function(user) {
+         return cb(user);
+        }, function(err) {
+         return cb(err);
+        }).$promise;
+      },
+
+      /**
+       * Add a vehicle association with user
+       *
+       * @param  {Object} vehicle
+       * @param  {Function} callback    - optional
+       */
+      addVehicle: function(vehicle, callback) {
+        var cb = callback || angular.noop;
+
+        return User.addVehicle({ id: currentUser._id }, {
+         vehicle: vehicle
+        }, function(user) {
+         return cb(user);
+        }, function(err) {
+         return cb(err);
+        }).$promise;
+      },
+
+      /**
+       * Remove a vehicle association with user
+       *
+       * @param  {Object} vehicle
+       * @param  {Function} callback    - optional
+       */
+      removeVehicle: function(vehicle, callback) {
+        var cb = callback || angular.noop;
+
+        return User.addVehicle({ id: currentUser._id }, {
+         vehicle: vehicle
+        }, function(user) {
+         return cb(user);
+        }, function(err) {
+         return cb(err);
+        }).$promise;
+      },
+
+      /**
        * Promotes a user's role
        *
        * @param  {Object} role

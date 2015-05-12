@@ -8,14 +8,6 @@ var CompanySchema = new Schema({
   info: String,
   email: String,
   phone: String,
-  active: {
-    type: Boolean,
-    default: true
-  },
-  authenticated: {
-    type: Boolean,
-    default: false
-  },
   admins: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
@@ -24,6 +16,14 @@ var CompanySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }],
+  locations: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Location'
+  }],
+  authenticated: {
+    type: Boolean,
+    default: false
+  },
   _creator: {
     type: Schema.Types.ObjectId,
     ref: 'User'
@@ -31,6 +31,10 @@ var CompanySchema = new Schema({
   created: {
     type: Date,
     default: Date.now
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 });
 
