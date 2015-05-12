@@ -7,6 +7,14 @@ angular.module('webApp')
     $scope.user = {};
     $scope.users = [];
 
+    $scope.find = function() {
+      $scope.users = User.query();
+    };
+
+    $scope.findMe = function() {
+      $scope.user = Auth.getCurrentUser();
+    };
+
     $scope.login = function(form) {
       $scope.submitted = true;
 
@@ -69,10 +77,6 @@ angular.module('webApp')
         });
       }
 		};
-
-    $scope.find = function() {
-      $scope.users = User.query();
-    };
 
     $scope.delete = function(user) {
       User.remove({ id: user._id });

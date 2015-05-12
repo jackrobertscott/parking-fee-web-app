@@ -53,21 +53,16 @@ angular.module('webApp')
        * Create a new user
        *
        * @param  {Object}   user     - user info
-       * @param  {Function} callback - optional
        * @return {Promise}
        */
-      createUser: function(user, callback) {
-        var cb = callback || angular.noop;
-
+      createUser: function(user) {
         return User.save(user,
           function(data) {
             $cookieStore.put('token', data.token);
             currentUser = User.get();
-            return cb(user);
           },
           function(err) {
             this.logout();
-            return cb(err);
           }.bind(this)).$promise;
       },
 
@@ -76,19 +71,12 @@ angular.module('webApp')
        *
        * @param  {String}   oldPassword
        * @param  {String}   newPassword
-       * @param  {Function} callback    - optional
        * @return {Promise}
        */
-      changePassword: function(oldPassword, newPassword, callback) {
-        var cb = callback || angular.noop;
-
+      changePassword: function(oldPassword, newPassword) {
         return User.changePassword({ id: currentUser._id }, {
           oldPassword: oldPassword,
           newPassword: newPassword
-        }, function(user) {
-          return cb(user);
-        }, function(err) {
-          return cb(err);
         }).$promise;
       },
 
@@ -149,17 +137,10 @@ angular.module('webApp')
        * Promotes a user's role
        *
        * @param  {Object} role
-       * @param  {Function} callback    - optional
        */
       promote: function(role, callback) {
-        var cb = callback || angular.noop;
-
         return User.promote({ id: currentUser._id }, {
           role: role
-        }, function(user) {
-          return cb(user);
-        }, function(err) {
-          return cb(err);
         }).$promise;
       },
 
@@ -167,17 +148,10 @@ angular.module('webApp')
        * Demotes a user's role
        *
        * @param  {Object} role
-       * @param  {Function} callback    - optional
        */
       demote: function(role, callback) {
-        var cb = callback || angular.noop;
-
         return User.demote({ id: currentUser._id }, {
           role: role
-        }, function(user) {
-          return cb(user);
-        }, function(err) {
-          return cb(err);
         }).$promise;
       }
 
