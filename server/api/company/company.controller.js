@@ -48,18 +48,18 @@ exports.destroy = function(req, res) {
   Company.findById(req.params.id, function (err, company) {
     if (err) { return handleError(res, err); }
     if (!company) { return res.send(404); }
-    company.remove(function(err) {
+    // Remove company in users aswell
+    User.find({ company: company._id }, function (err, users) {
       if (err) { return handleError(res, err); }
-      // Remove company in users aswell
-      User.find({ company: req.params.id }, function (err, users) {
-        if (err) return res.send(500, err);
-        users.forEach(function(user, i, array) {
-          user.company = null;
-          user.role = 'user';
-          user.save(function(err) {
-            if (err) return res.send(500, err);
-          });
+      users.forEach(function(user, i, array) {
+        user.company = null;
+        user.role = 'user';
+        user.save(function(err) {
+          if (err) { return handleError(res, err); }
         });
+      });
+      company.remove(function(err) {
+        if (err) { return handleError(res, err); }
         return res.send(204);
       });
     });

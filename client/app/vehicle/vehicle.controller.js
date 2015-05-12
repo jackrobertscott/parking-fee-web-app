@@ -49,16 +49,16 @@ angular.module('webApp')
       reset();
 
       if (form.$valid) {
+        var user = Auth.getCurrentUser();
         angular.extend($scope.vehicle, {
-          _creator: Auth.getCurrentUser()._id
+          _creator: user._id
         });
         var vehicle = new Vehicle($scope.vehicle);
         vehicle.$save(function (vehicle) {
-          Auth.addVehicle(vehicle)
-          .then(function() {
+          user.vehicle = vehicle._id;
+          user.$update(function() {
             $state.go('vehicle');
-          })
-          .catch(errorHandler);
+          }, errorHandler);
         }, errorHandler);
       }
     };
@@ -83,13 +83,9 @@ angular.module('webApp')
      */
 		$scope.remove = function(vehicle) {
 			if (vehicle) {
-        Auth.removeVehicle(vehicle)
-        .then(function() {
-          vehicle.$remove(function () {
-            $scope.message = 'Vehicle successfully deleted';
-          }, errorHandler);
-        })
-        .catch(errorHandler);
+        vehicle.$remove(function () {
+          $scope.message = 'Vehicle successfully deleted';
+        }, errorHandler);
         // Remove from view
         $scope.vehicles.forEach(function(element, i, array) {
           if (array[i] === vehicle) {
@@ -98,13 +94,9 @@ angular.module('webApp')
         });
 			} else {
 				vehicle = $scope.vehicle;
-        Auth.removeVehicle(vehicle)
-        .then(function() {
-          vehicle.$remove(function() {
-            $state.go('vehicle');
-          }, errorHandler);
-        })
-        .catch(errorHandler);
+        vehicle.$remove(function () {
+          $state.go('vehicle');
+        }, errorHandler);
 			}
 		};
 
