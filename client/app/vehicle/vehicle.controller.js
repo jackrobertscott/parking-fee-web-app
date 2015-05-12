@@ -2,8 +2,7 @@
 
 angular.module('webApp')
   .controller('VehicleCtrl', function ($scope, $state, $stateParams, Vehicle, Auth) {
-    $scope.errors = [];
-    $scope.message = '';
+    $scope.response = {};
     $scope.vehicle = {};
     $scope.vehicles = [];
     $scope.makes = ['Ford', 'Holden', 'Mazda', 'Suburu', 'Ferrari', 'Other'];
@@ -72,7 +71,7 @@ angular.module('webApp')
 
       if (form.$valid && $scope.vehicle) {
         $scope.vehicle.$update(function() {
-          $scope.message = 'Details successfully updated';
+          $scope.response.good = 'Details successfully updated';
   			}, errorHandler);
       }
     };
@@ -84,7 +83,7 @@ angular.module('webApp')
 		$scope.remove = function(vehicle) {
 			if (vehicle) {
         vehicle.$remove(function () {
-          $scope.message = 'Vehicle successfully deleted';
+          $scope.response.good = 'Vehicle successfully deleted';
         }, errorHandler);
         // Remove from view
         $scope.vehicles.forEach(function(element, i, array) {
@@ -101,17 +100,17 @@ angular.module('webApp')
 		};
 
     /**
-     * Reset a errors and message in form
+     * Reset response object
      */
     var reset = function () {
-      $scope.errors = [];
-      $scope.message = '';
+      $scope.response = {};
     };
 
     /**
      * A error handling function
      */
     var errorHandler = function (err) {
-      $scope.errors.push(err.data);
+      console.log(err.data);
+      $scope.response.bad = 'An error has occurred, we apologise for this inconvenience';
     };
   });

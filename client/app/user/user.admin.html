@@ -9,4 +9,6 @@
         <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
     </li>
   </ul>
+  <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
+  <p class="help-block" ng-show="response.good">{{ response.good }}</p>
 </div>

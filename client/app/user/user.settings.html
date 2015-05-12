@@ -14,7 +14,7 @@
           <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
                  mongoose-error/>
           <p class="help-block" ng-show="form.password.$error.mongoose">
-              {{ errors.other }}
+              {{ response.errors.other }}
           </p>
         </div>
 
@@ -30,7 +30,8 @@
           </p>
         </div>
 
-        <p class="help-block">{{ message }}</p>
+        <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
+        <p class="help-block" ng-show="response.good">{{ response.good }}</p>
 
         <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
       </form>

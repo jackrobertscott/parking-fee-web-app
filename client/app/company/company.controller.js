@@ -2,38 +2,40 @@
 
 angular.module('webApp')
   .controller('CompanyCtrl', function ($scope, $state, Company, Auth) {
-    $scope.errors = [];
-    $scope.message = '';
+    $scope.response = {};
     $scope.company = {};
+    $scope.companies = [];
+
+    // Redirect if user already attached to company
+    if ($state.is('companyRegister')) {
+      if (Auth.getCurrentUser().company) {
+        $state.go('companySettings');
+      }
+    }
 
     /**
-     * Set the company object to the users associated company
-     * If the company is empty then redirect to registry
-     * If on register view but company exists; redirect to settings
+     * Find all companies
      */
     $scope.find = function() {
-      var companyId = Auth.getCurrentUser().company;
-
-      if ($state.is('companyRegister')) {
-        if (companyId) {
-          $state.go('companySettings');
-        }
-      } else {
-        if (companyId) {
-          Company.get({ id: companyId },
-          function(company) {
-            $scope.company = company;
-          }, errorHandler);
-        } else {
-          $state.go('company');
-        }
-      }
+      Company.query(function(companies) {
+        $scope.companies = companies;
+      }, errorHandler);
     };
-    $scope.find();
 
     /**
-     * Register a company
-     * Update users company object and user role
+     * Find the users company
+     */
+    $scope.findOne = function() {
+      Company.get({ id: Auth.getCurrentUser().company },
+      function(company) {
+        if (!company) { $state.go('main'); }
+        $scope.company = company;
+      }, errorHandler);
+    };
+
+    /**
+     * Register new company
+     * Update user with new company
      */
     $scope.register = function(form) {
       $scope.submitted = true;
@@ -68,7 +70,7 @@ angular.module('webApp')
 
       if (form.$valid) {
         $scope.company.$update(function() {
-          $scope.message = 'Details successfully updated';
+          $scope.response.good = 'Details successfully updated';
   			}, errorHandler);
       }
     };
@@ -90,17 +92,17 @@ angular.module('webApp')
     };
 
     /**
-     * Reset a errors and message in form
+     * Reset response object
      */
     var reset = function () {
-      $scope.errors = [];
-      $scope.message = '';
+      $scope.response = {};
     };
 
     /**
      * A error handling function
      */
     var errorHandler = function (err) {
-      $scope.errors.push(err.data);
+      console.log(err.data);
+      $scope.response.bad = 'An error has occurred, we apologise for this inconvenience';
     };
   });

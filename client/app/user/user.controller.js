@@ -2,8 +2,7 @@
 
 angular.module('webApp')
   .controller('UserCtrl', function ($scope, $state, $window, Auth, User) {
-    $scope.errors = [];
-    $scope.message = '';
+    $scope.response = {};
     $scope.user = {};
     $scope.users = [];
 
@@ -11,12 +10,13 @@ angular.module('webApp')
       $scope.users = User.query();
     };
 
-    $scope.findMe = function() {
+    $scope.findOne = function() {
       $scope.user = Auth.getCurrentUser();
     };
 
     $scope.login = function(form) {
       $scope.submitted = true;
+      reset();
 
       if (form.$valid) {
         Auth.login({
@@ -28,7 +28,7 @@ angular.module('webApp')
           $state.go('main');
         })
         .catch(function(err) {
-          $scope.errors.other = err.message;
+          $scope.response.errors.other = err.message;
         });
       }
     };
@@ -39,6 +39,7 @@ angular.module('webApp')
 
     $scope.register = function(form) {
       $scope.submitted = true;
+      reset();
 
       if (form.$valid) {
         Auth.createUser({
@@ -52,12 +53,12 @@ angular.module('webApp')
         })
         .catch(function(err) {
           err = err.data;
-          $scope.errors = {};
+          $scope.response.errors = {};
 
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
             form[field].$setValidity('mongoose', false);
-            $scope.errors[field] = error.message;
+            $scope.response.errors[field] = error.message;
           });
         });
       }
@@ -65,15 +66,17 @@ angular.module('webApp')
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;
+      reset();
+
       if (form.$valid) {
         Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
         .then(function() {
-          $scope.message = 'Password successfully changed.';
+          $scope.response.good = 'Password successfully changed.';
         })
         .catch(function() {
           form.password.$setValidity('mongoose', false);
-          $scope.errors.other = 'Incorrect password';
-          $scope.message = '';
+          $scope.response.errors.other = 'Incorrect password';
+          $scope.response.good = '';
         });
       }
 		};
@@ -85,5 +88,20 @@ angular.module('webApp')
           $scope.users.splice(i, 1);
         }
       });
+    };
+
+    /**
+     * Reset response object
+     */
+    var reset = function () {
+      $scope.response = {};
+    };
+
+    /**
+     * A error handling function
+     */
+    var errorHandler = function (err) {
+      console.log(err.data);
+      $scope.response.bad = 'An error has occurred, we apologise for this inconvenience';
     };
   });

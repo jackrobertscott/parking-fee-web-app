@@ -2,21 +2,18 @@
 
 angular.module('webApp')
   .controller('LocationCtrl', function ($scope, $state, $stateParams, Location, Company, Auth) {
-    $scope.errors = [];
-    $scope.message = '';
+    $scope.response = {};
     $scope.location = {};
     $scope.locations = [];
 
     /**
-     * Get all locations registered to the user's company
+     * Find all locations registered to the user's company
      */
     $scope.find = function() {
-      var companyId = Auth.getCurrentUser().company;
-
-      if (!companyId) {
+      if (!Auth.getCurrentUser().company) {
         $state.go('main');
       } else {
-        Location.query({ company: companyId },
+        Location.query({ company: Auth.getCurrentUser().company },
         function(locations) {
           $scope.locations = locations;
         }, errorHandler);
@@ -81,7 +78,7 @@ angular.module('webApp')
 
       if (form.$valid && $scope.location) {
         $scope.location.$update(function() {
-          $scope.message = 'Details successfully updated';
+          $scope.response.good = 'Details successfully updated';
   			}, errorHandler);
       }
     };
@@ -100,7 +97,7 @@ angular.module('webApp')
           });
           company.$update(function() {
             location.$remove(function () {
-              $scope.message = 'Vehicle successfully deleted';
+              $scope.response.good = 'Vehicle successfully deleted';
             }, errorHandler);
           }, errorHandler);
         }, errorHandler);
@@ -120,7 +117,7 @@ angular.module('webApp')
           });
           company.$update(function() {
             location.$remove(function () {
-              $scope.message = 'Vehicle successfully deleted';
+              $scope.response.good = 'Vehicle successfully deleted';
             }, errorHandler);
           }, errorHandler);
         }, errorHandler);
@@ -129,17 +126,17 @@ angular.module('webApp')
  		};
 
     /**
-     * Reset a errors and message in form
+     * Reset response object
      */
     var reset = function () {
-      $scope.errors = [];
-      $scope.message = '';
+      $scope.response = {};
     };
 
     /**
      * A error handling function
      */
     var errorHandler = function (err) {
-      $scope.errors.push(err.data);
+      console.log(err.data);
+      $scope.response.bad = 'An error has occurred, we apologise for this inconvenience';
     };
   });

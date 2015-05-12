@@ -30,7 +30,7 @@
              Please enter a valid email.
           </p>
 
-          <p class="help-block">{{ errors.other }}</p>
+          <p class="help-block">{{ response.errors.other }}</p>
         </div>
 
         <div>
@@ -42,7 +42,11 @@
           </a>
         </div>
 
+        <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
+        <p class="help-block" ng-show="response.good">{{ response.good }}</p>
+
         <hr>
+        
         <div>
           <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
             <i class="fa fa-facebook"></i> Connect with Facebook

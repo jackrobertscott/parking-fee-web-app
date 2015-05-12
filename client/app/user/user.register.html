@@ -26,7 +26,7 @@
             What's your email address?
           </p>
           <p class="help-block" ng-show="form.email.$error.mongoose">
-            {{ errors.email }}
+            {{ response.errors.email }}
           </p>
         </div>
 
@@ -37,7 +37,7 @@
             Password must be at least 3 characters.
           </p>
           <p class="help-block" ng-show="form.password.$error.mongoose">
-            {{ errors.password }}
+            {{ response.errors.password }}
           </p>
         </div>
 
@@ -49,6 +49,9 @@
             Login
           </a>
         </div>
+
+        <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
+        <p class="help-block" ng-show="response.good">{{ response.good }}</p>
 
         <hr>
 
