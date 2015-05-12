@@ -143,7 +143,7 @@ angular.module('webApp')
      * A error handling function
      */
     var errorHandler = function (err) {
-      console.log(err.data);
+      console.log(err);
       $scope.response.bad = 'An error has occurred, we apologise for this inconvenience';
     };
   });
