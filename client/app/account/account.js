@@ -2,6 +2,7 @@
 
 angular.module('webApp')
   .config(function ($stateProvider) {
+    /*
     $stateProvider
       .state('login', {
         url: '/login',
@@ -9,8 +10,8 @@ angular.module('webApp')
         controller: 'LoginCtrl'
       })
       .state('signup', {
-        url: '/signup',
-        templateUrl: 'app/account/signup/signup.html',
+        url: '/register',
+        templateUrl: 'app/account/register/register.html',
         controller: 'SignupCtrl'
       })
       .state('settings', {
@@ -19,4 +20,5 @@ angular.module('webApp')
         controller: 'SettingsCtrl',
         authenticate: true
       });
+      */
   });
