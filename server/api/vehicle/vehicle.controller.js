@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var Vehicle = require('./vehicle.model');
-var User = require('./user.model');
+var User = require('../user/user.model');
 
 // Get list of vehicles
 exports.index = function(req, res) {

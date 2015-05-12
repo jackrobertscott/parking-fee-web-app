@@ -35,6 +35,8 @@ angular.module('webApp')
     $scope.findOne = function() {
       Location.get({ id: $stateParams.id },
       function(location) {
+        location.start = new Date(location.start);
+        location.end = new Date(location.end);
         $scope.location = location;
       }, errorHandler);
     };
@@ -65,11 +67,7 @@ angular.module('webApp')
         location.$save(function() {
           Company.get({ id: user.company },
           function(company) {
-            if (!company.locations.length) {
-              company.locations = [location._id];
-            } else {
-              company.locations.push(location._id);
-            }
+            company.locations.push(location._id);
             company.$update(function() {
               $state.go('location');
             }, errorHandler);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('VehicleCtrl', function ($scope, $state, $stateParams, Vehicle, Auth) {
+  .controller('VehicleCtrl', function ($scope, $state, $stateParams, Vehicle, User, Auth) {
     $scope.response = {};
     $scope.vehicle = {};
     $scope.vehicles = [];
@@ -54,7 +54,7 @@ angular.module('webApp')
         });
         var vehicle = new Vehicle($scope.vehicle);
         vehicle.$save(function (vehicle) {
-          user.vehicle = vehicle._id;
+          user.vehicles.push(vehicle._id);
           user.$update(function() {
             $state.go('vehicle');
           }, errorHandler);

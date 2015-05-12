@@ -17,6 +17,9 @@ angular.module('webApp')
           controller: 'password'
         }
       },
+      update: {
+        method: 'PUT'
+      },
       promote: {
         method: 'PUT',
         params: {

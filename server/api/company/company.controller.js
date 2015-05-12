@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var Company = require('./company.model');
-var User = require('./user.model');
+var User = require('../user/user.model');
 
 // Get list of companies
 exports.index = function(req, res) {

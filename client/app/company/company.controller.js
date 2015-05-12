@@ -6,7 +6,8 @@ angular.module('webApp')
     $scope.company = {};
     $scope.companies = [];
 
-    // Redirect if user already attached to company
+    // TODO: Need to change this
+    // If user is redirected, cannot click back!
     if ($state.is('companyRegister')) {
       if (Auth.getCurrentUser().company) {
         $state.go('companySettings');
