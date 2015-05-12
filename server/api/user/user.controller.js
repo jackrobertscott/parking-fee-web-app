@@ -30,7 +30,7 @@ exports.create = function (req, res, next) {
   newUser.role = 'user';
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+    var token = jwt.sign({ _id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
     res.json({ token: token });
   });
 };
@@ -85,7 +85,7 @@ exports.changePassword = function(req, res, next) {
  */
 exports.me = function(req, res, next) {
   var userId = req.user._id;
-  User.findOne({_id: userId},
+  User.findOne({ _id: userId },
   '-salt -hashedPassword',
   function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
@@ -102,6 +102,87 @@ exports.authCallback = function(req, res, next) {
 };
 
 // Added functions
+
+/**
+ * Safely update the user
+ */
+exports.update = function(req, res) {
+  if (req.body._id) { delete req.body._id; }
+  if (req.body.salt) { delete req.body.salt; }
+  if (req.body.hashedPassword) { delete req.body.hashedPassword; }
+  if (req.body.role) { delete req.body.role; }
+  User.findById(req.params.id, function (err, user) {
+    if (err) { return handleError(res, err); }
+    if (!user) { return res.send(404); }
+    var updated = _.merge(user, req.body);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, user);
+    });
+  });
+};
+
+/**
+ * Increase a users role to a higher role
+ */
+exports.promote = function(req, res, next) {
+  var userId = req.user._id;
+  var oldRole = String(req.user.role);
+  var newRole = String(req.body.role);
+
+  // Check if the given role exists
+  if (config.userRoles.indexOf(newRole) === -1) {
+    return res.send(403);
+  }
+
+  // Already have role higher then requested
+  if (config.userRoles.indexOf(newRole) < config.userRoles.indexOf(oldRole)) {
+    return res.send(200);
+  }
+
+  User.findById(userId, function (err, user) {
+    if (err) return res.send(500, err);
+    if (!user) return res.send(401);
+    user.role = newRole;
+    user.save(function(err) {
+      if (err) return res.send(500, err);
+      res.send(200);
+    });
+  });
+};
+
+/**
+ * Decrease users role to lower role
+ */
+exports.demote = function(req, res, next) {
+  var userId = req.user._id;
+  var oldRole = String(req.user.role);
+  var newRole = String(req.body.role);
+
+  // Check if the given role exists
+  if (config.userRoles.indexOf(newRole) === -1) {
+    return res.send(403);
+  }
+
+  // Already have role lower then requested
+  if (config.userRoles.indexOf(newRole) > config.userRoles.indexOf(oldRole)) {
+    return res.send(200);
+  }
+
+  User.findById(userId, function (err, user) {
+    if (err) return res.send(500, err);
+    if (!user) return res.send(401);
+    user.role = newRole;
+    user.save(function(err) {
+      if (err) return res.send(500, err);
+      res.send(200);
+    });
+  });
+};
+
+function handleError(res, err) {
+  return res.send(500, err);
+}
 
 /**
  * Associate a company to user
@@ -177,64 +258,6 @@ exports.removeVehicle = function(req, res, next) {
         array.splice(i, 1);
       }
     });
-    user.save(function(err) {
-      if (err) return res.send(500, err);
-      res.send(200);
-    });
-  });
-};
-
-/**
- * Increase a users role to a higher role
- */
-exports.promote = function(req, res, next) {
-  var userId = req.user._id;
-  var oldRole = String(req.user.role);
-  var newRole = String(req.body.role);
-
-  // Check if the given role exists
-  if (config.userRoles.indexOf(newRole) === -1) {
-    return res.send(403);
-  }
-
-  // Already have role higher then requested
-  if (config.userRoles.indexOf(newRole) < config.userRoles.indexOf(oldRole)) {
-    return res.send(200);
-  }
-
-  User.findById(userId, function (err, user) {
-    if (err) return res.send(500, err);
-    if (!user) return res.send(401);
-    user.role = newRole;
-    user.save(function(err) {
-      if (err) return res.send(500, err);
-      res.send(200);
-    });
-  });
-};
-
-/**
- * Decrease users role to lower role
- */
-exports.demote = function(req, res, next) {
-  var userId = req.user._id;
-  var oldRole = String(req.user.role);
-  var newRole = String(req.body.role);
-
-  // Check if the given role exists
-  if (config.userRoles.indexOf(newRole) === -1) {
-    return res.send(403);
-  }
-
-  // Already have role lower then requested
-  if (config.userRoles.indexOf(newRole) > config.userRoles.indexOf(oldRole)) {
-    return res.send(200);
-  }
-
-  User.findById(userId, function (err, user) {
-    if (err) return res.send(500, err);
-    if (!user) return res.send(401);
-    user.role = newRole;
     user.save(function(err) {
       if (err) return res.send(500, err);
       res.send(200);

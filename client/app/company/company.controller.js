@@ -47,15 +47,14 @@ angular.module('webApp')
         });
         var company = new Company($scope.company);
         company.$save(function(company) {
-          Auth.setCompany(company)
-          .then(function() {
+          user.company = company._id;
+          user.$update(function() {
             Auth.promote('company')
             .then(function() {
               $state.go('company');
             })
             .catch(errorHandler);
-          })
-          .catch(errorHandler);
+          }, errorHandler);
   			}, errorHandler);
       }
     };
@@ -84,13 +83,9 @@ angular.module('webApp')
       reset();
 
       if (form.$valid && company) {
-        Auth.removeCompany(company)
-        .then(function() {
-          company.$remove(function() {
-            $state.go('main');
-          }, errorHandler);
-        })
-        .catch(errorHandler);
+        company.$remove(function() {
+          $state.go('main');
+        }, errorHandler);
       }
     };
 

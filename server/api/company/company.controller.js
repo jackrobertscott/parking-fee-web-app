@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Company = require('./company.model');
+var User = require('./user.model');
 
 // Get list of companies
 exports.index = function(req, res) {
@@ -49,7 +50,18 @@ exports.destroy = function(req, res) {
     if (!company) { return res.send(404); }
     company.remove(function(err) {
       if (err) { return handleError(res, err); }
-      return res.send(204);
+      // Remove company in users aswell
+      User.find({ company: req.params.id }, function (err, users) {
+        if (err) return res.send(500, err);
+        users.forEach(function(user, i, array) {
+          user.company = null;
+          user.role = 'user';
+          user.save(function(err) {
+            if (err) return res.send(500, err);
+          });
+        });
+        return res.send(204);
+      });
     });
   });
 };
