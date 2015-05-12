@@ -12,7 +12,7 @@ angular.module('webApp')
     /**
      * Get all vehicles registered to the user
      */
-    $scope.find = function() {
+    $scope.findFew = function() {
       Auth.getCurrentUser().vehicles.forEach(function(vehicleId) {
         Vehicle.get({ id: vehicleId },
         function (vehicle) {

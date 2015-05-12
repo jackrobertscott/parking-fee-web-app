@@ -1,3 +1,13 @@
-<div class="col-md-12">
-This is the user view.
+<div ng-include="'components/navbar/navbar.html'" ng-init="find()"></div>
+
+<div class="container">
+  <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="user in users">
+        <strong>{{user.name}}</strong><br>
+        <span class="text-muted">{{user.email}}</span>
+    </li>
+  </ul>
+  <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
+  <p class="help-block" ng-show="response.good">{{ response.good }}</p>
 </div>

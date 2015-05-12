@@ -2,7 +2,7 @@
 
 <div class="container">
   <a href="/vehicle/register">Register a new vehicle</a>
-  <ul class="list-group" ng-init="find()">
+  <ul class="list-group" ng-init="findFew()">
     <li class="list-group-item" ng-repeat="vehicle in vehicles" ng-click="toSettings(vehicle)">
         <strong>{{vehicle.plate}}</strong><br>
         <span class="text-muted">Make: {{vehicle.make}},</span>
