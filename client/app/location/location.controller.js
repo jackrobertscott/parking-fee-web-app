@@ -7,9 +7,18 @@ angular.module('webApp')
     $scope.locations = [];
 
     /**
-     * Find all locations registered to the user's company
+     * Find all locations
      */
     $scope.find = function() {
+      Location.query(function(locations) {
+        $scope.locations = locations;
+      }, errorHandler);
+    };
+
+    /**
+     * Find all locations registered to the user's company
+     */
+    $scope.findFew = function() {
       if (!Auth.getCurrentUser().company) {
         $state.go('main');
       } else {
