@@ -1,13 +1,44 @@
-<div ng-include="'components/navbar/navbar.html'" ng-init="find()"></div>
-
-<div class="container">
-  <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="user in users">
-        <strong>{{user.name}}</strong><br>
-        <span class="text-muted">{{user.email}}</span>
-    </li>
-  </ul>
-  <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
-  <p class="help-block" ng-show="response.good">{{ response.good }}</p>
-</div>
+<span ng-include="'components/theme/header.html'"></span>
+<section id="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 left hidden-sm hidden-xs">
+        <span ng-include="'components/theme/sidebar.html'"></span>
+      </div>
+      <div class="col-md-9">
+        <h1>
+          <!-- title start -->
+          Users
+          <!-- title end -->
+        </h1>
+        <div class="row hidden-md hidden-lg">
+          <div class="col-sm-12">
+            <span ng-include="'components/theme/menu.html'"></span>
+          </div>
+        </div>
+        <hr class="hidden-xs hidden-sm">
+        <div class="row">
+          <div class="col-sm-8 center">
+            <!-- main content start -->
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="user in users">
+                  <strong>{{user.name}}</strong><br>
+                  <span class="text-muted">{{user.email}}</span>
+              </li>
+            </ul>
+            <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
+            <p class="help-block" ng-show="response.good">{{ response.good }}</p>
+            <!-- main content end -->
+          </div>
+          <div class="col-sm-4 right">
+            <hr class="hidden-sm hidden-md hidden-lg">
+            <!-- side content start -->
+            <span ng-include="'components/theme/right.default.html'"></span>
+            <!-- side content end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<span ng-include="'components/theme/footer.html'"></span>

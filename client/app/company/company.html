@@ -7,9 +7,9 @@
       </div>
       <div class="col-md-9">
         <h1>
-        <!-- title start -->
-        Company
-        <!-- title end -->
+          <!-- title start -->
+          Company
+          <!-- title end -->
         </h1>
         <div class="row hidden-md hidden-lg">
           <div class="col-sm-12">
@@ -19,29 +19,23 @@
         <hr class="hidden-xs hidden-sm">
         <div class="row">
           <div class="col-sm-8 center">
-          <!-- main content start -->
-          <a href="/company/register">Register a new company</a>
-          <ul class="list-group" ng-init="find()">
-            <li class="list-group-item" ng-repeat="company in companys">
-                <strong>{{company.name}}</strong><br>
-                <span class="text-muted">Email: {{company.email}},</span>
-                <span class="text-muted">Phone: {{company.phone}}</span>
-            </li>
-          </ul>
-          <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
-          <p class="help-block" ng-show="response.good">{{ response.good }}</p>
-          <!-- main content end -->
+            <!-- main content start -->
+            <a href="/company/register">Register a new company</a>
+            <ul class="list-group" ng-init="find()">
+              <li class="list-group-item" ng-repeat="company in companys">
+                  <strong>{{company.name}}</strong><br>
+                  <span class="text-muted">Email: {{company.email}},</span>
+                  <span class="text-muted">Phone: {{company.phone}}</span>
+              </li>
+            </ul>
+            <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
+            <p class="help-block" ng-show="response.good">{{ response.good }}</p>
+            <!-- main content end -->
           </div>
           <div class="col-sm-4 right">
             <hr class="hidden-sm hidden-md hidden-lg">
             <!-- side content start -->
-            <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
-            <h3>Flash</h3>
-            <p>
-              This is some text for the top tip. This is some text for the top tip.
-              This is some text for the top tip. This is some text for the top tip.
-              This is some text for the top tip. This is some text for the top tip.
-            </p>
+            <span ng-include="'components/theme/right.default.html'"></span>
             <!-- side content end -->
           </div>
         </div>

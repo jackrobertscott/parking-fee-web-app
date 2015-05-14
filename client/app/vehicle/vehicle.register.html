@@ -1,45 +1,81 @@
-<form class="form" name="form" ng-submit="register(form)" novalidate>
+<span ng-include="'components/theme/header.html'"></span>
+<section id="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 left hidden-sm hidden-xs">
+        <span ng-include="'components/theme/sidebar.html'"></span>
+      </div>
+      <div class="col-md-9">
+        <h1>
+          <!-- title start -->
+          Register a Vehicle
+          <!-- title end -->
+        </h1>
+        <div class="row hidden-md hidden-lg">
+          <div class="col-sm-12">
+            <span ng-include="'components/theme/menu.html'"></span>
+          </div>
+        </div>
+        <hr class="hidden-xs hidden-sm">
+        <div class="row">
+          <div class="col-sm-8 center">
+            <!-- main content start -->
+            <form class="form" name="form" ng-submit="register(form)" novalidate>
 
-  <div class="form-group" ng-class="{ 'has-success': form.plate.$valid && submitted, 'has-error': form.plate.$invalid && submitted }">
-    <label for="vehiclePlate">Vehicle Plate Number</label>
-    <input type="text" name="plate" class="form-control" id="vehiclePlate" placeholder="Vehicle Plate" ng-model="vehicle.plate" required>
-    <p class="help-block" ng-show="form.plate.$error.required && submitted">
-      A vehicle plate number is required
-    </p>
+              <div class="form-group" ng-class="{ 'has-success': form.plate.$valid && submitted, 'has-error': form.plate.$invalid && submitted }">
+                <label for="vehiclePlate">Vehicle Plate Number</label>
+                <input type="text" name="plate" class="form-control" id="vehiclePlate" placeholder="Vehicle Plate" ng-model="vehicle.plate" required>
+                <p class="help-block" ng-show="form.plate.$error.required && submitted">
+                  A vehicle plate number is required
+                </p>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-success': form.make.$valid && submitted, 'has-error': form.make.$invalid && submitted }">
+                <label for="vehicleMake">Vehicle Make</label>
+                <select name="make" class="form-control" id="vehicleMake" ng-model="vehicle.make" ng-options="make for make in makes" required></select>
+                <p class="help-block" ng-show="form.make.$error.required && submitted">
+                  A vehicle make is required
+                </p>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-success': form.type.$valid && submitted, 'has-error': form.type.$invalid && submitted }">
+                <label for="vehicleType">Vehicle Type</label>
+                <select name="type" class="form-control" id="vehicleType" ng-model="vehicle.type" ng-options="type for type in types" required></select>
+                <p class="help-block" ng-show="form.type.$error.required && submitted">
+                  A vehicle type is required
+                </p>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-success': form.color.$valid && submitted, 'has-error': form.color.$invalid && submitted }">
+                <label for="vehicleColor">Vehicle Colour</label>
+                <select name="color" class="form-control" id="vehicleColor" ng-model="vehicle.color" ng-options="color for color in colors" required></select>
+                <p class="help-block" ng-show="form.color.$error.required && submitted">
+                  A vehicle colour is required
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label for="vehicleInfo">Vehicle Information</label>
+                <textarea class="form-control" rows="3" id="vehicleInfo" ng-model="vehicle.info">Any extra information about the vehicle</textarea>
+              </div>
+
+              <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
+              <p class="help-block" ng-show="response.good">{{ response.good }}</p>
+
+              <button type="submit" class="btn btn-default">Submit</button>
+
+            </form>
+            <!-- main content end -->
+          </div>
+          <div class="col-sm-4 right">
+            <hr class="hidden-sm hidden-md hidden-lg">
+            <!-- side content start -->
+            <span ng-include="'components/theme/right.default.html'"></span>
+            <!-- side content end -->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-group" ng-class="{ 'has-success': form.make.$valid && submitted, 'has-error': form.make.$invalid && submitted }">
-    <label for="vehicleMake">Vehicle Make</label>
-    <select name="make" class="form-control" id="vehicleMake" ng-model="vehicle.make" ng-options="make for make in makes" required></select>
-    <p class="help-block" ng-show="form.make.$error.required && submitted">
-      A vehicle make is required
-    </p>
-  </div>
-
-  <div class="form-group" ng-class="{ 'has-success': form.type.$valid && submitted, 'has-error': form.type.$invalid && submitted }">
-    <label for="vehicleType">Vehicle Type</label>
-    <select name="type" class="form-control" id="vehicleType" ng-model="vehicle.type" ng-options="type for type in types" required></select>
-    <p class="help-block" ng-show="form.type.$error.required && submitted">
-      A vehicle type is required
-    </p>
-  </div>
-
-  <div class="form-group" ng-class="{ 'has-success': form.color.$valid && submitted, 'has-error': form.color.$invalid && submitted }">
-    <label for="vehicleColor">Vehicle Colour</label>
-    <select name="color" class="form-control" id="vehicleColor" ng-model="vehicle.color" ng-options="color for color in colors" required></select>
-    <p class="help-block" ng-show="form.color.$error.required && submitted">
-      A vehicle colour is required
-    </p>
-  </div>
-
-  <div class="form-group">
-    <label for="vehicleInfo">Vehicle Information</label>
-    <textarea class="form-control" rows="3" id="vehicleInfo" ng-model="vehicle.info">Any extra information about the vehicle</textarea>
-  </div>
-
-  <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
-  <p class="help-block" ng-show="response.good">{{ response.good }}</p>
-
-  <button type="submit" class="btn btn-default">Submit</button>
-
-</form>
+</section>
+<span ng-include="'components/theme/footer.html'"></span>
