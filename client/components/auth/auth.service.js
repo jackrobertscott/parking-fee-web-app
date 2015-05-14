@@ -138,7 +138,7 @@ angular.module('webApp')
        *
        * @param  {Object} role
        */
-      promote: function(role, callback) {
+      promote: function(role) {
         return User.promote({ id: currentUser._id }, {
           role: role
         }).$promise;
@@ -149,7 +149,7 @@ angular.module('webApp')
        *
        * @param  {Object} role
        */
-      demote: function(role, callback) {
+      demote: function(role) {
         return User.demote({ id: currentUser._id }, {
           role: role
         }).$promise;
