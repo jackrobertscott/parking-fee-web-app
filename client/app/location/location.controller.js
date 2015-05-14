@@ -33,12 +33,16 @@ angular.module('webApp')
      * Find one location by id in state params
      */
     $scope.findOne = function() {
-      Location.get({ id: $stateParams.id },
-      function(location) {
-        location.start = new Date(location.start);
-        location.end = new Date(location.end);
-        $scope.location = location;
-      }, errorHandler);
+      if (!Auth.getCurrentUser().company) {
+        $state.go('main');
+      } else {
+        Location.get({ id: $stateParams.id },
+        function(location) {
+          location.start = new Date(location.start);
+          location.end = new Date(location.end);
+          $scope.location = location;
+        }, errorHandler);
+      }
     };
 
     /**

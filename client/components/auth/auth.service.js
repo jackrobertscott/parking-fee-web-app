@@ -134,6 +134,15 @@ angular.module('webApp')
       // Added functions
 
       /**
+       * Check if a user is an admin
+       *
+       * @return {Boolean}
+       */
+      getRole: function() {
+        return currentUser.role;
+      },
+
+      /**
        * Promotes a user's role
        *
        * @param  {Object} role
