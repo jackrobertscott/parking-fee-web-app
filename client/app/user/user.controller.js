@@ -37,6 +37,11 @@ angular.module('webApp')
       $window.location.href = '/auth/' + provider;
     };
 
+    $scope.logout = function() {
+      Auth.logout();
+      $state.go('/login');
+    };
+
     $scope.register = function(form) {
       $scope.submitted = true;
       reset();

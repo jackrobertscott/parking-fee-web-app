@@ -23,6 +23,11 @@ angular.module('webApp')
         templateUrl: 'app/user/user.login.html',
         controller: 'UserCtrl'
       })
+      .state('userLogout', {
+        url: '/logout',
+        templateUrl: 'app/user/user.logout.html',
+        controller: 'UserCtrl'
+      })
       .state('userAdmin', {
         url: '/admin',
         templateUrl: 'app/user/user.admin.html',
