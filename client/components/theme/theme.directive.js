@@ -15,6 +15,11 @@ angular.module('webApp')
             // Finally, directives are evaluated
             // and templates are renderer here
 
+            /**
+             * jQuery code
+             *
+             * TODO: update this so its more appropriatly placed
+             */
             $(function() {
               // Maintain height of left section
               $('.left').height($('#main').height());
