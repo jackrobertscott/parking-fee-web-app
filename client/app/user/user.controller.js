@@ -3,6 +3,7 @@
 angular.module('webApp')
   .controller('UserCtrl', function ($scope, $state, $window, Auth, User) {
     $scope.response = {};
+    $scope.response.errors = {};
     $scope.user = {};
     $scope.users = [];
 
@@ -100,6 +101,7 @@ angular.module('webApp')
      */
     var reset = function () {
       $scope.response = {};
+      $scope.response.errors = {};
     };
 
     /**

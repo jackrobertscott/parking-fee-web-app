@@ -27,11 +27,16 @@ angular.module('webApp')
      * Find the users company
      */
     $scope.findOne = function() {
-      Company.get({ id: Auth.getCurrentUser().company },
-      function(company) {
-        if (!company) { $state.go('main'); }
-        $scope.company = company;
-      }, errorHandler);
+      var companyId = Auth.getCurrentUser().company;
+      if (companyId) {
+        Company.get({ id: companyId },
+        function(company) {
+          if (!company) { $state.go('main'); }
+          $scope.company = company;
+        }, errorHandler);
+      } else {
+        $state.go('companyRegister');
+      }
     };
 
     /**

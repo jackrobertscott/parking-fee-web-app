@@ -8,6 +8,9 @@ angular.module('webApp')
     $scope.makes = ['Ford', 'Holden', 'Mazda', 'Suburu', 'Ferrari', 'Other'];
     $scope.types = ['Sedan', 'Hatchback', 'Utility', 'Bus'];
     $scope.colors = ['Red', 'Blue', 'Yellow', 'Green', 'Orange', 'Purple', 'White', 'Black'];
+    $scope.vehicle.make = $scope.makes[0];
+    $scope.vehicle.type = $scope.types[0];
+    $scope.vehicle.color = $scope.colors[0];
 
     /**
      * Get all vehicles registered to the user

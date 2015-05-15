@@ -63,25 +63,25 @@ angular.module('webApp')
     };
 
     $scope.menu = [
-      new Item('Home', '/'),
-      new Item('Login', '/login', null, 'guest'),
-      new Item('Register', '/register', null, 'guest'),
-      new Item('Logout', '/logout', 'user'),
-      new Item('Setting', '/settings', 'user'),
-      new Item('All Locations', '/location', 'user'),
-      new Item('Users', '/user', 'admin'),
-      new Item('Admin', '/admin', 'admin'),
-      new Item('Register Company', '/company/register', 'user', 'inspector'),
+      new Item('Home', 'main'),
+      new Item('Login', 'userLogin', null, 'guest'),
+      new Item('Register', 'userRegister', null, 'guest'),
+      new Item('Settings', 'userSettings', 'user'),
+      new Item('Locations', 'location', 'user'),
+      new Item('Users', 'user', 'admin'),
+      new Item('Admin', 'userAdmin', 'admin'),
+      new Item('Register Company', 'companyRegister', 'user', 'inspector'),
       new Item('Company', null, 'company', null, [
-        new Item('Overview', '/company', 'admin'),
-        new Item('Settings', '/company/settings'),
-        new Item('Locations', '/location/company'),
-        new Item('New Location', '/location/register'),
+        new Item('Overview', 'company', 'admin'),
+        new Item('Settings', 'companySettings'),
+        new Item('Locations', 'locationCompany'),
+        new Item('New Location', 'locationRegister'),
       ]),
       new Item('Vehicles', null, 'user', null, [
-        new Item('Overview', '/vehicle'),
-        new Item('Register New', '/vehicle/register'),
+        new Item('Overview', 'vehicle'),
+        new Item('Register New', 'vehicleRegister'),
       ]),
+      new Item('Logout', 'userLogout', 'user'),
     ];
 
     $scope.isActive = function(route) {

@@ -18,8 +18,9 @@
         </div>
         <hr class="hidden-xs hidden-sm">
         <div class="row">
-          <div class="col-sm-8 center" ng-init="find()">
+          <div class="col-sm-8 center">
             <!-- main content start -->
+            <ul class="list-group" ng-init="find()">
               <li class="list-group-item" ng-repeat="location in locations">
                   <strong>{{location.name}}</strong><br>
                   <span class="text-muted">Rate/hr: {{location.rate}},</span>

@@ -1,10 +1,11 @@
 <ul class="list-unstyled" ng-controller="ThemeCtrl">
-  <span class="dropdown" ng-repeat="item in menu" ng-show="item.show()">
-    <a href="{{ item.href }}" >
+  <span class="dropdown" ng-repeat="item in menu" ng-if="item.show()">
+    <a ng-if="item.href" ui-sref="{{ item.href }}">
       <li>{{ item.name }}</li>
     </a>
+    <li ng-if="!item.href">{{ item.name }}</li>
     <ul>
-      <a ng-repeat="child in item.children" ng-show="child.show()" href="{{ child.href }}">
+      <a ng-repeat="child in item.children" ng-show="child.show()" ui-sref="{{ child.href }}">
         <li>{{ child.name }}</li>
       </a>
     </ul>
