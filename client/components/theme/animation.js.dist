@@ -1,5 +1,7 @@
 'use strict';
 
+// jQuery stuff need to go into theme.directive.js
+
 $(function() {
   setTimeout(function() {
     // Maintain height of left section
