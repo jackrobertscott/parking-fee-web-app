@@ -1,8 +1,12 @@
-<ul class="list-unstyled">
-  <span class="dropdown" ng-repeat="item in menu">
-    <a href="#"><li>Settings</li></a>
-    <ul ng-show="item.children != []">
-      <li ng-repeat="item in menu" ng-show="item.show()" href="{{ item.href }}">{{ item.name }}</li>
+<ul class="list-unstyled" ng-controller="ThemeCtrl">
+  <span class="dropdown" ng-repeat="item in menu" ng-show="item.show()">
+    <a href="{{ item.href }}" >
+      <li>{{ item.name }}</li>
+    </a>
+    <ul>
+      <a ng-repeat="child in item.children" ng-show="child.show()" href="{{ child.href }}">
+        <li>{{ child.name }}</li>
+      </a>
     </ul>
   </span>
 </ul>

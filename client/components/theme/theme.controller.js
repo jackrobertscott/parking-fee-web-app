@@ -2,30 +2,32 @@
 
 angular.module('webApp')
   .controller('ThemeCtrl', function ($scope, $state, Auth) {
-    var currentRole = Auth.getRole();
-
+    var role = Auth.getRole();
     var Item = function(name, href, minRole, maxRole, children) {
       // This need to fixed as it replicates the environment variable
       var userRoles = ['guest', 'user', 'inspector', 'company', 'admin'];
+      var currentRole = role;
 
       if (name) {this.name = name;} else {return menuError('name is not defined in item');}
       this.href = href;
+      this.minRole = null;
       if (minRole) {
-        if (userRoles.indexOf(minRole) !== -1) {
-          this.minRole = minRole;
-        } else {
+        if (userRoles.indexOf(minRole) === -1) {
           return menuError('min role is not valid in item');
+        } else {
+          this.minRole = minRole;
         }
       }
+      this.maxRole = null;
       if (maxRole) {
-        if (userRoles.indexOf(maxRole) !== -1) {
-          this.maxRole = maxRole;
-        } else {
+        if (userRoles.indexOf(maxRole) === -1) {
           return menuError('max role is not valid in item');
+        } else {
+          this.maxRole = maxRole;
         }
       }
       this.children = [];
-      if (children instanceof Array) {
+      if (angular.isArray(children)) {
         children.forEach(function(child) {
           if (!child.minRole || !this.minRole) {
             child.minRole = this.minRole;
@@ -40,13 +42,16 @@ angular.module('webApp')
             child.maxRole = this.maxRole;
           }
           this.children.push(child);
-        });
+        }, this);
       } else if (children) {
         return menuError('children must be an array');
       }
       this.show = function() {
-        if (userRoles.indexOf(currentRole) !== -1) {
-          return menuError('user\'s role was not found in controller list');
+        if (!currentRole) {
+          currentRole = userRoles[0];
+        }
+        if (userRoles.indexOf(currentRole) === -1) {
+          return menuError('user\'s role was not found in controller list: '+role);
         }
         if ((!this.minRole || userRoles.indexOf(currentRole) >= userRoles.indexOf(this.minRole)) &&
         (!this.maxRole || userRoles.indexOf(currentRole) <= userRoles.indexOf(this.maxRole))) {
@@ -63,6 +68,7 @@ angular.module('webApp')
       new Item('Register', '/register', null, 'guest'),
       new Item('Logout', '/logout', 'user'),
       new Item('Setting', '/settings', 'user'),
+      new Item('All Locations', '/location', 'user'),
       new Item('Users', '/user', 'admin'),
       new Item('Admin', '/admin', 'admin'),
       new Item('Register Company', '/company/register', 'user', 'inspector'),
@@ -70,15 +76,11 @@ angular.module('webApp')
         new Item('Overview', '/company', 'admin'),
         new Item('Settings', '/company/settings'),
         new Item('Locations', '/location/company'),
+        new Item('New Location', '/location/register'),
       ]),
       new Item('Vehicles', null, 'user', null, [
         new Item('Overview', '/vehicle'),
         new Item('Register New', '/vehicle/register'),
-      ]),
-      new Item('Locations', null, 'user', null, [
-        new Item('Overview', '/location'),
-        new Item('Register New', '/location/register', 'company'),
-        new Item('Company Locations', '/location/company', 'company'),
       ]),
     ];
 

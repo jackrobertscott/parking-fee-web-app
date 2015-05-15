@@ -39,7 +39,7 @@ angular.module('webApp')
 
     $scope.logout = function() {
       Auth.logout();
-      $state.go('/login');
+      $state.go('userLogin');
     };
 
     $scope.register = function(form) {

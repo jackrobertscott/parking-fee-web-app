@@ -61,7 +61,7 @@ angular.module('webApp')
             $cookieStore.put('token', data.token);
             currentUser = User.get();
           },
-          function(err) {
+          function() {
             this.logout();
           }.bind(this)).$promise;
       },

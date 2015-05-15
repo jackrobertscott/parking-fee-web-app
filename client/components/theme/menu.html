@@ -1,6 +1,12 @@
-<ul class="list-inline menu-labels">
-  <li ng-repeat="item in menu" ng-show="item.show()" href="{{ item.href }}">{{ item.name }}</li>
-</ul>
-<ul ng-repeat="parent in menu" class="list-inline menu-items">
-  <li ng-repeat="item in parent.children" ng-show="item.show()" href="{{ item.href }}">{{ item.name }}</li>
-</ul>
+<div ng-controller="ThemeCtrl">
+  <ul class="list-inline menu-labels">
+    <a ng-repeat="item in menu" ng-show="item.show()" href="{{ item.href }}">
+      <li>{{ item.name }}</li>
+    </a>
+  </ul>
+  <ul ng-repeat="parent in menu" class="list-inline menu-items">
+    <a ng-repeat="item in parent.children" ng-show="item.show()" href="{{ item.href }}">
+      <li>{{ item.name }}</li>
+    </a>
+  </ul>
+</div>

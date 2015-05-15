@@ -128,7 +128,7 @@ angular.module('webApp')
           });
           company.$update(function() {
             location.$remove(function () {
-              $scope.response.good = 'Vehicle successfully deleted';
+              $scope.response.good = 'Location successfully deleted';
             }, errorHandler);
           }, errorHandler);
         }, errorHandler);
