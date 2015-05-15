@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Vehicle = require('./vehicle.model');
+var User = require('../user/user.model');
 
 // Get list of vehicles
 exports.index = function(req, res) {
@@ -47,9 +48,22 @@ exports.destroy = function(req, res) {
   Vehicle.findById(req.params.id, function (err, vehicle) {
     if (err) { return handleError(res, err); }
     if (!vehicle) { return res.send(404); }
-    vehicle.remove(function(err) {
+    // Remove from user aswell
+    User.findById(vehicle._creator, function (err, user) {
       if (err) { return handleError(res, err); }
-      return res.send(204);
+      if (!user) { return res.send(404); }
+      user.vehicles.forEach(function(element, i, array) {
+        if (element === vehicle._id) {
+          array.splice(i, 1);
+        }
+      });
+      user.save(function(err) {
+        if (err) { return handleError(res, err); }
+        vehicle.remove(function(err) {
+          if (err) { return handleError(res, err); }
+          return res.send(204);
+        });
+      });
     });
   });
 };

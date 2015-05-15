@@ -8,7 +8,7 @@
       <div class="col-md-9">
         <h1>
           <!-- title start -->
-          Locations
+          Admin
           <!-- title end -->
         </h1>
         <div class="row hidden-md hidden-lg">
@@ -20,13 +20,12 @@
         <div class="row">
           <div class="col-sm-8 center">
             <!-- main content start -->
+            <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
             <ul class="list-group" ng-init="find()">
-              <li class="list-group-item" ng-repeat="location in locations">
-                  <strong>{{location.name}}</strong><br>
-                  <span class="text-muted">Rate/hr: {{location.rate}},</span>
-                  <span class="text-muted">Lots: {{location.lots}},</span>
-                  <span class="text-muted">Start: {{location.start}},</span>
-                  <span class="text-muted">End: {{location.end}}</span>
+              <li class="list-group-item" ng-repeat="user in users">
+                  <strong>{{user.name}}</strong><br>
+                  <span class="text-muted">{{user.email}}</span>
+                  <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
               </li>
             </ul>
             <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>

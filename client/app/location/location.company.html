@@ -8,7 +8,7 @@
       <div class="col-md-9">
         <h1>
           <!-- title start -->
-          Locations
+          Company Locations
           <!-- title end -->
         </h1>
         <div class="row hidden-md hidden-lg">
@@ -20,13 +20,15 @@
         <div class="row">
           <div class="col-sm-8 center">
             <!-- main content start -->
-            <ul class="list-group" ng-init="find()">
-              <li class="list-group-item" ng-repeat="location in locations">
+            <a href="/location/register">Register a new location</a>
+            <ul class="list-group" ng-init="findFew()">
+              <li class="list-group-item" ng-repeat="location in locations" ng-click="toSettings(location)">
                   <strong>{{location.name}}</strong><br>
                   <span class="text-muted">Rate/hr: {{location.rate}},</span>
                   <span class="text-muted">Lots: {{location.lots}},</span>
                   <span class="text-muted">Start: {{location.start}},</span>
                   <span class="text-muted">End: {{location.end}}</span>
+                  <a ng-click="remove(location)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
               </li>
             </ul>
             <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>

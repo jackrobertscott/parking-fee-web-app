@@ -16,7 +16,7 @@ var validationError = function(res, err) {
  */
 exports.index = function(req, res) {
   User.find({}, '-salt -hashedPassword', function (err, users) {
-    if (err) return res.send(500, err);
+    if (err) { return handleError(res, err); }
     res.json(200, users);
   });
 };
@@ -30,7 +30,7 @@ exports.create = function (req, res, next) {
   newUser.role = 'user';
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+    var token = jwt.sign({ _id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
     res.json({ token: token });
   });
 };
@@ -54,7 +54,7 @@ exports.show = function (req, res, next) {
  */
 exports.destroy = function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err, user) {
-    if (err) return res.send(500, err);
+    if (err) { return handleError(res, err); }
     return res.send(204);
   });
 };
@@ -81,82 +81,43 @@ exports.changePassword = function(req, res, next) {
 };
 
 /**
- * Associate a company to user
+ * Get my info
  */
-exports.setCompany = function(req, res, next) {
+exports.me = function(req, res, next) {
   var userId = req.user._id;
-  var companyId = req.body.company._id;
-
-  User.findById(userId, function (err, user) {
-    if (err) return res.send(500, err);
-    if (!user) return res.send(401);
-    user.company = companyId;
-    user.save(function(err) {
-      if (err) return res.send(500, err);
-      res.send(200);
-    });
+  User.findOne({ _id: userId },
+  '-salt -hashedPassword',
+  function(err, user) { // don't ever give out the password or salt
+    if (err) return next(err);
+    if (!user) return res.json(401);
+    res.json(user);
   });
 };
 
 /**
- * Associate a company to user
+ * Authentication callback
  */
-exports.removeCompany = function(req, res, next) {
-  var companyId = req.body.company._id;
-
-  User.find({ company: companyId },
-  function (err, users) {
-    if (err) return res.send(500, err);
-    users.forEach(function(user, i, array) {
-      user.company = null;
-      user.save(function(err) {
-        if (err) return res.send(500, err);
-      });
-    });
-    res.send(200);
-  });
+exports.authCallback = function(req, res, next) {
+  res.redirect('/');
 };
 
-/**
- * Associate a vehicle to user
- */
-exports.addVehicle = function(req, res, next) {
-  var userId = req.user._id;
-  var vehicleId = req.body.vehicle._id;
-
-  User.findById(userId, function (err, user) {
-    if (err) return res.send(500, err);
-    if (!user) return res.send(401);
-    if (!user.vehicles.length) {
-      user.vehicles = [vehicleId];
-    } else {
-      user.vehicles.push(vehicleId);
-    }
-    user.save(function(err) {
-      if (err) return res.send(500, err);
-      res.send(200);
-    });
-  });
-};
+// Added functions
 
 /**
- * Remove associated vehicle from user
+ * Safely update the user
  */
-exports.removeVehicle = function(req, res, next) {
-  var userId = req.user._id;
-  var vehicleId = req.body.vehicle._id;
-
-  User.findById(userId, function (err, user) {
-    if (err) return res.send(500, err);
-    if (!user) return res.send(401);
-    user.vehicles.forEach(function(element, i, array) {
-      if (element === vehicleId) {
-        array.splice(i, 1);
-      }
-    });
-    user.save(function(err) {
-      if (err) return res.send(500, err);
-      res.send(200);
+exports.update = function(req, res) {
+  if (req.body._id) { delete req.body._id; }
+  if (req.body.salt) { delete req.body.salt; }
+  if (req.body.hashedPassword) { delete req.body.hashedPassword; }
+  if (req.body.role) { delete req.body.role; }
+  User.findById(req.params.id, function (err, user) {
+    if (err) { return handleError(res, err); }
+    if (!user) { return res.send(404); }
+    var updated = _.merge(user, req.body);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, user);
     });
   });
 };
@@ -180,11 +141,11 @@ exports.promote = function(req, res, next) {
   }
 
   User.findById(userId, function (err, user) {
-    if (err) return res.send(500, err);
+    if (err) { return handleError(res, err); }
     if (!user) return res.send(401);
     user.role = newRole;
     user.save(function(err) {
-      if (err) return res.send(500, err);
+      if (err) { return handleError(res, err); }
       res.send(200);
     });
   });
@@ -209,33 +170,16 @@ exports.demote = function(req, res, next) {
   }
 
   User.findById(userId, function (err, user) {
-    if (err) return res.send(500, err);
+    if (err) { return handleError(res, err); }
     if (!user) return res.send(401);
     user.role = newRole;
     user.save(function(err) {
-      if (err) return res.send(500, err);
+      if (err) { return handleError(res, err); }
       res.send(200);
     });
   });
 };
 
-/**
- * Get my info
- */
-exports.me = function(req, res, next) {
-  var userId = req.user._id;
-  User.findOne({_id: userId},
-  '-salt -hashedPassword',
-  function(err, user) { // don't ever give out the password or salt
-    if (err) return next(err);
-    if (!user) return res.json(401);
-    res.json(user);
-  });
-};
-
-/**
- * Authentication callback
- */
-exports.authCallback = function(req, res, next) {
-  res.redirect('/');
-};
+function handleError(res, err) {
+  return res.send(500, err);
+}

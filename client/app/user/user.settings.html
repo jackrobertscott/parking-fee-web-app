@@ -1,0 +1,65 @@
+<span ng-include="'components/theme/header.html'"></span>
+<section id="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 left hidden-sm hidden-xs">
+        <span ng-include="'components/theme/sidebar.html'"></span>
+      </div>
+      <div class="col-md-9">
+        <h1>
+          <!-- title start -->
+          Change Password
+          <!-- title end -->
+        </h1>
+        <div class="row hidden-md hidden-lg">
+          <div class="col-sm-12">
+            <span ng-include="'components/theme/menu.html'"></span>
+          </div>
+        </div>
+        <hr class="hidden-xs hidden-sm">
+        <div class="row">
+          <div class="col-sm-8 center">
+            <!-- main content start -->
+            <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+
+              <div class="form-group">
+                <label>Current Password</label>
+
+                <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
+                       mongoose-error/>
+                <p class="help-block" ng-show="form.password.$error.mongoose">
+                    {{ response.errors.other }}
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label>New Password</label>
+
+                <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
+                       ng-minlength="3"
+                       required/>
+                <p class="help-block"
+                   ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+                  Password must be at least 3 characters.
+                </p>
+              </div>
+
+              <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
+              <p class="help-block" ng-show="response.good">{{ response.good }}</p>
+
+              <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+            </form>
+            <!-- main content end -->
+          </div>
+          <div class="col-sm-4 right">
+            <hr class="hidden-sm hidden-md hidden-lg">
+            <!-- side content start -->
+            <span ng-include="'components/theme/right.default.html'"></span>
+            <!-- side content end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<span ng-include="'components/theme/footer.html'"></span>

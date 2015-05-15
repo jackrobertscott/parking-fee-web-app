@@ -1,19 +1,21 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('VehicleCtrl', function ($scope, $state, $stateParams, Vehicle, Auth) {
-    $scope.errors = [];
-    $scope.message = '';
+  .controller('VehicleCtrl', function ($scope, $state, $stateParams, Vehicle, User, Auth) {
+    $scope.response = {};
     $scope.vehicle = {};
     $scope.vehicles = [];
     $scope.makes = ['Ford', 'Holden', 'Mazda', 'Suburu', 'Ferrari', 'Other'];
     $scope.types = ['Sedan', 'Hatchback', 'Utility', 'Bus'];
     $scope.colors = ['Red', 'Blue', 'Yellow', 'Green', 'Orange', 'Purple', 'White', 'Black'];
+    $scope.vehicle.make = $scope.makes[0];
+    $scope.vehicle.type = $scope.types[0];
+    $scope.vehicle.color = $scope.colors[0];
 
     /**
      * Get all vehicles registered to the user
      */
-    $scope.find = function() {
+    $scope.findFew = function() {
       Auth.getCurrentUser().vehicles.forEach(function(vehicleId) {
         Vehicle.get({ id: vehicleId },
         function (vehicle) {
@@ -49,16 +51,16 @@ angular.module('webApp')
       reset();
 
       if (form.$valid) {
+        var user = Auth.getCurrentUser();
         angular.extend($scope.vehicle, {
-          _creator: Auth.getCurrentUser()._id
+          _creator: user._id
         });
         var vehicle = new Vehicle($scope.vehicle);
         vehicle.$save(function (vehicle) {
-          Auth.addVehicle(vehicle)
-          .then(function() {
+          user.vehicles.push(vehicle._id);
+          user.$update(function() {
             $state.go('vehicle');
-          })
-          .catch(errorHandler);
+          }, errorHandler);
         }, errorHandler);
       }
     };
@@ -72,7 +74,7 @@ angular.module('webApp')
 
       if (form.$valid && $scope.vehicle) {
         $scope.vehicle.$update(function() {
-          $scope.message = 'Details successfully updated';
+          $scope.response.good = 'Details successfully updated';
   			}, errorHandler);
       }
     };
@@ -83,13 +85,9 @@ angular.module('webApp')
      */
 		$scope.remove = function(vehicle) {
 			if (vehicle) {
-        Auth.removeVehicle(vehicle)
-        .then(function() {
-          vehicle.$remove(function () {
-            $scope.message = 'Vehicle successfully deleted';
-          }, errorHandler);
-        })
-        .catch(errorHandler);
+        vehicle.$remove(function () {
+          $scope.response.good = 'Vehicle successfully deleted';
+        }, errorHandler);
         // Remove from view
         $scope.vehicles.forEach(function(element, i, array) {
           if (array[i] === vehicle) {
@@ -98,28 +96,24 @@ angular.module('webApp')
         });
 			} else {
 				vehicle = $scope.vehicle;
-        Auth.removeVehicle(vehicle)
-        .then(function() {
-          vehicle.$remove(function() {
-            $state.go('vehicle');
-          }, errorHandler);
-        })
-        .catch(errorHandler);
+        vehicle.$remove(function () {
+          $state.go('vehicle');
+        }, errorHandler);
 			}
 		};
 
     /**
-     * Reset a errors and message in form
+     * Reset response object
      */
     var reset = function () {
-      $scope.errors = [];
-      $scope.message = '';
+      $scope.response = {};
     };
 
     /**
      * A error handling function
      */
     var errorHandler = function (err) {
-      $scope.errors.push(err.data);
+      console.log(err);
+      $scope.response.bad = 'An error has occurred, we apologise for this inconvenience';
     };
   });

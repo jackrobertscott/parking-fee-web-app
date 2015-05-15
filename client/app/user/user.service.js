@@ -17,29 +17,8 @@ angular.module('webApp')
           controller: 'password'
         }
       },
-      setCompany: {
-        method: 'PUT',
-        params: {
-          controller: 'company'
-        }
-      },
-      removeCompany: {
-        method: 'DELETE',
-        params: {
-          controller: 'company'
-        }
-      },
-      addVehicle: {
-        method: 'PUT',
-        params: {
-          controller: 'vehicle'
-        }
-      },
-      removeVehicle: {
-        method: 'DELETE',
-        params: {
-          controller: 'vehicle'
-        }
+      update: {
+        method: 'PUT'
       },
       promote: {
         method: 'PUT',

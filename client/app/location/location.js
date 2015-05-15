@@ -17,5 +17,10 @@ angular.module('webApp')
         url: '/location/settings/:id',
         templateUrl: 'app/location/location.settings.html',
         controller: 'LocationCtrl'
+      })
+      .state('locationCompany', {
+        url: '/location/company',
+        templateUrl: 'app/location/location.company.html',
+        controller: 'LocationCtrl'
       });
   });

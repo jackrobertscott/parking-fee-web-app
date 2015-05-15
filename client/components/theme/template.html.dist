@@ -8,7 +8,6 @@
       <div class="col-md-9">
         <h1>
           <!-- title start -->
-          Locations
           <!-- title end -->
         </h1>
         <div class="row hidden-md hidden-lg">
@@ -20,17 +19,6 @@
         <div class="row">
           <div class="col-sm-8 center">
             <!-- main content start -->
-            <ul class="list-group" ng-init="find()">
-              <li class="list-group-item" ng-repeat="location in locations">
-                  <strong>{{location.name}}</strong><br>
-                  <span class="text-muted">Rate/hr: {{location.rate}},</span>
-                  <span class="text-muted">Lots: {{location.lots}},</span>
-                  <span class="text-muted">Start: {{location.start}},</span>
-                  <span class="text-muted">End: {{location.end}}</span>
-              </li>
-            </ul>
-            <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
-            <p class="help-block" ng-show="response.good">{{ response.good }}</p>
             <!-- main content end -->
           </div>
           <div class="col-sm-4 right">

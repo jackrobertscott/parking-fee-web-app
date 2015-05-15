@@ -1,14 +1,48 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-
-<div class="container">
-  <a href="/vehicle/register">Register a new vehicle</a>
-  <ul class="list-group" ng-init="find()">
-    <li class="list-group-item" ng-repeat="vehicle in vehicles" ng-click="toSettings(vehicle)">
-        <strong>{{vehicle.plate}}</strong><br>
-        <span class="text-muted">Make: {{vehicle.make}},</span>
-        <span class="text-muted">Colour: {{vehicle.color}},</span>
-        <span class="text-muted">Type: {{vehicle.type}}</span>
-        <a ng-click="remove(vehicle)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
-    </li>
-  </ul>
-</div>
+<span ng-include="'components/theme/header.html'"></span>
+<section id="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 left hidden-sm hidden-xs">
+        <span ng-include="'components/theme/sidebar.html'"></span>
+      </div>
+      <div class="col-md-9">
+        <h1>
+          <!-- title start -->
+          Vehicles
+          <!-- title end -->
+        </h1>
+        <div class="row hidden-md hidden-lg">
+          <div class="col-sm-12">
+            <span ng-include="'components/theme/menu.html'"></span>
+          </div>
+        </div>
+        <hr class="hidden-xs hidden-sm">
+        <div class="row">
+          <div class="col-sm-8 center">
+            <!-- main content start -->
+            <a href="/vehicle/register">Register a new vehicle</a>
+            <ul class="list-group" ng-init="findFew()">
+              <li class="list-group-item" ng-repeat="vehicle in vehicles" ng-click="toSettings(vehicle)">
+                  <strong>{{vehicle.plate}}</strong><br>
+                  <span class="text-muted">Make: {{vehicle.make}},</span>
+                  <span class="text-muted">Colour: {{vehicle.color}},</span>
+                  <span class="text-muted">Type: {{vehicle.type}}</span>
+                  <a ng-click="remove(vehicle)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+              </li>
+            </ul>
+            <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
+            <p class="help-block" ng-show="response.good">{{ response.good }}</p>
+            <!-- main content end -->
+          </div>
+          <div class="col-sm-4 right">
+            <hr class="hidden-sm hidden-md hidden-lg">
+            <!-- side content start -->
+            <span ng-include="'components/theme/right.default.html'"></span>
+            <!-- side content end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<span ng-include="'components/theme/footer.html'"></span>

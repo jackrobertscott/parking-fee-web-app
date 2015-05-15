@@ -2,21 +2,27 @@
 
 angular.module('webApp')
   .controller('LocationCtrl', function ($scope, $state, $stateParams, Location, Company, Auth) {
-    $scope.errors = [];
-    $scope.message = '';
+    $scope.response = {};
     $scope.location = {};
     $scope.locations = [];
 
     /**
-     * Get all locations registered to the user's company
+     * Find all locations
      */
     $scope.find = function() {
-      var companyId = Auth.getCurrentUser().company;
+      Location.query(function(locations) {
+        $scope.locations = locations;
+      }, errorHandler);
+    };
 
-      if (!companyId) {
+    /**
+     * Find all locations registered to the user's company
+     */
+    $scope.findFew = function() {
+      if (!Auth.getCurrentUser().company) {
         $state.go('main');
       } else {
-        Location.query({ company: companyId },
+        Location.query({ company: Auth.getCurrentUser().company },
         function(locations) {
           $scope.locations = locations;
         }, errorHandler);
@@ -27,10 +33,16 @@ angular.module('webApp')
      * Find one location by id in state params
      */
     $scope.findOne = function() {
-      Location.get({ id: $stateParams.id },
-      function(location) {
-        $scope.location = location;
-      }, errorHandler);
+      if (!Auth.getCurrentUser().company) {
+        $state.go('main');
+      } else {
+        Location.get({ id: $stateParams.id },
+        function(location) {
+          location.start = new Date(location.start);
+          location.end = new Date(location.end);
+          $scope.location = location;
+        }, errorHandler);
+      }
     };
 
     /**
@@ -59,11 +71,7 @@ angular.module('webApp')
         location.$save(function() {
           Company.get({ id: user.company },
           function(company) {
-            if (!company.locations.length) {
-              company.locations = [location._id];
-            } else {
-              company.locations.push(location._id);
-            }
+            company.locations.push(location._id);
             company.$update(function() {
               $state.go('location');
             }, errorHandler);
@@ -81,7 +89,7 @@ angular.module('webApp')
 
       if (form.$valid && $scope.location) {
         $scope.location.$update(function() {
-          $scope.message = 'Details successfully updated';
+          $scope.response.good = 'Details successfully updated';
   			}, errorHandler);
       }
     };
@@ -100,7 +108,7 @@ angular.module('webApp')
           });
           company.$update(function() {
             location.$remove(function () {
-              $scope.message = 'Vehicle successfully deleted';
+              $scope.response.good = 'Vehicle successfully deleted';
             }, errorHandler);
           }, errorHandler);
         }, errorHandler);
@@ -120,7 +128,7 @@ angular.module('webApp')
           });
           company.$update(function() {
             location.$remove(function () {
-              $scope.message = 'Vehicle successfully deleted';
+              $scope.response.good = 'Location successfully deleted';
             }, errorHandler);
           }, errorHandler);
         }, errorHandler);
@@ -129,17 +137,17 @@ angular.module('webApp')
  		};
 
     /**
-     * Reset a errors and message in form
+     * Reset response object
      */
     var reset = function () {
-      $scope.errors = [];
-      $scope.message = '';
+      $scope.response = {};
     };
 
     /**
      * A error handling function
      */
     var errorHandler = function (err) {
-      $scope.errors.push(err.data);
+      console.log(err);
+      $scope.response.bad = 'An error has occurred, we apologise for this inconvenience';
     };
   });

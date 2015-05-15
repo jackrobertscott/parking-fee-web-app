@@ -53,21 +53,16 @@ angular.module('webApp')
        * Create a new user
        *
        * @param  {Object}   user     - user info
-       * @param  {Function} callback - optional
        * @return {Promise}
        */
-      createUser: function(user, callback) {
-        var cb = callback || angular.noop;
-
+      createUser: function(user) {
         return User.save(user,
           function(data) {
             $cookieStore.put('token', data.token);
             currentUser = User.get();
-            return cb(user);
           },
-          function(err) {
+          function() {
             this.logout();
-            return cb(err);
           }.bind(this)).$promise;
       },
 
@@ -76,127 +71,12 @@ angular.module('webApp')
        *
        * @param  {String}   oldPassword
        * @param  {String}   newPassword
-       * @param  {Function} callback    - optional
        * @return {Promise}
        */
-      changePassword: function(oldPassword, newPassword, callback) {
-        var cb = callback || angular.noop;
-
+      changePassword: function(oldPassword, newPassword) {
         return User.changePassword({ id: currentUser._id }, {
           oldPassword: oldPassword,
           newPassword: newPassword
-        }, function(user) {
-          return cb(user);
-        }, function(err) {
-          return cb(err);
-        }).$promise;
-      },
-
-      /**
-       * Sets a company association with user
-       *
-       * @param  {Object} company
-       * @param  {Function} callback    - optional
-       */
-      setCompany: function(company, callback) {
-        var cb = callback || angular.noop;
-
-        return User.setCompany({ id: currentUser._id }, {
-         company: company
-        }, function(user) {
-         return cb(user);
-        }, function(err) {
-         return cb(err);
-        }).$promise;
-      },
-
-      /**
-       * Sets a company association with user
-       *
-       * @param  {Object} company
-       * @param  {Function} callback    - optional
-       */
-      removeCompany: function(company, callback) {
-        var cb = callback || angular.noop;
-
-        return User.removeCompany({ id: currentUser._id }, {
-         company: company
-        }, function(user) {
-         return cb(user);
-        }, function(err) {
-         return cb(err);
-        }).$promise;
-      },
-
-      /**
-       * Add a vehicle association with user
-       *
-       * @param  {Object} vehicle
-       * @param  {Function} callback    - optional
-       */
-      addVehicle: function(vehicle, callback) {
-        var cb = callback || angular.noop;
-
-        return User.addVehicle({ id: currentUser._id }, {
-         vehicle: vehicle
-        }, function(user) {
-         return cb(user);
-        }, function(err) {
-         return cb(err);
-        }).$promise;
-      },
-
-      /**
-       * Remove a vehicle association with user
-       *
-       * @param  {Object} vehicle
-       * @param  {Function} callback    - optional
-       */
-      removeVehicle: function(vehicle, callback) {
-        var cb = callback || angular.noop;
-
-        return User.addVehicle({ id: currentUser._id }, {
-         vehicle: vehicle
-        }, function(user) {
-         return cb(user);
-        }, function(err) {
-         return cb(err);
-        }).$promise;
-      },
-
-      /**
-       * Promotes a user's role
-       *
-       * @param  {Object} role
-       * @param  {Function} callback    - optional
-       */
-      promote: function(role, callback) {
-        var cb = callback || angular.noop;
-
-        return User.promote({ id: currentUser._id }, {
-          role: role
-        }, function(user) {
-          return cb(user);
-        }, function(err) {
-          return cb(err);
-        }).$promise;
-      },
-
-      /**
-       * Demotes a user's role
-       *
-       * @param  {Object} role
-       * @param  {Function} callback    - optional
-       */
-      demote: function(role, callback) {
-        var cb = callback || angular.noop;
-
-        return User.demote({ id: currentUser._id }, {
-          role: role
-        }, function(user) {
-          return cb(user);
-        }, function(err) {
-          return cb(err);
         }).$promise;
       },
 
@@ -249,6 +129,40 @@ angular.module('webApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      },
+
+      // Added functions
+
+      /**
+       * Check if a user is an admin
+       *
+       * @return {Boolean}
+       */
+      getRole: function() {
+        return currentUser.role;
+      },
+
+      /**
+       * Promotes a user's role
+       *
+       * @param  {Object} role
+       */
+      promote: function(role) {
+        return User.promote({ id: currentUser._id }, {
+          role: role
+        }).$promise;
+      },
+
+      /**
+       * Demotes a user's role
+       *
+       * @param  {Object} role
+       */
+      demote: function(role) {
+        return User.demote({ id: currentUser._id }, {
+          role: role
+        }).$promise;
       }
+
     };
   });
