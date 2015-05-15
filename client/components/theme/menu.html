@@ -1,11 +1,13 @@
 <div ng-controller="ThemeCtrl">
   <ul class="list-inline menu-labels">
-    <a ng-if="item.href && item.show()" ng-repeat="item in menu" ui-sref="{{ item.href }}">
-      <li>{{ item.name }}</li>
-    </a>
-    <li ng-if="!item.href && item.show()" ng-repeat="item in menu">{{ item.name }}</li>
+    <span ng-repeat="item in menu" ng-if="item.show()">
+      <a ng-if="item.href" ui-sref="{{ item.href }}">
+        <li>{{ item.name }}</li>
+      </a>
+      <li ng-if="!item.href">{{ item.name }}</li>
+    </span>
   </ul>
-  <ul ng-repeat="parent in menu" class="list-inline menu-items">
+  <ul ng-repeat="parent in menu" ng-if="parent.show()" class="list-inline menu-items">
     <a ng-repeat="item in parent.children" ng-show="item.show()" ui-sref="{{ item.href }}">
       <li>{{ item.name }}</li>
     </a>
