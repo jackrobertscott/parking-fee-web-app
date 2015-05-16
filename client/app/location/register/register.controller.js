@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('LocationRegisterCtrl', function ($scope) {
-    $scope.message = 'Hello';
+  .controller('LocationRegisterCtrl', function ($scope, tracto, locationCurator, $state, Auth) {
+    $scope.tracto = tracto;
   });

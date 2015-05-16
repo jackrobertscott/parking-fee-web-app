@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('UserLogoutCtrl', function ($scope) {
-    $scope.message = 'Hello';
+  .controller('UserLogoutCtrl', function ($scope, tracto, userCurator, $state, Auth) {
+    $scope.tracto = tracto;
   });
