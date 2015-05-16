@@ -7,6 +7,7 @@ angular.module('webApp')
       // This need to fixed as it replicates the environment variable
       var userRoles = ['guest', 'user', 'inspector', 'company', 'admin'];
       var currentRole = role;
+      this.showChildren = false;
 
       if (name) {this.name = name;} else {return menuError('name is not defined in item');}
       this.href = href;
@@ -83,6 +84,11 @@ angular.module('webApp')
       ]),
       new Item('Logout', 'userLogout', 'user'),
     ];
+
+    $scope.toggleChildren = function(index) {
+      console.log(index);
+      $scope.menu[index].showChildren = !$scope.menu[index].showChildren;
+    };
 
     $scope.isActive = function(route) {
       return $state.is(route);

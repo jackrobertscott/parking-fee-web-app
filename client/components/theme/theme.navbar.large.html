@@ -3,8 +3,8 @@
     <a ng-if="item.href" ui-sref="{{ item.href }}">
       <li>{{ item.name }}</li>
     </a>
-    <li ng-if="!item.href">{{ item.name }}</li>
-    <ul>
+    <li ng-if="!item.href" ng-click="toggleChildren($index)">{{ item.name }}</li>
+    <ul ng-if="item.showChildren">
       <a ng-repeat="child in item.children" ng-show="child.show()" ui-sref="{{ child.href }}">
         <li>{{ child.name }}</li>
       </a>

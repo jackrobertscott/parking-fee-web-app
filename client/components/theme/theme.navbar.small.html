@@ -4,10 +4,10 @@
       <a ng-if="item.href" ui-sref="{{ item.href }}">
         <li>{{ item.name }}</li>
       </a>
-      <li ng-if="!item.href">{{ item.name }}</li>
+      <li ng-if="!item.href" ng-click="toggleChildren($index)">{{ item.name }}</li>
     </span>
   </ul>
-  <ul ng-repeat="parent in menu" ng-if="parent.show()" class="list-inline menu-items">
+  <ul ng-repeat="parent in menu" ng-if="parent.showChildren" class="list-inline menu-items">
     <a ng-repeat="item in parent.children" ng-show="item.show()" ui-sref="{{ item.href }}">
       <li>{{ item.name }}</li>
     </a>
