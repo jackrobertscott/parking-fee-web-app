@@ -21,12 +21,13 @@
           <div class="col-sm-8 center">
             <!-- main content start -->
             <a href="/vehicle/register">Register a new vehicle</a>
-            <ul class="list-group" ng-init="find()">
-              <li class="list-group-item" ng-repeat="vehicle in vehicles">
+            <ul class="list-group" ng-init="findFew()">
+              <li class="list-group-item" ng-repeat="vehicle in vehicles" ng-click="toSettings(vehicle)">
                   <strong>{{vehicle.plate}}</strong><br>
                   <span class="text-muted">Make: {{vehicle.make}},</span>
                   <span class="text-muted">Colour: {{vehicle.color}},</span>
                   <span class="text-muted">Type: {{vehicle.type}}</span>
+                  <a ng-click="remove(vehicle)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
               </li>
             </ul>
             <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>

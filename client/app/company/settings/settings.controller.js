@@ -12,9 +12,32 @@ angular.module('webApp')
         function(company) {
           if (!company) { $state.go('main'); }
           $scope.company = company;
-        }, errorHandler);
+        }, $scope.tracto.handle);
       } else {
         $state.go('companyRegister');
+      }
+    };
+
+    $scope.update = function(form) {
+      $scope.submitted = true;
+      $scope.tracto.reset();
+
+      if (form.$valid) {
+        $scope.company.$update(function() {
+          $scope.tracto.good = 'Details successfully updated';
+  			}, $scope.tracto.handle);
+      }
+    };
+
+    $scope.remove = function(form) {
+      var company = $scope.company;
+      $scope.submitted = true;
+      $scope.tracto.reset();
+
+      if (form.$valid && company) {
+        company.$remove(function() {
+          $state.go('main');
+        }, $scope.tracto.handle);
       }
     };
   });

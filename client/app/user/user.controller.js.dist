@@ -2,8 +2,8 @@
 
 angular.module('webApp')
   .controller('UserCtrl', function ($scope, $state, $window, Auth, User) {
-    $scope.response = {};
-    $scope.response.errors = {};
+    $scope.tracto = {};
+    $scope.tracto.errors = {};
     $scope.user = {};
     $scope.users = [];
 
@@ -17,7 +17,7 @@ angular.module('webApp')
 
     $scope.login = function(form) {
       $scope.submitted = true;
-      reset();
+      $scope.tracto.reset();
 
       if (form.$valid) {
         Auth.login({
@@ -29,7 +29,7 @@ angular.module('webApp')
           $state.go('main');
         })
         .catch(function(err) {
-          $scope.response.errors.other = err.message;
+          $scope.tracto.errors.other = err.message;
         });
       }
     };
@@ -45,7 +45,7 @@ angular.module('webApp')
 
     $scope.register = function(form) {
       $scope.submitted = true;
-      reset();
+      $scope.tracto.reset();
 
       if (form.$valid) {
         Auth.createUser({
@@ -59,12 +59,12 @@ angular.module('webApp')
         })
         .catch(function(err) {
           err = err.data;
-          $scope.response.errors = {};
+          $scope.tracto.errors = {};
 
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
             form[field].$setValidity('mongoose', false);
-            $scope.response.errors[field] = error.message;
+            $scope.tracto.errors[field] = error.message;
           });
         });
       }
@@ -72,17 +72,17 @@ angular.module('webApp')
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;
-      reset();
+      $scope.tracto.reset();
 
       if (form.$valid) {
         Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
         .then(function() {
-          $scope.response.good = 'Password successfully changed.';
+          $scope.tracto.good = 'Password successfully changed.';
         })
         .catch(function() {
           form.password.$setValidity('mongoose', false);
-          $scope.response.errors.other = 'Incorrect password';
-          $scope.response.good = '';
+          $scope.tracto.errors.other = 'Incorrect password';
+          $scope.tracto.good = '';
         });
       }
 		};
@@ -100,15 +100,15 @@ angular.module('webApp')
      * Reset response object
      */
     var reset = function () {
-      $scope.response = {};
-      $scope.response.errors = {};
+      $scope.tracto = {};
+      $scope.tracto.errors = {};
     };
 
     /**
      * A error handling function
      */
-    var errorHandler = function (err) {
+    var $scope.tracto.handle = function (err) {
       console.log(err);
-      $scope.response.bad = 'An error has occurred, we apologise for this inconvenience';
+      $scope.tracto.bad = 'An error has occurred, we apologise for this inconvenience';
     };
   });

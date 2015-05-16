@@ -2,7 +2,7 @@
 
 angular.module('webApp')
   .controller('CompanyCtrl', function ($scope, $state, Company, Auth) {
-    $scope.response = {};
+    $scope.tracto = {};
     $scope.company = {};
     $scope.companies = [];
 
@@ -20,7 +20,7 @@ angular.module('webApp')
     $scope.find = function() {
       Company.query(function(companies) {
         $scope.companies = companies;
-      }, errorHandler);
+      }, $scope.tracto.handle);
     };
 
     /**
@@ -33,7 +33,7 @@ angular.module('webApp')
         function(company) {
           if (!company) { $state.go('main'); }
           $scope.company = company;
-        }, errorHandler);
+        }, $scope.tracto.handle);
       } else {
         $state.go('companyRegister');
       }
@@ -45,7 +45,7 @@ angular.module('webApp')
      */
     $scope.register = function(form) {
       $scope.submitted = true;
-      reset();
+      $scope.tracto.reset();
 
       if (form.$valid) {
         var user = Auth.getCurrentUser();
@@ -61,9 +61,9 @@ angular.module('webApp')
             .then(function() {
               $state.go('company');
             })
-            .catch(errorHandler);
-          }, errorHandler);
-  			}, errorHandler);
+            .catch($scope.tracto.handle);
+          }, $scope.tracto.handle);
+  			}, $scope.tracto.handle);
       }
     };
 
@@ -72,12 +72,12 @@ angular.module('webApp')
      */
     $scope.update = function(form) {
       $scope.submitted = true;
-      reset();
+      $scope.tracto.reset();
 
       if (form.$valid) {
         $scope.company.$update(function() {
-          $scope.response.good = 'Details successfully updated';
-  			}, errorHandler);
+          $scope.tracto.good = 'Details successfully updated';
+  			}, $scope.tracto.handle);
       }
     };
 
@@ -88,12 +88,12 @@ angular.module('webApp')
     $scope.remove = function(form) {
       var company = $scope.company;
       $scope.submitted = true;
-      reset();
+      $scope.tracto.reset();
 
       if (form.$valid && company) {
         company.$remove(function() {
           $state.go('main');
-        }, errorHandler);
+        }, $scope.tracto.handle);
       }
     };
 
@@ -101,14 +101,14 @@ angular.module('webApp')
      * Reset response object
      */
     var reset = function () {
-      $scope.response = {};
+      $scope.tracto = {};
     };
 
     /**
      * A error handling function
      */
-    var errorHandler = function (err) {
+    var $scope.tracto.handle = function (err) {
       console.log(err);
-      $scope.response.bad = 'An error has occurred, we apologise for this inconvenience';
+      $scope.tracto.bad = 'An error has occurred, we apologise for this inconvenience';
     };
   });

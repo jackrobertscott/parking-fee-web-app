@@ -2,7 +2,7 @@
 
 angular.module('webApp')
   .controller('LocationCtrl', function ($scope, $state, $stateParams, Location, Company, Auth) {
-    $scope.response = {};
+    $scope.tracto = {};
     $scope.location = {};
     $scope.locations = [];
 
@@ -12,7 +12,7 @@ angular.module('webApp')
     $scope.find = function() {
       Location.query(function(locations) {
         $scope.locations = locations;
-      }, errorHandler);
+      }, $scope.tracto.handle);
     };
 
     /**
@@ -25,7 +25,7 @@ angular.module('webApp')
         Location.query({ company: Auth.getCurrentUser().company },
         function(locations) {
           $scope.locations = locations;
-        }, errorHandler);
+        }, $scope.tracto.handle);
       }
     };
 
@@ -41,7 +41,7 @@ angular.module('webApp')
           location.start = new Date(location.start);
           location.end = new Date(location.end);
           $scope.location = location;
-        }, errorHandler);
+        }, $scope.tracto.handle);
       }
     };
 
@@ -59,7 +59,7 @@ angular.module('webApp')
      */
     $scope.register = function(form) {
       $scope.submitted = true;
-      reset();
+      $scope.tracto.reset();
 
       if (form.$valid) {
         var user = Auth.getCurrentUser();
@@ -74,9 +74,9 @@ angular.module('webApp')
             company.locations.push(location._id);
             company.$update(function() {
               $state.go('location');
-            }, errorHandler);
-          }, errorHandler);
-        }, errorHandler);
+            }, $scope.tracto.handle);
+          }, $scope.tracto.handle);
+        }, $scope.tracto.handle);
       }
     };
 
@@ -85,12 +85,12 @@ angular.module('webApp')
      */
     $scope.update = function(form) {
       $scope.submitted = true;
-      reset();
+      $scope.tracto.reset();
 
       if (form.$valid && $scope.location) {
         $scope.location.$update(function() {
-          $scope.response.good = 'Details successfully updated';
-  			}, errorHandler);
+          $scope.tracto.good = 'Details successfully updated';
+  			}, $scope.tracto.handle);
       }
     };
 
@@ -108,10 +108,10 @@ angular.module('webApp')
           });
           company.$update(function() {
             location.$remove(function () {
-              $scope.response.good = 'Vehicle successfully deleted';
-            }, errorHandler);
-          }, errorHandler);
-        }, errorHandler);
+              $scope.tracto.good = 'Vehicle successfully deleted';
+            }, $scope.tracto.handle);
+          }, $scope.tracto.handle);
+        }, $scope.tracto.handle);
         // Remove from view
         $scope.locations.forEach(function(element, i, array) {
           if (array[i] === location) {
@@ -128,10 +128,10 @@ angular.module('webApp')
           });
           company.$update(function() {
             location.$remove(function () {
-              $scope.response.good = 'Location successfully deleted';
-            }, errorHandler);
-          }, errorHandler);
-        }, errorHandler);
+              $scope.tracto.good = 'Location successfully deleted';
+            }, $scope.tracto.handle);
+          }, $scope.tracto.handle);
+        }, $scope.tracto.handle);
         $state.go('location');
  			}
  		};
@@ -140,14 +140,14 @@ angular.module('webApp')
      * Reset response object
      */
     var reset = function () {
-      $scope.response = {};
+      $scope.tracto = {};
     };
 
     /**
      * A error handling function
      */
-    var errorHandler = function (err) {
+    var $scope.tracto.handle = function (err) {
       console.log(err);
-      $scope.response.bad = 'An error has occurred, we apologise for this inconvenience';
+      $scope.tracto.bad = 'An error has occurred, we apologise for this inconvenience';
     };
   });
