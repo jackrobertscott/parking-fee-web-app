@@ -5,17 +5,17 @@ angular.module('webApp')
     $stateProvider
       .state('vehicle', {
         url: '/vehicle',
-        templateUrl: 'app/vehicle/vehicle.html',
+        templateUrl: 'app/vehicle/overview/overview.html',
         controller: 'VehicleCtrl'
       })
       .state('vehicleRegister', {
         url: '/vehicle/register',
-        templateUrl: 'app/vehicle/vehicle.register.html',
+        templateUrl: 'app/vehicle/register/register.html',
         controller: 'VehicleCtrl'
       })
       .state('vehicleSettings', {
         url: '/vehicle/settings/:id',
-        templateUrl: 'app/vehicle/vehicle.settings.html',
+        templateUrl: 'app/vehicle/settings/settings.html',
         controller: 'VehicleCtrl'
       });
   });

@@ -5,22 +5,22 @@ angular.module('webApp')
     $stateProvider
       .state('location', {
         url: '/location',
-        templateUrl: 'app/location/location.html',
+        templateUrl: 'app/location/overview/overview.html',
         controller: 'LocationCtrl'
       })
       .state('locationRegister', {
         url: '/location/register',
-        templateUrl: 'app/location/location.register.html',
+        templateUrl: 'app/location/register/register.html',
         controller: 'LocationCtrl'
       })
       .state('locationSettings', {
         url: '/location/settings/:id',
-        templateUrl: 'app/location/location.settings.html',
+        templateUrl: 'app/location/settings/settings.html',
         controller: 'LocationCtrl'
       })
       .state('locationCompany', {
         url: '/location/company',
-        templateUrl: 'app/location/location.company.html',
+        templateUrl: 'app/location/company/company.html',
         controller: 'LocationCtrl'
       });
   });
