@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('SettingsCtrl', function ($scope) {
+  .controller('UserSettingsCtrl', function ($scope) {
     $scope.message = 'Hello';
   });

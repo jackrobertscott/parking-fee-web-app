@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: RegisterCtrl', function () {
+describe('Controller: UserRegisterCtrl', function () {
 
   // load the controller's module
   beforeEach(module('webApp'));
@@ -10,7 +10,7 @@ describe('Controller: RegisterCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    RegisterCtrl = $controller('RegisterCtrl', {
+    RegisterCtrl = $controller('UserRegisterCtrl', {
       $scope: scope
     });
   }));

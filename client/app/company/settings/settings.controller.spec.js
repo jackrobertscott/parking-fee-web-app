@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: SettingsCtrl', function () {
+describe('Controller: CompanySettingsCtrl', function () {
 
   // load the controller's module
   beforeEach(module('webApp'));
@@ -10,7 +10,7 @@ describe('Controller: SettingsCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    SettingsCtrl = $controller('SettingsCtrl', {
+    SettingsCtrl = $controller('CompanySettingsCtrl', {
       $scope: scope
     });
   }));

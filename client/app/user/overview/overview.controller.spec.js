@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: OverviewCtrl', function () {
+describe('Controller: UserOverviewCtrl', function () {
 
   // load the controller's module
   beforeEach(module('webApp'));
@@ -10,7 +10,7 @@ describe('Controller: OverviewCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    OverviewCtrl = $controller('OverviewCtrl', {
+    OverviewCtrl = $controller('UserOverviewCtrl', {
       $scope: scope
     });
   }));
