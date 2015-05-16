@@ -1,9 +1,9 @@
-<span ng-include="'components/theme/header.html'"></span>
+<span ng-include="'components/theme/theme.header.html'"></span>
 <section id="main">
   <div class="container">
     <div class="row">
       <div class="col-md-3 left hidden-sm hidden-xs">
-        <span ng-include="'components/theme/sidebar.html'"></span>
+        <span ng-include="'components/theme/theme.navbar.large.html'"></span>
       </div>
       <div class="col-md-9">
         <h1>
@@ -13,7 +13,7 @@
         </h1>
         <div class="row hidden-md hidden-lg">
           <div class="col-sm-12">
-            <span ng-include="'components/theme/menu.html'"></span>
+            <span ng-include="'components/theme/theme.navbar.small.html'"></span>
           </div>
         </div>
         <hr class="hidden-xs hidden-sm">
@@ -65,7 +65,7 @@
           <div class="col-sm-4 right">
             <hr class="hidden-sm hidden-md hidden-lg">
             <!-- side content start -->
-            <span ng-include="'components/theme/right.default.html'"></span>
+            <span ng-include="'components/theme/theme.right.default.html'"></span>
             <!-- side content end -->
           </div>
         </div>
@@ -73,4 +73,4 @@
     </div>
   </div>
 </section>
-<span ng-include="'components/theme/footer.html'"></span>
+<span ng-include="'components/theme/theme.footer.html'"></span>
