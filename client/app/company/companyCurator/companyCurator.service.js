@@ -1,16 +1,27 @@
 'use strict';
 
 angular.module('webApp')
-  .factory('companyCurator', function () {
-    // Service logic
-    // ...
-
-    var meaningOfLife = 42;
-
-    // Public API here
+  .factory('companyCurator', function (Company) {
     return {
-      someMethod: function () {
-        return meaningOfLife;
+      // query for and return objects
+      find: function(query, tracto) {
+        query = query || {};
+      },
+
+      // find a single object
+      findOne: function(id, tracto) {
+      },
+
+      // create a new object
+      create: function(object, tracto) {
+      },
+
+      // update an object
+      update: function(object, tracto) {
+      },
+
+      // remove/delete an object
+      remove: function(object, tracto) {
       }
     };
   });
