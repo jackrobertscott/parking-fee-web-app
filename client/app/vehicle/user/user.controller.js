@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('LocationUserCtrl', function ($scope, tracto, Vehicle, $state, Auth) {
+  .controller('VehicleUserCtrl', function ($scope, tracto, Vehicle, $state, Auth) {
     $scope.tracto = tracto;
     $scope.vehicles = [];
 

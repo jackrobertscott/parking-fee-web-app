@@ -5,6 +5,10 @@ angular.module('webApp')
     $scope.tracto = tracto;
     $scope.user = {};
 
+    if (Auth.isLoggedIn()) {
+      $state.go('main');
+    }
+
     $scope.register = function(form) {
       $scope.submitted = true;
       $scope.tracto.reset();
@@ -17,7 +21,7 @@ angular.module('webApp')
         })
         .then(function() {
           // Account created, redirect to home
-          $state.go('main');
+          $state.go('userRegister');
         })
         .catch(function(err) {
           err = err.data;

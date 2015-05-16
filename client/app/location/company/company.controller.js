@@ -6,7 +6,7 @@ angular.module('webApp')
 
     $scope.findFew = function() {
       if (!Auth.getCurrentUser().company) {
-        $state.go('main');
+        $state.go('companyRegister');
       } else {
         Location.query({ company: Auth.getCurrentUser().company },
         function(locations) {

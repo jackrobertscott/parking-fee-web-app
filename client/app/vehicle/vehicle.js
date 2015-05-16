@@ -6,16 +6,21 @@ angular.module('webApp')
       .state('vehicle', {
         url: '/vehicle',
         templateUrl: 'app/vehicle/overview/overview.html',
-        controller: 'VehicleCtrl'
+        controller: 'VehicleOverviewCtrl'
       })
       .state('vehicleRegister', {
         url: '/vehicle/register',
         templateUrl: 'app/vehicle/register/register.html',
-        controller: 'VehicleCtrl'
+        controller: 'VehicleRegisterCtrl'
+      })
+      .state('vehicleUser', {
+        url: '/vehicle/user',
+        templateUrl: 'app/vehicle/user/user.html',
+        controller: 'VehicleUserCtrl'
       })
       .state('vehicleSettings', {
         url: '/vehicle/settings/:id',
         templateUrl: 'app/vehicle/settings/settings.html',
-        controller: 'VehicleCtrl'
+        controller: 'VehicleSettingsCtrl'
       });
   });

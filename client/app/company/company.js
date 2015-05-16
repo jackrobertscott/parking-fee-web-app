@@ -6,16 +6,21 @@ angular.module('webApp')
       .state('company', {
         url: '/company',
         templateUrl: 'app/company/overview/overview.html',
-        controller: 'CompanyCtrl'
+        controller: 'CompanyOverviewCtrl'
       })
       .state('companyRegister', {
         url: '/company/register',
         templateUrl: 'app/company/register/register.html',
-        controller: 'CompanyCtrl'
+        controller: 'CompanyRegisterCtrl'
       })
       .state('companySettings', {
         url: '/company/settings',
         templateUrl: 'app/company/settings/settings.html',
-        controller: 'CompanyCtrl'
+        controller: 'CompanySettingsCtrl'
+      })
+      .state('companyAdmin', {
+        url: '/company/admin',
+        templateUrl: 'app/company/admin/admin.html',
+        controller: 'CompanyAdminCtrl'
       });
   });

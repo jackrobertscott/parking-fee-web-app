@@ -68,25 +68,27 @@ angular.module('webApp')
       new Item('Login', 'userLogin', null, 'guest'),
       new Item('Register', 'userRegister', null, 'guest'),
       new Item('Settings', 'userSettings', 'user'),
-      new Item('Locations', 'location', 'user'),
       new Item('Users', 'user', 'admin'),
       new Item('Admin', 'userAdmin', 'admin'),
-      new Item('Register Company', 'companyRegister', 'user', 'inspector'),
-      new Item('Company', null, 'company', null, [
+      new Item('Company', null, 'user', null, [
         new Item('Overview', 'company', 'admin'),
-        new Item('Settings', 'companySettings'),
-        new Item('Locations', 'locationCompany'),
-        new Item('New Location', 'locationRegister'),
+        new Item('Settings', 'companySettings', 'company'),
+        new Item('Register', 'companyRegister', 'inspector'),
+      ]),
+      new Item('Location', null, 'user', null, [
+        new Item('Overview', 'location'),
+        new Item('My Locations', 'locationCompany', 'company'),
+        new Item('New Location', 'locationRegister', 'company'),
       ]),
       new Item('Vehicles', null, 'user', null, [
-        new Item('Overview', 'vehicle'),
+        new Item('Overview', 'vehicle', 'admin'),
+        new Item('My Vehicles', 'vehicleUser'),
         new Item('Register New', 'vehicleRegister'),
       ]),
       new Item('Logout', 'userLogout', 'user'),
     ];
 
     $scope.toggleChildren = function(index) {
-      console.log(index);
       $scope.menu[index].showChildren = !$scope.menu[index].showChildren;
     };
 
