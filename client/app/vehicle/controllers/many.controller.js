@@ -22,7 +22,7 @@
     ////////////
 
     function activate() {
-      return getMany();
+      return vm.getMany();
     }
 
     function getMany() {
