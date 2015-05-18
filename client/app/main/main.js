@@ -12,7 +12,8 @@
     .state('main', {
       url: '/',
       templateUrl: 'app/main/views/overview.html',
-      controller: 'oneMainCtrl'
+      controller: 'manyMainCtrl',
+      controllerAs: 'vm'
     });
   }
 })();
