@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('OneCompanyCtrl', OneCompanyCtrl);
 
-  OneCompanyCtrl.$inject = ['dataCompany', 'tracto', '$state'];
+  OneCompanyCtrl.$inject = ['dataCompany', 'tracto', '$state', 'Auth'];
 
-  function OneCompanyCtrl(dataCompany, tracto, $state) {
+  function OneCompanyCtrl(dataCompany, tracto, $state, Auth) {
     var vm = this;
 
     vm.item = {};
@@ -30,6 +30,8 @@
 
     function findOne(id) {
       vm.tracto.reset();
+      id = id || Auth.getCurrentUser.company;
+      if (!id) {return $state.go('main');}
       dataCompany.getOne(id).then(function(item) {
         vm.item = item;
       }).catch(vm.tracto.handle);
@@ -40,6 +42,11 @@
       if (form.$valid) {
         invalid();
       } else {
+        var user = Auth.getCurrentUser();
+        angular.extend(vm.item, {
+          _creator: user._id,
+          admins: [user._id]
+        });
         dataCompany.create(vm.item).then(function(item) {
           $state.go('main');
         }).catch(vm.tracto.handle);

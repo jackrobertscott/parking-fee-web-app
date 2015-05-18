@@ -9,6 +9,10 @@ var VehicleSchema = new Schema({
   color: String,
   type: String,
   info: String,
+  users: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   _creator: {
     type: Schema.Types.ObjectId,
     ref: 'User'

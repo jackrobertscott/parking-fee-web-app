@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('OneLocationCtrl', OneLocationCtrl);
 
-  OneLocationCtrl.$inject = ['dataLocation', 'tracto', '$state'];
+  OneLocationCtrl.$inject = ['dataLocation', 'tracto', '$state', 'Auth'];
 
-  function OneLocationCtrl(dataLocation, tracto, $state) {
+  function OneLocationCtrl(dataLocation, tracto, $state, Auth) {
     var vm = this;
 
     vm.item = {};
@@ -31,6 +31,8 @@
     function findOne(id) {
       vm.tracto.reset();
       dataLocation.getOne(id).then(function(item) {
+        item.start = new Date(item.start);
+        item.end = new Date(item.end);
         vm.item = item;
       }).catch(vm.tracto.handle);
     }
@@ -40,6 +42,11 @@
       if (form.$valid) {
         invalid();
       } else {
+        var user = Auth.getCurrentUser();
+        angular.extend(vm.item, {
+          _creator: user._id,
+          company: user.company
+        });
         dataLocation.create(vm.item).then(function(item) {
           $state.go('main');
         }).catch(vm.tracto.handle);

@@ -5,15 +5,17 @@
   .module('webApp')
   .controller('ManyLocationsCtrl', ManyLocationsCtrl);
 
-  ManyLocationsCtrl.$inject = ['dataLocation', 'tracto'];
+  ManyLocationsCtrl.$inject = ['dataLocation', 'tracto', '$state', 'Auth'];
 
-  function ManyLocationsCtrl(dataLocation, tracto) {
+  function ManyLocationsCtrl(dataLocation, tracto, $state, Auth) {
     var vm = this;
 
     vm.items = [];
     vm.tracto = tracto;
     vm.getMany = getMany;
     vm.remove = remove;
+    vm.getFew = getFew;
+    vm.toSettings = toSettings;
 
     ////////////
 
@@ -42,6 +44,19 @@
         });
         vm.tracto.good = 'Successfully deleted item';
       }).catch(vm.tracto.handle);
+    }
+
+    function getFew() {
+      dataLocation.getMany({company: Auth.getCurrentUser().company})
+      .then(function(items) {
+        vm.items = items;
+      }).catch(vm.tracto.handle);
+    }
+
+    function toSettings(item) {
+      $state.go('locationSettings', {
+        id: item._id
+      });
     }
   }
 })();

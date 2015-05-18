@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('OneVehicleCtrl', OneVehicleCtrl);
 
-  OneVehicleCtrl.$inject = ['dataVehicle', 'tracto', '$state'];
+  OneVehicleCtrl.$inject = ['dataVehicle', 'tracto', '$state', 'Auth'];
 
-  function OneVehicleCtrl(dataVehicle, tracto, $state) {
+  function OneVehicleCtrl(dataVehicle, tracto, $state, Auth) {
     var vm = this;
 
     vm.item = {};
@@ -40,6 +40,11 @@
       if (form.$valid) {
         invalid();
       } else {
+        var user = Auth.getCurrentUser();
+        angular.extend(vm.item, {
+          _creator: user._id,
+          users: [user._id]
+        });
         dataVehicle.create(vm.item).then(function(item) {
           $state.go('main');
         }).catch(vm.tracto.handle);

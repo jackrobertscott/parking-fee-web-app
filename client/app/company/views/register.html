@@ -20,11 +20,11 @@
         <div class="row">
           <div class="col-sm-8 center">
             <!-- main content start -->
-            <form class="form" name="form" ng-submit="register(form)" novalidate>
+            <form class="form" name="form" ng-submit="vm.create(form)" novalidate>
 
               <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted, 'has-error': form.name.$invalid && submitted }">
                 <label for="companyName">Company Name</label>
-                <input type="text" name="name" class="form-control" id="companyName" placeholder="Company Name" ng-model="company.name" required>
+                <input type="text" name="name" class="form-control" id="companyName" placeholder="Company Name" ng-model="vm.item.name" required>
                 <p class="help-block" ng-show="form.name.$error.required && submitted">
                   A company name is required
                 </p>
@@ -32,7 +32,7 @@
 
               <div class="form-group" ng-class="{ 'has-success': form.phone.$valid && submitted, 'has-error': form.phone.$invalid && submitted }">
                 <label for="companyPhone">Contact Phone Number</label>
-                <input type="text" name="phone" class="form-control" id="companyPhone" placeholder="Company Phone" ng-model="company.phone" required>
+                <input type="text" name="phone" class="form-control" id="companyPhone" placeholder="Company Phone" ng-model="vm.item.phone" required>
                 <p class="help-block" ng-show="form.phone.$error.required && submitted">
                   A company phone number is required
                 </p>
@@ -40,7 +40,7 @@
 
               <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted, 'has-error': form.email.$invalid && submitted }">
                 <label for="companyEmail">Contact Email Address</label>
-                <input type="email" name="email" class="form-control" id="companyEmail" placeholder="Company Email" ng-model="company.email" required>
+                <input type="email" name="email" class="form-control" id="companyEmail" placeholder="Company Email" ng-model="vm.item.email" required>
                 <p class="help-block" ng-show="form.email.$error.email && submitted">
                   Please use a valid email address
                 </p>
@@ -51,7 +51,7 @@
 
               <div class="form-group">
                 <label for="companyInfo">Company Information</label>
-                <textarea class="form-control" rows="3" id="companyInfo" ng-model="company.info">Text</textarea>
+                <textarea class="form-control" rows="3" id="companyInfo" ng-model="vm.item.info">Text</textarea>
               </div>
 
               <p class="help-block" ng-show="vm.tracto.bad">{{ vm.tracto.bad }}</p>
