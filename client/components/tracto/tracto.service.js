@@ -3,26 +3,30 @@
 
   angular
   .module('webApp')
-  .service('tracto', tracto);
+  .factory('tracto', tracto);
 
   tracto.$inject = [];
 
   function tracto() {
-    this.good = '';
-    this.bad = '';
-    this.errors = {};
-    this.handle = handle;
-    this.reset = reset;
+    var service = {
+      bad: '',
+      good: '',
+      errors: {},
+      handle: handle,
+      reset: reset
+    };
+
+    return service;
 
     function handle(error) {
       console.log(error);
-      this.bad = 'An error has occurred. We apologize for this inconvenience.';
+      service.bad = 'An error has occurred. We apologize for this inconvenience.';
     }
 
     function reset() {
-      this.good = '';
-      this.bad = '';
-      this.errors = {};
+      service.bad = '';
+      service.good = '';
+      service.errors = {};
     }
   }
 })();

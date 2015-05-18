@@ -1,7 +1,13 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('socketMock', [])
-  .factory('socket', function() {
+  angular
+  .module('socketMock')
+  .factory('socket', socket);
+
+  socket.$inject = [];
+
+  function socket() {
     return {
       socket: {
         connect: function() {},
@@ -13,4 +19,5 @@ angular.module('socketMock', [])
       syncUpdates: function() {},
       unsyncUpdates: function() {}
     };
-  });
+  }
+})();
