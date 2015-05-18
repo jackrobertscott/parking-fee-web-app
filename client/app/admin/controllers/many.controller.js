@@ -36,7 +36,7 @@
       vm.tracto.reset();
       dataAdmin.remove(item).then(function() {
         vm.items.forEach(function(elem, i, array) {
-          if (array[i] === item) {
+          if (array[i]._id === item._id) {
             array.splice(i, 1);
           }
         });

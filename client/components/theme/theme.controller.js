@@ -21,7 +21,8 @@
       new Item('Users', 'user', 'admin'),
       new Item('Admin', 'userAdmin', 'admin'),
       new Item('Company', null, 'user', null, [
-        new Item('Overview', 'company', 'admin'),
+        new Item('Admin', 'companyAdmin', 'admin'),
+        new Item('Overview', 'company', 'inspector'),
         new Item('Settings', 'companySettings', 'company'),
         new Item('Register', 'companyRegister'),
       ]),
@@ -56,7 +57,7 @@
       console.log('A menu error occured: '+String(error));
     }
 
-    var Item = function(name, href, minRole, maxRole, children) {
+    function Item(name, href, minRole, maxRole, children) {
       // This need to fixed as it replicates the environment variable
       var userRoles = ['guest', 'user', 'inspector', 'company', 'admin'];
       var currentRole = role;
