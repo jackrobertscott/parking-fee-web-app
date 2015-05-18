@@ -11,6 +11,7 @@
     var vm = this;
 
     vm.items = [];
+    vm.tracto = tracto;
     vm.getMany = getMany;
     vm.remove = remove;
 
@@ -27,7 +28,7 @@
     function getMany() {
       return dataLocation.getMany().then(function(items) {
         vm.items = items;
-      }).catch(tracto.handle);
+      }).catch(vm.tracto.handle);
     }
 
     function remove(item) {
@@ -37,7 +38,7 @@
             array.splice(i, 1);
           }
         });
-      }).catch(tracto.handle);
+      }).catch(vm.tracto.handle);
     }
   }
 })();

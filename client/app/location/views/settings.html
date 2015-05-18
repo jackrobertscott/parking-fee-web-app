@@ -67,8 +67,8 @@
                 <textarea class="form-control" rows="3" id="locationInfo" ng-model="location.info">Any extra information about the location</textarea>
               </div>
 
-              <p class="help-block" ng-show="response.bad">{{ response.bad }}</p>
-              <p class="help-block" ng-show="response.good">{{ response.good }}</p>
+              <p class="help-block" ng-show="vm.tracto.bad">{{ vm.tracto.bad }}</p>
+              <p class="help-block" ng-show="vm.tracto.good">{{ vm.tracto.good }}</p>
 
               <button type="submit" class="btn btn-default">Submit</button>
 
