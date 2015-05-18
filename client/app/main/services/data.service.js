@@ -3,11 +3,11 @@
 
   angular
   .module('webApp')
-  .factory('dataAdmin', dataAdmin);
+  .factory('dataMain', dataMain);
 
-  dataAdmin.$inject = ['ResourceAdmin'];
+  dataMain.$inject = ['ResourceMain'];
 
-  function dataAdmin(ResourceAdmin) {
+  function dataMain(ResourceMain) {
     var service = {
       getOne: getOne,
       getMany: getMany,
@@ -19,16 +19,16 @@
     return service;
 
     function getOne(id) {
-      return ResourceAdmin.get({id: id}).$promise;
+      return ResourceMain.get({id: id}).$promise;
     }
 
     function getMany(query) {
       query = query || {};
-      return ResourceAdmin.query(query).$promise;
+      return ResourceMain.query(query).$promise;
     }
 
     function create(body) {
-      var object = new ResourceAdmin(body);
+      var object = new ResourceMain(body);
       return object.$save().$promise;
     }
 

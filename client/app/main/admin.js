@@ -9,10 +9,10 @@
 
   function config($stateProvider) {
     $stateProvider
-    .state('admin', {
+    .state('main', {
       url: '/',
-      templateUrl: 'app/admin/views/overview.html',
-      controller: 'oneAdminCtrl'
+      templateUrl: 'app/main/views/overview.html',
+      controller: 'oneMainCtrl'
     });
   }
 })();

@@ -3,11 +3,11 @@
 
   angular
   .module('webApp')
-  .factory('ResourceAdmin', ResourceAdmin);
+  .factory('ResourceMain', ResourceMain);
 
-  ResourceAdmin.$inject = ['$resource'];
+  ResourceMain.$inject = ['$resource'];
 
-  function ResourceAdmin($resource) {
+  function ResourceMain($resource) {
     return $resource();
   }
 })();

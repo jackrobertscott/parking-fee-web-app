@@ -3,11 +3,11 @@
 
   angular
   .module('webApp')
-  .controller('ManyAdminsCtrl', ManyAdminsCtrl);
+  .controller('ManyCompaniesCtrl', ManyCompaniesCtrl);
 
-  ManyAdminsCtrl.$inject = ['dataAdmin', 'tracto'];
+  ManyCompaniesCtrl.$inject = ['dataCompany', 'tracto'];
 
-  function ManyAdminsCtrl(dataAdmin, tracto) {
+  function ManyCompaniesCtrl(dataCompany, tracto) {
     var vm = this;
 
     vm.items = [];
@@ -25,13 +25,13 @@
     }
 
     function getMany() {
-      return dataAdmin.getMany().then(function(items) {
+      return dataCompany.getMany().then(function(items) {
         vm.items = items;
       }).catch(tracto.handle);
     }
 
     function remove(item) {
-      return dataAdmin.remove(item).then(function() {
+      return dataCompany.remove(item).then(function() {
         vm.items.forEach(function(elem, i, array) {
           if (array[i] === item) {
             array.splice(i, 1);

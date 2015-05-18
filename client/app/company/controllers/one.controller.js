@@ -3,11 +3,11 @@
 
   angular
   .module('webApp')
-  .controller('OneAdminCtrl', OneAdminCtrl);
+  .controller('OneCompanyCtrl', OneCompanyCtrl);
 
-  OneAdminCtrl.$inject = ['dataAdmin', 'tracto'];
+  OneCompanyCtrl.$inject = ['dataCompany', 'tracto'];
 
-  function OneAdminCtrl(dataAdmin, tracto) {
+  function OneCompanyCtrl(dataCompany, tracto) {
     var vm = this;
 
     vm.item = {};
@@ -27,28 +27,28 @@
     }
 
     function findOne(id) {
-      return dataAdmin.getOne(id).then(function(item) {
+      return dataCompany.getOne(id).then(function(item) {
         vm.item = item;
       }).catch(tracto.handle);
     }
 
     function create(item) {
       item = item || vm.item;
-      return dataAdmin.create(item).then(function(item) {
+      return dataCompany.create(item).then(function(item) {
         // code
       }).catch(tracto.handle);
     }
 
     function update(item) {
       item = item || vm.item;
-      return dataAdmin.update(item).then(function(item) {
+      return dataCompany.update(item).then(function(item) {
         // code
       }).catch(tracto.handle);
     }
 
     function remove(item) {
       item = item || vm.item;
-      return dataAdmin.remove(item).then(function() {
+      return dataCompany.remove(item).then(function() {
         vm.item = {};
       }).catch(tracto.handle);
     }
