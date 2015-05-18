@@ -25,7 +25,6 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Vehicle.create(req.body, function(err, vehicle) {
     if (err) { return handleError(res, err); }
-    if (!vehicle) { return res.send(404); }
     User.findById(vehicle._creator, function(err, user) {
       if (err) { return handleError(res, err); }
       if (!user) { return res.send(404); }
@@ -56,22 +55,23 @@ exports.update = function(req, res) {
 exports.destroy = function(req, res) {
   Vehicle.findById(req.params.id, function (err, vehicle) {
     if (err) { return handleError(res, err); }
-    if (!vehicle) { return res.send(404); }
-    // Remove from user aswell
-    User.findById(vehicle._creator, function (err, user) {
+    if (!vehicle) { return res.send(404); } // check
+    User.find({ id: { $in: vehicle.users } }, function (err, users) {
       if (err) { return handleError(res, err); }
-      if (!user) { return res.send(404); }
-      user.vehicles.forEach(function(element, i, array) {
-        if (element === vehicle._id) {
-          array.splice(i, 1);
-        }
-      });
-      user.save(function(err) {
-        if (err) { return handleError(res, err); }
-        vehicle.remove(function(err) {
-          if (err) { return handleError(res, err); }
-          return res.send(204);
+      if (!users) { return res.send(404); } // check
+      users.forEach(function(user) {
+        user.vehicles.forEach(function(elem, i, array) {
+          if (array[i] === vehicle._id) {
+            array.splice(i, 1);
+          }
         });
+        user.save(function(err) {
+          if (err) { return handleError(res, err); }
+        });
+      });
+      vehicle.remove(function(err) {
+        if (err) { return handleError(res, err); }
+        return res.send(204);
       });
     });
   });

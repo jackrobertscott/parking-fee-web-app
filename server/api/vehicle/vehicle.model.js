@@ -11,7 +11,8 @@ var VehicleSchema = new Schema({
   info: String,
   users: [{
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    default: []
   }],
   _creator: {
     type: Schema.Types.ObjectId,

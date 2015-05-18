@@ -21,7 +21,8 @@ var UserSchema = new Schema({
   github: {},
   vehicles: [{
     type: Schema.Types.ObjectId,
-    ref: 'Vehicle'
+    ref: 'Vehicle',
+    default: []
   }],
   company: {
     type: Schema.Types.ObjectId,

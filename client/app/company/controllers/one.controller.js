@@ -44,7 +44,7 @@
         var user = Auth.getCurrentUser();
         angular.extend(vm.item, {
           _creator: user._id,
-          admins: [user._id]
+          members: [user._id]
         });
         dataCompany.create(vm.item).then(function(item) {
           Auth.reloadUser();
