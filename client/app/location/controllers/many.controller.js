@@ -22,22 +22,25 @@
     ////////////
 
     function activate() {
-      return vm.getMany();
+      // code
     }
 
     function getMany() {
-      return dataLocation.getMany().then(function(items) {
+      vm.tracto.reset();
+      dataLocation.getMany().then(function(items) {
         vm.items = items;
       }).catch(vm.tracto.handle);
     }
 
     function remove(item) {
-      return dataLocation.remove(item).then(function() {
+      vm.tracto.reset();
+      dataLocation.remove(item).then(function() {
         vm.items.forEach(function(elem, i, array) {
           if (array[i] === item) {
             array.splice(i, 1);
           }
         });
+        vm.tracto.good = 'Successfully deleted item';
       }).catch(vm.tracto.handle);
     }
   }
