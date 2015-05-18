@@ -18,6 +18,13 @@
     vm.update = update;
     vm.remove = remove;
 
+    vm.makes = ['Ford', 'Holden', 'Mazda', 'Suburu', 'Ferrari', 'Other'];
+    vm.types = ['Sedan', 'Hatchback', 'Utility', 'Bus'];
+    vm.colors = ['Red', 'Blue', 'Yellow', 'Green', 'Orange', 'Purple', 'White', 'Black'];
+    vm.vehicle.make = vm.makes[0];
+    vm.vehicle.type = vm.types[0];
+    vm.vehicle.color = vm.colors[0];
+
     ////////////
 
     activate();
