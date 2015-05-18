@@ -5,15 +5,15 @@
   .module('webApp')
   .controller('OneLocationCtrl', OneLocationCtrl);
 
-  OneLocationCtrl.$inject = ['dataLocation', 'tracto', '$state', 'Auth'];
+  OneLocationCtrl.$inject = ['dataLocation', 'tracto', '$state', 'Auth', '$stateParams'];
 
-  function OneLocationCtrl(dataLocation, tracto, $state, Auth) {
+  function OneLocationCtrl(dataLocation, tracto, $state, Auth, $stateParams) {
     var vm = this;
 
     vm.item = {};
     vm.tracto = tracto;
     vm.submitted = false;
-    vm.findOne = findOne;
+    vm.getOne = getOne;
     vm.create = create;
     vm.update = update;
     vm.remove = remove;
@@ -28,8 +28,9 @@
       // code
     }
 
-    function findOne(id) {
+    function getOne(id) {
       vm.tracto.reset();
+      id = id || $stateParams.id;
       dataLocation.getOne(id).then(function(item) {
         item.start = new Date(item.start);
         item.end = new Date(item.end);
@@ -39,7 +40,7 @@
 
     function create(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         var user = Auth.getCurrentUser();
@@ -55,7 +56,7 @@
 
     function update(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         return dataLocation.update(vm.item).then(function(item) {
@@ -66,7 +67,7 @@
 
     function remove(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         dataLocation.remove(vm.item).then(function() {

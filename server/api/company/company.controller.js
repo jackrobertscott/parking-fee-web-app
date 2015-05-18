@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Company = require('./company.model');
 var User = require('../user/user.model');
+var config = require('../../config/environment');
 
 // Get list of companies
 exports.index = function(req, res) {
@@ -27,7 +28,9 @@ exports.create = function(req, res) {
     if (err) { return handleError(res, err); }
     User.find({ id: company._creator }, function(err, user) {
       user.company = company._id;
-      user.role = 'company';
+      if (config.userRoles.indexOf('company') > config.userRoles.indexOf(user.role)) {
+        user.role = 'company';
+      }
       user.save(function(err) {
         if (err) { return handleError(res, err); }
         return res.json(201, company);

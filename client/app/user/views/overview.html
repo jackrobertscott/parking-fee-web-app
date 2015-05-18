@@ -8,7 +8,7 @@
       <div class="col-md-9">
         <h1>
           <!-- title start -->
-          Users
+          User
           <!-- title end -->
         </h1>
         <div class="row hidden-md hidden-lg">
@@ -22,8 +22,8 @@
             <!-- main content start -->
             <ul class="list-group" ng-init="vm.getMany()">
               <li class="list-group-item" ng-repeat="user in vm.items">
-                  <strong>{{vm.item.name}}</strong><br>
-                  <span class="text-muted">{{vm.item.email}}</span>
+                  <strong>{{user.name}}</strong><br>
+                  <span class="text-muted">{{user.email}}</span>
               </li>
             </ul>
             <p class="help-block" ng-show="vm.tracto.bad">{{ vm.tracto.bad }}</p>

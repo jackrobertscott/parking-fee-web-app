@@ -13,7 +13,7 @@
     vm.item = {};
     vm.tracto = tracto;
     vm.submitted = false;
-    vm.findOne = findOne;
+    vm.getOne = getOne;
     vm.create = create;
     vm.update = update;
     vm.remove = remove;
@@ -32,9 +32,9 @@
       // code
     }
 
-    function findOne(id) {
+    function getOne(id) {
       vm.tracto.reset();
-      id = id || Auth.getCurrentUser();
+      id = id || Auth.getCurrentUser()._id;
       dataUser.getOne(id).then(function(item) {
         vm.item = item;
       }).catch(vm.tracto.handle);
@@ -42,7 +42,7 @@
 
     function create(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         Auth.createUser({
@@ -68,7 +68,7 @@
 
     function update(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         return dataUser.update(vm.item).then(function(item) {
@@ -79,7 +79,7 @@
 
     function remove(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         dataUser.remove(vm.item).then(function() {
@@ -91,7 +91,7 @@
 
     function login(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         Auth.login({
@@ -118,7 +118,7 @@
 
     function changePassword(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         Auth.changePassword(vm.item.oldPassword, vm.item.newPassword)

@@ -73,7 +73,7 @@ angular.module('webApp')
       new Item('Company', null, 'user', null, [
         new Item('Overview', 'company', 'admin'),
         new Item('Settings', 'companySettings', 'company'),
-        new Item('Register', 'companyRegister', 'inspector'),
+        new Item('Register', 'companyRegister'),
       ]),
       new Item('Location', null, 'user', null, [
         new Item('Overview', 'location'),

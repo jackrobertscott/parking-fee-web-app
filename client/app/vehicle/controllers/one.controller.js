@@ -5,15 +5,15 @@
   .module('webApp')
   .controller('OneVehicleCtrl', OneVehicleCtrl);
 
-  OneVehicleCtrl.$inject = ['dataVehicle', 'tracto', '$state', 'Auth'];
+  OneVehicleCtrl.$inject = ['dataVehicle', 'tracto', '$state', 'Auth', '$stateParams'];
 
-  function OneVehicleCtrl(dataVehicle, tracto, $state, Auth) {
+  function OneVehicleCtrl(dataVehicle, tracto, $state, Auth, $stateParams) {
     var vm = this;
 
     vm.item = {};
     vm.tracto = tracto;
     vm.submitted = false;
-    vm.findOne = findOne;
+    vm.getOne = getOne;
     vm.create = create;
     vm.update = update;
     vm.remove = remove;
@@ -21,9 +21,9 @@
     vm.makes = ['Ford', 'Holden', 'Mazda', 'Suburu', 'Ferrari', 'Other'];
     vm.types = ['Sedan', 'Hatchback', 'Utility', 'Bus'];
     vm.colors = ['Red', 'Blue', 'Yellow', 'Green', 'Orange', 'Purple', 'White', 'Black'];
-    vm.vehicle.make = vm.makes[0];
-    vm.vehicle.type = vm.types[0];
-    vm.vehicle.color = vm.colors[0];
+    vm.item.make = vm.makes[0];
+    vm.item.type = vm.types[0];
+    vm.item.color = vm.colors[0];
 
     ////////////
 
@@ -35,8 +35,9 @@
       // code
     }
 
-    function findOne(id) {
+    function getOne(id) {
       vm.tracto.reset();
+      id = id || $stateParams.id;
       dataVehicle.getOne(id).then(function(item) {
         vm.item = item;
       }).catch(vm.tracto.handle);
@@ -44,7 +45,7 @@
 
     function create(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         var user = Auth.getCurrentUser();
@@ -60,7 +61,7 @@
 
     function update(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         return dataVehicle.update(vm.item).then(function(item) {
@@ -71,7 +72,7 @@
 
     function remove(form) {
       vm.tracto.reset();
-      if (form.$valid) {
+      if (!form.$valid) {
         invalid();
       } else {
         dataVehicle.remove(vm.item).then(function() {

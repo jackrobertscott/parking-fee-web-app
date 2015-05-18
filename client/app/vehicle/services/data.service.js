@@ -29,15 +29,15 @@
 
     function create(body) {
       var object = new ResourceVehicle(body);
-      return object.$save().$promise;
+      return object.$save();
     }
 
     function update(object) {
-      return object.$update.$promise;
+      return object.$update();
     }
 
     function remove(object) {
-      return object.$remove().$promise;
+      return object.$remove();
     }
   }
 })();

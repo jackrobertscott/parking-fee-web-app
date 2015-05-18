@@ -10,7 +10,7 @@
     'ui.router'
   ])
   .config(config)
-  .factory(authInterceptor)
+  .factory('authInterceptor', authInterceptor)
   .run(run);
 
   config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
@@ -25,7 +25,7 @@
 
   authInterceptor.$inject = ['$rootScope', '$q', '$cookieStore', '$location'];
 
-  function authInterceptor($rootScope, $q, $cookieStore, $state) {
+  function authInterceptor($rootScope, $q, $cookieStore, $location) {
     return {
       // Add authorization token to headers
       request: function (config) {
@@ -39,7 +39,7 @@
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if (response.status === 401) {
-          $state.go('userLogin');
+          $location.path('/login');
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
@@ -53,12 +53,12 @@
 
   run.$inject = ['$rootScope', '$location', 'Auth'];
 
-  function run($rootScope, $state, Auth) {
+  function run($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
-          $state.go('userLogin');
+          $location.path('/login');
         }
       });
     });

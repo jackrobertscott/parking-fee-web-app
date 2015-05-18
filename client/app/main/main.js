@@ -5,14 +5,14 @@
   .module('webApp')
   .config(config);
 
-  config.$inject = ['stateProvider'];
+  config.$inject = ['$stateProvider'];
 
   function config($stateProvider) {
     $stateProvider
     .state('main', {
       url: '/',
       templateUrl: 'app/main/views/overview.html',
-      controller: 'manyMainCtrl',
+      controller: 'ManyMainsCtrl',
       controllerAs: 'vm'
     });
   }

@@ -5,32 +5,32 @@
   .module('webApp')
   .config(config);
 
-  config.$inject = ['stateProvider'];
+  config.$inject = ['$stateProvider'];
 
   function config($stateProvider) {
     $stateProvider
     .state('company', {
       url: '/company',
       templateUrl: 'app/company/views/overview.html',
-      controller: 'manyCompanyCtrl',
+      controller: 'ManyCompaniesCtrl',
       controllerAs: 'vm'
     })
     .state('companyAdmin', {
       url: '/company/admin',
       templateUrl: 'app/company/views/admin.html',
-      controller: 'manyCompanyCtrl',
+      controller: 'ManyCompaniesCtrl',
       controllerAs: 'vm'
     })
     .state('companyRegister', {
       url: '/company/register',
       templateUrl: 'app/company/views/register.html',
-      controller: 'oneCompanyCtrl',
+      controller: 'OneCompanyCtrl',
       controllerAs: 'vm'
     })
     .state('companySettings', {
       url: '/company/settings',
       templateUrl: 'app/company/views/settings.html',
-      controller: 'oneCompanyCtrl',
+      controller: 'OneCompanyCtrl',
       controllerAs: 'vm'
     });
   }
