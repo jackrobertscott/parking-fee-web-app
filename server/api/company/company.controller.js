@@ -25,7 +25,14 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Company.create(req.body, function(err, company) {
     if (err) { return handleError(res, err); }
-    return res.json(201, company);
+    User.find({ id: company._creator }, function(err, user) {
+      user.company = company._id;
+      user.role = 'company';
+      user.save(function(err) {
+        if (err) { return handleError(res, err); }
+        return res.json(201, company);
+      });
+    });
   });
 };
 

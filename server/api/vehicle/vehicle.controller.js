@@ -25,7 +25,13 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Vehicle.create(req.body, function(err, vehicle) {
     if (err) { return handleError(res, err); }
-    return res.json(201, vehicle);
+    User.find({ id: vehicle._creator }, function(err, user) {
+      user.vehicles.push(vehicle._id);
+      user.save(function(err) {
+        if (err) { return handleError(res, err); }
+        return res.json(201, vehicle);
+      });
+    });
   });
 };
 
