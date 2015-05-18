@@ -47,10 +47,12 @@
     }
 
     function getFew() {
-      dataVehicle.getMany({users: Auth.getCurrentUser()._id})
-      .then(function(items) {
-        vm.items = items;
-      }).catch(vm.tracto.handle);
+      Auth.getCurrentUser().vehicles.forEach(function(vehicle) {
+        dataVehicle.getOne(vehicle)
+        .then(function(item) {
+          vm.items.push(item);
+        }).catch(vm.tracto.handle);
+      });
     }
 
     function toSettings(item) {

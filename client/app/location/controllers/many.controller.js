@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('ManyLocationsCtrl', ManyLocationsCtrl);
 
-  ManyLocationsCtrl.$inject = ['dataLocation', 'tracto', '$state', 'Auth'];
+  ManyLocationsCtrl.$inject = ['dataLocation', 'tracto', '$state', 'Auth', 'dataCompany'];
 
-  function ManyLocationsCtrl(dataLocation, tracto, $state, Auth) {
+  function ManyLocationsCtrl(dataLocation, tracto, $state, Auth, dataCompany) {
     var vm = this;
 
     vm.items = [];
@@ -47,9 +47,15 @@
     }
 
     function getFew() {
-      dataLocation.getMany({company: Auth.getCurrentUser().company})
-      .then(function(items) {
-        vm.items = items;
+      dataCompany.getOne(Auth.getCurrentUser().company)
+      .then(function(company) {
+        // this is bad as makes multiple db queries
+        company.locations.forEach(function(location) {
+          dataLocation.getOne(location)
+          .then(function(items) {
+            vm.items.push(items);
+          }).catch(vm.tracto.handle);
+        });
       }).catch(vm.tracto.handle);
     }
 

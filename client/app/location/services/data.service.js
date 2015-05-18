@@ -22,9 +22,8 @@
       return ResourceLocation.get({id: id}).$promise;
     }
 
-    function getMany(query) {
-      query = query || {};
-      return ResourceLocation.query(query).$promise;
+    function getMany() {
+      return ResourceLocation.query().$promise;
     }
 
     function create(body) {

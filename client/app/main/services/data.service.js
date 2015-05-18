@@ -22,9 +22,8 @@
       return ResourceMain.get({id: id}).$promise;
     }
 
-    function getMany(query) {
-      query = query || {};
-      return ResourceMain.query(query).$promise;
+    function getMany() {
+      return ResourceMain.query().$promise;
     }
 
     function create(body) {
