@@ -11,7 +11,7 @@
     $stateProvider
     .state('admin', {
       url: '/admin',
-      templateUrl: 'app/admin/views/overview.html',
+      template: '<p>Nothing here.</p>',
       controller: 'oneAdminCtrl'
     });
   }
