@@ -46,6 +46,11 @@
     }
 
     function toggleChildren(index) {
+      vm.menu.forEach(function(item) {
+        if (item.showChildren) {
+          item.showChildren = false;
+        }
+      });
       vm.menu[index].showChildren = !vm.menu[index].showChildren;
     }
 
