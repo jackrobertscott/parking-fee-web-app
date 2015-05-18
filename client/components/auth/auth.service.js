@@ -24,6 +24,7 @@
       isAdmin: isAdmin,
       getToken: getToken,
       getRole: getRole,
+      reloadUser: reloadUser,
       promote: promote,
       demote: demote
     };
@@ -106,6 +107,13 @@
 
     function getRole() {
       return currentUser.role;
+    }
+
+    function reloadUser() {
+      if ($cookieStore.get('token')) {
+        currentUser = User.get();
+      }
+      return currentUser;
     }
 
     function promote(role) {

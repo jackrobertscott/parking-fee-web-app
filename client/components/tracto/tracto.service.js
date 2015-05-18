@@ -1,24 +1,28 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('webApp')
-  .factory('tracto', function () {
-    return {
-      // message viewed on success
-      good: '',
+  angular
+  .module('webApp')
+  .service('tracto', tracto);
 
-      // message viewed on error
-      bad: '',
+  tracto.$inject = [];
 
-      // resource error handler
-      handle: function(error) {
-        console.log(error);
-        this.bad = 'An error has occurred. We apologize for this inconvenience.';
-      },
+  function tracto() {
+    this.good = '';
+    this.bad = '';
+    this.errors = {};
+    this.handle = handle;
+    this.reset = reset;
 
-      // reset messages
-      reset: function() {
-        this.good = '';
-        this.bad = '';
-      }
-    };
-  });
+    function handle(error) {
+      console.log(error);
+      this.bad = 'An error has occurred. We apologize for this inconvenience.';
+    }
+
+    function reset() {
+      this.good = '';
+      this.bad = '';
+      this.errors = {};
+    }
+  }
+})();

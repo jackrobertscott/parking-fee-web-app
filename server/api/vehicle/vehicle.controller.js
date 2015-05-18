@@ -25,7 +25,10 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Vehicle.create(req.body, function(err, vehicle) {
     if (err) { return handleError(res, err); }
-    User.find({ id: vehicle._creator }, function(err, user) {
+    if (!vehicle) { return res.send(404); }
+    User.findById(vehicle._creator, function(err, user) {
+      if (err) { return handleError(res, err); }
+      if (!user) { return res.send(404); }
       user.vehicles.push(vehicle._id);
       user.save(function(err) {
         if (err) { return handleError(res, err); }

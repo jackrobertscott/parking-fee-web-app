@@ -26,7 +26,9 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Company.create(req.body, function(err, company) {
     if (err) { return handleError(res, err); }
-    User.find({ id: company._creator }, function(err, user) {
+    User.findById(company._creator, function(err, user) {
+      if (err) { return handleError(res, err); }
+      if (!user) { return res.send(401); }
       user.company = company._id;
       if (config.userRoles.indexOf('company') > config.userRoles.indexOf(user.role)) {
         user.role = 'company';
@@ -61,6 +63,7 @@ exports.destroy = function(req, res) {
     // Remove company in users aswell
     User.find({ company: company._id }, function (err, users) {
       if (err) { return handleError(res, err); }
+      if (!users) { return res.send(404); }
       users.forEach(function(user, i, array) {
         user.company = null;
         user.role = 'user';

@@ -25,8 +25,10 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Location.create(req.body, function(err, location) {
     if (err) { return handleError(res, err); }
+    if (!location) { return res.send(404); }
     Company.find({ admins: location._creator }, function(err, company) {
       if (err) { return handleError(res, err); }
+      if (!company) { return res.send(404); }
       company.locations.push(location._id);
       company.save(function(err) {
         if (err) { return handleError(res, err); }
@@ -57,6 +59,7 @@ exports.destroy = function(req, res) {
     if (!location) { return res.send(404); }
     Company.find({ locations: location._id }, function(err, company) {
       if (err) { return handleError(res, err); }
+      if (!company) { return res.send(404); }
       company.locations.forEach(function(element, i, array) {
         if (element === location._id) {
           array.splice(i, 1);

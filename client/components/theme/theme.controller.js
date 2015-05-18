@@ -3,6 +3,7 @@
 angular.module('webApp')
   .controller('ThemeCtrl', function ($scope, $state, Auth) {
     var role = Auth.getRole();
+    console.log(role);
     var Item = function(name, href, minRole, maxRole, children) {
       // This need to fixed as it replicates the environment variable
       var userRoles = ['guest', 'user', 'inspector', 'company', 'admin'];

@@ -30,8 +30,7 @@
 
     function getOne(id) {
       vm.tracto.reset();
-      id = id || Auth.getCurrentUser.company;
-      if (!id) {return $state.go('main');}
+      id = id || Auth.getCurrentUser().company;
       dataCompany.getOne(id).then(function(item) {
         vm.item = item;
       }).catch(vm.tracto.handle);
@@ -48,6 +47,7 @@
           admins: [user._id]
         });
         dataCompany.create(vm.item).then(function(item) {
+          Auth.reloadUser();
           $state.go('main');
         }).catch(vm.tracto.handle);
       }
