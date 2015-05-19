@@ -25,9 +25,9 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Location.create(req.body, function(err, location) {
     if (err) { return handleError(res, err); }
-    Company.findOne({ admins: { $in: [location._creator] } }, function(err, company) {
+    Company.findById(location.company, function(err, company) {
       if (err) { return handleError(res, err); }
-      if (!company) { return res.send(404); } // check
+      if (!company) { return res.send(404); }
       company.locations.push(location._id);
       company.save(function(err) {
         if (err) { return handleError(res, err); }
@@ -55,10 +55,10 @@ exports.update = function(req, res) {
 exports.destroy = function(req, res) {
   Location.findById(req.params.id, function (err, location) {
     if (err) { return handleError(res, err); }
-    if (!location) { return res.send(404); } // check
-    Company.findOne({ locations: { $in: [location._id] } }, function(err, company) {
+    if (!location) { return res.send(404); }
+    Company.findById(location.company, function(err, company) {
       if (err) { return handleError(res, err); }
-      if (!company) { return res.send(404); } // check
+      if (!company) { return res.send(404); }
       company.locations.forEach(function(element, i, array) {
         if (element === location._id) {
           array.splice(i, 1);

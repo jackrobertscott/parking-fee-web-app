@@ -55,10 +55,11 @@ exports.update = function(req, res) {
 exports.destroy = function(req, res) {
   Vehicle.findById(req.params.id, function (err, vehicle) {
     if (err) { return handleError(res, err); }
-    if (!vehicle) { return res.send(404); } // check
+    if (!vehicle) { return res.send(404); }
+    // Check for ALL users of the vehicle
     User.find({ id: { $in: vehicle.users } }, function (err, users) {
       if (err) { return handleError(res, err); }
-      if (!users) { return res.send(404); } // check
+      if (!users) { return res.send(404); }
       users.forEach(function(user) {
         user.vehicles.forEach(function(elem, i, array) {
           if (array[i] === vehicle._id) {

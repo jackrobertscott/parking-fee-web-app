@@ -60,13 +60,12 @@ exports.update = function(req, res) {
 exports.destroy = function(req, res) {
   Company.findById(req.params.id, function (err, company) {
     if (err) { return handleError(res, err); }
-    if (!company) { return res.send(404); } // check
-    // Remove company in users aswell
+    if (!company) { return res.send(404); }
     User.find({ company: company._id }, function (err, users) {
       if (err) { return handleError(res, err); }
-      if (!users) { return res.send(404); } // check
       users.forEach(function(user, i, array) {
         user.company = null;
+        // leave admins as admins
         if (config.userRoles.indexOf('admin') > config.userRoles.indexOf(user.role)) {
           user.role = 'user';
         }
@@ -77,13 +76,11 @@ exports.destroy = function(req, res) {
     });
     Location.find({ company: company._id }, function (err, locations) {
       if (err) { return handleError(res, err); }
-      if (locations && _.isArray(locations)) {
-        locations.forEach(function(location, i, array) {
-          location.remove(function(err) {
-            if (err) { return handleError(res, err); }
-          });
+      locations.forEach(function(location, i, array) {
+        location.remove(function(err) {
+          if (err) { return handleError(res, err); }
         });
-      }
+      });
     });
     company.remove(function(err) {
       if (err) { return handleError(res, err); }
