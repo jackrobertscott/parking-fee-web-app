@@ -5,15 +5,16 @@
   .module('webApp')
   .factory('dataCompany', dataCompany);
 
-  dataCompany.$inject = ['ResourceCompany'];
+  dataCompany.$inject = ['ResourceCompany', 'dataUser'];
 
-  function dataCompany(ResourceCompany) {
+  function dataCompany(ResourceCompany, dataUser) {
     var service = {
       getOne: getOne,
       getMany: getMany,
       create: create,
       update: update,
       remove: remove,
+      getMembers: getMembers,
       addMember: addMember,
       removeMember: removeMember
     };
@@ -39,6 +40,10 @@
 
     function remove(object) {
       return object.$remove();
+    }
+
+    function getMembers(id) {
+      return ResourceCompany.getMembers({id: id}).$promise;
     }
 
     function addMember(object, memberId) {

@@ -8,7 +8,7 @@
   ResourceUser.$inject = ['$resource'];
 
   function ResourceUser($resource) {
-    return $resource('/api/users/:id/:controller', {
+    return $resource('/api/users/:id/:action', {
       id: '@_id'
     }, {
       get: {
@@ -20,7 +20,7 @@
       changePassword: {
         method: 'PUT',
         params: {
-          controller: 'password'
+          action: 'password'
         }
       },
       update: {
@@ -29,13 +29,13 @@
       promote: {
         method: 'PUT',
         params: {
-          controller: 'promote'
+          action: 'promote'
         }
       },
       demote: {
         method: 'PUT',
         params: {
-          controller: 'demote'
+          action: 'demote'
         }
       }
     });

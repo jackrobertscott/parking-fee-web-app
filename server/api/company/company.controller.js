@@ -95,3 +95,17 @@ exports.destroy = function(req, res) {
 function handleError(res, err) {
   return res.send(500, err);
 }
+
+// Added methods
+
+// Get a company's members
+exports.getMembers = function(req, res) {
+  Company.findById(req.params.id, function (err, company) {
+    if (err) { return handleError(res, err); }
+    if (!company) { return res.send(404); }
+    User.find({ _id: { $in: company.members } }, function (err, users) {
+      if (err) { return handleError(res, err); }
+      return res.json(users);
+    });
+  });
+};

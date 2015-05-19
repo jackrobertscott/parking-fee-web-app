@@ -58,24 +58,19 @@
     function getPeople() {
       vm.tracto.reset();
       dataUser.getMany().then(function(people) {
-        vm.people = people;
-        vm.people.forEach(function(person, i, array) {
+        people.forEach(function(person, i, array) {
           if (person.role === 'admin') { // remove admins
             array.splice(i, 1);
           }
         });
+        vm.people = people;
       }).catch(vm.tracto.handle);
     }
 
     function getMembers() {
       vm.tracto.reset();
-      vm.items = [];
-      dataCompany.getOne(currentUser.company).then(function(company) {
-        company.members.forEach(function(elem) { // slow
-          dataUser.getOne(elem).then(function(member) {
-            vm.items.push(member);
-          }).catch(vm.tracto.handle);
-        });
+      dataCompany.getMembers().then(function(items) {
+        vm.items = items;
       }).catch(vm.tracto.handle);
     }
 
