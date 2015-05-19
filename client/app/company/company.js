@@ -21,6 +21,12 @@
       controller: 'ManyCompaniesCtrl',
       controllerAs: 'vm'
     })
+    .state('companyMembers', {
+      url: '/company/members',
+      templateUrl: 'app/company/views/members.html',
+      controller: 'ManyCompaniesCtrl',
+      controllerAs: 'vm'
+    })
     .state('companyRegister', {
       url: '/company/register',
       templateUrl: 'app/company/views/register.html',

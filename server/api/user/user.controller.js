@@ -41,10 +41,10 @@ exports.create = function (req, res, next) {
 exports.show = function (req, res, next) {
   var userId = req.params.id;
 
-  User.findById(userId, function (err, user) {
+  User.findById(userId, '-salt -hashedPassword', function (err, user) {
     if (err) return next(err);
     if (!user) return res.send(401);
-    res.json(user.profile);
+    res.json(user);
   });
 };
 
@@ -110,7 +110,6 @@ exports.update = function(req, res) {
   if (req.body._id) { delete req.body._id; }
   if (req.body.salt) { delete req.body.salt; }
   if (req.body.hashedPassword) { delete req.body.hashedPassword; }
-  if (req.body.role) { delete req.body.role; }
   User.findById(req.params.id, function (err, user) {
     if (err) { return handleError(res, err); }
     if (!user) { return res.send(404); }

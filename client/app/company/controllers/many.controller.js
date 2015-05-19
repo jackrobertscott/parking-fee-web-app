@@ -5,15 +5,20 @@
   .module('webApp')
   .controller('ManyCompaniesCtrl', ManyCompaniesCtrl);
 
-  ManyCompaniesCtrl.$inject = ['dataCompany', 'tracto', 'Auth'];
+  ManyCompaniesCtrl.$inject = ['dataCompany', 'tracto', '$state', 'Auth', 'dataUser'];
 
-  function ManyCompaniesCtrl(dataCompany, tracto, Auth) {
+  function ManyCompaniesCtrl(dataCompany, tracto, $state, Auth, dataUser) {
     var vm = this;
 
+    var currentUser = Auth.getCurrentUser();
     vm.items = [];
     vm.tracto = tracto;
     vm.getMany = getMany;
     vm.remove = remove;
+    vm.getMembers = getMembers;
+    vm.memberToCompany = memberToCompany;
+    vm.memberToInspector = memberToInspector;
+    vm.memberToUser = memberToUser;
     vm.authenticate = authenticate;
     vm.unauthenticate = unauthenticate;
 
@@ -24,7 +29,9 @@
     ////////////
 
     function activate() {
-      // code
+      if (currentUser.role !== 'company' && currentUser.role !== 'admin') {
+        $state.go('main');
+      }
     }
 
     function getMany() {
@@ -44,6 +51,56 @@
         });
         vm.tracto.good = 'Successfully deleted item';
       }).catch(vm.tracto.handle);
+    }
+
+    function getMembers(id) {
+      vm.tracto.reset();
+      id = id || currentUser.company;
+      dataCompany.getOne(id).then(function(company) {
+        company.members.forEach(function(elem) { // slow
+          dataUser.getOne(elem).then(function(member) {
+            vm.items.push(member);
+          }).catch(vm.tracto.handle);
+        });
+      }).catch(vm.tracto.handle);
+    }
+
+    function memberToCompany(member) {
+      roleChecks(member, function() {
+        member.role = 'company';
+        dataUser.update(member).then(function() {
+          vm.tracto.good = 'User\'s role was successfully updated';
+        }).catch(vm.tracto.handle);
+      });
+    }
+
+    function memberToInspector(member) {
+      roleChecks(member, function() {
+        member.role = 'inspector';
+        dataUser.update(member).then(function() {
+          vm.tracto.good = 'User\'s role was successfully updated';
+        }).catch(vm.tracto.handle);
+      });
+    }
+
+    function memberToUser(member) {
+      roleChecks(member, function() {
+        member.company = null;
+        member.role = 'user';
+        dataUser.update(member).then(function() {
+          vm.tracto.good = 'User\'s role was successfully updated';
+        }).catch(vm.tracto.handle);
+      });
+    }
+
+    function roleChecks(member, cb) {
+      if (member.role === 'admin') {
+        vm.tracto.bad = 'Can not demote admins';
+      } else if (member._id === currentUser._id) {
+        vm.tracto.bad = 'Can not edit self';
+      } else {
+        cb();
+      }
     }
 
     function authenticate(item) {

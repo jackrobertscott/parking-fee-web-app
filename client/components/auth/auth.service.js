@@ -116,14 +116,16 @@
       return currentUser;
     }
 
-    function promote(role) {
-      return User.promote({ id: currentUser._id }, {
+    function promote(role, user) {
+      user = user || currentUser;
+      return User.promote({ id: user._id }, {
         role: role
       }).$promise;
     }
 
-    function demote(role) {
-      return User.demote({ id: currentUser._id }, {
+    function demote(role, user) {
+      user = user || currentUser;
+      return User.demote({ id: user._id }, {
         role: role
       }).$promise;
     }

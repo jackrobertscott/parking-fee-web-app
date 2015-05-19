@@ -46,11 +46,12 @@
         new Item('Change Password', 'userPassword', 'user'),
         new Item('Users', 'user', 'admin'),
         new Item('Admin', 'userAdmin', 'admin'),
-        new Item('Company', null, 'user', null, [
+        new Item('Register Company', 'companyRegister', 'user', 'user'),
+        new Item('Company', null, 'company', null, [
           new Item('Admin', 'companyAdmin', 'admin'),
-          new Item('Overview', 'company', 'inspector'),
-          new Item('Settings', 'companySettings', 'company'),
-          new Item('Register', 'companyRegister'),
+          new Item('Overview', 'company'),
+          new Item('Settings', 'companySettings'),
+          new Item('Members', 'companyMembers'),
         ]),
         new Item('Location', null, 'user', null, [
           new Item('Overview', 'location'),
