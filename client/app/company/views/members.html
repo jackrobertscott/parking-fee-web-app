@@ -22,19 +22,44 @@
             <!-- main content start -->
             <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
             <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
+            <p>Add members</p>
+            <div class="form-group">
+              <label for="companyPhone" class="sr-only">Search people</label>
+              <input type="text" class="form-control" placeholder="Search people" ng-model="search">
+            </div>
+            <ul class="list-group" ng-init="vm.getPeople()">
+              <li class="list-group-item" ng-repeat="person in vm.people | filter: search | limitTo: 5">
+                  <strong>{{person.name}}</strong><br>
+                  <span class="text-muted">{{person.email}}</span>
+                  <a ng-click="vm.personToCompany(person)" class="pull-right">
+                    Company Admin
+                    <span ng-show="person.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
+                  </a>
+                  <a ng-click="vm.personToInspector(person)" class="pull-right">
+                    Inspector
+                    <span ng-show="person.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
+                  </a>
+                  <a ng-click="vm.personToUser(person)" class="pull-right">
+                    User
+                    <span ng-show="person.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
+                  </a>
+              </li>
+            </ul>
+            <hr>
+            <p>Current members</p>
             <ul class="list-group" ng-init="vm.getMembers()">
               <li class="list-group-item" ng-repeat="member in vm.items">
                   <strong>{{member.name}}</strong><br>
                   <span class="text-muted">{{member.email}}</span>
-                  <a ng-click="vm.memberToCompany(member)" class="pull-right">
+                  <a ng-click="vm.personToCompany(member)" class="pull-right">
                     Company Admin
                     <span ng-show="member.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
                   </a>
-                  <a ng-click="vm.memberToInspector(member)" class="pull-right">
+                  <a ng-click="vm.personToInspector(member)" class="pull-right">
                     Inspector
                     <span ng-show="member.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
                   </a>
-                  <a ng-click="vm.memberToUser(member)" class="pull-right">
+                  <a ng-click="vm.personToUser(member)" class="pull-right">
                     User
                     <span ng-show="member.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
                   </a>

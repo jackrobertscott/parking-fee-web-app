@@ -12,13 +12,15 @@
 
     var currentUser = Auth.getCurrentUser();
     vm.items = [];
+    vm.people = [];
     vm.tracto = tracto;
     vm.getMany = getMany;
     vm.remove = remove;
+    vm.getPeople = getPeople;
     vm.getMembers = getMembers;
-    vm.memberToCompany = memberToCompany;
-    vm.memberToInspector = memberToInspector;
-    vm.memberToUser = memberToUser;
+    vm.personToCompany = personToCompany;
+    vm.personToInspector = personToInspector;
+    vm.personToUser = personToUser;
     vm.authenticate = authenticate;
     vm.unauthenticate = unauthenticate;
 
@@ -53,10 +55,22 @@
       }).catch(vm.tracto.handle);
     }
 
-    function getMembers(id) {
+    function getPeople() {
       vm.tracto.reset();
-      id = id || currentUser.company;
-      dataCompany.getOne(id).then(function(company) {
+      dataUser.getMany().then(function(people) {
+        vm.people = people;
+        vm.people.forEach(function(person, i, array) {
+          if (person.role === 'admin') { // remove admins
+            array.splice(i, 1);
+          }
+        });
+      }).catch(vm.tracto.handle);
+    }
+
+    function getMembers() {
+      vm.tracto.reset();
+      vm.items = [];
+      dataCompany.getOne(currentUser.company).then(function(company) {
         company.members.forEach(function(elem) { // slow
           dataUser.getOne(elem).then(function(member) {
             vm.items.push(member);
@@ -65,41 +79,43 @@
       }).catch(vm.tracto.handle);
     }
 
-    function memberToCompany(member) {
-      roleChecks(member, function() {
-        member.role = 'company';
-        dataUser.update(member).then(function() {
-          vm.tracto.good = 'User\'s role was successfully updated';
-        }).catch(vm.tracto.handle);
-      });
+    function personToCompany(member) {
+      vm.tracto.reset();
+      updateMember(member, 'company', currentUser.company);
     }
 
-    function memberToInspector(member) {
-      roleChecks(member, function() {
-        member.role = 'inspector';
-        dataUser.update(member).then(function() {
-          vm.tracto.good = 'User\'s role was successfully updated';
-        }).catch(vm.tracto.handle);
-      });
+    function personToInspector(member) {
+      vm.tracto.reset();
+      updateMember(member, 'inspector', currentUser.company);
     }
 
-    function memberToUser(member) {
-      roleChecks(member, function() {
-        member.company = null;
-        member.role = 'user';
-        dataUser.update(member).then(function() {
-          vm.tracto.good = 'User\'s role was successfully updated';
-        }).catch(vm.tracto.handle);
-      });
+    function personToUser(member) {
+      vm.tracto.reset();
+      updateMember(member, 'user', null);
     }
 
-    function roleChecks(member, cb) {
+    function updateMember(member, role, company) {
       if (member.role === 'admin') {
         vm.tracto.bad = 'Can not demote admins';
       } else if (member._id === currentUser._id) {
         vm.tracto.bad = 'Can not edit self';
       } else {
-        cb();
+        member.company = company;
+        member.role = role;
+        // update user
+        dataUser.update(member).then(function() {
+          vm.tracto.good = 'User\'s role was successfully updated';
+        }).catch(vm.tracto.handle);
+        // update company
+        dataCompany.getOne(currentUser.company)
+        .then(function(company) {
+          if (member.company) {
+            dataCompany.addMember(company, member._id); // server does not correctly update
+          } else {
+            dataCompany.removeMember(company, member._id); // server does not correctly update
+          }
+          getMembers();
+        }).catch(vm.tracto.handle);
       }
     }
 
