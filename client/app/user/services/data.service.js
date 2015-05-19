@@ -13,7 +13,9 @@
       getMany: getMany,
       create: create,
       update: update,
-      remove: remove
+      remove: remove,
+      addCompanyMember: addCompanyMember,
+      removeCompanyMember: removeCompanyMember
     };
 
     return service;
@@ -37,6 +39,16 @@
 
     function remove(object) {
       return object.$remove();
+    }
+
+    function addCompanyMember(object, companyId, role) {
+      object.company = companyId;
+      object.role = role;
+      return object.$addCompanyMember();
+    }
+
+    function removeCompanyMember(object) {
+      return object.$removeCompanyMember();
     }
   }
 })();

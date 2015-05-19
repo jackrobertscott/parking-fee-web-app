@@ -17,7 +17,7 @@ router.post('/', controller.create);
 // Added routes
 
 router.put('/:id', auth.isAuthenticated(), controller.update);
-router.put('/:id/promote', auth.isAuthenticated(), controller.promote);
-router.put('/:id/demote', auth.isAuthenticated(), controller.demote);
+router.post('/:id/company', auth.isAuthenticated(), controller.addCompanyMember);
+router.delete('/:id/company', auth.isAuthenticated(), controller.removeCompanyMember);
 
 module.exports = router;

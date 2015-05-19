@@ -17,25 +17,25 @@
           id: 'me'
         }
       },
+      update: {
+        method: 'PUT'
+      },
       changePassword: {
         method: 'PUT',
         params: {
           action: 'password'
         }
       },
-      update: {
-        method: 'PUT'
-      },
-      promote: {
-        method: 'PUT',
+      addCompanyMember: {
+        method: 'POST',
         params: {
-          action: 'promote'
+          action: 'company'
         }
       },
-      demote: {
-        method: 'PUT',
+      removeCompanyMember: {
+        method: 'DELETE',
         params: {
-          action: 'demote'
+          action: 'company'
         }
       }
     });

@@ -115,19 +115,5 @@
       }
       return currentUser;
     }
-
-    function promote(role, user) {
-      user = user || currentUser;
-      return User.promote({ id: user._id }, {
-        role: role
-      }).$promise;
-    }
-
-    function demote(role, user) {
-      user = user || currentUser;
-      return User.demote({ id: user._id }, {
-        role: role
-      }).$promise;
-    }
   }
 })();

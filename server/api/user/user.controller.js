@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var User = require('./user.model');
+var Company = require('../company/company.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -11,9 +12,9 @@ var validationError = function(res, err) {
 };
 
 /**
- * Get list of users
- * restriction: 'admin'
- */
+* Get list of users
+* restriction: 'admin'
+*/
 exports.index = function(req, res) {
   User.find({}, '-salt -hashedPassword', function (err, users) {
     if (err) { return handleError(res, err); }
@@ -22,8 +23,8 @@ exports.index = function(req, res) {
 };
 
 /**
- * Creates a new user
- */
+* Creates a new user
+*/
 exports.create = function (req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
@@ -36,8 +37,8 @@ exports.create = function (req, res, next) {
 };
 
 /**
- * Get a single user
- */
+* Get a single user
+*/
 exports.show = function (req, res, next) {
   var userId = req.params.id;
 
@@ -49,9 +50,9 @@ exports.show = function (req, res, next) {
 };
 
 /**
- * Deletes a user
- * restriction: 'admin'
- */
+* Deletes a user
+* restriction: 'admin'
+*/
 exports.destroy = function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err, user) {
     if (err) { return handleError(res, err); }
@@ -60,8 +61,8 @@ exports.destroy = function(req, res) {
 };
 
 /**
- * Change a users password
- */
+* Change a users password
+*/
 exports.changePassword = function(req, res, next) {
   var userId = req.user._id;
   var oldPass = String(req.body.oldPassword);
@@ -81,13 +82,13 @@ exports.changePassword = function(req, res, next) {
 };
 
 /**
- * Get my info
- */
+* Get my info
+*/
 exports.me = function(req, res, next) {
   var userId = req.user._id;
   User.findOne({ _id: userId },
-  '-salt -hashedPassword',
-  function(err, user) { // don't ever give out the password or salt
+    '-salt -hashedPassword',
+    function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);
     res.json(user);
@@ -95,8 +96,8 @@ exports.me = function(req, res, next) {
 };
 
 /**
- * Authentication callback
- */
+* Authentication callback
+*/
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
@@ -104,8 +105,8 @@ exports.authCallback = function(req, res, next) {
 // Added functions
 
 /**
- * Safely update the user
- */
+* PUT: Safely update the user
+*/
 exports.update = function(req, res) {
   if (req.body._id) { delete req.body._id; }
   if (req.body.salt) { delete req.body.salt; }
@@ -122,59 +123,62 @@ exports.update = function(req, res) {
 };
 
 /**
- * Increase a users role to a higher role
- */
-exports.promote = function(req, res, next) {
-  var userId = req.user._id;
-  var oldRole = String(req.user.role);
-  var newRole = String(req.body.role);
-
-  // Check if the given role exists
-  if (config.userRoles.indexOf(newRole) === -1) {
-    return res.send(403);
+* PUT: Add user to company members
+*/
+exports.addCompanyMember = function(req, res) {
+  var companyId = req.body.company;
+  var role = req.body.role;
+  if (!companyId || !role || config.userRoles.indexOf(role) === -1) {
+    return res.send(404);
   }
-
-  // Already have role higher then requested
-  if (config.userRoles.indexOf(newRole) < config.userRoles.indexOf(oldRole)) {
-    return res.send(200);
-  }
-
-  User.findById(userId, function (err, user) {
+  User.findById(req.params.id, function (err, user) {
     if (err) { return handleError(res, err); }
-    if (!user) return res.send(401);
-    user.role = newRole;
-    user.save(function(err) {
+    if (!user) { return res.send(404); }
+    Company.findById(companyId, function (err, company) {
       if (err) { return handleError(res, err); }
-      res.send(200);
+      if (!company) { return res.send(404); }
+      // update user
+      user.company = companyId;
+      user.role = role;
+      user.save(function (err) {
+        if (err) { return handleError(res, err); }
+        // and user to company members
+        company.members.push(user._id);
+        company.save(function (err) {
+          if (err) { return handleError(res, err); }
+          return res.json(200, user);
+        });
+      });
     });
   });
 };
 
 /**
- * Decrease users role to lower role
- */
-exports.demote = function(req, res, next) {
-  var userId = req.user._id;
-  var oldRole = String(req.user.role);
-  var newRole = String(req.body.role);
-
-  // Check if the given role exists
-  if (config.userRoles.indexOf(newRole) === -1) {
-    return res.send(403);
-  }
-
-  // Already have role lower then requested
-  if (config.userRoles.indexOf(newRole) > config.userRoles.indexOf(oldRole)) {
-    return res.send(200);
-  }
-
-  User.findById(userId, function (err, user) {
+* PUT: Remove user from company members
+*/
+exports.removeCompanyMember = function(req, res) {
+  User.findById(req.params.id, function (err, user) {
     if (err) { return handleError(res, err); }
-    if (!user) return res.send(401);
-    user.role = newRole;
-    user.save(function(err) {
+    if (!user) { return res.send(404); }
+    Company.findById(user.company, function (err, company) {
       if (err) { return handleError(res, err); }
-      res.send(200);
+      if (!company) { return res.send(404); }
+      // update user
+      user.company = null;
+      user.role = 'user';
+      user.save(function (err) {
+        if (err) { return handleError(res, err); }
+        // and user to company members
+        company.members.forEach(function(elem, i, array) {
+          if (array[i] === user._id) {
+            array.splice(i, 1);
+          }
+        });
+        company.save(function (err) {
+          if (err) { return handleError(res, err); }
+          return res.json(200, user);
+        });
+      });
     });
   });
 };

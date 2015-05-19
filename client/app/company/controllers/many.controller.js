@@ -12,15 +12,15 @@
 
     var currentUser = Auth.getCurrentUser();
     vm.items = [];
-    vm.people = [];
+    vm.users = [];
     vm.tracto = tracto;
     vm.getMany = getMany;
     vm.remove = remove;
-    vm.getPeople = getPeople;
+    vm.getUsers = getUsers;
     vm.getMembers = getMembers;
-    vm.personToCompany = personToCompany;
-    vm.personToInspector = personToInspector;
-    vm.personToUser = personToUser;
+    vm.companyAddCompany = companyAddCompany;
+    vm.companyAddInspector = companyAddInspector;
+    vm.companyRemoveMember = companyRemoveMember;
     vm.authenticate = authenticate;
     vm.unauthenticate = unauthenticate;
 
@@ -55,15 +55,10 @@
       }).catch(vm.tracto.handle);
     }
 
-    function getPeople() {
+    function getUsers() {
       vm.tracto.reset();
-      dataUser.getMany().then(function(people) {
-        people.forEach(function(person, i, array) {
-          if (person.role === 'admin') { // remove admins
-            array.splice(i, 1);
-          }
-        });
-        vm.people = people;
+      dataUser.getMany().then(function(users) {
+        vm.users = users;
       }).catch(vm.tracto.handle);
     }
 
@@ -74,41 +69,37 @@
       }).catch(vm.tracto.handle);
     }
 
-    function personToCompany(member) {
+    function companyAddCompany(member) {
       vm.tracto.reset();
-      updateMember(member, 'company', currentUser.company);
-    }
-
-    function personToInspector(member) {
-      vm.tracto.reset();
-      updateMember(member, 'inspector', currentUser.company);
-    }
-
-    function personToUser(member) {
-      vm.tracto.reset();
-      updateMember(member, 'user', null);
-    }
-
-    function updateMember(member, role, company) {
-      if (member.role === 'admin') {
-        vm.tracto.bad = 'Can not demote admins';
-      } else if (member._id === currentUser._id) {
-        vm.tracto.bad = 'Can not edit self';
-      } else {
-        member.company = company;
-        member.role = role;
-        // update user
-        dataUser.update(member).then(function() {
-          vm.tracto.good = 'User\'s role was successfully updated';
+      if (member.role === 'admin') {vm.tracto.bad = 'Can not demote admins';}
+      else if (member._id === currentUser._id) {vm.tracto.bad = 'Can not edit self';}
+      else {
+        dataUser.addCompanyMember(member, currentUser.company, 'company')
+        .then(function() {
+          getMembers();
         }).catch(vm.tracto.handle);
-        // update company
-        dataCompany.getOne(currentUser.company)
-        .then(function(company) {
-          if (member.company) {
-            dataCompany.addMember(company, member._id); // server does not correctly update
-          } else {
-            dataCompany.removeMember(company, member._id); // server does not correctly update
-          }
+      }
+    }
+
+    function companyAddInspector(member) {
+      vm.tracto.reset();
+      if (member.role === 'admin') {vm.tracto.bad = 'Can not demote admins';}
+      else if (member._id === currentUser._id) {vm.tracto.bad = 'Can not edit self';}
+      else {
+        dataUser.addCompanyMember(member, currentUser.company, 'inspector')
+        .then(function() {
+          getMembers();
+        }).catch(vm.tracto.handle);
+      }
+    }
+
+    function companyRemoveMember(member) {
+      vm.tracto.reset();
+      if (member.role === 'admin') {vm.tracto.bad = 'Can not demote admins';}
+      else if (member._id === currentUser._id) {vm.tracto.bad = 'Can not edit self';}
+      else {
+        dataUser.removeCompanyMember(member)
+        .then(function() {
           getMembers();
         }).catch(vm.tracto.handle);
       }
