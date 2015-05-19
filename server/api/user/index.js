@@ -19,5 +19,6 @@ router.post('/', controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.update);
 router.post('/:id/company', auth.isAuthenticated(), controller.addCompanyMember);
 router.delete('/:id/company', auth.isAuthenticated(), controller.removeCompanyMember);
+router.get('/:id/vehicles', auth.isAuthenticated(), controller.getUserVehicles);
 
 module.exports = router;

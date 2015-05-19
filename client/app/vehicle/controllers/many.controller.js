@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('ManyVehiclesCtrl', ManyVehiclesCtrl);
 
-  ManyVehiclesCtrl.$inject = ['dataVehicle', 'tracto', '$state', 'Auth'];
+  ManyVehiclesCtrl.$inject = ['dataVehicle', 'tracto', '$state', 'Auth', 'dataUser'];
 
-  function ManyVehiclesCtrl(dataVehicle, tracto, $state, Auth) {
+  function ManyVehiclesCtrl(dataVehicle, tracto, $state, Auth, dataUser) {
     var vm = this;
 
     vm.items = [];
@@ -47,12 +47,10 @@
     }
 
     function getFew() {
-      Auth.getCurrentUser().vehicles.forEach(function(vehicle) {
-        dataVehicle.getOne(vehicle)
-        .then(function(item) {
-          vm.items.push(item);
-        }).catch(vm.tracto.handle);
-      });
+      dataUser.getUserVehicles(Auth.getCurrentUser()._id)
+      .then(function(items) {
+        vm.items = items;
+      }).catch(vm.tracto.handle);
     }
 
     function toSettings(item) {

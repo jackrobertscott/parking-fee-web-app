@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var User = require('./user.model');
 var Company = require('../company/company.model');
+var Vehicle = require('../vehicle/vehicle.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -123,7 +124,7 @@ exports.update = function(req, res) {
 };
 
 /**
-* PUT: Add user to company members
+* Add user to company members
 */
 exports.addCompanyMember = function(req, res) {
   var companyId = req.body.company;
@@ -154,7 +155,7 @@ exports.addCompanyMember = function(req, res) {
 };
 
 /**
-* PUT: Remove user from company members
+* Remove user from company members
 */
 exports.removeCompanyMember = function(req, res) {
   User.findById(req.params.id, function (err, user) {
@@ -179,6 +180,20 @@ exports.removeCompanyMember = function(req, res) {
           return res.json(200, user);
         });
       });
+    });
+  });
+};
+
+/**
+* Get a user's vehicles
+*/
+exports.getUserVehicles = function(req, res) {
+  User.findById(req.params.id, function (err, user) {
+    if (err) { return handleError(res, err); }
+    if (!user) { return res.send(404); }
+    Vehicle.find({ _id: { $in: user.vehicles } }, function (err, vehicles) {
+      if (err) { return handleError(res, err); }
+      return res.json(vehicles);
     });
   });
 };

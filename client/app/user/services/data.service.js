@@ -15,7 +15,8 @@
       update: update,
       remove: remove,
       addCompanyMember: addCompanyMember,
-      removeCompanyMember: removeCompanyMember
+      removeCompanyMember: removeCompanyMember,
+      getUserVehicles: getUserVehicles
     };
 
     return service;
@@ -49,6 +50,10 @@
 
     function removeCompanyMember(object) {
       return object.$removeCompanyMember();
+    }
+
+    function getUserVehicles(id) {
+      return ResourceUser.getUserVehicles({id: id}).$promise;
     }
   }
 })();

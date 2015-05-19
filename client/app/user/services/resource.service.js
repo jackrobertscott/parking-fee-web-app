@@ -37,6 +37,12 @@
         params: {
           action: 'company'
         }
+      },
+      getUserVehicles: {
+        method: 'GET',
+        params: {
+          action: 'vehicles'
+        }
       }
     });
   }
