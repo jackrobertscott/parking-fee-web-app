@@ -47,15 +47,9 @@
     }
 
     function getFew() {
-      dataCompany.getOne(Auth.getCurrentUser().company)
-      .then(function(company) {
-        // this is bad as makes multiple db queries
-        company.locations.forEach(function(location) {
-          dataLocation.getOne(location)
-          .then(function(items) {
-            vm.items.push(items);
-          }).catch(vm.tracto.handle);
-        });
+      dataCompany.getCompanyLocations(Auth.getCurrentUser().company)
+      .then(function(items) {
+        vm.items = items;
       }).catch(vm.tracto.handle);
     }
 

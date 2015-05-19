@@ -13,7 +13,8 @@
       getMany: getMany,
       create: create,
       update: update,
-      remove: remove
+      remove: remove,
+      getCompanyLocations: getCompanyLocations
     };
 
     return service;

@@ -19,6 +19,12 @@
         params: {
           action: 'members'
         }
+      },
+      getCompanyLocations: {
+        method: 'GET',
+        params: {
+          action: 'locations'
+        }
       }
     });
   }

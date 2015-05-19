@@ -5,9 +5,9 @@
   .module('webApp')
   .factory('dataCompany', dataCompany);
 
-  dataCompany.$inject = ['ResourceCompany', 'dataUser'];
+  dataCompany.$inject = ['ResourceCompany'];
 
-  function dataCompany(ResourceCompany, dataUser) {
+  function dataCompany(ResourceCompany) {
     var service = {
       getOne: getOne,
       getMany: getMany,
@@ -15,8 +15,7 @@
       update: update,
       remove: remove,
       getMembers: getMembers,
-      addMember: addMember,
-      removeMember: removeMember
+      getCompanyLocations: getCompanyLocations
     };
 
     return service;
@@ -46,20 +45,8 @@
       return ResourceCompany.getMembers({id: id}).$promise;
     }
 
-    function addMember(object, memberId) {
-      if (object.members.indexOf(memberId) === -1) {
-        object.members.push(memberId);
-      }
-      return object.$update();
-    }
-
-    function removeMember(object, memberId) {
-      object.members.forEach(function(elem, i, array) {
-        if (array[i] === memberId) {
-          array[i].splice(i, 1);
-        }
-      });
-      return object.$update();
+    function getCompanyLocations(id) {
+      return ResourceCompany.getCompanyLocations({id: id}).$promise;
     }
   }
 })();
