@@ -13,31 +13,7 @@
     var role = Auth.getRole();
     vm.toggleChildren = toggleChildren;
     vm.isActive = isActive;
-    vm.menu = [
-      new Item('Home', 'main'),
-      new Item('Login', 'userLogin', null, 'guest'),
-      new Item('Register', 'userRegister', null, 'guest'),
-      new Item('Settings', 'userSettings', 'user'),
-      new Item('Users', 'user', 'admin'),
-      new Item('Admin', 'userAdmin', 'admin'),
-      new Item('Company', null, 'user', null, [
-        new Item('Admin', 'companyAdmin', 'admin'),
-        new Item('Overview', 'company', 'inspector'),
-        new Item('Settings', 'companySettings', 'company'),
-        new Item('Register', 'companyRegister'),
-      ]),
-      new Item('Location', null, 'user', null, [
-        new Item('Overview', 'location'),
-        new Item('My Locations', 'locationCompany', 'company'),
-        new Item('New Location', 'locationRegister', 'company'),
-      ]),
-      new Item('Vehicles', null, 'user', null, [
-        new Item('Overview', 'vehicle', 'admin'),
-        new Item('My Vehicles', 'vehicleUser'),
-        new Item('Register New', 'vehicleRegister'),
-      ]),
-      new Item('Logout', 'userLogout', 'user'),
-    ];
+    vm.menu = getMenu();
 
     activate();
 
@@ -60,6 +36,34 @@
 
     function menuError(error) {
       console.log('A menu error occured: '+String(error));
+    }
+
+    function getMenu() {
+      return [
+        new Item('Home', 'main'),
+        new Item('Login', 'userLogin', null, 'guest'),
+        new Item('Register', 'userRegister', null, 'guest'),
+        new Item('Change Password', 'userPassword', 'user'),
+        new Item('Users', 'user', 'admin'),
+        new Item('Admin', 'userAdmin', 'admin'),
+        new Item('Company', null, 'user', null, [
+          new Item('Admin', 'companyAdmin', 'admin'),
+          new Item('Overview', 'company', 'inspector'),
+          new Item('Settings', 'companySettings', 'company'),
+          new Item('Register', 'companyRegister'),
+        ]),
+        new Item('Location', null, 'user', null, [
+          new Item('Overview', 'location'),
+          new Item('My Locations', 'locationCompany', 'company'),
+          new Item('New Location', 'locationRegister', 'company'),
+        ]),
+        new Item('Vehicles', null, 'user', null, [
+          new Item('Overview', 'vehicle', 'admin'),
+          new Item('My Vehicles', 'vehicleUser'),
+          new Item('Register New', 'vehicleRegister'),
+        ]),
+        new Item('Logout', 'userLogout', 'user'),
+      ];
     }
 
     function Item(name, href, minRole, maxRole, children) {

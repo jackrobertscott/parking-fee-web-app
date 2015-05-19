@@ -27,9 +27,9 @@
       controller: 'OneUserCtrl',
       controllerAs: 'vm'
     })
-    .state('userSettings', {
-      url: '/user/settings',
-      templateUrl: 'app/user/views/settings.html',
+    .state('userPassword', {
+      url: '/user/password',
+      templateUrl: 'app/user/views/password.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm'
     })
