@@ -20,6 +20,8 @@
         <div class="row">
           <div class="col-sm-8 center">
             <!-- main content start -->
+            <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
+            <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
             <form class="form" name="form" ng-init="vm.getOne()" ng-submit="vm.update(form)" novalidate>
 
               <div class="form-group" ng-class="{ 'has-success': form.plate.$valid && submitted, 'has-error': form.plate.$invalid && submitted }">
@@ -58,9 +60,6 @@
                 <label for="vehicleInfo">Vehicle Information</label>
                 <textarea class="form-control" rows="3" id="vehicleInfo" ng-model="vm.item.info">Any extra information about the vehicle</textarea>
               </div>
-
-              <p class="help-block" ng-show="vm.tracto.bad">{{ vm.tracto.bad }}</p>
-              <p class="help-block" ng-show="vm.tracto.good">{{ vm.tracto.good }}</p>
 
               <button type="submit" class="btn btn-default">Submit</button>
 

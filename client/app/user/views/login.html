@@ -20,6 +20,8 @@
         <div class="row">
           <div class="col-sm-8 center">
             <!-- main content start -->
+            <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
+            <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
             <p>Accounts are reset on server restart from <code>server/config/seed.js</code>. Default account is <code>test@test.com</code> / <code>test</code></p>
             <p>User account is <code>admin@admin.com</code> / <code>admin</code></p>
             <form class="form" name="form" ng-submit="vm.login(form)" novalidate>
@@ -55,9 +57,6 @@
                   Register
                 </a>
               </div>
-
-              <p class="help-block" ng-show="vm.tracto.bad">{{ vm.tracto.bad }}</p>
-              <p class="help-block" ng-show="vm.tracto.good">{{ vm.tracto.good }}</p>
 
               <hr>
 

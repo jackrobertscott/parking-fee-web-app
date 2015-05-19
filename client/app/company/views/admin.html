@@ -20,17 +20,21 @@
         <div class="row">
           <div class="col-sm-8 center">
             <!-- main content start -->
+            <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
+            <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
             <ul class="list-group" ng-init="vm.getMany()">
               <li class="list-group-item" ng-repeat="company in vm.items">
                   <strong>{{company.name}}</strong><br>
                   <span class="text-muted">Email: {{company.email}},</span>
                   <span class="text-muted">Phone: {{company.phone}}</span>
-                  <a ng-hide="company.authenticated" ng-click="vm.authenticate(company)" class="trash"><span class="glyphicon glyphicon-remove-circle pull-right"></span></a>
-                  <a ng-show="company.authenticated" ng-click="vm.unauthenticate(company)" class="trash"><span class="glyphicon glyphicon-ok-circle pull-right"></span></a>
+                  <a ng-hide="company.authenticated" ng-click="vm.authenticate(company)" class="trash">
+                    <span class="glyphicon glyphicon-remove-circle pull-right"></span>
+                  </a>
+                  <a ng-show="company.authenticated" ng-click="vm.unauthenticate(company)" class="trash">
+                    <span class="glyphicon glyphicon-ok-circle pull-right"></span>
+                  </a>
               </li>
             </ul>
-            <p class="help-block" ng-show="vm.tracto.bad">{{ vm.tracto.bad }}</p>
-            <p class="help-block" ng-show="vm.tracto.good">{{ vm.tracto.good }}</p>
             <!-- main content end -->
           </div>
           <div class="col-sm-4 right">
