@@ -13,23 +13,23 @@
       url: '/user',
       templateUrl: 'app/user/views/overview.html',
       controller: 'ManyUsersCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      data: {
+        role: 'admin'
+      }
     })
     .state('userAdmin', {
       url: '/user/admin',
       templateUrl: 'app/user/views/admin.html',
       controller: 'ManyUsersCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      data: {
+        role: 'admin'
+      }
     })
     .state('userRegister', {
       url: '/user/register',
       templateUrl: 'app/user/views/register.html',
-      controller: 'OneUserCtrl',
-      controllerAs: 'vm'
-    })
-    .state('userPassword', {
-      url: '/user/password',
-      templateUrl: 'app/user/views/password.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm'
     })
@@ -44,6 +44,15 @@
       templateUrl: 'app/user/views/logout.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm'
+    })
+    .state('userPassword', {
+      url: '/user/password',
+      templateUrl: 'app/user/views/password.html',
+      controller: 'OneUserCtrl',
+      controllerAs: 'vm',
+      data: {
+        role: 'user'
+      }
     });
   }
 })();

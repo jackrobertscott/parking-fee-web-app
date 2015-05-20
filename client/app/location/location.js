@@ -13,25 +13,37 @@
       url: '/location',
       templateUrl: 'app/location/views/overview.html',
       controller: 'ManyLocationsCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      data: {
+        role: 'user'
+      }
     })
     .state('locationCompany', {
       url: '/location/company',
       templateUrl: 'app/location/views/company.html',
       controller: 'ManyLocationsCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      data: {
+        role: 'company'
+      }
     })
     .state('locationRegister', {
       url: '/location/register',
       templateUrl: 'app/location/views/register.html',
       controller: 'OneLocationCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      data: {
+        role: 'company'
+      }
     })
     .state('locationSettings', {
       url: '/location/settings/:id',
       templateUrl: 'app/location/views/settings.html',
       controller: 'OneLocationCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      data: {
+        role: 'company'
+      }
     });
   }
 })();
