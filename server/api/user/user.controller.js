@@ -112,7 +112,7 @@ exports.update = function(req, res) {
   if (req.body._id) { delete req.body._id; }
   if (req.body.salt) { delete req.body.salt; }
   if (req.body.hashedPassword) { delete req.body.hashedPassword; }
-  User.findById(req.params.id, function (err, user) {
+  User.findById(req.params.id, '-salt -hashedPassword', function (err, user) {
     if (err) { return handleError(res, err); }
     if (!user) { return res.send(404); }
     var updated = _.merge(user, req.body);
@@ -132,7 +132,7 @@ exports.addCompanyMember = function(req, res) {
   if (!companyId || !role || config.userRoles.indexOf(role) === -1) {
     return res.send(404);
   }
-  User.findById(req.params.id, function (err, user) {
+  User.findById(req.params.id, '-salt -hashedPassword', function (err, user) {
     if (err) { return handleError(res, err); }
     if (!user) { return res.send(404); }
     Company.findById(companyId, function (err, company) {
@@ -158,7 +158,7 @@ exports.addCompanyMember = function(req, res) {
 * Remove user from company members
 */
 exports.removeCompanyMember = function(req, res) {
-  User.findById(req.params.id, function (err, user) {
+  User.findById(req.params.id, '-salt -hashedPassword', function (err, user) {
     if (err) { return handleError(res, err); }
     if (!user) { return res.send(404); }
     Company.findById(user.company, function (err, company) {
@@ -188,7 +188,7 @@ exports.removeCompanyMember = function(req, res) {
 * Get a user's vehicles
 */
 exports.getUserVehicles = function(req, res) {
-  User.findById(req.params.id, function (err, user) {
+  User.findById(req.params.id, '-salt -hashedPassword', function (err, user) {
     if (err) { return handleError(res, err); }
     if (!user) { return res.send(404); }
     Vehicle.find({ _id: { $in: user.vehicles } }, function (err, vehicles) {
