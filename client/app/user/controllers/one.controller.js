@@ -51,7 +51,7 @@
           password: vm.item.password
         })
         .then(function() {
-          $state.go('main');
+          $state.go('vehicleRegister');
         })
         .catch(function(err) {
           err = err.data;

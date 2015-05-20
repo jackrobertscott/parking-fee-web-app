@@ -50,7 +50,7 @@
           members: [user._id]
         });
         dataCompany.create(vm.item).then(function(item) {
-          $state.go('main');
+          $state.go('companyMembers');
         }).catch(vm.tracto.handle);
       }
     }

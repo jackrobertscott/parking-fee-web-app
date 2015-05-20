@@ -49,7 +49,7 @@
           company: user.company
         });
         dataLocation.create(vm.item).then(function(item) {
-          $state.go('main');
+          $state.go('locationCompany');
         }).catch(vm.tracto.handle);
       }
     }
@@ -72,7 +72,7 @@
       } else {
         dataLocation.remove(vm.item).then(function() {
           vm.item = {};
-          $state.go('main');
+          $state.go('locationCompany');
         }).catch(vm.tracto.handle);
       }
     }

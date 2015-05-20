@@ -54,7 +54,7 @@
           users: [user._id]
         });
         dataVehicle.create(vm.item).then(function(item) {
-          $state.go('main');
+          $state.go('vehicleUser');
         }).catch(vm.tracto.handle);
       }
     }
@@ -77,7 +77,7 @@
       } else {
         dataVehicle.remove(vm.item).then(function() {
           vm.item = {};
-          $state.go('main');
+          $state.go('vehicleUser');
         }).catch(vm.tracto.handle);
       }
     }
