@@ -50,7 +50,6 @@
           members: [user._id]
         });
         dataCompany.create(vm.item).then(function(item) {
-          Auth.reloadUser();
           $state.go('main');
         }).catch(vm.tracto.handle);
       }

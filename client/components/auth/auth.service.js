@@ -103,12 +103,5 @@
     function getToken() {
       return $cookieStore.get('token');
     }
-
-    function reloadUser() {
-      if ($cookieStore.get('token')) {
-        currentUser = ResourceUser.get();
-      }
-      return currentUser;
-    }
   }
 })();
