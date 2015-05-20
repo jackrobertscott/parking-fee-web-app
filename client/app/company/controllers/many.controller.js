@@ -107,7 +107,7 @@
 
     function authenticate(item) {
       vm.tracto.reset();
-      if (Auth.getRole() !== 'admin') {return;}
+      if (Auth.getCurrentUser().role !== 'admin') {return;}
       item.authenticated = true;
       dataCompany.update(item).then(function () {
         vm.tracto.good = 'Successfully authenticated company';
@@ -116,7 +116,7 @@
 
     function unauthenticate(item) {
       vm.tracto.reset();
-      if (Auth.getRole() !== 'admin') {return;}
+      if (Auth.getCurrentUser().role !== 'admin') {return;}
       item.authenticated = false;
       dataCompany.update(item).then(function () {
         vm.tracto.good = 'Successfully unauthenticated company';

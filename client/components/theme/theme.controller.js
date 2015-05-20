@@ -10,7 +10,7 @@
   function ThemeCtrl($state, Auth) {
     var vm = this;
 
-    var role = Auth.getRole();
+    var role = Auth.getCurrentUser().role;
     vm.toggleChildren = toggleChildren;
     vm.isActive = isActive;
     vm.menu = getMenu();

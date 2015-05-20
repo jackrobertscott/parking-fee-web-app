@@ -23,7 +23,6 @@
       isLoggedInAsync: isLoggedInAsync,
       isAdmin: isAdmin,
       getToken: getToken,
-      getRole: getRole,
       reloadUser: reloadUser,
       promote: promote,
       demote: demote
@@ -103,10 +102,6 @@
 
     function getToken() {
       return $cookieStore.get('token');
-    }
-
-    function getRole() {
-      return currentUser.role;
     }
 
     function reloadUser() {
