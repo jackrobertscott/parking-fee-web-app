@@ -8,10 +8,10 @@
   Item.$inject = ['Auth'];
 
   function Item(Auth) {
-    var userRoles = Auth.getUserRoles();
-    var currentRole = Auth.getCurrentUser().role;
-
     return function(name, href, minRole, maxRole, children) {
+      // following variables must be on inside of function as they can change...
+      var userRoles = Auth.getUserRoles();
+      var currentRole = Auth.getCurrentUser().role;
       if (name) {this.name = name;} else {return menuError('name is not defined in Item');}
       this.href = href;
       this.showChildren = false;
