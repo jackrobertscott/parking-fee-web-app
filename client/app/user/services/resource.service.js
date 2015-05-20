@@ -40,6 +40,7 @@
       },
       getUserVehicles: {
         method: 'GET',
+        isArray:true,
         params: {
           action: 'vehicles'
         }

@@ -22,10 +22,7 @@
       isLoggedIn: isLoggedIn,
       isLoggedInAsync: isLoggedInAsync,
       isAdmin: isAdmin,
-      getToken: getToken,
-      reloadUser: reloadUser,
-      promote: promote,
-      demote: demote
+      getToken: getToken
     };
 
     return service;
