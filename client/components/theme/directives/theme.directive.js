@@ -10,10 +10,10 @@
       restrict: 'A',
       link: linkFunc,
     };
-    
+
     return directive;
 
-    function linkFunc(scope, el, attr, ctrl) {
+    function linkFunc(scope, elem, attr, ctrl) {
       scope.$watch(function () {
         elem.css({
           height: elem.parent().parent().height()
