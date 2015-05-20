@@ -25,10 +25,7 @@
     ////////////
 
     function activate() {
-      var user = Auth.getCurrentUser();
-      if (!$state.is('companyRegister') && user.role !== 'company' && user.role !== 'admin') {
-        $state.go('main');
-      }
+      // code
     }
 
     function getOne(id) {

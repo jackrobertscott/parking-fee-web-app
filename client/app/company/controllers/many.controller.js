@@ -31,9 +31,7 @@
     ////////////
 
     function activate() {
-      if (currentUser.role !== 'company' && currentUser.role !== 'admin') {
-        $state.go('main');
-      }
+      // code
     }
 
     function getMany() {
@@ -71,7 +69,7 @@
 
     function companyAddCompany(member) {
       vm.tracto.reset();
-      if (member.role === 'admin') {vm.tracto.bad = 'Can not demote admins';}
+      if (member.role === 'admin') {vm.tracto.bad = 'Can not edit admins';}
       else if (member._id === currentUser._id) {vm.tracto.bad = 'Can not edit self';}
       else {
         dataUser.addCompanyMember(member, currentUser.company, 'company')
@@ -83,7 +81,7 @@
 
     function companyAddInspector(member) {
       vm.tracto.reset();
-      if (member.role === 'admin') {vm.tracto.bad = 'Can not demote admins';}
+      if (member.role === 'admin') {vm.tracto.bad = 'Can not edit admins';}
       else if (member._id === currentUser._id) {vm.tracto.bad = 'Can not edit self';}
       else {
         dataUser.addCompanyMember(member, currentUser.company, 'inspector')
@@ -95,7 +93,7 @@
 
     function companyRemoveMember(member) {
       vm.tracto.reset();
-      if (member.role === 'admin') {vm.tracto.bad = 'Can not demote admins';}
+      if (member.role === 'admin') {vm.tracto.bad = 'Can not edit admins';}
       else if (member._id === currentUser._id) {vm.tracto.bad = 'Can not edit self';}
       else {
         dataUser.removeCompanyMember(member)
@@ -107,7 +105,6 @@
 
     function authenticate(item) {
       vm.tracto.reset();
-      if (Auth.getCurrentUser().role !== 'admin') {return;}
       item.authenticated = true;
       dataCompany.update(item).then(function () {
         vm.tracto.good = 'Successfully authenticated company';
@@ -116,7 +113,6 @@
 
     function unauthenticate(item) {
       vm.tracto.reset();
-      if (Auth.getCurrentUser().role !== 'admin') {return;}
       item.authenticated = false;
       dataCompany.update(item).then(function () {
         vm.tracto.good = 'Successfully unauthenticated company';
