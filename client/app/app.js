@@ -55,10 +55,18 @@
 
   function run($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$stateChangeStart', function (event, next) {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       Auth.isLoggedInAsync(function(loggedIn) {
-        if (next.authenticate && !loggedIn) {
-          $location.path('/login');
+        if (toState.data && toState.data.role && toState.data.role !== 'guest') {
+          var userRoles = Auth.getUserRoles();
+          if (!loggedIn) {
+            event.preventDefault();
+            $location.path('/login');
+          } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
+            // Logged in but not authorised
+            event.preventDefault();
+            $location.path('/');
+          }
         }
       });
     });

@@ -10,7 +10,8 @@
   function ThemeCtrl($state, Auth) {
     var vm = this;
 
-    var role = Auth.getCurrentUser().role;
+    var userRoles = Auth.getUserRoles();
+    var currentRole = Auth.getCurrentUser().role;
     vm.toggleChildren = toggleChildren;
     vm.isActive = isActive;
     vm.menu = getMenu();
@@ -68,13 +69,9 @@
     }
 
     function Item(name, href, minRole, maxRole, children) {
-      // This need to fixed as it replicates the environment variable
-      var userRoles = ['guest', 'user', 'inspector', 'company', 'admin'];
-      var currentRole = role;
-      this.showChildren = false;
-
       if (name) {this.name = name;} else {return menuError('name is not defined in item');}
       this.href = href;
+      this.showChildren = false;
       this.minRole = null;
       if (minRole) {
         if (userRoles.indexOf(minRole) === -1) {

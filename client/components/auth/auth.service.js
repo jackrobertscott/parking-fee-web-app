@@ -22,7 +22,8 @@
       isLoggedIn: isLoggedIn,
       isLoggedInAsync: isLoggedInAsync,
       isAdmin: isAdmin,
-      getToken: getToken
+      getToken: getToken,
+      getUserRoles: getUserRoles
     };
 
     return service;
@@ -100,6 +101,11 @@
 
     function getToken() {
       return $cookieStore.get('token');
+    }
+
+    function getUserRoles() {
+      // These should mirror roles on server side environment
+      return ['guest', 'user', 'inspector', 'company', 'admin'];
     }
   }
 })();
