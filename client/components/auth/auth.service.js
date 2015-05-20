@@ -7,10 +7,10 @@
 
   Auth.$inject = ['$location', '$rootScope', '$http', 'ResourceUser', '$cookieStore', '$q'];
 
-  function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q) {
     var currentUser = {};
     if ($cookieStore.get('token')) {
-      currentUser = User.get();
+      currentUser = ResourceUser.get();
     }
 
     var service = {
@@ -40,7 +40,7 @@
       }).
       success(function(data) {
         $cookieStore.put('token', data.token);
-        currentUser = User.get();
+        currentUser = ResourceUser.get();
         deferred.resolve(data);
         return cb();
       }).
@@ -59,16 +59,16 @@
     }
 
     function createUser(user) {
-      return User.save(user, function(data) {
+      return ResourceUser.save(user, function(data) {
         $cookieStore.put('token', data.token);
-        currentUser = User.get();
+        currentUser = ResourceUser.get();
       }, function() {
         this.logout();
       }.bind(this)).$promise;
     }
 
     function changePassword(oldPassword, newPassword) {
-      return User.changePassword({ id: currentUser._id }, {
+      return ResourceUser.changePassword({ id: currentUser._id }, {
         oldPassword: oldPassword,
         newPassword: newPassword
       }).$promise;
@@ -106,7 +106,7 @@
 
     function reloadUser() {
       if ($cookieStore.get('token')) {
-        currentUser = User.get();
+        currentUser = ResourceUser.get();
       }
       return currentUser;
     }
