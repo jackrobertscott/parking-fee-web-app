@@ -40,9 +40,10 @@
       }).
       success(function(data) {
         $cookieStore.put('token', data.token);
-        currentUser = ResourceUser.get();
-        deferred.resolve(data);
-        return cb();
+        currentUser = ResourceUser.get(function() {
+          deferred.resolve(data);
+          return cb();
+        });
       }).
       error(function(err) {
         this.logout();
