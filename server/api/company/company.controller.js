@@ -96,7 +96,7 @@ function handleError(res, err) {
 // Added methods
 
 // Get a company's members
-exports.getMembers = function(req, res) {
+exports.getCompanyMembers = function(req, res) {
   Company.findById(req.params.id, function (err, company) {
     if (err) { return handleError(res, err); }
     if (!company) { return res.send(404); }

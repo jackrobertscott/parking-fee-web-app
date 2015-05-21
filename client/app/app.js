@@ -51,23 +51,26 @@
     };
   }
 
-  run.$inject = ['$rootScope', '$location', 'Auth'];
+  run.$inject = ['$rootScope', '$location', 'Auth', 'tracto'];
 
-  function run($rootScope, $location, Auth) {
+  function run($rootScope, $location, Auth, tracto) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      tracto.reset();
       Auth.isLoggedInAsync(function(loggedIn) {
-        if (toState.data && toState.data.role && toState.data.role !== 'guest') {
-          var userRoles = Auth.getUserRoles();
-          if (!loggedIn) {
-            event.preventDefault();
-            $location.path('/login');
-          } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
-            // Logged in but not authorised
-            event.preventDefault();
-            $location.path('/');
+        Auth.tokenChangeReload(function() {
+          if (toState.data && toState.data.role && toState.data.role !== 'guest') {
+            var userRoles = Auth.getUserRoles();
+            if (!loggedIn) {
+              event.preventDefault();
+              $location.path('/login');
+            } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
+              // Logged in but not authorised
+              event.preventDefault();
+              $location.path('/');
+            }
           }
-        }
+        });
       });
     });
   }

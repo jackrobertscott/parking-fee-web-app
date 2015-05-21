@@ -28,25 +28,25 @@
       }
     })
     .state('userRegister', {
-      url: '/user/register',
+      url: '/register',
       templateUrl: 'app/user/views/register.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm'
     })
     .state('userLogin', {
-      url: '/user/login',
+      url: '/login',
       templateUrl: 'app/user/views/login.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm'
     })
     .state('userLogout', {
-      url: '/user/logout',
+      url: '/logout',
       templateUrl: 'app/user/views/logout.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm'
     })
     .state('userPassword', {
-      url: '/user/password',
+      url: '/password',
       templateUrl: 'app/user/views/password.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm',

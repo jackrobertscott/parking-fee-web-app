@@ -10,14 +10,13 @@
   function ManyCompaniesCtrl(dataCompany, tracto, $state, Auth, dataUser) {
     var vm = this;
 
-    var currentUser = Auth.getCurrentUser();
     vm.items = [];
     vm.users = [];
     vm.tracto = tracto;
     vm.getMany = getMany;
     vm.remove = remove;
     vm.getUsers = getUsers;
-    vm.getMembers = getMembers;
+    vm.getCompanyMembers = getCompanyMembers;
     vm.companyAddCompany = companyAddCompany;
     vm.companyAddInspector = companyAddInspector;
     vm.companyRemoveMember = companyRemoveMember;
@@ -60,9 +59,10 @@
       }).catch(vm.tracto.handle);
     }
 
-    function getMembers() {
+    function getCompanyMembers() {
       vm.tracto.reset();
-      dataCompany.getMembers().then(function(items) {
+      dataCompany.getCompanyMembers(Auth.getCurrentUser().company)
+      .then(function(items) {
         vm.items = items;
       }).catch(vm.tracto.handle);
     }
@@ -70,11 +70,11 @@
     function companyAddCompany(member) {
       vm.tracto.reset();
       if (member.role === 'admin') {vm.tracto.bad = 'Can not edit admins';}
-      else if (member._id === currentUser._id) {vm.tracto.bad = 'Can not edit self';}
+      else if (member._id === Auth.getCurrentUser()._id) {vm.tracto.bad = 'Can not edit self';}
       else {
-        dataUser.addCompanyMember(member, currentUser.company, 'company')
+        dataUser.addCompanyMember(member, Auth.getCurrentUser().company, 'company')
         .then(function() {
-          getMembers();
+          getCompanyMembers();
         }).catch(vm.tracto.handle);
       }
     }
@@ -82,11 +82,11 @@
     function companyAddInspector(member) {
       vm.tracto.reset();
       if (member.role === 'admin') {vm.tracto.bad = 'Can not edit admins';}
-      else if (member._id === currentUser._id) {vm.tracto.bad = 'Can not edit self';}
+      else if (member._id === Auth.getCurrentUser()._id) {vm.tracto.bad = 'Can not edit self';}
       else {
-        dataUser.addCompanyMember(member, currentUser.company, 'inspector')
+        dataUser.addCompanyMember(member, Auth.getCurrentUser().company, 'inspector')
         .then(function() {
-          getMembers();
+          getCompanyMembers();
         }).catch(vm.tracto.handle);
       }
     }
@@ -98,7 +98,7 @@
       else {
         dataUser.removeCompanyMember(member)
         .then(function() {
-          getMembers();
+          getCompanyMembers();
         }).catch(vm.tracto.handle);
       }
     }

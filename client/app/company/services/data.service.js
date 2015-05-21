@@ -14,7 +14,7 @@
       create: create,
       update: update,
       remove: remove,
-      getMembers: getMembers,
+      getCompanyMembers: getCompanyMembers,
       getCompanyLocations: getCompanyLocations
     };
 
@@ -41,8 +41,8 @@
       return object.$remove();
     }
 
-    function getMembers(id) {
-      return ResourceCompany.getMembers({id: id}).$promise;
+    function getCompanyMembers(id) {
+      return ResourceCompany.getCompanyMembers({id: id}).$promise;
     }
 
     function getCompanyLocations(id) {
