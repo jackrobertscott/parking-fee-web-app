@@ -9,8 +9,7 @@
 
   function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q) {
     var currentUser = {};
-    var token = $cookieStore.get('token');
-    if (token) {
+    if ($cookieStore.get('token')) {
       currentUser = ResourceUser.get();
     }
 
@@ -24,8 +23,7 @@
       isLoggedInAsync: isLoggedInAsync,
       isAdmin: isAdmin,
       getToken: getToken,
-      getUserRoles: getUserRoles,
-      tokenChangeReload: tokenChangeReload
+      getUserRoles: getUserRoles
     };
 
     return service;
@@ -40,7 +38,6 @@
       }).
       success(function(data) {
         $cookieStore.put('token', data.token);
-        token = $cookieStore.get('token');
         currentUser = ResourceUser.get(function() {
           deferred.resolve(data);
           return cb();
@@ -109,17 +106,6 @@
     function getUserRoles() {
       // These should mirror roles on server side environment
       return ['guest', 'user', 'inspector', 'company', 'admin'];
-    }
-
-    function tokenChangeReload(cb) {
-      if ($cookieStore.get('token') && token && token.role !== $cookieStore.get('token').role) {
-        currentUser = ResourceUser.get(function () {
-          token = $cookieStore.get('token');
-          cb();
-        });
-      } else {
-        cb();
-      }
     }
   }
 })();
