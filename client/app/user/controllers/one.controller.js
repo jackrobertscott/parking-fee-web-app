@@ -42,6 +42,7 @@
 
     function create(form) {
       vm.tracto.reset();
+      vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
@@ -68,6 +69,7 @@
 
     function update(form) {
       vm.tracto.reset();
+      vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
@@ -91,6 +93,7 @@
 
     function login(form) {
       vm.tracto.reset();
+      vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
@@ -118,6 +121,7 @@
 
     function changePassword(form) {
       vm.tracto.reset();
+      vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
