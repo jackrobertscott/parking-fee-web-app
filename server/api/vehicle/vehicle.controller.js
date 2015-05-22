@@ -61,11 +61,7 @@ exports.destroy = function(req, res) {
       if (err) { return handleError(res, err); }
       if (!users) { return res.send(404); }
       users.forEach(function(user) {
-        user.vehicles.forEach(function(elem, i, array) {
-          if (array[i] === vehicle._id) {
-            array.splice(i, 1);
-          }
-        });
+        _.remove(user.vehicles, vehicle._id);
         user.save(function(err) {
           if (err) { return handleError(res, err); }
         });

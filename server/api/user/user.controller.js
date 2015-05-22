@@ -68,7 +68,6 @@ exports.changePassword = function(req, res, next) {
   var userId = req.user._id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
-
   User.findById(userId, function (err, user) {
     if (user.authenticate(oldPass)) {
       user.password = newPass;
@@ -169,12 +168,8 @@ exports.removeCompanyMember = function(req, res) {
       user.role = 'user';
       user.save(function (err) {
         if (err) { return handleError(res, err); }
-        // and user to company members
-        company.members.forEach(function(elem, i, array) {
-          if (array[i] === user._id) {
-            array.splice(i, 1);
-          }
-        });
+        // remove user from company members
+        _.remove(company.members, user._id);
         company.save(function (err) {
           if (err) { return handleError(res, err); }
           return res.json(200, user);

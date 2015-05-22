@@ -59,11 +59,7 @@ exports.destroy = function(req, res) {
     Company.findById(location.company, function(err, company) {
       if (err) { return handleError(res, err); }
       if (!company) { return res.send(404); }
-      company.locations.forEach(function(element, i, array) {
-        if (element === location._id) {
-          array.splice(i, 1);
-        }
-      });
+      _.remove(company.locations, location._id);
       company.save(function(err) {
         if (err) { return handleError(res, err); }
         location.remove(function(err) {
