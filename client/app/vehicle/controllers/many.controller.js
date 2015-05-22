@@ -31,7 +31,6 @@
       vm.tracto.reset();
       dataVehicle.getMany().then(function(items) {
         vm.items = items;
-        socket.syncUpdates('vehicle', vm.items); // use new name for each list of items
       }).catch(vm.tracto.handle);
     }
 
@@ -59,9 +58,5 @@
         id: item._id
       });
     }
-
-    vm.$on('$destroy', function () {
-      socket.unsyncUpdates('vehicle');
-    });
   }
 })();
