@@ -31,15 +31,15 @@
               <li class="list-group-item" ng-repeat="user in vm.users | filter: {$:search, role:'!admin'} | limitTo: 5">
                   <strong>{{user.name}}</strong><br>
                   <span class="text-muted">{{user.email}}</span>
-                  <a ng-click="vm.companyAddCompany(user)" class="pull-right">
+                  <a ng-click="vm.companyAddCompany(user)" class="trash pull-right">
                     <span ng-show="user.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
                     Company Admin
                   </a>
-                  <a ng-click="vm.companyAddInspector(user)" class="pull-right">
+                  <a ng-click="vm.companyAddInspector(user)" class="trash pull-right">
                     <span ng-show="user.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
                     Inspector
                   </a>
-                  <a ng-click="vm.companyRemoveMember(user)" class="pull-right">
+                  <a ng-click="vm.companyRemoveMember(user)" class="trash pull-right">
                     <span ng-show="user.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
                     User
                   </a>
@@ -51,15 +51,15 @@
               <li class="list-group-item" ng-repeat="member in vm.items">
                   <strong>{{member.name}}</strong><br>
                   <span class="text-muted">{{member.email}}</span>
-                  <a ng-click="vm.companyAddCompany(member)" class="pull-right">
+                  <a ng-click="vm.companyAddCompany(member)" class="trash pull-right">
                     Company Admin
                     <span ng-show="member.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
                   </a>
-                  <a ng-click="vm.companyAddInspector(member)" class="pull-right">
+                  <a ng-click="vm.companyAddInspector(member)" class="trash pull-right">
                     Inspector
                     <span ng-show="member.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
                   </a>
-                  <a ng-click="vm.companyRemoveMember(member)" class="pull-right">
+                  <a ng-click="vm.companyRemoveMember(member)" class="trash pull-right">
                     User
                     <span ng-show="member.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
                   </a>

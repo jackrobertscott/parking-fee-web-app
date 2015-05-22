@@ -27,11 +27,13 @@
                   <strong>{{company.name}}</strong><br>
                   <span class="text-muted">Email: {{company.email}},</span>
                   <span class="text-muted">Phone: {{company.phone}}</span>
-                  <a ng-hide="company.authenticated" ng-click="vm.authenticate(company)" class="trash">
-                    <span class="glyphicon glyphicon-remove-circle pull-right"></span>
+                  <a ng-hide="company.authenticated" ng-click="vm.authenticate(company)" class="trash pull-right">
+                    authenticated
+                    <span class="glyphicon glyphicon-remove-circle"></span>
                   </a>
-                  <a ng-show="company.authenticated" ng-click="vm.unauthenticate(company)" class="trash">
-                    <span class="glyphicon glyphicon-ok-circle pull-right"></span>
+                  <a ng-show="company.authenticated" ng-click="vm.unauthenticate(company)" class="trash pull-right">
+                    unauthenticated
+                    <span class="glyphicon glyphicon-ok-circle"></span>
                   </a>
               </li>
             </ul>
