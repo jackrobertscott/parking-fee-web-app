@@ -3,19 +3,11 @@
 
   angular
   .module('webApp')
-  .factory('socket', socket);
+  .factory('socket', socketInstance);
 
-  socket.$inject = ['socketFactory'];
+  socketInstance.$inject = ['socketFactory'];
 
-  function socket(socketFactory) {
-    var service = {
-      socket: socket,
-      syncUpdates: syncUpdates,
-      unsyncUpdates: unsyncUpdates
-    };
-
-    return service;
-
+  function socketInstance(socketFactory) {
     // socket.io now auto-configures its connection when we ommit a connection url
     var ioSocket = io('', {
       // Send auth token on connection, you will need to DI the Auth service above
@@ -26,6 +18,14 @@
     var socket = socketFactory({
       ioSocket: ioSocket
     });
+
+    var service = {
+      socket: socket,
+      syncUpdates: syncUpdates,
+      unsyncUpdates: unsyncUpdates
+    };
+
+    return service;
 
     /**
     * Register listeners to sync an array with updates on a model
