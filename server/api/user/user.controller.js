@@ -42,7 +42,6 @@ exports.create = function (req, res, next) {
 */
 exports.show = function (req, res, next) {
   var userId = req.params.id;
-
   User.findById(userId, '-salt -hashedPassword', function (err, user) {
     if (err) return next(err);
     if (!user) return res.send(401);
@@ -144,6 +143,7 @@ exports.addCompanyMember = function(req, res) {
         if (err) { return handleError(res, err); }
         // and user to company members
         company.members.push(user._id);
+        company.markModified('members');
         company.save(function (err) {
           if (err) { return handleError(res, err); }
           return res.json(200, user);
@@ -170,6 +170,7 @@ exports.removeCompanyMember = function(req, res) {
         if (err) { return handleError(res, err); }
         // remove user from company members
         _.remove(company.members, user._id);
+        company.markModified('members');
         company.save(function (err) {
           if (err) { return handleError(res, err); }
           return res.json(200, user);

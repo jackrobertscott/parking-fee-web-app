@@ -29,6 +29,7 @@ exports.create = function(req, res) {
       if (err) { return handleError(res, err); }
       if (!user) { return res.send(404); }
       user.vehicles.push(vehicle._id);
+      user.markModified('vehicles');
       user.save(function(err) {
         if (err) { return handleError(res, err); }
         return res.json(201, vehicle);
@@ -62,6 +63,7 @@ exports.destroy = function(req, res) {
       if (!users) { return res.send(404); }
       users.forEach(function(user) {
         _.remove(user.vehicles, vehicle._id);
+        user.markModified('vehicles');
         user.save(function(err) {
           if (err) { return handleError(res, err); }
         });

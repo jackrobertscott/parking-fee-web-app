@@ -74,14 +74,9 @@ exports.destroy = function(req, res) {
         });
       });
     });
-    Location.find({ company: company._id }, function (err, locations) {
+    Location.find({ company: company._id }).remove(function(err) {
       if (err) { return handleError(res, err); }
-      locations.forEach(function(location, i, array) {
-        location.remove(function(err) {
-          if (err) { return handleError(res, err); }
-        });
-      });
-    });
+    }); // not sure works
     company.remove(function(err) {
       if (err) { return handleError(res, err); }
       return res.send(204);
