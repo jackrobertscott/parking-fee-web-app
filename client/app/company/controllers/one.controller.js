@@ -48,7 +48,9 @@
           members: [user._id]
         });
         dataCompany.create(vm.item).then(function(item) {
-          $state.go('companyMembers');
+          Auth.reloadUser(function() { // update user role in Auth
+            $state.go('companyMembers');
+          });
         }).catch(vm.tracto.handle);
       }
     }
@@ -72,7 +74,9 @@
       } else {
         dataCompany.remove(vm.item).then(function() {
           vm.item = {};
-          $state.go('main');
+          Auth.reloadUser(function() { // update user role in Auth
+            $state.go('main');
+          });
         }).catch(vm.tracto.handle);
       }
     }

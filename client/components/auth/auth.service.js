@@ -5,9 +5,9 @@
   .module('webApp')
   .factory('Auth', Auth);
 
-  Auth.$inject = ['$location', '$rootScope', '$http', 'ResourceUser', '$cookieStore', '$q'];
+  Auth.$inject = ['$location', '$rootScope', '$http', 'ResourceUser', '$cookieStore', '$q', 'tracto'];
 
-  function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q) {
+  function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q, tracto) {
     var currentUser = {};
     if ($cookieStore.get('token')) {
       currentUser = ResourceUser.get();
@@ -23,7 +23,8 @@
       isLoggedInAsync: isLoggedInAsync,
       isAdmin: isAdmin,
       getToken: getToken,
-      getUserRoles: getUserRoles
+      getUserRoles: getUserRoles,
+      reloadUser: reloadUser
     };
 
     return service;
@@ -106,6 +107,16 @@
     function getUserRoles() {
       // These should mirror roles on server side environment
       return ['guest', 'user', 'inspector', 'company', 'admin'];
+    }
+
+    function reloadUser(cb) {
+      ResourceUser.get().$promise
+      .then(function(user) {
+        currentUser = user;
+        cb();
+      }).catch(function(err) {
+        cb(err);
+      });
     }
   }
 })();
