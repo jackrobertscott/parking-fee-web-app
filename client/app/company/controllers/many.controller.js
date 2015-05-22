@@ -74,7 +74,9 @@
       else {
         dataUser.addCompanyMember(member, Auth.getCurrentUser().company, 'company')
         .then(function() {
+          // could be slow
           getCompanyMembers();
+          getUsers();
         }).catch(vm.tracto.handle);
       }
     }
@@ -86,7 +88,9 @@
       else {
         dataUser.addCompanyMember(member, Auth.getCurrentUser().company, 'inspector')
         .then(function() {
+          // could be slow
           getCompanyMembers();
+          getUsers();
         }).catch(vm.tracto.handle);
       }
     }
@@ -98,7 +102,9 @@
       else {
         dataUser.removeCompanyMember(member)
         .then(function() {
+          // could be slow
           getCompanyMembers();
+          getUsers();
         }).catch(vm.tracto.handle);
       }
     }

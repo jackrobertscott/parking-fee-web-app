@@ -28,7 +28,7 @@
               <input type="text" class="form-control" placeholder="Search people" ng-model="search">
             </div>
             <ul class="list-group" ng-init="vm.getUsers()">
-              <li class="list-group-item" ng-repeat="user in vm.users | filter: {$:search, role:'!admin'} | limitTo: 5">
+              <li class="list-group-item" ng-repeat="user in vm.users | filter: {$:search, role:'!admin', company:'null'} | limitTo: 5">
                   <strong>{{user.name}}</strong><br>
                   <span class="text-muted">{{user.email}}</span>
                   <a ng-click="vm.companyAddCompany(user)" class="trash pull-right">
