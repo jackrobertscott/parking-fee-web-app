@@ -34,21 +34,25 @@
       return object.$save();
     }
 
-    function update(object) {
+    function update(body) {
+      var object = new ResourceUser(body);
       return object.$update();
     }
 
-    function remove(object) {
+    function remove(body) {
+      var object = new ResourceUser(body);
       return object.$remove();
     }
 
-    function addCompanyMember(object, companyId, role) {
+    function addCompanyMember(body, companyId, role) {
+      var object = new ResourceUser(body);
       object.company = companyId;
       object.role = role;
       return object.$addCompanyMember();
     }
 
-    function removeCompanyMember(object) {
+    function removeCompanyMember(body) {
+      var object = new ResourceUser(body);
       return object.$removeCompanyMember();
     }
 
