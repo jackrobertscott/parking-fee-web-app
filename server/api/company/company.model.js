@@ -8,6 +8,7 @@ var CompanySchema = new Schema({
   info: String,
   email: String,
   phone: Number,
+  abn: Number,
   members: [{
     type: Schema.Types.ObjectId,
     ref: 'User',
