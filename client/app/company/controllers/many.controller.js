@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('ManyCompaniesCtrl', ManyCompaniesCtrl);
 
-  ManyCompaniesCtrl.$inject = ['dataCompany', 'tracto', '$state', 'Auth', 'dataUser'];
+  ManyCompaniesCtrl.$inject = ['dataCompany', 'tracto', 'socket', '$state', 'Auth', 'dataUser'];
 
-  function ManyCompaniesCtrl(dataCompany, tracto, $state, Auth, dataUser) {
+  function ManyCompaniesCtrl(dataCompany, tracto, socket, $state, Auth, dataUser) {
     var vm = this;
 
     vm.items = [];
@@ -37,6 +37,7 @@
       vm.tracto.reset();
       dataCompany.getMany().then(function(items) {
         vm.items = items;
+        socket.syncUpdates('company', vm.items); // use new name for each list of items
       }).catch(vm.tracto.handle);
     }
 
@@ -118,5 +119,9 @@
         vm.tracto.good = 'Successfully unauthenticated company';
       }).catch(vm.tracto.handle);
     }
+
+    vm.$on('$destroy', function () {
+      socket.unsyncUpdates('company');
+    });
   }
 })();

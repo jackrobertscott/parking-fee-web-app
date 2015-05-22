@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('ManyMainsCtrl', ManyMainsCtrl);
 
-  ManyMainsCtrl.$inject = ['dataMain', 'tracto'];
+  ManyMainsCtrl.$inject = ['dataMain', 'tracto', 'socket'];
 
-  function ManyMainsCtrl(dataMain, tracto) {
+  function ManyMainsCtrl(dataMain, tracto, socket) {
     var vm = this;
 
     vm.items = [];
@@ -29,6 +29,7 @@
       vm.tracto.reset();
       dataMain.getMany().then(function(items) {
         vm.items = items;
+        //socket.syncUpdates('NAME', vm.items); // use new name for each list of items
       }).catch(vm.tracto.handle);
     }
 
@@ -43,5 +44,9 @@
         vm.tracto.good = 'Successfully deleted item';
       }).catch(vm.tracto.handle);
     }
+
+    vm.$on('$destroy', function () {
+      //socket.unsyncUpdates('NAME');
+    });
   }
 })();

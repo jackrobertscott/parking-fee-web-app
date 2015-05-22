@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('ManyLocationsCtrl', ManyLocationsCtrl);
 
-  ManyLocationsCtrl.$inject = ['dataLocation', 'tracto', '$state', 'Auth', 'dataCompany'];
+  ManyLocationsCtrl.$inject = ['dataLocation', 'tracto', 'socket', '$state', 'Auth', 'dataCompany'];
 
-  function ManyLocationsCtrl(dataLocation, tracto, $state, Auth, dataCompany) {
+  function ManyLocationsCtrl(dataLocation, tracto, socket, $state, Auth, dataCompany) {
     var vm = this;
 
     vm.items = [];
@@ -31,6 +31,7 @@
       vm.tracto.reset();
       dataLocation.getMany().then(function(items) {
         vm.items = items;
+        socket.syncUpdates('location', vm.items); // use new name for each list of items
       }).catch(vm.tracto.handle);
     }
 
@@ -58,5 +59,9 @@
         id: item._id
       });
     }
+
+    vm.$on('$destroy', function () {
+      socket.unsyncUpdates('location');
+    });
   }
 })();
