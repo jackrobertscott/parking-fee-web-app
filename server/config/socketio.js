@@ -21,7 +21,6 @@ function onConnect(socket) {
   require('../api/location/location.socket').register(socket);
   require('../api/vehicle/vehicle.socket').register(socket);
   require('../api/company/company.socket').register(socket);
-  require('../api/thing/thing.socket').register(socket);
 }
 
 module.exports = function (socketio) {
