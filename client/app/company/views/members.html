@@ -32,16 +32,16 @@
                   <strong>{{user.name}}</strong><br>
                   <span class="text-muted">{{user.email}}</span>
                   <a ng-click="vm.companyAddCompany(user)" class="trash pull-right">
-                    <span ng-show="user.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
                     Company Admin
+                    <span ng-show="user.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
                   </a>
                   <a ng-click="vm.companyAddInspector(user)" class="trash pull-right">
-                    <span ng-show="user.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
                     Inspector
+                    <span ng-show="user.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
                   </a>
                   <a ng-click="vm.companyRemoveMember(user)" class="trash pull-right">
-                    <span ng-show="user.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
                     User
+                    <span ng-show="user.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
                   </a>
               </li>
             </ul>

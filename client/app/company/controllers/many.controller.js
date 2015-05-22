@@ -94,7 +94,7 @@
     function companyRemoveMember(member) {
       vm.tracto.reset();
       if (member.role === 'admin') {vm.tracto.bad = 'Can not edit admins';}
-      else if (member._id === currentUser._id) {vm.tracto.bad = 'Can not edit self';}
+      else if (member._id === Auth.getCurrentUser()._id) {vm.tracto.bad = 'Can not edit self';}
       else {
         dataUser.removeCompanyMember(member)
         .then(function() {

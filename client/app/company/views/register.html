@@ -38,6 +38,9 @@
                 <p class="help-block" ng-show="form.phone.$error.required && vm.submitted">
                   A company phone number is required
                 </p>
+                <p class="help-block" ng-show="form.phone.$error.number && vm.submitted">
+                  Please use only numeric characters (0-9)
+                </p>
               </div>
 
               <div class="form-group" ng-class="{ 'has-success': form.abn.$valid && vm.submitted, 'has-error': form.abn.$invalid && vm.submitted }">
@@ -45,6 +48,9 @@
                 <input type="number" name="abn" class="form-control" id="companyABN" placeholder="Company ABN" ng-model="vm.item.abn" required>
                 <p class="help-block" ng-show="form.abn.$error.required && vm.submitted">
                   An ABN number is required
+                </p>
+                <p class="help-block" ng-show="form.abn.$error.number && vm.submitted">
+                  Please use only numeric characters (0-9)
                 </p>
               </div>
 
