@@ -5,15 +5,17 @@
   .module('webApp')
   .controller('ManyInfringementsCtrl', ManyInfringementsCtrl);
 
-  ManyInfringementsCtrl.$inject = ['dataInfringement', 'tracto', 'socket', 'Auth'];
+  ManyInfringementsCtrl.$inject = ['dataInfringement', 'tracto', 'socket', 'Auth', '$state'];
 
-  function ManyInfringementsCtrl(dataInfringement, tracto, socket, Auth) {
+  function ManyInfringementsCtrl(dataInfringement, tracto, socket, Auth, $state) {
     var vm = this;
 
     vm.items = [];
     vm.tracto = tracto;
     vm.getMany = getMany;
     vm.remove = remove;
+    vm.toSettings = toSettings;
+    vm.getFewCompany = getFewCompany;
 
     ////////////
 
@@ -42,6 +44,12 @@
         });
         vm.tracto.good = 'Successfully deleted item';
       }).catch(vm.tracto.handle);
+    }
+
+    function toSettings(item) {
+      $state.go('infringementSettings', {
+        id: item._id
+      });
     }
 
     function getFewCompany() {

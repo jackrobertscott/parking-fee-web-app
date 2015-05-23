@@ -8,7 +8,7 @@
       <div class="col-md-9">
         <h1>
           <!-- title start -->
-          Welcome
+          Company Infringements
           <!-- title end -->
         </h1>
         <div class="row hidden-md hidden-lg">
@@ -23,7 +23,7 @@
             <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
             <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
             <ul class="list-group" ng-init="vm.getFewCompany()">
-              <li class="list-group-item" ng-repeat="infringement in vm.items">
+              <li class="list-group-item" ng-repeat="infringement in vm.items" ng-click="vm.toSettings(infringement)">
                   <strong>{{infringement.name}}</strong><br>
                   <span class="text-muted">Payment: {{infringement.payment}},</span>
               </li>

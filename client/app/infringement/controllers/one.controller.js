@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('OneInfringementCtrl', OneInfringementCtrl);
 
-  OneInfringementCtrl.$inject = ['dataInfringement', 'tracto', '$state'];
+  OneInfringementCtrl.$inject = ['dataInfringement', 'tracto', '$state', '$stateParams'];
 
-  function OneInfringementCtrl(dataInfringement, tracto, $state) {
+  function OneInfringementCtrl(dataInfringement, tracto, $state, $stateParams) {
     var vm = this;
 
     vm.item = {};
@@ -30,6 +30,7 @@
 
     function getOne(id) {
       vm.tracto.reset();
+      id = id || $stateParams.id;
       dataInfringement.getOne(id).then(function(item) {
         vm.item = item;
       }).catch(vm.tracto.handle);

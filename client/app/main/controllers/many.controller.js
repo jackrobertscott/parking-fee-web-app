@@ -5,15 +5,16 @@
   .module('webApp')
   .controller('ManyMainsCtrl', ManyMainsCtrl);
 
-  ManyMainsCtrl.$inject = ['dataMain', 'tracto', 'socket'];
+  ManyMainsCtrl.$inject = ['dataMain', 'tracto', 'socket', '$state'];
 
-  function ManyMainsCtrl(dataMain, tracto, socket) {
+  function ManyMainsCtrl(dataMain, tracto, socket, $state) {
     var vm = this;
 
     vm.items = [];
     vm.tracto = tracto;
     vm.getMany = getMany;
     vm.remove = remove;
+    vm.toSettings = toSettings;
 
     ////////////
 
@@ -42,6 +43,12 @@
         });
         vm.tracto.good = 'Successfully deleted item';
       }).catch(vm.tracto.handle);
+    }
+
+    function toSettings(item) {
+      $state.go('infringementSettings', {
+        id: item._id
+      });
     }
   }
 })();

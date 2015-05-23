@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('OneMainCtrl', OneMainCtrl);
 
-  OneMainCtrl.$inject = ['dataMain', 'tracto', '$state'];
+  OneMainCtrl.$inject = ['dataMain', 'tracto', '$state', '$stateParams'];
 
-  function OneMainCtrl(dataMain, tracto, $state) {
+  function OneMainCtrl(dataMain, tracto, $state, $stateParams) {
     var vm = this;
 
     vm.item = {};
@@ -30,6 +30,7 @@
 
     function getOne(id) {
       vm.tracto.reset();
+      id = id || $stateParams.id;
       dataMain.getOne(id).then(function(item) {
         vm.item = item;
       }).catch(vm.tracto.handle);

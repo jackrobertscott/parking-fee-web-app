@@ -26,6 +26,24 @@
       data: {
         role: 'company'
       }
+    })
+    .state('infringementRegister', {
+      url: '/infringement/register',
+      templateUrl: 'app/infringement/views/register.html',
+      controller: 'ManyInfringementsCtrl',
+      controllerAs: 'vm',
+      data: {
+        role: 'company'
+      }
+    })
+    .state('infringementSettings', {
+      url: '/infringement/settings/:id',
+      templateUrl: 'app/infringement/views/settings.html',
+      controller: 'ManyInfringementsCtrl',
+      controllerAs: 'vm',
+      data: {
+        role: 'company'
+      }
     });
   }
 })();
