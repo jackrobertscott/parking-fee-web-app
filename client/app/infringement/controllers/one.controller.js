@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('OneInfringementCtrl', OneInfringementCtrl);
 
-  OneInfringementCtrl.$inject = ['dataInfringement', 'tracto', '$state', '$stateParams'];
+  OneInfringementCtrl.$inject = ['dataInfringement', 'tracto', '$state', '$stateParams', 'Auth'];
 
-  function OneInfringementCtrl(dataInfringement, tracto, $state, $stateParams) {
+  function OneInfringementCtrl(dataInfringement, tracto, $state, $stateParams, Auth) {
     var vm = this;
 
     vm.item = {};
@@ -42,6 +42,11 @@
       if (!form.$valid) {
         invalid();
       } else {
+        var user = Auth.getCurrentUser();
+        angular.extend(vm.item, {
+          _creator: user._id,
+          company: user.company
+        });
         dataInfringement.create(vm.item).then(function(item) {
           $state.go('infringement');
         }).catch(vm.tracto.handle);
