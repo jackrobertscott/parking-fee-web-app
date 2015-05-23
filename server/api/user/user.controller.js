@@ -8,10 +8,6 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
-var validationError = function(res, err) {
-  return res.json(422, err);
-};
-
 /**
 * Get list of users
 * restriction: 'admin'
@@ -196,4 +192,8 @@ exports.removeCompanyMember = function(req, res) {
 
 function handleError(res, err) {
   return res.send(500, err);
+}
+
+function validationError(res, err) {
+  return res.json(422, err);
 }

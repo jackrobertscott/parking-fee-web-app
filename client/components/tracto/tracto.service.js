@@ -17,9 +17,13 @@
 
     return service;
 
-    function handle(error) {
-      console.log(error);
-      service.bad = 'An error has occurred. We apologize for this inconvenience.';
+    function handle(err) {
+      console.log(err);
+      if (err.message) {
+        service.bad = 'Error: '+err.message;
+      } else {
+        service.bad = 'An error has occurred. We apologize for this inconvenience.';
+      }
     }
 
     function reset() {

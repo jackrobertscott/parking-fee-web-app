@@ -4,7 +4,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var VehicleSchema = new Schema({
-  plate: String,
+  plate: {
+    type: String,
+    unique: true
+  },
   make: String,
   color: String,
   type: String,
