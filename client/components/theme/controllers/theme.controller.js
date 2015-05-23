@@ -39,6 +39,7 @@
         new Item('Login', 'userLogin', null, 'guest'),
         new Item('Register', 'userRegister', null, 'guest'),
         new Item('Change Password', 'userPassword', 'user'),
+        new Item('Profile Settings', 'userSettings', 'user'),
         new Item('Users', 'user', 'admin'),
         new Item('Admin', 'userAdmin', 'admin'),
         new Item('Register Company', 'companyRegister', 'user', 'user'),

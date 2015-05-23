@@ -53,6 +53,15 @@
       data: {
         role: 'user'
       }
+    })
+    .state('userSettings', {
+      url: '/settings',
+      templateUrl: 'app/user/views/settings.html',
+      controller: 'OneUserCtrl',
+      controllerAs: 'vm',
+      data: {
+        role: 'user'
+      }
     });
   }
 })();
