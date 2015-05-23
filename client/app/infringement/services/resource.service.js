@@ -8,11 +8,18 @@
   ResourceInfringement.$inject = ['$resource'];
 
   function ResourceInfringement($resource) {
-    return $resource('/api/infringement/:id', {
+    return $resource('/api/infringement/:id/:action', {
       id: '@_id'
     }, {
       update: {
         method: 'PUT'
+      },
+      getFewCompany: {
+        method: 'GET',
+        isArray: true,
+        params: {
+          action: 'company'
+        }
       }
     });
   }

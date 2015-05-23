@@ -15,6 +15,6 @@ router.delete('/:id', auth.hasRole('inspector'), controller.destroy);
 
 // Added routes
 
-router.get('/:id/company', controller.show);
+router.get('/:id/company', auth.hasRole('inspector'), controller.getFewCompany);
 
 module.exports = router;

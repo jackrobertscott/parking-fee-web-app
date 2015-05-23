@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Infringement = require('./infringement.model');
+var Company = require('../company/company.model');
 
 // Get list of infringements
 exports.index = function(req, res) {
@@ -51,6 +52,14 @@ exports.destroy = function(req, res) {
       if(err) { return handleError(res, err); }
       return res.send(204);
     });
+  });
+};
+
+// Get a single infringement
+exports.getFewCompany = function(req, res) {
+  Infringement.find({ company: req.params.id }, function (err, infringements) {
+    if(err) { return handleError(res, err); }
+    return res.json(infringements);
   });
 };
 

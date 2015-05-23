@@ -13,7 +13,8 @@
       getMany: getMany,
       create: create,
       update: update,
-      remove: remove
+      remove: remove,
+      getFewCompany: getFewCompany
     };
 
     return service;
@@ -39,6 +40,10 @@
     function remove(body) {
       var object = new ResourceInfringement(body);
       return object.$remove();
+    }
+
+    function getFewCompany() {
+      return ResourceInfringement.getFewCompany().$promise;
     }
   }
 })();
