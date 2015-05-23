@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 
 // Generic infringements companies may apply
 var InfringementSchema = new Schema({
+  name: String,
   payment: Number,
   info: String,
   company: {

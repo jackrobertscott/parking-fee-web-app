@@ -22,7 +22,12 @@
             <!-- infringement content start -->
             <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
             <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
-            <p>This is the home page.</p>
+            <ul class="list-group" ng-init="vm.getMany()">
+              <li class="list-group-item" ng-repeat="infringement in vm.items">
+                  <strong>{{infringement.name}}</strong><br>
+                  <span class="text-muted">Payment: {{infringement.payment}},</span>
+              </li>
+            </ul>
             <!-- infringement content end -->
           </div>
           <div class="col-sm-4 right">

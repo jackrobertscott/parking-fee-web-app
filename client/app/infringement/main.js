@@ -10,10 +10,13 @@
   function config($stateProvider) {
     $stateProvider
     .state('infringement', {
-      url: '/',
+      url: '/infringement',
       templateUrl: 'app/infringement/views/overview.html',
       controller: 'ManyInfringementsCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      data: {
+        role: 'admin'
+      }
     });
   }
 })();
