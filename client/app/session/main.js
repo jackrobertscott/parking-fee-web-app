@@ -20,7 +20,7 @@
     })
     .state('sessionUser', {
       url: '/session/user',
-      templateUrl: 'app/session/views/overview.html',
+      templateUrl: 'app/session/views/user.html',
       controller: 'ManySessionsCtrl',
       controllerAs: 'vm',
       data: {

@@ -13,7 +13,8 @@
       getMany: getMany,
       create: create,
       update: update,
-      remove: remove
+      remove: remove,
+      getUserVehicles: getUserVehicles
     };
 
     return service;
@@ -39,6 +40,10 @@
     function remove(body) {
       var object = new ResourceVehicle(body);
       return object.$remove();
+    }
+
+    function getUserVehicles(id) {
+      return ResourceVehicle.getUserVehicles({id: id}).$promise;
     }
   }
 })();

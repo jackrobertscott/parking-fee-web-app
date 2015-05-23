@@ -13,20 +13,6 @@
     }, {
       update: {
         method: 'PUT'
-      },
-      getCompanyMembers: {
-        method: 'GET',
-        isArray: true,
-        params: {
-          action: 'members'
-        }
-      },
-      getCompanyLocations: {
-        method: 'GET',
-        isArray: true,
-        params: {
-          action: 'locations'
-        }
       }
     });
   }

@@ -26,6 +26,13 @@
           action: 'password'
         }
       },
+      getCompanyMembers: {
+        method: 'GET',
+        isArray: true,
+        params: {
+          action: 'company'
+        }
+      },
       addCompanyMember: {
         method: 'POST',
         params: {
@@ -36,13 +43,6 @@
         method: 'DELETE',
         params: {
           action: 'company'
-        }
-      },
-      getUserVehicles: {
-        method: 'GET',
-        isArray: true,
-        params: {
-          action: 'vehicles'
         }
       }
     });

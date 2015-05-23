@@ -8,11 +8,18 @@
   ResourceLocation.$inject = ['$resource'];
 
   function ResourceLocation($resource) {
-    return $resource('/api/locations/:id', {
+    return $resource('/api/locations/:id/:action', {
       id: '@_id'
     }, {
       update: {
         method: 'PUT'
+      },
+      getCompanyLocations: {
+        method: 'GET',
+        isArray: true,
+        params: {
+          action: 'company'
+        }
       }
     });
   }

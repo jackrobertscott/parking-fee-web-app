@@ -13,7 +13,8 @@
       getMany: getMany,
       create: create,
       update: update,
-      remove: remove
+      remove: remove,
+      getCompanyLocations: getCompanyLocations
     };
 
     return service;
@@ -39,6 +40,10 @@
     function remove(body) {
       var object = new ResourceLocation(body);
       return object.$remove();
+    }
+
+    function getCompanyLocations(id) {
+      return ResourceLocation.getCompanyLocations({id: id}).$promise;
     }
   }
 })();

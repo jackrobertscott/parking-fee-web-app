@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('ManyLocationsCtrl', ManyLocationsCtrl);
 
-  ManyLocationsCtrl.$inject = ['dataLocation', 'tracto', 'socket', '$state', 'Auth', 'dataCompany'];
+  ManyLocationsCtrl.$inject = ['dataLocation', 'tracto', 'socket', '$state', 'Auth'];
 
-  function ManyLocationsCtrl(dataLocation, tracto, socket, $state, Auth, dataCompany) {
+  function ManyLocationsCtrl(dataLocation, tracto, socket, $state, Auth) {
     var vm = this;
 
     vm.items = [];
@@ -47,7 +47,7 @@
     }
 
     function getFew() {
-      dataCompany.getCompanyLocations(Auth.getCurrentUser().company)
+      dataLocation.getCompanyLocations(Auth.getCurrentUser().company)
       .then(function(items) {
         vm.items = items;
       }).catch(vm.tracto.handle);

@@ -61,7 +61,7 @@
 
     function getCompanyMembers() {
       vm.tracto.reset();
-      dataCompany.getCompanyMembers(Auth.getCurrentUser().company)
+      dataUser.getCompanyMembers(Auth.getCurrentUser().company)
       .then(function(items) {
         vm.items = items;
       }).catch(vm.tracto.handle);
