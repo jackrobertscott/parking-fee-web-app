@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('ManyInfringementsCtrl', ManyInfringementsCtrl);
 
-  ManyInfringementsCtrl.$inject = ['dataInfringement', 'tracto', 'socket'];
+  ManyInfringementsCtrl.$inject = ['dataInfringement', 'tracto', 'socket', 'Auth', 'dataSession'];
 
-  function ManyInfringementsCtrl(dataInfringement, tracto, socket) {
+  function ManyInfringementsCtrl(dataInfringement, tracto, socket, Auth, dataSession) {
     var vm = this;
 
     vm.items = [];
@@ -41,6 +41,22 @@
           }
         });
         vm.tracto.good = 'Successfully deleted item';
+      }).catch(vm.tracto.handle);
+    }
+
+    function getFewCompany() {
+      vm.tracto.reset();
+      dataSession.getFewCompany(Auth.getCurrentUser().company)
+      .then(function(items) {
+        vm.items = items;
+      }).catch(vm.tracto.handle);
+    }
+
+    function getFewUser() {
+      vm.tracto.reset();
+      dataSession.getFewUser(Auth.getCurrentUser()._id)
+      .then(function(items) {
+        vm.items = items;
       }).catch(vm.tracto.handle);
     }
   }
