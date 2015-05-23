@@ -3,10 +3,10 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var InspectionSchema = new Schema({
+var InfringementSchema = new Schema({
   name: String,
   info: String,
   active: Boolean
 });
 
-module.exports = mongoose.model('Inspection', InspectionSchema);
+module.exports = mongoose.model('Infringement', InfringementSchema);
