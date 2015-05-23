@@ -56,12 +56,10 @@
         })
         .catch(function(err) {
           err = err.data;
-          vm.tracto.errors = {};
-
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
             form[field].$setValidity('mongoose', false);
-            vm.tracto.errors[field] = error.message;
+            vm.tracto.bad = error.message;
           });
         });
       }
@@ -105,7 +103,7 @@
           $state.go('main');
         })
         .catch(function(err) {
-          vm.tracto.errors.other = err.message;
+          vm.tracto.bad = err.message;
         });
       }
     }
@@ -131,7 +129,7 @@
         })
         .catch(function() {
           form.password.$setValidity('mongoose', false);
-          vm.tracto.errors.other = 'Incorrect password';
+          vm.tracto.bad = 'Incorrect password';
         });
       }
     }

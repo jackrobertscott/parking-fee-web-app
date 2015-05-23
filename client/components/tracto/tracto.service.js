@@ -11,7 +11,6 @@
     var service = {
       bad: '',
       good: '',
-      errors: {},
       handle: handle,
       reset: reset
     };
@@ -26,7 +25,6 @@
     function reset() {
       service.bad = '';
       service.good = '';
-      service.errors = {};
     }
   }
 })();
