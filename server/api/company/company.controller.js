@@ -3,6 +3,8 @@
 var _ = require('lodash');
 var Company = require('./company.model');
 var User = require('../user/user.model');
+var Location = require('../location/location.model');
+var config = require('../../config/environment');
 
 // Get list of companies
 exports.index = function(req, res) {
@@ -25,7 +27,18 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Company.create(req.body, function(err, company) {
     if (err) { return handleError(res, err); }
-    return res.json(201, company);
+    User.findById(company._creator, function(err, user) {
+      if (err) { return handleError(res, err); }
+      if (!user) { return res.send(401); } // check
+      user.company = company._id;
+      if (config.userRoles.indexOf('company') > config.userRoles.indexOf(user.role)) {
+        user.role = 'company';
+      }
+      user.save(function(err) {
+        if (err) { return handleError(res, err); }
+        return res.json(201, company);
+      });
+    });
   });
 };
 
@@ -48,20 +61,25 @@ exports.destroy = function(req, res) {
   Company.findById(req.params.id, function (err, company) {
     if (err) { return handleError(res, err); }
     if (!company) { return res.send(404); }
-    // Remove company in users aswell
     User.find({ company: company._id }, function (err, users) {
       if (err) { return handleError(res, err); }
       users.forEach(function(user, i, array) {
         user.company = null;
-        user.role = 'user';
+        // leave admins as admins
+        if (config.userRoles.indexOf('admin') > config.userRoles.indexOf(user.role)) {
+          user.role = 'user';
+        }
         user.save(function(err) {
           if (err) { return handleError(res, err); }
         });
       });
-      company.remove(function(err) {
-        if (err) { return handleError(res, err); }
-        return res.send(204);
-      });
+    });
+    Location.find({ company: company._id }).remove(function(err) {
+      if (err) { return handleError(res, err); }
+    }); // not sure works
+    company.remove(function(err) {
+      if (err) { return handleError(res, err); }
+      return res.send(204);
     });
   });
 };
@@ -69,3 +87,29 @@ exports.destroy = function(req, res) {
 function handleError(res, err) {
   return res.send(500, err);
 }
+
+// Added methods
+
+// Get a company's members
+exports.getCompanyMembers = function(req, res) {
+  Company.findById(req.params.id, function (err, company) {
+    if (err) { return handleError(res, err); }
+    if (!company) { return res.send(404); }
+    User.find({ _id: { $in: company.members } }, function (err, users) {
+      if (err) { return handleError(res, err); }
+      return res.json(users);
+    });
+  });
+};
+
+// Get a company's members
+exports.getCompanyLocations = function(req, res) {
+  Company.findById(req.params.id, function (err, company) {
+    if (err) { return handleError(res, err); }
+    if (!company) { return res.send(404); }
+    Location.find({ _id: { $in: company.locations } }, function (err, locations) {
+      if (err) { return handleError(res, err); }
+      return res.json(locations);
+    });
+  });
+};

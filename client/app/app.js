@@ -1,21 +1,31 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('webApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'btford.socket-io',
-  'ui.router'
-])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  angular
+  .module('webApp', [
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'btford.socket-io',
+    'ui.router'
+  ])
+  .config(config)
+  .factory('authInterceptor', authInterceptor)
+  .run(run);
+
+  config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
+
+  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
-      .otherwise('/');
+    .otherwise('/');
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
-  })
+  }
 
-  .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
+  authInterceptor.$inject = ['$rootScope', '$q', '$cookieStore', '$location'];
+
+  function authInterceptor($rootScope, $q, $cookieStore, $location) {
     return {
       // Add authorization token to headers
       request: function (config) {
@@ -39,15 +49,27 @@ angular.module('webApp', [
         }
       }
     };
-  })
+  }
 
-  .run(function ($rootScope, $location, Auth) {
+  run.$inject = ['$rootScope', '$location', 'Auth', 'tracto'];
+
+  function run($rootScope, $location, Auth, tracto) {
     // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$stateChangeStart', function (event, next) {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      tracto.reset();
       Auth.isLoggedInAsync(function(loggedIn) {
-        if (next.authenticate && !loggedIn) {
-          $location.path('/login');
+        if (toState.data && toState.data.role && toState.data.role !== 'guest') {
+          var userRoles = Auth.getUserRoles();
+          if (!loggedIn) {
+            event.preventDefault();
+            $location.path('/login');
+          } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
+            // Logged in but not authorised
+            event.preventDefault();
+            $location.path('/');
+          }
         }
       });
     });
-  });
+  }
+})();

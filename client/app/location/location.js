@@ -1,26 +1,49 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('webApp')
-  .config(function ($stateProvider) {
+  angular
+  .module('webApp')
+  .config(config);
+
+  config.$inject = ['$stateProvider'];
+
+  function config($stateProvider) {
     $stateProvider
-      .state('location', {
-        url: '/location',
-        templateUrl: 'app/location/location.html',
-        controller: 'LocationCtrl'
-      })
-      .state('locationRegister', {
-        url: '/location/register',
-        templateUrl: 'app/location/location.register.html',
-        controller: 'LocationCtrl'
-      })
-      .state('locationSettings', {
-        url: '/location/settings/:id',
-        templateUrl: 'app/location/location.settings.html',
-        controller: 'LocationCtrl'
-      })
-      .state('locationCompany', {
-        url: '/location/company',
-        templateUrl: 'app/location/location.company.html',
-        controller: 'LocationCtrl'
-      });
-  });
+    .state('location', {
+      url: '/location',
+      templateUrl: 'app/location/views/overview.html',
+      controller: 'ManyLocationsCtrl',
+      controllerAs: 'vm',
+      data: {
+        role: 'user'
+      }
+    })
+    .state('locationCompany', {
+      url: '/location/company',
+      templateUrl: 'app/location/views/company.html',
+      controller: 'ManyLocationsCtrl',
+      controllerAs: 'vm',
+      data: {
+        role: 'company'
+      }
+    })
+    .state('locationRegister', {
+      url: '/location/register',
+      templateUrl: 'app/location/views/register.html',
+      controller: 'OneLocationCtrl',
+      controllerAs: 'vm',
+      data: {
+        role: 'company'
+      }
+    })
+    .state('locationSettings', {
+      url: '/location/settings/:id',
+      templateUrl: 'app/location/views/settings.html',
+      controller: 'OneLocationCtrl',
+      controllerAs: 'vm',
+      data: {
+        role: 'company'
+      }
+    });
+  }
+})();

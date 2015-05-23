@@ -1,0 +1,15 @@
+<div ng-controller="ThemeCtrl as vm">
+  <ul class="list-inline menu-labels">
+    <span ng-repeat="item in vm.menu" ng-if="item.show()">
+      <a ng-if="item.href" ui-sref="{{ item.href }}">
+        <li>{{ item.name }}</li>
+      </a>
+      <li ng-if="!item.href" ng-click="vm.toggleChildren($index)">{{ item.name }}</li>
+    </span>
+  </ul>
+  <ul ng-repeat="parent in vm.menu" ng-if="parent.showChildren" class="list-inline menu-items">
+    <a ng-repeat="item in parent.children" ng-show="item.show()" ui-sref="{{ item.href }}">
+      <li>{{ item.name }}</li>
+    </a>
+  </ul>
+</div>

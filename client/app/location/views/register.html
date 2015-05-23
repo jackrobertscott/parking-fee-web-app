@@ -1,0 +1,88 @@
+<span ng-include="'components/theme/views/header.html'"></span>
+<section id="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 hidden-sm hidden-xs left" sidebar-resize>
+        <span ng-include="'components/theme/views/navbar.large.html'"></span>
+      </div>
+      <div class="col-md-9">
+        <h1>
+          <!-- title start -->
+          Register a Location
+          <!-- title end -->
+        </h1>
+        <div class="row hidden-md hidden-lg">
+          <div class="col-sm-12">
+            <span ng-include="'components/theme/views/navbar.small.html'"></span>
+          </div>
+        </div>
+        <hr class="hidden-xs hidden-sm">
+        <div class="row">
+          <div class="col-sm-8 center">
+            <!-- main content start -->
+            <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
+            <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
+            <form class="form" name="form" ng-submit="vm.create(form)" novalidate>
+
+              <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted, 'has-error': form.name.$invalid && vm.submitted }">
+                <label for="locationName">Location Name</label>
+                <input type="text" name="name" class="form-control" id="locationName" placeholder="Location Name" ng-model="vm.item.name" required>
+                <p class="help-block" ng-show="form.name.$error.required && vm.submitted">
+                  A location name number is required
+                </p>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-success': form.rate.$valid && vm.submitted, 'has-error': form.rate.$invalid && vm.submitted }">
+                <label for="locationRate">Ticket Parking Rate</label>
+                <input type="number" name="rate" class="form-control" id="locationRate" ng-model="vm.item.rate" placeholder="Cents/Hour" min="0" max="1000" required>
+                <p class="help-block" ng-show="form.rate.$error.required && vm.submitted">
+                  A location rate is required
+                </p>
+                <p class="help-block" ng-show="form.rate.$error.number && vm.submitted">
+                  The location rate must be less than $10.00/hr
+                </p>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-success': form.start.$valid && vm.submitted, 'has-error': form.start.$invalid && vm.submitted }">
+                <label for="locationStart">Ticket Parking Start Time</label>
+                <input type="time" name="start" class="form-control" id="locationStart" ng-model="vm.item.start" placeholder="HH:mm:ss" required>
+                <p class="help-block" ng-show="form.start.$error.required && vm.submitted">
+                  A location start time is required
+                </p>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-success': form.end.$valid && vm.submitted, 'has-error': form.end.$invalid && vm.submitted }">
+                <label for="locationEnd">Ticket Parking End Time</label>
+                <input type="time" name="end" class="form-control" id="locationEnd" ng-model="vm.item.end" placeholder="HH:mm:ss" required>
+                <p class="help-block" ng-show="form.end.$error.required && vm.submitted">
+                  A location end time is required
+                </p>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-success': form.lots.$valid && vm.submitted, 'has-error': form.lots.$invalid && vm.submitted }">
+                <label for="locationLots">(Optional) Number of Available Lots</label>
+                <input type="number" name="lots" class="form-control" id="locationLots" ng-model="vm.item.lots" placeholder="Lots">
+              </div>
+
+              <div class="form-group">
+                <label for="locationInfo">Location Information</label>
+                <textarea class="form-control" rows="3" id="locationInfo" ng-model="vm.item.info">Any extra information about the location</textarea>
+              </div>
+
+              <button type="submit" class="btn btn-default">Submit</button>
+
+            </form>
+            <!-- main content end -->
+          </div>
+          <div class="col-sm-4 right">
+            <hr class="hidden-sm hidden-md hidden-lg">
+            <!-- side content start -->
+            <span ng-include="'components/theme/views/right.default.html'"></span>
+            <!-- side content end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<span ng-include="'components/theme/views/footer.html'"></span>

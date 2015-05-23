@@ -12,6 +12,7 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
+  phone: Number,
   hashedPassword: String,
   provider: String,
   salt: String,
@@ -21,7 +22,8 @@ var UserSchema = new Schema({
   github: {},
   vehicles: [{
     type: Schema.Types.ObjectId,
-    ref: 'Vehicle'
+    ref: 'Vehicle',
+    default: []
   }],
   company: {
     type: Schema.Types.ObjectId,

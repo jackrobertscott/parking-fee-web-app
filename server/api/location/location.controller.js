@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Location = require('./location.model');
+var Company = require('../company/company.model');
 
 // Get list of locations
 exports.index = function(req, res) {
@@ -24,7 +25,16 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Location.create(req.body, function(err, location) {
     if (err) { return handleError(res, err); }
-    return res.json(201, location);
+    Company.findById(location.company, function(err, company) {
+      if (err) { return handleError(res, err); }
+      if (!company) { return res.send(404); }
+      company.locations.push(location._id);
+      company.markModified('locations');
+      company.save(function(err) {
+        if (err) { return handleError(res, err); }
+        return res.json(201, location);
+      });
+    });
   });
 };
 
@@ -47,9 +57,18 @@ exports.destroy = function(req, res) {
   Location.findById(req.params.id, function (err, location) {
     if (err) { return handleError(res, err); }
     if (!location) { return res.send(404); }
-    location.remove(function(err) {
+    Company.findById(location.company, function(err, company) {
       if (err) { return handleError(res, err); }
-      return res.send(204);
+      if (!company) { return res.send(404); }
+      _.remove(company.locations, location._id);
+      company.markModified('locations');
+      company.save(function(err) {
+        if (err) { return handleError(res, err); }
+        location.remove(function(err) {
+          if (err) { return handleError(res, err); }
+          return res.send(204);
+        });
+      });
     });
   });
 };
