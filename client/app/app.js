@@ -61,11 +61,9 @@
         if (toState.data && toState.data.role && toState.data.role !== 'guest') {
           var userRoles = Auth.getUserRoles();
           if (!loggedIn) {
-            event.preventDefault();
             $location.path('/login');
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
-            event.preventDefault();
             $location.path('/');
           }
         }
