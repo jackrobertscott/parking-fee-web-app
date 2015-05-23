@@ -49,6 +49,10 @@
           new Item('Settings', 'companySettings'),
           new Item('Members', 'companyMembers'),
         ]),
+        new Item('Infringement', null, 'company', null, [
+          new Item('Overview', 'infringement', 'admin'),
+          new Item('Company Infringements', 'infringementCompany'),
+        ]),
         new Item('Location', null, 'user', null, [
           new Item('Overview', 'location'),
           new Item('My Locations', 'locationCompany', 'company'),
@@ -58,6 +62,10 @@
           new Item('Overview', 'vehicle', 'admin'),
           new Item('My Vehicles', 'vehicleUser'),
           new Item('Register New', 'vehicleRegister'),
+        ]),
+        new Item('Sessions', null, 'user', null, [
+          new Item('Overview', 'session', 'admin'),
+          new Item('User Sessions', 'sessionUser'),
         ]),
         new Item('Logout', 'userLogout', 'user'),
       ];
