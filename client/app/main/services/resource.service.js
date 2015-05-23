@@ -8,7 +8,7 @@
   ResourceMain.$inject = ['$resource'];
 
   function ResourceMain($resource) {
-    return $resource('/api/END_POINT_HERE/:id', {
+    return $resource('/api/END_POINT_HERE/:id/:action', {
       id: '@_id'
     }, {
       update: {

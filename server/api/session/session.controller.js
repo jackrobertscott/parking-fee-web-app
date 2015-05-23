@@ -54,6 +54,14 @@ exports.destroy = function(req, res) {
   });
 };
 
+// Get a user sessions
+exports.getFewUser = function(req, res) {
+  Session.find({ _creator: req.params.id }, function (err, sessions) {
+    if(err) { return handleError(res, err); }
+    return res.json(sessions);
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

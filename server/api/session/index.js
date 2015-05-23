@@ -13,4 +13,8 @@ router.put('/:id', auth.isAuthenticated(), controller.update);
 router.patch('/:id', auth.isAuthenticated(), controller.update);
 router.delete('/:id', auth.isAuthenticated(), controller.destroy);
 
+// Added routes
+
+router.get('/:id/user', auth.isAuthenticated(), controller.getFewUser);
+
 module.exports = router;

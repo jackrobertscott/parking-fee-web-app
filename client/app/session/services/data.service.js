@@ -40,5 +40,9 @@
       var object = new ResourceSession(body);
       return object.$remove();
     }
+
+    function getFewUser(id) {
+      return ResourceSession.getFewUser({id: id}).$promise;
+    }
   }
 })();

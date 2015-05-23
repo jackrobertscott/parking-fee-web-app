@@ -42,8 +42,8 @@
       return object.$remove();
     }
 
-    function getFewCompany() {
-      return ResourceInfringement.getFewCompany().$promise;
+    function getFewCompany(id) {
+      return ResourceInfringement.getFewCompany({id: id}).$promise;
     }
   }
 })();

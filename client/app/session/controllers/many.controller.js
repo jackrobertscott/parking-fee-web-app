@@ -14,6 +14,7 @@
     vm.tracto = tracto;
     vm.getMany = getMany;
     vm.remove = remove;
+    vm.getFewUser = getFewUser;
 
     ////////////
 
