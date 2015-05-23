@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('ManyInfringementsCtrl', ManyInfringementsCtrl);
 
-  ManyInfringementsCtrl.$inject = ['dataInfringement', 'tracto', 'socket', 'Auth', 'dataSession'];
+  ManyInfringementsCtrl.$inject = ['dataInfringement', 'tracto', 'socket', 'Auth'];
 
-  function ManyInfringementsCtrl(dataInfringement, tracto, socket, Auth, dataSession) {
+  function ManyInfringementsCtrl(dataInfringement, tracto, socket, Auth) {
     var vm = this;
 
     vm.items = [];
@@ -46,15 +46,7 @@
 
     function getFewCompany() {
       vm.tracto.reset();
-      dataSession.getFewCompany(Auth.getCurrentUser().company)
-      .then(function(items) {
-        vm.items = items;
-      }).catch(vm.tracto.handle);
-    }
-
-    function getFewUser() {
-      vm.tracto.reset();
-      dataSession.getFewUser(Auth.getCurrentUser()._id)
+      dataInfringement.getFewCompany(Auth.getCurrentUser().company)
       .then(function(items) {
         vm.items = items;
       }).catch(vm.tracto.handle);

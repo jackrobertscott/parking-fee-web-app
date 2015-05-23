@@ -31,11 +31,13 @@
       return object.$save();
     }
 
-    function update(object) {
+    function update(body) {
+      var object = new ResourceInfringement(body);
       return object.$update();
     }
 
-    function remove(object) {
+    function remove(body) {
+      var object = new ResourceInfringement(body);
       return object.$remove();
     }
   }

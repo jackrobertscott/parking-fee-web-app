@@ -17,6 +17,15 @@
       data: {
         role: 'admin'
       }
+    })
+    .state('infringementCompany', {
+      url: '/infringement/company',
+      templateUrl: 'app/infringement/views/company.html',
+      controller: 'ManyInfringementsCtrl',
+      controllerAs: 'vm',
+      data: {
+        role: 'company'
+      }
     });
   }
 })();
