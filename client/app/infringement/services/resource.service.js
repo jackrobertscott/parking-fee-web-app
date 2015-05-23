@@ -8,7 +8,7 @@
   ResourceInfringement.$inject = ['$resource'];
 
   function ResourceInfringement($resource) {
-    return $resource('/api/infringement/:id/:action', {
+    return $resource('/api/infringements/:id/:action', {
       id: '@_id'
     }, {
       update: {

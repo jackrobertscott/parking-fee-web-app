@@ -1,5 +1,5 @@
 <span ng-include="'components/theme/views/header.html'"></span>
-<section id="session">
+<section id="content">
   <div class="container">
     <div class="row">
       <div class="col-md-3 hidden-sm hidden-xs left" sidebar-resize>
@@ -24,8 +24,8 @@
             <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
             <ul class="list-group" ng-init="vm.getFewUser()">
               <li class="list-group-item" ng-repeat="session in vm.items">
-                  <strong>{{session.name}}</strong><br>
-                  <span class="text-muted">Payment: {{session.payment}}</span>
+                <strong>{{session.name}}</strong><br>
+                <span class="text-muted">Payment: {{session.payment}}</span>
               </li>
             </ul>
             <!-- session content end -->

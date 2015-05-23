@@ -8,7 +8,7 @@
   ResourceSession.$inject = ['$resource'];
 
   function ResourceSession($resource) {
-    return $resource('/api/session/:id/:action', {
+    return $resource('/api/sessions/:id/:action', {
       id: '@_id'
     }, {
       update: {
