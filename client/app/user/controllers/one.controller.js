@@ -46,11 +46,7 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.createUser({
-          name: vm.item.name,
-          email: vm.item.email,
-          password: vm.item.password
-        })
+        Auth.createUser(vm.item)
         .then(function() {
           $state.go('vehicleRegister');
         })
@@ -95,10 +91,7 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.login({
-          email: vm.item.email,
-          password: vm.item.password
-        })
+        Auth.login(vm.item)
         .then(function() {
           $state.go('main');
         })
