@@ -11,7 +11,7 @@
     $stateProvider
     .state('session', {
       url: '/session',
-      templateUrl: 'app/session/views/overview.html',
+      templateUrl: 'app/session/overview.html',
       controller: 'ManySessionsCtrl',
       controllerAs: 'vm',
       data: {
@@ -20,7 +20,7 @@
     })
     .state('sessionUser', {
       url: '/session/user',
-      templateUrl: 'app/session/views/user.html',
+      templateUrl: 'app/session/user.html',
       controller: 'ManySessionsCtrl',
       controllerAs: 'vm',
       data: {
