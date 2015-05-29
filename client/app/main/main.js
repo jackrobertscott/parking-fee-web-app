@@ -11,7 +11,7 @@
     $stateProvider
     .state('main', {
       url: '/',
-      templateUrl: 'app/main/views/overview.html',
+      templateUrl: 'app/main/overview.html',
       controller: 'ManyMainsCtrl',
       controllerAs: 'vm'
     });
