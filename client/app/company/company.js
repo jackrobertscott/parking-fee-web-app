@@ -11,7 +11,7 @@
     $stateProvider
     .state('company', {
       url: '/company',
-      templateUrl: 'app/company/views/overview.html',
+      templateUrl: 'app/company/overview.html',
       controller: 'ManyCompaniesCtrl',
       controllerAs: 'vm',
       data: {
@@ -20,7 +20,7 @@
     })
     .state('companyAdmin', {
       url: '/company/admin',
-      templateUrl: 'app/company/views/admin.html',
+      templateUrl: 'app/company/admin.html',
       controller: 'ManyCompaniesCtrl',
       controllerAs: 'vm',
       data: {
@@ -29,7 +29,7 @@
     })
     .state('companyMembers', {
       url: '/company/members',
-      templateUrl: 'app/company/views/members.html',
+      templateUrl: 'app/company/members.html',
       controller: 'ManyCompaniesCtrl',
       controllerAs: 'vm',
       data: {
@@ -38,7 +38,7 @@
     })
     .state('companyRegister', {
       url: '/company/register',
-      templateUrl: 'app/company/views/register.html',
+      templateUrl: 'app/company/register.html',
       controller: 'OneCompanyCtrl',
       controllerAs: 'vm',
       data: {
@@ -47,7 +47,7 @@
     })
     .state('companySettings', {
       url: '/company/settings',
-      templateUrl: 'app/company/views/settings.html',
+      templateUrl: 'app/company/settings.html',
       controller: 'OneCompanyCtrl',
       controllerAs: 'vm',
       data: {
