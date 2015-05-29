@@ -11,7 +11,7 @@
     $stateProvider
     .state('location', {
       url: '/location',
-      templateUrl: 'app/location/views/overview.html',
+      templateUrl: 'app/location/overview.html',
       controller: 'ManyLocationsCtrl',
       controllerAs: 'vm',
       data: {
@@ -20,7 +20,7 @@
     })
     .state('locationCompany', {
       url: '/location/company',
-      templateUrl: 'app/location/views/company.html',
+      templateUrl: 'app/location/company.html',
       controller: 'ManyLocationsCtrl',
       controllerAs: 'vm',
       data: {
@@ -29,7 +29,7 @@
     })
     .state('locationRegister', {
       url: '/location/register',
-      templateUrl: 'app/location/views/register.html',
+      templateUrl: 'app/location/register.html',
       controller: 'OneLocationCtrl',
       controllerAs: 'vm',
       data: {
@@ -38,7 +38,7 @@
     })
     .state('locationSettings', {
       url: '/location/settings/:id',
-      templateUrl: 'app/location/views/settings.html',
+      templateUrl: 'app/location/settings.html',
       controller: 'OneLocationCtrl',
       controllerAs: 'vm',
       data: {
