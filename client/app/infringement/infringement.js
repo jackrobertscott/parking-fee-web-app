@@ -11,7 +11,7 @@
     $stateProvider
     .state('infringement', {
       url: '/infringement',
-      templateUrl: 'app/infringement/views/overview.html',
+      templateUrl: 'app/infringement/overview.html',
       controller: 'ManyInfringementsCtrl',
       controllerAs: 'vm',
       data: {
@@ -20,7 +20,7 @@
     })
     .state('infringementCompany', {
       url: '/infringement/company',
-      templateUrl: 'app/infringement/views/company.html',
+      templateUrl: 'app/infringement/company.html',
       controller: 'ManyInfringementsCtrl',
       controllerAs: 'vm',
       data: {
@@ -29,7 +29,7 @@
     })
     .state('infringementRegister', {
       url: '/infringement/register',
-      templateUrl: 'app/infringement/views/register.html',
+      templateUrl: 'app/infringement/register.html',
       controller: 'ManyInfringementsCtrl',
       controllerAs: 'vm',
       data: {
@@ -38,7 +38,7 @@
     })
     .state('infringementSettings', {
       url: '/infringement/settings/:id',
-      templateUrl: 'app/infringement/views/settings.html',
+      templateUrl: 'app/infringement/settings.html',
       controller: 'ManyInfringementsCtrl',
       controllerAs: 'vm',
       data: {
