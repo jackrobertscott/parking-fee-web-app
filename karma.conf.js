@@ -21,16 +21,16 @@ module.exports = function(config) {
       'client/bower_components/lodash/dist/lodash.compat.js',
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
-      'client/components/app.js',
-      'client/components/app.coffee',
+      'client/app/app.js',
+      'client/app/app.coffee',
+      'client/app/**/*.js',
+      'client/app/**/*.coffee',
       'client/components/**/*.js',
       'client/components/**/*.coffee',
-      'client/shared/**/*.js',
-      'client/shared/**/*.coffee',
+      'client/app/**/*.jade',
       'client/components/**/*.jade',
-      'client/shared/**/*.jade',
-      'client/components/**/*.html',
-      'client/shared/**/*.html'
+      'client/app/**/*.html',
+      'client/components/**/*.html'
     ],
 
     preprocessors: {

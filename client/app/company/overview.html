@@ -1,0 +1,45 @@
+<span ng-include="'components/theme/header.html'"></span>
+<section id="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 hidden-sm hidden-xs left" sidebar-resize>
+        <span ng-include="'components/theme/navbar.large.html'"></span>
+      </div>
+      <div class="col-md-9">
+        <h1>
+          <!-- title start -->
+          Company
+          <!-- title end -->
+        </h1>
+        <div class="row hidden-md hidden-lg">
+          <div class="col-sm-12">
+            <span ng-include="'components/theme/navbar.small.html'"></span>
+          </div>
+        </div>
+        <hr class="hidden-xs hidden-sm">
+        <div class="row">
+          <div class="col-sm-8 center">
+            <!-- main content start -->
+            <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
+            <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
+            <ul class="list-group" ng-init="vm.getMany()">
+              <li class="list-group-item" ng-repeat="company in vm.items">
+                  <strong>{{company.name}}</strong><br>
+                  <span class="text-muted">Email: {{company.email}},</span>
+                  <span class="text-muted">Phone: {{company.phone}}</span>
+              </li>
+            </ul>
+            <!-- main content end -->
+          </div>
+          <div class="col-sm-4 right">
+            <hr class="hidden-sm hidden-md hidden-lg">
+            <!-- side content start -->
+            <span ng-include="'components/theme/right.default.html'"></span>
+            <!-- side content end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<span ng-include="'components/theme/footer.html'"></span>

@@ -57,15 +57,15 @@ module.exports = function (grunt) {
     watch: {
       injectJS: {
         files: [
-          '<%= yeoman.client %>/{components,shared}/**/*.js',
-          '!<%= yeoman.client %>/{components,shared}/**/*.spec.js',
-          '!<%= yeoman.client %>/{components,shared}/**/*.mock.js',
-          '!<%= yeoman.client %>/components/app.js'],
+          '<%= yeoman.client %>/{app,components}/**/*.js',
+          '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
+          '!<%= yeoman.client %>/{app,components}/**/*.mock.js',
+          '!<%= yeoman.client %>/app/app.js'],
         tasks: ['injector:scripts']
       },
       injectCss: {
         files: [
-          '<%= yeoman.client %>/{components,shared}/**/*.css'
+          '<%= yeoman.client %>/{app,components}/**/*.css'
         ],
         tasks: ['injector:css']
       },
@@ -75,19 +75,19 @@ module.exports = function (grunt) {
       },
       jsTest: {
         files: [
-          '<%= yeoman.client %>/{components,shared}/**/*.spec.js',
-          '<%= yeoman.client %>/{components,shared}/**/*.mock.js'
+          '<%= yeoman.client %>/{app,components}/**/*.spec.js',
+          '<%= yeoman.client %>/{app,components}/**/*.mock.js'
         ],
         tasks: ['newer:jshint:all', 'karma']
       },
       injectLess: {
         files: [
-          '<%= yeoman.client %>/{components,shared}/**/*.less'],
+          '<%= yeoman.client %>/{app,components}/**/*.less'],
         tasks: ['injector:less']
       },
       less: {
         files: [
-          '<%= yeoman.client %>/{components,shared}/**/*.less'],
+          '<%= yeoman.client %>/{app,components}/**/*.less'],
         tasks: ['less', 'autoprefixer']
       },
       gruntfile: {
@@ -95,11 +95,11 @@ module.exports = function (grunt) {
       },
       livereload: {
         files: [
-          '{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.css',
-          '{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.html',
-          '{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.js',
-          '!{.tmp,<%= yeoman.client %>}{components,shared}/**/*.spec.js',
-          '!{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.mock.js',
+          '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.css',
+          '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.html',
+          '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+          '!{.tmp,<%= yeoman.client %>}{app,components}/**/*.spec.js',
+          '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js',
           '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         options: {
@@ -140,14 +140,14 @@ module.exports = function (grunt) {
         src: ['server/**/*.spec.js']
       },
       all: [
-        '<%= yeoman.client %>/{components,shared}/**/*.js',
-        '!<%= yeoman.client %>/{components,shared}/**/*.spec.js',
-        '!<%= yeoman.client %>/{components,shared}/**/*.mock.js'
+        '<%= yeoman.client %>/{app,components}/**/*.js',
+        '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
+        '!<%= yeoman.client %>/{app,components}/**/*.mock.js'
       ],
       test: {
         src: [
-          '<%= yeoman.client %>/{components,shared}/**/*.spec.js',
-          '<%= yeoman.client %>/{components,shared}/**/*.mock.js'
+          '<%= yeoman.client %>/{app,components}/**/*.spec.js',
+          '<%= yeoman.client %>/{app,components}/**/*.mock.js'
         ]
       }
     },
@@ -320,16 +320,16 @@ module.exports = function (grunt) {
           removeScriptTypeAttributes: true,
           removeStyleLinkTypeAttributes: true
         },
-        usemin: 'components/app.js'
+        usemin: 'app/app.js'
       },
       main: {
         cwd: '<%= yeoman.client %>',
-        src: ['{components,shared}/**/*.html'],
+        src: ['{app,components}/**/*.html'],
         dest: '.tmp/templates.js'
       },
       tmp: {
         cwd: '.tmp',
-        src: ['{components,shared}/**/*.html'],
+        src: ['{app,components}/**/*.html'],
         dest: '.tmp/tmp-templates.js'
       }
     },
@@ -375,7 +375,7 @@ module.exports = function (grunt) {
         expand: true,
         cwd: '<%= yeoman.client %>',
         dest: '.tmp/',
-        src: ['{components,shared}/**/*.css']
+        src: ['{app,components}/**/*.css']
       }
     },
 
@@ -468,13 +468,13 @@ module.exports = function (grunt) {
       options: {
         paths: [
           '<%= yeoman.client %>/bower_components',
-          '<%= yeoman.client %>/components',
-          '<%= yeoman.client %>/shared'
+          '<%= yeoman.client %>/app',
+          '<%= yeoman.client %>/components'
         ]
       },
       server: {
         files: {
-          '.tmp/components/app.css' : '<%= yeoman.client %>/components/app.less'
+          '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.less'
         }
       },
     },
@@ -496,10 +496,10 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.client %>/index.html': [
-              ['{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.js',
-               '!{.tmp,<%= yeoman.client %>}/components/app.js',
-               '!{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.spec.js',
-               '!{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.mock.js']
+              ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+               '!{.tmp,<%= yeoman.client %>}/app/app.js',
+               '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
+               '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
             ]
         }
       },
@@ -508,17 +508,17 @@ module.exports = function (grunt) {
       less: {
         options: {
           transform: function(filePath) {
+            filePath = filePath.replace('/client/app/', '');
             filePath = filePath.replace('/client/components/', '');
-            filePath = filePath.replace('/client/shared/', '');
             return '@import \'' + filePath + '\';';
           },
           starttag: '// injector',
           endtag: '// endinjector'
         },
         files: {
-          '<%= yeoman.client %>/components/app.less': [
-            '<%= yeoman.client %>/{components,shared}/**/*.less',
-            '!<%= yeoman.client %>/components/app.less'
+          '<%= yeoman.client %>/app/app.less': [
+            '<%= yeoman.client %>/{app,components}/**/*.less',
+            '!<%= yeoman.client %>/app/app.less'
           ]
         }
       },
@@ -536,7 +536,7 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.client %>/index.html': [
-            '<%= yeoman.client %>/{components,shared}/**/*.css'
+            '<%= yeoman.client %>/{app,components}/**/*.css'
           ]
         }
       }
@@ -568,7 +568,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:less',
+        'injector:less', 
         'concurrent:server',
         'injector',
         'wiredep',
@@ -580,7 +580,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:less',
+      'injector:less', 
       'concurrent:server',
       'injector',
       'wiredep',
@@ -610,7 +610,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:less',
+        'injector:less', 
         'concurrent:test',
         'injector',
         'autoprefixer',
@@ -623,7 +623,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
-        'injector:less',
+        'injector:less', 
         'concurrent:test',
         'injector',
         'wiredep',
@@ -641,7 +641,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:less',
+    'injector:less', 
     'concurrent:dist',
     'injector',
     'wiredep',
