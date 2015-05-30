@@ -1,0 +1,96 @@
+<span ng-include="'shared/theme/header.html'"></span>
+<section id="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 hidden-sm hidden-xs left" sidebar-resize>
+        <span ng-include="'shared/theme/navbar.large.html'"></span>
+      </div>
+      <div class="col-md-9">
+        <h1>
+          <!-- title start -->
+          Register User
+          <!-- title end -->
+        </h1>
+        <div class="row hidden-md hidden-lg">
+          <div class="col-sm-12">
+            <span ng-include="'shared/theme/navbar.small.html'"></span>
+          </div>
+        </div>
+        <hr class="hidden-xs hidden-sm">
+        <div class="row">
+          <div class="col-sm-8 center">
+            <!-- main content start -->
+            <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
+            <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
+            <form class="form" name="form" ng-submit="vm.create(form)" novalidate>
+
+              <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted, 'has-error': form.name.$invalid && vm.submitted }">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" ng-model="vm.item.name" required>
+                <p class="help-block" ng-show="form.name.$error.required && vm.submitted">
+                  A name is required
+                </p>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-success': form.email.$valid && vm.submitted, 'has-error': form.email.$invalid && vm.submitted }">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" ng-model="vm.item.email" required mongoose-error/>
+                <p class="help-block" ng-show="form.email.$error.email && vm.submitted">
+                  Doesn't look like a valid email.
+                </p>
+                <p class="help-block" ng-show="form.email.$error.required && vm.submitted">
+                  What's your email address?
+                </p>
+                <p class="help-block" ng-show="form.email.$error.mongoose">
+                  {{ response.errors.email }}
+                </p>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-success': form.password.$valid && vm.submitted, 'has-error': form.password.$invalid && vm.submitted }">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" ng-model="vm.item.password" ng-minlength="3" required mongoose-error/>
+                <p class="help-block" ng-show="(form.password.$error.minlength || form.password.$error.required) && vm.submitted">
+                  Password must be at least 3 characters.
+                </p>
+                <p class="help-block" ng-show="form.password.$error.mongoose">
+                  {{ response.errors.password }}
+                </p>
+              </div>
+
+              <div>
+                <button class="btn btn-inverse btn-lg btn-login" type="submit">
+                  Sign up
+                </button>
+                <a class="btn btn-default btn-lg btn-register" href="/login">
+                  Login
+                </a>
+              </div>
+
+              <hr>
+
+              <div>
+                <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
+                  <i class="fa fa-facebook"></i> Connect with Facebook
+                </a>
+                <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
+                  <i class="fa fa-google-plus"></i> Connect with Google+
+                </a>
+                <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
+                  <i class="fa fa-twitter"></i> Connect with Twitter
+                </a>
+              </div>
+            </form>
+            <!-- main content end -->
+          </div>
+          <div class="col-sm-4 right">
+            <hr class="hidden-sm hidden-md hidden-lg">
+            <!-- side content start -->
+            <span ng-include="'shared/theme/right.default.html'"></span>
+            <!-- side content end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<span ng-include="'shared/theme/footer.html'"></span>
