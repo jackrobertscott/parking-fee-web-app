@@ -60,8 +60,7 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{components,shared}/**/*.js',
           '!<%= yeoman.client %>/{components,shared}/**/*.spec.js',
           '!<%= yeoman.client %>/{components,shared}/**/*.mock.js',
-          '!<%= yeoman.client %>/components/app.js'
-        ],
+          '!<%= yeoman.client %>/components/app.js'],
         tasks: ['injector:scripts']
       },
       injectCss: {
@@ -83,14 +82,12 @@ module.exports = function (grunt) {
       },
       injectLess: {
         files: [
-          '<%= yeoman.client %>/{components,shared}/**/*.less'
-        ],
+          '<%= yeoman.client %>/{components,shared}/**/*.less'],
         tasks: ['injector:less']
       },
       less: {
         files: [
-          '<%= yeoman.client %>/{components,shared}/**/*.less'
-        ],
+          '<%= yeoman.client %>/{components,shared}/**/*.less'],
         tasks: ['less', 'autoprefixer']
       },
       gruntfile: {
@@ -484,7 +481,7 @@ module.exports = function (grunt) {
 
     injector: {
       options: {
-        // Task-specific options go here.
+
       },
       // Inject application script files into index.html (doesn't include bower)
       scripts: {
@@ -499,11 +496,11 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.client %>/index.html': [
-            ['{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.js',
-            '!{.tmp,<%= yeoman.client %>}/components/app.js',
-            '!{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.spec.js',
-            '!{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.mock.js']
-          ]
+              ['{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.js',
+               '!{.tmp,<%= yeoman.client %>}/components/app.js',
+               '!{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.spec.js',
+               '!{.tmp,<%= yeoman.client %>}/{components,shared}/**/*.mock.js']
+            ]
         }
       },
 
