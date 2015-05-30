@@ -60,7 +60,8 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.js',
           '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '!<%= yeoman.client %>/{app,components}/**/*.mock.js',
-          '!<%= yeoman.client %>/app/app.js'],
+          '!<%= yeoman.client %>/app/app.js'
+        ],
         tasks: ['injector:scripts']
       },
       injectCss: {
@@ -82,12 +83,14 @@ module.exports = function (grunt) {
       },
       injectLess: {
         files: [
-          '<%= yeoman.client %>/{app,components}/**/*.less'],
+          '<%= yeoman.client %>/{app,components}/**/*.less'
+        ],
         tasks: ['injector:less']
       },
       less: {
         files: [
-          '<%= yeoman.client %>/{app,components}/**/*.less'],
+          '<%= yeoman.client %>/{app,components}/**/*.less'
+        ],
         tasks: ['less', 'autoprefixer']
       },
       gruntfile: {
@@ -496,11 +499,11 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.client %>/index.html': [
-              ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-               '!{.tmp,<%= yeoman.client %>}/app/app.js',
-               '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
-               '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
-            ]
+            ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+            '!{.tmp,<%= yeoman.client %>}/app/app.js',
+            '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
+            '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
+          ]
         }
       },
 
@@ -568,7 +571,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:less', 
+        'injector:less',
         'concurrent:server',
         'injector',
         'wiredep',
@@ -580,7 +583,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:less', 
+      'injector:less',
       'concurrent:server',
       'injector',
       'wiredep',
@@ -610,7 +613,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:less', 
+        'injector:less',
         'concurrent:test',
         'injector',
         'autoprefixer',
@@ -623,7 +626,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
-        'injector:less', 
+        'injector:less',
         'concurrent:test',
         'injector',
         'wiredep',
@@ -641,7 +644,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:less', 
+    'injector:less',
     'concurrent:dist',
     'injector',
     'wiredep',
