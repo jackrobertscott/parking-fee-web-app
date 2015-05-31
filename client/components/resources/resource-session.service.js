@@ -5,10 +5,10 @@
   .module('webApp')
   .factory('ResourceSession', ResourceSession);
 
-  ResourceSession.$inject = ['$resource'];
+  ResourceSession.$inject = ['$resource', 'ENV'];
 
-  function ResourceSession($resource) {
-    return $resource('/api/sessions/:id/:action', {
+  function ResourceSession($resource, ENV) {
+    return $resource(ENV.apiEndpoint+'/api/sessions/:id/:action', {
       id: '@_id'
     }, {
       update: {

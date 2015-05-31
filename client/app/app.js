@@ -7,7 +7,8 @@
     'ngResource',
     'ngSanitize',
     'btford.socket-io',
-    'ui.router'
+    'ui.router',
+    'config'
   ])
   .config(config)
   .factory('authInterceptor', authInterceptor)

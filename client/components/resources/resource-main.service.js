@@ -5,10 +5,10 @@
   .module('webApp')
   .factory('ResourceMain', ResourceMain);
 
-  ResourceMain.$inject = ['$resource'];
+  ResourceMain.$inject = ['$resource', 'ENV'];
 
-  function ResourceMain($resource) {
-    return $resource('/api/END_POINT_HERE/:id/:action', {
+  function ResourceMain($resource, ENV) {
+    return $resource(ENV.apiEndpoint+'/api/mains/:id/:action', {
       id: '@_id'
     }, {
       update: {

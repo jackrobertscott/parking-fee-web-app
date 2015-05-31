@@ -5,10 +5,10 @@
   .module('webApp')
   .factory('ResourceUser', ResourceUser);
 
-  ResourceUser.$inject = ['$resource'];
+  ResourceUser.$inject = ['$resource', 'ENV'];
 
-  function ResourceUser($resource) {
-    return $resource('/api/users/:id/:action', {
+  function ResourceUser($resource, ENV) {
+    return $resource(ENV.apiEndpoint+'/api/users/:id/:action', {
       id: '@_id'
     }, {
       get: {

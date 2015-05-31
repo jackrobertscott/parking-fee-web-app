@@ -5,10 +5,10 @@
   .module('webApp')
   .factory('ResourceInfringement', ResourceInfringement);
 
-  ResourceInfringement.$inject = ['$resource'];
+  ResourceInfringement.$inject = ['$resource', 'ENV'];
 
-  function ResourceInfringement($resource) {
-    return $resource('/api/infringements/:id/:action', {
+  function ResourceInfringement($resource, ENV) {
+    return $resource(ENV.apiEndpoint+'/api/infringements/:id/:action', {
       id: '@_id'
     }, {
       update: {

@@ -5,10 +5,10 @@
   .module('webApp')
   .factory('ResourceVehicle', ResourceVehicle);
 
-  ResourceVehicle.$inject = ['$resource'];
+  ResourceVehicle.$inject = ['$resource', 'ENV'];
 
-  function ResourceVehicle($resource) {
-    return $resource('/api/vehicles/:id/:action', {
+  function ResourceVehicle($resource, ENV) {
+    return $resource(ENV.apiEndpoint+'/api/vehicles/:id/:action', {
       id: '@_id'
     }, {
       update: {

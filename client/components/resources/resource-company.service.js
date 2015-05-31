@@ -5,10 +5,10 @@
   .module('webApp')
   .factory('ResourceCompany', ResourceCompany);
 
-  ResourceCompany.$inject = ['$resource'];
+  ResourceCompany.$inject = ['$resource', 'ENV'];
 
-  function ResourceCompany($resource) {
-    return $resource('/api/companies/:id/:action', {
+  function ResourceCompany($resource, ENV) {
+    return $resource(ENV.apiEndpoint+'/api/companies/:id/:action', {
       id: '@_id'
     }, {
       update: {
