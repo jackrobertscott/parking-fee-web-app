@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('webApp')
+  .module('dataServices')
   .factory('dataLocation', dataLocation);
 
   dataLocation.$inject = ['ResourceLocation'];

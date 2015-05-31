@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('webApp')
+  .module('resources')
   .factory('ResourceSession', ResourceSession);
 
   ResourceSession.$inject = ['$resource', 'ENV'];
