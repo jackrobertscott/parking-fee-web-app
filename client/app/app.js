@@ -10,7 +10,6 @@
     'ui.router',
     'config',
     'auth',
-    'resources',
     'dataServices'
   ])
   .config(config)
