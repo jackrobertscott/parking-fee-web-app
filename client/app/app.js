@@ -6,11 +6,12 @@
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'btford.socket-io',
+    'socket',
     'ui.router',
     'config',
-    'auth',
-    'dataServices'
+    'tracto',
+    'dataServices',
+    'auth'
   ])
   .config(config)
   .factory('authInterceptor', authInterceptor)

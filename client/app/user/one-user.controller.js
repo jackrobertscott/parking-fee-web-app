@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('OneUserCtrl', OneUserCtrl);
 
-  OneUserCtrl.$inject = ['dataUser', 'tracto', '$state', 'Auth', '$window'];
+  OneUserCtrl.$inject = ['dataUser', 'tracto', '$state', 'Auth'];
 
-  function OneUserCtrl(dataUser, tracto, $state, Auth, $window) {
+  function OneUserCtrl(dataUser, tracto, $state, Auth) {
     var vm = this;
 
     vm.item = {};
@@ -102,7 +102,7 @@
     }
 
     function loginOauth(provider) {
-      $window.location.href = '/auth/' + provider;
+      Auth.loginOauth(provider);
     }
 
     function logout() {

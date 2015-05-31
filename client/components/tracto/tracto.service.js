@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('webApp')
+  .module('tracto')
   .factory('tracto', tracto);
 
   tracto.$inject = [];

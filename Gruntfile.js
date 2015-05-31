@@ -499,10 +499,20 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.client %>/index.html': [
-            ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+            '{.tmp,<%= yeoman.client %>}/components/socket/**/*.js',
+            '{.tmp,<%= yeoman.client %>}/components/tracto/**/*.js',
+            '{.tmp,<%= yeoman.client %>}/components/resources/**/*.js',
+            '{.tmp,<%= yeoman.client %>}/components/data-services/**/*.js',
+            '{.tmp,<%= yeoman.client %>}/components/auth/**/*.js',
+            '{.tmp,<%= yeoman.client %>}/app/**/*.js',
+            '!{.tmp,<%= yeoman.client %>}/components/socket/socket.js',
+            '!{.tmp,<%= yeoman.client %>}/components/tracto/tracto.js',
+            '!{.tmp,<%= yeoman.client %>}/components/resources/resources.js',
+            '!{.tmp,<%= yeoman.client %>}/components/data-services/data-services.js',
+            '!{.tmp,<%= yeoman.client %>}/components/auth/auth.js',
             '!{.tmp,<%= yeoman.client %>}/app/app.js',
             '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
-            '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
+            '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js',
           ]
         }
       },
