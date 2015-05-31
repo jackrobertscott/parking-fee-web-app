@@ -13,4 +13,8 @@ router.put('/:id', auth.hasRole('company'), controller.update);
 router.patch('/:id', auth.hasRole('company'), controller.update);
 router.delete('/:id', auth.hasRole('company'), controller.destroy);
 
+// Added routes
+
+router.get('/:id/company', auth.hasRole('company'), controller.getCompanyLocations);
+
 module.exports = router;

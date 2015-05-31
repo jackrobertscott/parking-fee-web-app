@@ -76,6 +76,18 @@ exports.destroy = function(req, res) {
   });
 };
 
+// Get user vehicles
+exports.getUserVehicles = function(req, res) {
+  User.findById(req.params.id, '-salt -hashedPassword', function (err, user) {
+    if (err) { return handleError(res, err); }
+    if (!user) { return res.send(404); }
+    Vehicle.find({ _id: { $in: user.vehicles } }, function (err, vehicles) {
+      if (err) { return handleError(res, err); }
+      return res.json(vehicles);
+    });
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

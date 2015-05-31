@@ -11,7 +11,7 @@
     $stateProvider
     .state('user', {
       url: '/user',
-      templateUrl: 'app/user/views/overview.html',
+      templateUrl: 'app/user/overview.html',
       controller: 'ManyUsersCtrl',
       controllerAs: 'vm',
       data: {
@@ -20,7 +20,7 @@
     })
     .state('userAdmin', {
       url: '/user/admin',
-      templateUrl: 'app/user/views/admin.html',
+      templateUrl: 'app/user/admin.html',
       controller: 'ManyUsersCtrl',
       controllerAs: 'vm',
       data: {
@@ -29,25 +29,34 @@
     })
     .state('userRegister', {
       url: '/register',
-      templateUrl: 'app/user/views/register.html',
+      templateUrl: 'app/user/register.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm'
     })
     .state('userLogin', {
       url: '/login',
-      templateUrl: 'app/user/views/login.html',
+      templateUrl: 'app/user/login.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm'
     })
     .state('userLogout', {
       url: '/logout',
-      templateUrl: 'app/user/views/logout.html',
+      templateUrl: 'app/user/logout.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm'
     })
     .state('userPassword', {
       url: '/password',
-      templateUrl: 'app/user/views/password.html',
+      templateUrl: 'app/user/password.html',
+      controller: 'OneUserCtrl',
+      controllerAs: 'vm',
+      data: {
+        role: 'user'
+      }
+    })
+    .state('userSettings', {
+      url: '/settings',
+      templateUrl: 'app/user/settings.html',
       controller: 'OneUserCtrl',
       controllerAs: 'vm',
       data: {

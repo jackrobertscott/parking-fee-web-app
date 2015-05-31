@@ -11,7 +11,7 @@
     $stateProvider
     .state('vehicle', {
       url: '/vehicle',
-      templateUrl: 'app/vehicle/views/overview.html',
+      templateUrl: 'app/vehicle/overview.html',
       controller: 'ManyVehiclesCtrl',
       controllerAs: 'vm',
       data: {
@@ -20,7 +20,7 @@
     })
     .state('vehicleUser', {
       url: '/vehicle/user',
-      templateUrl: 'app/vehicle/views/user.html',
+      templateUrl: 'app/vehicle/user.html',
       controller: 'ManyVehiclesCtrl',
       controllerAs: 'vm',
       data: {
@@ -29,7 +29,7 @@
     })
     .state('vehicleRegister', {
       url: '/vehicle/register',
-      templateUrl: 'app/vehicle/views/register.html',
+      templateUrl: 'app/vehicle/register.html',
       controller: 'OneVehicleCtrl',
       controllerAs: 'vm',
       data: {
@@ -38,7 +38,7 @@
     })
     .state('vehicleSettings', {
       url: '/vehicle/settings/:id',
-      templateUrl: 'app/vehicle/views/settings.html',
+      templateUrl: 'app/vehicle/settings.html',
       controller: 'OneVehicleCtrl',
       controllerAs: 'vm',
       data: {

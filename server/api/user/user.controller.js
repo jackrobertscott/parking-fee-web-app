@@ -8,10 +8,6 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
-var validationError = function(res, err) {
-  return res.json(422, err);
-};
-
 /**
 * Get list of users
 * restriction: 'admin'
@@ -122,6 +118,20 @@ exports.update = function(req, res) {
 };
 
 /**
+* GET: company members
+*/
+exports.getCompanyMembers = function(req, res) {
+  Company.findById(req.params.id, function (err, company) {
+    if (err) { return handleError(res, err); }
+    if (!company) { return res.send(404); }
+    User.find({ _id: { $in: company.members } }, function (err, users) {
+      if (err) { return handleError(res, err); }
+      return res.json(users);
+    });
+  });
+};
+
+/**
 * Add user to company members
 */
 exports.addCompanyMember = function(req, res) {
@@ -180,20 +190,10 @@ exports.removeCompanyMember = function(req, res) {
   });
 };
 
-/**
-* Get a user's vehicles
-*/
-exports.getUserVehicles = function(req, res) {
-  User.findById(req.params.id, '-salt -hashedPassword', function (err, user) {
-    if (err) { return handleError(res, err); }
-    if (!user) { return res.send(404); }
-    Vehicle.find({ _id: { $in: user.vehicles } }, function (err, vehicles) {
-      if (err) { return handleError(res, err); }
-      return res.json(vehicles);
-    });
-  });
-};
-
 function handleError(res, err) {
   return res.send(500, err);
+}
+
+function validationError(res, err) {
+  return res.json(422, err);
 }
