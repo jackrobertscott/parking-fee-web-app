@@ -511,6 +511,7 @@ module.exports = function (grunt) {
             '!{.tmp,<%= yeoman.client %>}/components/data-services/data-services.js',
             '!{.tmp,<%= yeoman.client %>}/components/auth/auth.js',
             '!{.tmp,<%= yeoman.client %>}/app/app.js',
+            '!{.tmp,<%= yeoman.client %>}/app/config.js',
             '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
             '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js',
           ]
