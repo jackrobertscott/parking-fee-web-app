@@ -1,12 +1,12 @@
 <ul class="list-unstyled" ng-controller="ThemeCtrl as vm">
-  <span class="dropdown" ng-repeat="item in vm.menu" ng-if="item.show()">
-    <a ng-if="item.href" ui-sref="{{ item.href }}">
-      <li>{{ item.name }}</li>
+  <span class="dropdown" ng-repeat="item in vm.menu">
+    <a ng-if="item.direction != ''" ui-sref="{{ item.direction }}">
+      <li>{{ item.label }}</li>
     </a>
-    <li ng-if="!item.href" ng-click="vm.toggleChildren($index)">{{ item.name }}</li>
-    <ul ng-if="item.showChildren">
-      <a ng-repeat="child in item.children" ng-show="child.show()" ui-sref="{{ child.href }}">
-        <li>{{ child.name }}</li>
+    <li ng-if="item.direction == ''">{{ item.label }}</li>
+    <ul>
+      <a ng-repeat="child in item.children" ui-sref="{{ child.direction }}">
+        <li>{{ child.label }}</li>
       </a>
     </ul>
   </span>

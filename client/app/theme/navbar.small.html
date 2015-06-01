@@ -1,15 +1,17 @@
 <div ng-controller="ThemeCtrl as vm">
   <ul class="list-inline menu-labels">
-    <span ng-repeat="item in vm.menu" ng-if="item.show()">
-      <a ng-if="item.href" ui-sref="{{ item.href }}">
-        <li>{{ item.name }}</li>
+    <span ng-repeat="item in vm.menu">
+      <a ng-if="item.direction != ''" ui-sref="{{ item.direction }}">
+        <li>{{ item.label }}</li>
       </a>
-      <li ng-if="!item.href" ng-click="vm.toggleChildren($index)">{{ item.name }}</li>
+      <li ng-if="item.direction == ''" ng-click="vm.toggleChildren($index)">{{ item.label }}</li>
     </span>
   </ul>
+  <!-- ALter for next version of UI
   <ul ng-repeat="parent in vm.menu" ng-if="parent.showChildren" class="list-inline menu-items">
     <a ng-repeat="item in parent.children" ng-show="item.show()" ui-sref="{{ item.href }}">
       <li>{{ item.name }}</li>
     </a>
   </ul>
+  -->
 </div>

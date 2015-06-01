@@ -5,70 +5,64 @@
   .module('webApp')
   .controller('ThemeCtrl', ThemeCtrl);
 
-  ThemeCtrl.$inject = ['$state', 'Item'];
+  ThemeCtrl.$inject = ['$state', 'menu'];
 
-  function ThemeCtrl($state, Item) {
+  function ThemeCtrl($state, menu) {
     var vm = this;
 
-    vm.toggleChildren = toggleChildren;
     vm.isActive = isActive;
-    vm.menu = getMenu();
+    vm.menu = [];
 
     activate();
 
     function activate() {
-      // code
-    }
-
-    function toggleChildren(index) {
-      vm.menu.forEach(function(item) {
-        if (item.showChildren) {
-          item.showChildren = false;
-        }
-      });
-      vm.menu[index].showChildren = !vm.menu[index].showChildren;
+      var items = menu.getItems();
+      if (items && items.length) {
+        vm.menu = items;
+      } else {
+        vm.menu = createMenu();
+      }
     }
 
     function isActive(route) {
       return $state.is(route);
     }
 
-    function getMenu() {
-      return [
-        new Item('Home', 'main'),
-        new Item('Login', 'userLogin', null, 'guest'),
-        new Item('Register', 'userRegister', null, 'guest'),
-        new Item('Change Password', 'userPassword', 'user'),
-        new Item('Profile Settings', 'userSettings', 'user'),
-        new Item('Users', 'user', 'admin'),
-        new Item('Admin', 'userAdmin', 'admin'),
-        new Item('Register Company', 'companyRegister', 'user', 'user'),
-        new Item('Company', null, 'company', null, [
-          new Item('Admin', 'companyAdmin', 'admin'),
-          new Item('Overview', 'company'),
-          new Item('Settings', 'companySettings'),
-          new Item('Members', 'companyMembers'),
-        ]),
-        new Item('Infringement', null, 'company', null, [
-          new Item('Overview', 'infringement', 'admin'),
-          new Item('Company Infringements', 'infringementCompany'),
-        ]),
-        new Item('Location', null, 'user', null, [
-          new Item('Overview', 'location'),
-          new Item('My Locations', 'locationCompany', 'company'),
-          new Item('New Location', 'locationRegister', 'company'),
-        ]),
-        new Item('Vehicles', null, 'user', null, [
-          new Item('Overview', 'vehicle', 'admin'),
-          new Item('My Vehicles', 'vehicleUser'),
-          new Item('Register New', 'vehicleRegister'),
-        ]),
-        new Item('Sessions', null, 'user', null, [
-          new Item('Overview', 'session', 'admin'),
-          new Item('User Sessions', 'sessionUser'),
-        ]),
-        new Item('Logout', 'userLogout', 'user'),
-      ];
+    function createMenu() {
+      menu.addItem({label: 'Home', direction: 'main'});
+      menu.addItem({label: 'Login', direction: 'userLogin', maxRole: 'guest'});
+      menu.addItem({label: 'Register', direction: 'userRegister', maxRole: 'guest'});
+      menu.addItem({label: 'Change Password', direction: 'userPassword', minRole: 'user'});
+      menu.addItem({label: 'Profile Settings', direction: 'userSettings', minRole: 'user'});
+      menu.addItem({label: 'Admin', direction: 'userAdmin', minRole: 'admin'});
+      menu.addItem({label: 'Register Company', direction: 'companyRegister', minRole: 'user', maxRole: 'user'});
+      menu.addItem({label: 'Company', minRole: 'company', children: [
+        {label: 'Admin', direction: 'companyAdmin', minRole: 'admin'},
+        {label: 'Overview', direction: 'company'},
+        {label: 'Settings', direction: 'companySettings'},
+        {label: 'Members', direction: 'companyRegister'},
+      ]});
+      menu.addItem({label: 'All Locations', direction: 'location'});
+      menu.addItem({label: 'Locations', minRole: 'company', children: [
+        {label: 'My Locations', direction: 'locationCompany'},
+        {label: 'New Location', direction: 'locationRegister'},
+      ]});
+      menu.addItem({label: 'Vehicles', minRole: 'user', children: [
+        {label: 'Overview', direction: 'vehicle', minRole: 'admin'},
+        {label: 'My Vehicles', direction: 'vehicleUser'},
+        {label: 'Register New', direction: 'vehicleRegister'},
+      ]});
+      menu.addItem({label: 'Sessions', minRole: 'user', children: [
+        {label: 'Overview', direction: 'session', minRole: 'admin'},
+        {label: 'User Sessions', direction: 'sessionUser'},
+      ]});
+      menu.addItem({label: 'Infringements', minRole: 'user', children: [
+        {label: 'Overview', direction: 'infringement', minRole: 'admin'},
+        {label: 'Company Infringements', direction: 'infringementCompany', minRole: 'company'},
+        {label: 'My Infringements', direction: 'infringementUser'},
+      ]});
+      menu.addItem({label: 'Logout', direction: 'userLogout', minRole: 'user'});
+      return menu.getItems();
     }
   }
 })();

@@ -11,7 +11,8 @@
     'config',
     'tracto',
     'dataServices',
-    'auth'
+    'auth',
+    'menu'
   ])
   .config(config)
   .factory('authInterceptor', authInterceptor)
