@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('webApp')
+  .module('socket')
   .factory('socket', socketInstance);
 
   socketInstance.$inject = ['socketFactory'];

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('webApp')
+  .module('dataServices')
   .factory('dataMain', dataMain);
 
   dataMain.$inject = ['ResourceMain'];

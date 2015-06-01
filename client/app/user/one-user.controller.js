@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('OneUserCtrl', OneUserCtrl);
 
-  OneUserCtrl.$inject = ['dataUser', 'tracto', '$state', 'Auth', '$window'];
+  OneUserCtrl.$inject = ['dataUser', 'tracto', '$state', 'Auth'];
 
-  function OneUserCtrl(dataUser, tracto, $state, Auth, $window) {
+  function OneUserCtrl(dataUser, tracto, $state, Auth) {
     var vm = this;
 
     vm.item = {};
@@ -35,9 +35,11 @@
     function getOne(id) {
       vm.tracto.reset();
       id = id || Auth.getCurrentUser()._id;
-      dataUser.getOne(id).then(function(item) {
+      dataUser.getOne(id)
+      .then(function(item) {
         vm.item = item;
-      }).catch(vm.tracto.handle);
+      })
+      .catch(vm.tracto.handle);
     }
 
     function create(form) {
@@ -67,9 +69,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        return dataUser.update(vm.item).then(function(item) {
+        dataUser.update(vm.item)
+        .then(function(item) {
           vm.tracto.good = 'Successfully updated';
-        }).catch(vm.tracto.handle);
+        })
+        .catch(vm.tracto.handle);
       }
     }
 
@@ -78,10 +82,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataUser.remove(vm.item).then(function() {
+        dataUser.remove(vm.item)
+        .then(function() {
           vm.item = {};
           $state.go('main');
-        }).catch(vm.tracto.handle);
+        })
+        .catch(vm.tracto.handle);
       }
     }
 
@@ -102,7 +108,7 @@
     }
 
     function loginOauth(provider) {
-      $window.location.href = '/auth/' + provider;
+      Auth.loginOauth(provider);
     }
 
     function logout() {

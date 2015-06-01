@@ -6,9 +6,12 @@
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'btford.socket-io',
+    'socket',
     'ui.router',
-    'config'
+    'config',
+    'tracto',
+    'dataServices',
+    'auth'
   ])
   .config(config)
   .factory('authInterceptor', authInterceptor)
@@ -17,9 +20,8 @@
   config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
   function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-    $urlRouterProvider
-    .otherwise('/');
-
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
   }
