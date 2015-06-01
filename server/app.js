@@ -20,6 +20,13 @@ if (config.seedDB) { require('./config/seed'); }
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
+
+// Solve cross domain origin problems
+var cors = require('cors');
+app.use(cors());
+app.options('*', cors());
+
+// Socket setup
 var socketio = require('socket.io')(server, {
   serveClient: (config.env === 'production') ? false : true,
   path: '/socket.io-client'
