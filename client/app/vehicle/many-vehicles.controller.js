@@ -14,7 +14,7 @@
     vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
-    vm.getFew = getFew;
+    vm.getForUser = getForUser;
     vm.toSettings = toSettings;
 
     ////////////
@@ -29,28 +29,33 @@
 
     function getMany() {
       vm.glitch.reset();
-      dataVehicle.getMany().then(function(items) {
+      dataVehicle.getMany()
+      .then(function(items) {
         vm.items = items;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function remove(item) {
       vm.glitch.reset();
-      dataVehicle.remove(item).then(function() {
+      dataVehicle.remove(item)
+      .then(function() {
         vm.items.forEach(function(elem, i, array) {
           if (array[i]._id === item._id) {
             array.splice(i, 1);
           }
         });
         vm.glitch.good = 'Successfully deleted item';
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
-    function getFew() {
+    function getForUser() {
       dataVehicle.getUserVehicles(Auth.getCurrentUser()._id)
       .then(function(items) {
         vm.items = items;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function toSettings(item) {
