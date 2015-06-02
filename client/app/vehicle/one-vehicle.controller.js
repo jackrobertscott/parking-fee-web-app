@@ -66,7 +66,7 @@
       if (!form.$valid) {
         invalid();
       } else {
-        return dataVehicle.update(vm.item).then(function(item) {
+        dataVehicle.update(vm.item).then(function(item) {
           vm.tracto.good = 'Successfully updated';
         }).catch(vm.tracto.handle);
       }
