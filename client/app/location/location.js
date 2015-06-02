@@ -13,10 +13,7 @@
       url: '/location',
       templateUrl: 'app/location/overview.html',
       controller: 'ManyLocationsCtrl',
-      controllerAs: 'vm',
-      data: {
-        role: 'user'
-      }
+      controllerAs: 'vm'
     })
     .state('locationCompany', {
       url: '/location/company',
