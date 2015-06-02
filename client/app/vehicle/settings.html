@@ -20,8 +20,8 @@
         <div class="row">
           <div class="col-sm-8 center">
             <!-- main content start -->
-            <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
-            <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
+            <div ng-show="vm.glitch.bad" class="alert alert-danger" role="alert">{{ vm.glitch.bad }}</div>
+            <div ng-show="vm.glitch.good" class="alert alert-success" role="alert">{{ vm.glitch.good }}</div>
             <form class="form" name="form" ng-init="vm.getOne()" ng-submit="vm.update(form)" novalidate>
 
               <div class="form-group" ng-class="{ 'has-success': form.plate.$valid && vm.submitted, 'has-error': form.plate.$invalid && vm.submitted }">

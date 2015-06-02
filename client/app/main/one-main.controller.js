@@ -5,13 +5,13 @@
   .module('webApp')
   .controller('OneMainCtrl', OneMainCtrl);
 
-  OneMainCtrl.$inject = ['dataMain', 'tracto', '$state', '$stateParams'];
+  OneMainCtrl.$inject = ['dataMain', 'glitch', '$state', '$stateParams'];
 
-  function OneMainCtrl(dataMain, tracto, $state, $stateParams) {
+  function OneMainCtrl(dataMain, glitch, $state, $stateParams) {
     var vm = this;
 
     vm.item = {};
-    vm.tracto = tracto;
+    vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
     vm.create = create;
@@ -29,52 +29,52 @@
     }
 
     function getOne(id) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       id = id || $stateParams.id;
       dataMain.getOne(id).then(function(item) {
         vm.item = item;
-      }).catch(vm.tracto.handle);
+      }).catch(vm.glitch.handle);
     }
 
     function create(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
         dataMain.create(vm.item).then(function(item) {
           $state.go('main');
-        }).catch(vm.tracto.handle);
+        }).catch(vm.glitch.handle);
       }
     }
 
     function update(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
         return dataMain.update(vm.item).then(function(item) {
-          vm.tracto.good = 'Successfully updated';
-        }).catch(vm.tracto.handle);
+          vm.glitch.good = 'Successfully updated';
+        }).catch(vm.glitch.handle);
       }
     }
 
     function remove(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       if (!form.$valid) {
         invalid();
       } else {
         dataMain.remove(vm.item).then(function() {
           vm.item = {};
           $state.go('main');
-        }).catch(vm.tracto.handle);
+        }).catch(vm.glitch.handle);
       }
     }
 
     function invalid() {
       vm.submitted = true;
-      vm.tracto.bad = 'Form is invalid';
+      vm.glitch.bad = 'Form is invalid';
     }
   }
 })();

@@ -20,8 +20,8 @@
         <div class="row">
           <div class="col-sm-8 center">
             <!-- main content start -->
-            <div ng-show="vm.tracto.bad" class="alert alert-danger" role="alert">{{ vm.tracto.bad }}</div>
-            <div ng-show="vm.tracto.good" class="alert alert-success" role="alert">{{ vm.tracto.good }}</div>
+            <div ng-show="vm.glitch.bad" class="alert alert-danger" role="alert">{{ vm.glitch.bad }}</div>
+            <div ng-show="vm.glitch.good" class="alert alert-success" role="alert">{{ vm.glitch.good }}</div>
             <a href="/vehicle/register">Register a new vehicle</a>
             <ul class="list-group" ng-init="vm.getMany()">
               <li class="list-group-item" ng-repeat="vehicle in vm.items">

@@ -5,13 +5,13 @@
   .module('webApp')
   .controller('OneUserCtrl', OneUserCtrl);
 
-  OneUserCtrl.$inject = ['dataUser', 'tracto', '$state', 'Auth'];
+  OneUserCtrl.$inject = ['dataUser', 'glitch', '$state', 'Auth'];
 
-  function OneUserCtrl(dataUser, tracto, $state, Auth) {
+  function OneUserCtrl(dataUser, glitch, $state, Auth) {
     var vm = this;
 
     vm.item = {};
-    vm.tracto = tracto;
+    vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
     vm.create = create;
@@ -33,17 +33,17 @@
     }
 
     function getOne(id) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       id = id || Auth.getCurrentUser()._id;
       dataUser.getOne(id)
       .then(function(item) {
         vm.item = item;
       })
-      .catch(vm.tracto.handle);
+      .catch(vm.glitch.handle);
     }
 
     function create(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
@@ -57,28 +57,28 @@
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
             form[field].$setValidity('mongoose', false);
-            vm.tracto.bad = error.message;
+            vm.glitch.bad = error.message;
           });
         });
       }
     }
 
     function update(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
         dataUser.update(vm.item)
         .then(function(item) {
-          vm.tracto.good = 'Successfully updated';
+          vm.glitch.good = 'Successfully updated';
         })
-        .catch(vm.tracto.handle);
+        .catch(vm.glitch.handle);
       }
     }
 
     function remove(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       if (!form.$valid) {
         invalid();
       } else {
@@ -87,12 +87,12 @@
           vm.item = {};
           $state.go('main');
         })
-        .catch(vm.tracto.handle);
+        .catch(vm.glitch.handle);
       }
     }
 
     function login(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
@@ -102,7 +102,7 @@
           $state.go('main');
         })
         .catch(function(err) {
-          vm.tracto.bad = err.message;
+          vm.glitch.bad = err.message;
         });
       }
     }
@@ -117,25 +117,25 @@
     }
 
     function changePassword(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
         Auth.changePassword(vm.item.oldPassword, vm.item.newPassword)
         .then(function() {
-          vm.tracto.good = 'Password successfully changed.';
+          vm.glitch.good = 'Password successfully changed.';
         })
         .catch(function() {
           form.password.$setValidity('mongoose', false);
-          vm.tracto.bad = 'Incorrect password';
+          vm.glitch.bad = 'Incorrect password';
         });
       }
     }
 
     function invalid() {
       vm.submitted = true;
-      vm.tracto.bad = 'Form is invalid';
+      vm.glitch.bad = 'Form is invalid';
     }
   }
 })();
