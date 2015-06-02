@@ -16,7 +16,7 @@
   ])
   .config(config)
   .factory('authInterceptor', authInterceptor)
-  .run(run);
+  .run(allowAccess);
 
   config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
@@ -55,9 +55,9 @@
     };
   }
 
-  run.$inject = ['$rootScope', '$location', 'Auth', 'tracto'];
+  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'tracto'];
 
-  function run($rootScope, $location, Auth, tracto) {
+  function allowAccess($rootScope, $location, Auth, tracto) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       tracto.reset();
