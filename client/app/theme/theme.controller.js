@@ -5,9 +5,9 @@
   .module('webApp')
   .controller('ThemeCtrl', ThemeCtrl);
 
-  ThemeCtrl.$inject = ['$state', 'menu'];
+  ThemeCtrl.$inject = ['$state', 'Auth', 'menu'];
 
-  function ThemeCtrl($state, menu) {
+  function ThemeCtrl($state, Auth, menu) {
     var vm = this;
 
     vm.isActive = isActive;
@@ -16,12 +16,9 @@
     activate();
 
     function activate() {
-      var items = menu.getItems();
-      if (items && items.length) {
-        vm.menu = items;
-      } else {
+      Auth.isLoggedInAsync(function(isLoggedIn) {
         vm.menu = createMenu();
-      }
+      });
     }
 
     function isActive(route) {
@@ -29,6 +26,7 @@
     }
 
     function createMenu() {
+      menu.reset();
       menu.addItem({label: 'Home', direction: 'main'});
       menu.addItem({label: 'Login', direction: 'userLogin', maxRole: 'guest'});
       menu.addItem({label: 'Register', direction: 'userRegister', maxRole: 'guest'});
