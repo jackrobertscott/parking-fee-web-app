@@ -57,7 +57,7 @@
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
             form[field].$setValidity('mongoose', false);
-            vm.glitch.bad = error.message;
+            vm.glitch.setError(error.message);
           });
         });
       }
@@ -71,7 +71,7 @@
       } else {
         dataUser.update(vm.item)
         .then(function(item) {
-          vm.glitch.good = 'Successfully updated';
+          vm.glitch.setSuccess('Successfully updated');
         })
         .catch(vm.glitch.handle);
       }
@@ -102,7 +102,7 @@
           $state.go('main');
         })
         .catch(function(err) {
-          vm.glitch.bad = err.message;
+          vm.glitch.setError(err.message);
         });
       }
     }
@@ -124,18 +124,18 @@
       } else {
         Auth.changePassword(vm.item.oldPassword, vm.item.newPassword)
         .then(function() {
-          vm.glitch.good = 'Password successfully changed.';
+          vm.glitch.setSuccess('Password successfully changed.');
         })
         .catch(function() {
           form.password.$setValidity('mongoose', false);
-          vm.glitch.bad = 'Incorrect password';
+          vm.glitch.setError('Incorrect password');
         });
       }
     }
 
     function invalid() {
       vm.submitted = true;
-      vm.glitch.bad = 'Form is invalid';
+      vm.glitch.setError('Form is invalid');
     }
   }
 })();

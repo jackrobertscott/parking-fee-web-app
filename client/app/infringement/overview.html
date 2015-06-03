@@ -20,8 +20,8 @@
         <div class="row">
           <div class="col-sm-8 center">
             <!-- infringement content start -->
-            <div ng-show="vm.glitch.bad" class="alert alert-danger" role="alert">{{ vm.glitch.bad }}</div>
-            <div ng-show="vm.glitch.good" class="alert alert-success" role="alert">{{ vm.glitch.good }}</div>
+            <div ng-show="vm.glitch.getError()" class="alert alert-danger" role="alert">{{ vm.glitch.getError() }}</div>
+            <div ng-show="vm.glitch.getSuccess()" class="alert alert-success" role="alert">{{ vm.glitch.getSuccess() }}</div>
             <ul class="list-group" ng-init="vm.getMany()">
               <li class="list-group-item" ng-repeat="infringement in vm.items">
                   <strong>{{infringement.name}}</strong><br>

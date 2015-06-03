@@ -48,7 +48,7 @@
             array.splice(i, 1);
           }
         });
-        vm.glitch.good = 'Successfully deleted item';
+        vm.glitch.setSuccess('Successfully deleted item');
       }).catch(vm.glitch.handle);
     }
 
@@ -69,8 +69,8 @@
 
     function companyAddCompany(member) {
       vm.glitch.reset();
-      if (member.role === 'admin') {vm.glitch.bad = 'Can not edit admins';}
-      else if (member._id === Auth.getCurrentUser()._id) {vm.glitch.bad = 'Can not edit self';}
+      if (member.role === 'admin') {vm.glitch.setError('Can not edit admins');}
+      else if (member._id === Auth.getCurrentUser()._id) {vm.glitch.setError('Can not edit self');}
       else {
         dataUser.addCompanyMember(member, Auth.getCurrentUser().company, 'company')
         .then(function() {
@@ -83,8 +83,8 @@
 
     function companyAddInspector(member) {
       vm.glitch.reset();
-      if (member.role === 'admin') {vm.glitch.bad = 'Can not edit admins';}
-      else if (member._id === Auth.getCurrentUser()._id) {vm.glitch.bad = 'Can not edit self';}
+      if (member.role === 'admin') {vm.glitch.setError('Can not edit admins');}
+      else if (member._id === Auth.getCurrentUser()._id) {vm.glitch.setError('Can not edit self');}
       else {
         dataUser.addCompanyMember(member, Auth.getCurrentUser().company, 'inspector')
         .then(function() {
@@ -97,8 +97,8 @@
 
     function companyRemoveMember(member) {
       vm.glitch.reset();
-      if (member.role === 'admin') {vm.glitch.bad = 'Can not edit admins';}
-      else if (member._id === Auth.getCurrentUser()._id) {vm.glitch.bad = 'Can not edit self';}
+      if (member.role === 'admin') {vm.glitch.setError('Can not edit admins');}
+      else if (member._id === Auth.getCurrentUser()._id) {vm.glitch.setError('Can not edit self');}
       else {
         dataUser.removeCompanyMember(member)
         .then(function() {
@@ -113,7 +113,7 @@
       vm.glitch.reset();
       item.authenticated = true;
       dataCompany.update(item).then(function () {
-        vm.glitch.good = 'Successfully authenticated company';
+        vm.glitch.setSuccess('Successfully authenticated company');
       }).catch(vm.glitch.handle);
     }
 
@@ -121,7 +121,7 @@
       vm.glitch.reset();
       item.authenticated = false;
       dataCompany.update(item).then(function () {
-        vm.glitch.good = 'Successfully unauthenticated company';
+        vm.glitch.setSuccess('Successfully unauthenticated company');
       }).catch(vm.glitch.handle);
     }
   }

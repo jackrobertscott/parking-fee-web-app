@@ -41,7 +41,7 @@
             array.splice(i, 1);
           }
         });
-        vm.glitch.good = 'Successfully deleted item';
+        vm.glitch.setSuccess('Successfully deleted item');
       }).catch(vm.glitch.handle);
     }
 

@@ -60,7 +60,7 @@
         invalid();
       } else {
         return dataInfringement.update(vm.item).then(function(item) {
-          vm.glitch.good = 'Successfully updated';
+          vm.glitch.setSuccess('Successfully updated');
         }).catch(vm.glitch.handle);
       }
     }
@@ -79,7 +79,7 @@
 
     function invalid() {
       vm.submitted = true;
-      vm.glitch.bad = 'Form is invalid';
+      vm.glitch.setError('Form is invalid');
     }
   }
 })();
