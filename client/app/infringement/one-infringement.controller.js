@@ -31,9 +31,11 @@
     function getOne(id) {
       vm.glitch.reset();
       id = id || $stateParams.id;
-      dataInfringement.getOne(id).then(function(item) {
+      dataInfringement.getOne(id)
+      .then(function(item) {
         vm.item = item;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -47,9 +49,11 @@
           _creator: user._id,
           company: user.company
         });
-        dataInfringement.create(vm.item).then(function(item) {
+        dataInfringement.create(vm.item)
+        .then(function(item) {
           $state.go('infringement');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -59,9 +63,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        return dataInfringement.update(vm.item).then(function(item) {
+        dataInfringement.update(vm.item)
+        .then(function(item) {
           vm.glitch.setSuccess('Successfully updated');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -70,10 +76,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataInfringement.remove(vm.item).then(function() {
+        dataInfringement.remove(vm.item)
+        .then(function() {
           vm.item = {};
           $state.go('infringement');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 

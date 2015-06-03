@@ -3,11 +3,11 @@
 
   angular
   .module('dataServices')
-  .factory('dataMain', dataMain);
+  .factory('dataXxxUCPHxxx', dataXxxUCPHxxx);
 
-  dataMain.$inject = ['ResourceMain'];
+  dataXxxUCPHxxx.$inject = ['ResourceXxxUCPHxxx'];
 
-  function dataMain(ResourceMain) {
+  function dataXxxUCPHxxx(ResourceXxxUCPHxxx) {
     var service = {
       getOne: getOne,
       getMany: getMany,
@@ -19,25 +19,25 @@
     return service;
 
     function getOne(id) {
-      return ResourceMain.get({id: id}).$promise;
+      return ResourceXxxUCPHxxx.get({id: id}).$promise;
     }
 
     function getMany() {
-      return ResourceMain.query().$promise;
+      return ResourceXxxUCPHxxx.query().$promise;
     }
 
     function create(body) {
-      var object = new ResourceMain(body);
+      var object = new ResourceXxxUCPHxxx(body);
       return object.$save();
     }
 
     function update(body) {
-      var object = new ResourceMain(body);
+      var object = new ResourceXxxUCPHxxx(body);
       return object.$update();
     }
 
     function remove(body) {
-      var object = new ResourceMain(body);
+      var object = new ResourceXxxUCPHxxx(body);
       return object.$remove();
     }
   }

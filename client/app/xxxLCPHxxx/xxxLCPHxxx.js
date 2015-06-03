@@ -8,12 +8,14 @@
   config.$inject = ['$stateProvider'];
 
   function config($stateProvider) {
+    /* Remove comments and add states
     $stateProvider
-    .state('main', {
+    .state('xxxLCPHxxx', {
       url: '/',
-      templateUrl: 'app/main/overview.html',
-      controller: 'MainCtrl',
+      templateUrl: 'app/xxxLCPHxxx/overview.html',
+      controller: 'ManyXxxUCPHxxxsCtrl',
       controllerAs: 'vm'
     });
+    */
   }
 })();

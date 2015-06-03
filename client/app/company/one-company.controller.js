@@ -31,9 +31,11 @@
     function getOne(id) {
       vm.glitch.reset();
       id = id || Auth.getCurrentUser().company;
-      dataCompany.getOne(id).then(function(item) {
+      dataCompany.getOne(id)
+      .then(function(item) {
         vm.item = item;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -47,11 +49,13 @@
           _creator: user._id,
           members: [user._id]
         });
-        dataCompany.create(vm.item).then(function(item) {
+        dataCompany.create(vm.item)
+        .then(function(item) {
           Auth.reloadUser(function() { // update user role in Auth
             $state.go('companyMembers');
           });
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -61,9 +65,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        return dataCompany.update(vm.item).then(function(item) {
+        dataCompany.update(vm.item)
+        .then(function(item) {
           vm.glitch.setSuccess('Successfully updated');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -72,12 +78,14 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataCompany.remove(vm.item).then(function() {
+        dataCompany.remove(vm.item)
+        .then(function() {
           vm.item = {};
           Auth.reloadUser(function() { // update user role in Auth
             $state.go('main');
           });
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 

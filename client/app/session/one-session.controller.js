@@ -30,9 +30,11 @@
 
     function getOne(id) {
       vm.glitch.reset();
-      dataSession.getOne(id).then(function(item) {
+      dataSession.getOne(id)
+      .then(function(item) {
         vm.item = item;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -41,9 +43,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataSession.create(vm.item).then(function(item) {
+        dataSession.create(vm.item)
+        .then(function(item) {
           $state.go('session');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -53,9 +57,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        return dataSession.update(vm.item).then(function(item) {
+        dataSession.update(vm.item)
+        .then(function(item) {
           vm.glitch.setSuccess('Successfully updated');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -64,10 +70,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataSession.remove(vm.item).then(function() {
+        dataSession.remove(vm.item)
+        .then(function() {
           vm.item = {};
           $state.go('session');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 

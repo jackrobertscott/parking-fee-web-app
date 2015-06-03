@@ -31,11 +31,13 @@
     function getOne(id) {
       vm.glitch.reset();
       id = id || $stateParams.id;
-      dataLocation.getOne(id).then(function(item) {
+      dataLocation.getOne(id)
+      .then(function(item) {
         item.start = new Date(item.start);
         item.end = new Date(item.end);
         vm.item = item;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -49,9 +51,11 @@
           _creator: user._id,
           company: user.company
         });
-        dataLocation.create(vm.item).then(function(item) {
+        dataLocation.create(vm.item)
+        .then(function(item) {
           $state.go('locationCompany');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -61,9 +65,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        return dataLocation.update(vm.item).then(function(item) {
+        dataLocation.update(vm.item)
+        .then(function(item) {
           vm.glitch.setSuccess('Successfully updated');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -72,10 +78,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataLocation.remove(vm.item).then(function() {
+        dataLocation.remove(vm.item)
+        .then(function() {
           vm.item = {};
           $state.go('locationCompany');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 

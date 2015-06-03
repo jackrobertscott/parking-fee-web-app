@@ -19,9 +19,11 @@
         <hr class="hidden-xs hidden-sm">
         <div class="row">
           <div class="col-sm-8 center">
-            <!-- main content start -->
+            <!-- xxxLCPHxxx content start -->
+            <div ng-show="vm.glitch.getError()" class="alert alert-danger" role="alert">{{ vm.glitch.getError() }}</div>
+            <div ng-show="vm.glitch.getSuccess()" class="alert alert-success" role="alert">{{ vm.glitch.getSuccess() }}</div>
             <p>This is the home page.</p>
-            <!-- main content end -->
+            <!-- xxxLCPHxxx content end -->
           </div>
           <div class="col-sm-4 right">
             <hr class="hidden-sm hidden-md hidden-lg">

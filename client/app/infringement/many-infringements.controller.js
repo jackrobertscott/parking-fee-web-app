@@ -29,21 +29,25 @@
 
     function getMany() {
       vm.glitch.reset();
-      dataInfringement.getMany().then(function(items) {
+      dataInfringement.getMany()
+      .then(function(items) {
         vm.items = items;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function remove(item) {
       vm.glitch.reset();
-      dataInfringement.remove(item).then(function() {
+      dataInfringement.remove(item)
+      .then(function() {
         vm.items.forEach(function(elem, i, array) {
           if (array[i]._id === item._id) {
             array.splice(i, 1);
           }
         });
         vm.glitch.setSuccess('Successfully deleted item');
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function toSettings(item) {
@@ -57,7 +61,8 @@
       dataInfringement.getFewCompany(Auth.getCurrentUser().company)
       .then(function(items) {
         vm.items = items;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
   }
 })();

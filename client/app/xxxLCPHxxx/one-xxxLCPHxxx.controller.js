@@ -3,14 +3,14 @@
 
   angular
   .module('webApp')
-  .controller('OneMainCtrl', OneMainCtrl);
+  .controller('OneXxxUCPHxxxCtrl', OneXxxUCPHxxxCtrl);
 
-  OneMainCtrl.$inject = ['dataMain', 'glitch', '$state', '$stateParams'];
+  OneXxxUCPHxxxCtrl.$inject = ['dataXxxUCPHxxx', 'glitch', '$state', '$stateParams'];
 
-  function OneMainCtrl(dataMain, glitch, $state, $stateParams) {
+  function OneXxxUCPHxxxCtrl(dataXxxUCPHxxx, glitch, $state, $stateParams) {
     var vm = this;
 
-    vm.item = {};
+    vm.xxxLCPHxxx = {};
     vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
@@ -31,9 +31,11 @@
     function getOne(id) {
       vm.glitch.reset();
       id = id || $stateParams.id;
-      dataMain.getOne(id).then(function(item) {
-        vm.item = item;
-      }).catch(vm.glitch.handle);
+      dataXxxUCPHxxx.getOne(id)
+      .then(function(xxxLCPHxxx) {
+        vm.xxxLCPHxxx = xxxLCPHxxx;
+      })
+      .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -42,9 +44,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataMain.create(vm.item).then(function(item) {
-          $state.go('main');
-        }).catch(vm.glitch.handle);
+        dataXxxUCPHxxx.create(vm.xxxLCPHxxx)
+        .then(function(xxxLCPHxxx) {
+          $state.go('xxxLCPHxxx');
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -54,9 +58,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        return dataMain.update(vm.item).then(function(item) {
+        dataXxxUCPHxxx.update(vm.xxxLCPHxxx)
+        .then(function(xxxLCPHxxx) {
           vm.glitch.setSuccess('Successfully updated');
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -65,10 +71,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataMain.remove(vm.item).then(function() {
-          vm.item = {};
-          $state.go('main');
-        }).catch(vm.glitch.handle);
+        dataXxxUCPHxxx.remove(vm.xxxLCPHxxx)
+        .then(function() {
+          vm.xxxLCPHxxx = {};
+          $state.go('xxxLCPHxxx');
+        })
+        .catch(vm.glitch.handle);
       }
     }
 

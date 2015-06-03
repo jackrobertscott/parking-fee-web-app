@@ -3,11 +3,11 @@
 
   angular
   .module('webApp')
-  .controller('ManyMainsCtrl', ManyMainsCtrl);
+  .controller('ManyXxxUCPHxxxsCtrl', ManyXxxUCPHxxxsCtrl);
 
-  ManyMainsCtrl.$inject = ['dataMain', 'glitch', 'socket', '$state'];
+  ManyXxxUCPHxxxsCtrl.$inject = ['dataXxxUCPHxxx', 'glitch', 'socket', '$state'];
 
-  function ManyMainsCtrl(dataMain, glitch, socket, $state) {
+  function ManyXxxUCPHxxxsCtrl(dataXxxUCPHxxx, glitch, socket, $state) {
     var vm = this;
 
     vm.items = [];
@@ -28,21 +28,25 @@
 
     function getMany() {
       vm.glitch.reset();
-      dataMain.getMany().then(function(items) {
+      dataXxxUCPHxxx.getMany()
+      .then(function(items) {
         vm.items = items;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function remove(item) {
       vm.glitch.reset();
-      dataMain.remove(item).then(function() {
+      dataXxxUCPHxxx.remove(item)
+      .then(function() {
         vm.items.forEach(function(elem, i, array) {
           if (array[i]._id === item._id) {
             array.splice(i, 1);
           }
         });
         vm.glitch.setSuccess('Successfully deleted item');
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function toSettings(item) {

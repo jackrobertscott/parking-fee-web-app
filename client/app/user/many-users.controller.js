@@ -27,21 +27,25 @@
 
     function getMany() {
       vm.glitch.reset();
-      dataUser.getMany().then(function(items) {
+      dataUser.getMany()
+      .then(function(items) {
         vm.items = items;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function remove(item) {
       vm.glitch.reset();
-      dataUser.remove(item).then(function() {
+      dataUser.remove(item)
+      .then(function() {
         vm.items.forEach(function(elem, i, array) {
           if (array[i]._id === item._id) {
             array.splice(i, 1);
           }
         });
         vm.glitch.setSuccess('Successfully deleted item');
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
   }
 })();

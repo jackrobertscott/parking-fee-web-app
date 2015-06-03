@@ -35,28 +35,34 @@
 
     function getMany() {
       vm.glitch.reset();
-      dataCompany.getMany().then(function(items) {
+      dataCompany.getMany()
+      .then(function(items) {
         vm.items = items;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function remove(item) {
       vm.glitch.reset();
-      dataCompany.remove(item).then(function() {
+      dataCompany.remove(item)
+      .then(function() {
         vm.items.forEach(function(elem, i, array) {
           if (array[i]._id === item._id) {
             array.splice(i, 1);
           }
         });
         vm.glitch.setSuccess('Successfully deleted item');
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function getUsers() {
       vm.glitch.reset();
-      dataUser.getMany().then(function(users) {
+      dataUser.getMany()
+      .then(function(users) {
         vm.users = users;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function getCompanyMembers() {
@@ -64,7 +70,8 @@
       dataUser.getCompanyMembers(Auth.getCurrentUser().company)
       .then(function(items) {
         vm.items = items;
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function companyAddCompany(member) {
@@ -77,7 +84,8 @@
           // could be slow
           getCompanyMembers();
           getUsers();
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -91,7 +99,8 @@
           // could be slow
           getCompanyMembers();
           getUsers();
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
@@ -105,24 +114,29 @@
           // could be slow
           getCompanyMembers();
           getUsers();
-        }).catch(vm.glitch.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
     function authenticate(item) {
       vm.glitch.reset();
       item.authenticated = true;
-      dataCompany.update(item).then(function () {
+      dataCompany.update(item)
+      .then(function () {
         vm.glitch.setSuccess('Successfully authenticated company');
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function unauthenticate(item) {
       vm.glitch.reset();
       item.authenticated = false;
-      dataCompany.update(item).then(function () {
+      dataCompany.update(item)
+      .then(function () {
         vm.glitch.setSuccess('Successfully unauthenticated company');
-      }).catch(vm.glitch.handle);
+      })
+      .catch(vm.glitch.handle);
     }
   }
 })();
