@@ -12,7 +12,7 @@
     .state('main', {
       url: '/',
       templateUrl: 'app/main/overview.html',
-      controller: 'ManyMainsCtrl',
+      controller: 'MainCtrl',
       controllerAs: 'vm'
     });
   }

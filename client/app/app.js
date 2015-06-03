@@ -6,20 +6,23 @@
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'btford.socket-io',
+    'socket',
     'ui.router',
-    'config'
+    'config',
+    'glitch',
+    'dataServices',
+    'auth',
+    'menu'
   ])
   .config(config)
   .factory('authInterceptor', authInterceptor)
-  .run(run);
+  .run(allowAccess);
 
   config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
   function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-    $urlRouterProvider
-    .otherwise('/');
-
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
   }
@@ -52,12 +55,12 @@
     };
   }
 
-  run.$inject = ['$rootScope', '$location', 'Auth', 'tracto'];
+  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'glitch'];
 
-  function run($rootScope, $location, Auth, tracto) {
+  function allowAccess($rootScope, $location, Auth, glitch) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      tracto.reset();
+      glitch.reset();
       Auth.isLoggedInAsync(function(loggedIn) {
         if (toState.data && toState.data.role && toState.data.role !== 'guest') {
           var userRoles = Auth.getUserRoles();

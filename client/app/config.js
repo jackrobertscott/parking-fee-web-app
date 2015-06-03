@@ -3,5 +3,5 @@
 
   angular
   .module('config', [])
-  .constant('ENV', {name:'',apiEndpoint:''}); // placeholder
+  .constant('ENV', {name:'',apiEndpoint:'/'});
 })();

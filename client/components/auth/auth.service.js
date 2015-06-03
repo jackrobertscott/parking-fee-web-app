@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-  .module('webApp')
+  .module('auth')
   .factory('Auth', Auth);
 
-  Auth.$inject = ['$location', '$rootScope', '$http', 'ResourceUser', '$cookieStore', '$q', 'tracto'];
+  Auth.$inject = ['$location', '$rootScope', '$http', 'ResourceUser', '$cookieStore', '$q', '$window', 'glitch', 'ENV'];
 
-  function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q, tracto) {
+  function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q, $window, glitch, ENV) {
     var currentUser = {};
     if ($cookieStore.get('token')) {
       currentUser = ResourceUser.get();
@@ -24,7 +24,8 @@
       isAdmin: isAdmin,
       getToken: getToken,
       getUserRoles: getUserRoles,
-      reloadUser: reloadUser
+      reloadUser: reloadUser,
+      loginOauth: loginOauth
     };
 
     return service;
@@ -33,22 +34,23 @@
       cb = cb || angular.noop;
       var deferred = $q.defer();
 
-      $http.post('/auth/local', {
+      $http.post(ENV.apiEndpoint+'auth/local', {
         email: user.email,
         password: user.password
-      }).
-      success(function(data) {
+      })
+      .success(function(data) {
         $cookieStore.put('token', data.token);
         currentUser = ResourceUser.get(function() {
           deferred.resolve(data);
           return cb();
         });
-      }).
-      error(function(err) {
+      })
+      .error(function(err) {
         this.logout();
         deferred.reject(err);
         return cb(err);
-      }.bind(this));
+      }
+      .bind(this));
 
       return deferred.promise;
     }
@@ -84,9 +86,11 @@
 
     function isLoggedInAsync(cb) {
       if (currentUser.hasOwnProperty('$promise')) {
-        currentUser.$promise.then(function() {
+        currentUser.$promise
+        .then(function() {
           cb(true);
-        }).catch(function() {
+        })
+        .catch(function() {
           cb(false);
         });
       } else if (currentUser.hasOwnProperty('role')) {
@@ -114,9 +118,14 @@
       .then(function(user) {
         currentUser = user;
         cb();
-      }).catch(function(err) {
+      })
+      .catch(function(err) {
         cb(err);
       });
+    }
+
+    function loginOauth(provider) {
+      $window.location.href = ENV.apiEndpoint + 'auth/' + provider;
     }
   }
 })();

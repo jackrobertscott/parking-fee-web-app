@@ -5,13 +5,13 @@
   .module('webApp')
   .controller('OneLocationCtrl', OneLocationCtrl);
 
-  OneLocationCtrl.$inject = ['dataLocation', 'tracto', '$state', 'Auth', '$stateParams'];
+  OneLocationCtrl.$inject = ['dataLocation', 'glitch', '$state', 'Auth', '$stateParams'];
 
-  function OneLocationCtrl(dataLocation, tracto, $state, Auth, $stateParams) {
+  function OneLocationCtrl(dataLocation, glitch, $state, Auth, $stateParams) {
     var vm = this;
 
     vm.item = {};
-    vm.tracto = tracto;
+    vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
     vm.create = create;
@@ -29,17 +29,19 @@
     }
 
     function getOne(id) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       id = id || $stateParams.id;
-      dataLocation.getOne(id).then(function(item) {
+      dataLocation.getOne(id)
+      .then(function(item) {
         item.start = new Date(item.start);
         item.end = new Date(item.end);
         vm.item = item;
-      }).catch(vm.tracto.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function create(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
@@ -49,39 +51,45 @@
           _creator: user._id,
           company: user.company
         });
-        dataLocation.create(vm.item).then(function(item) {
+        dataLocation.create(vm.item)
+        .then(function(item) {
           $state.go('locationCompany');
-        }).catch(vm.tracto.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
     function update(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
-        return dataLocation.update(vm.item).then(function(item) {
-          vm.tracto.good = 'Successfully updated';
-        }).catch(vm.tracto.handle);
+        dataLocation.update(vm.item)
+        .then(function(item) {
+          vm.glitch.setSuccess('Successfully updated');
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
     function remove(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       if (!form.$valid) {
         invalid();
       } else {
-        dataLocation.remove(vm.item).then(function() {
+        dataLocation.remove(vm.item)
+        .then(function() {
           vm.item = {};
           $state.go('locationCompany');
-        }).catch(vm.tracto.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
     function invalid() {
       vm.submitted = true;
-      vm.tracto.bad = 'Form is invalid';
+      vm.glitch.setError('Form is invalid');
     }
   }
 })();

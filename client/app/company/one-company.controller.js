@@ -5,13 +5,13 @@
   .module('webApp')
   .controller('OneCompanyCtrl', OneCompanyCtrl);
 
-  OneCompanyCtrl.$inject = ['dataCompany', 'tracto', '$state', 'Auth'];
+  OneCompanyCtrl.$inject = ['dataCompany', 'glitch', '$state', 'Auth'];
 
-  function OneCompanyCtrl(dataCompany, tracto, $state, Auth) {
+  function OneCompanyCtrl(dataCompany, glitch, $state, Auth) {
     var vm = this;
 
     vm.item = {};
-    vm.tracto = tracto;
+    vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
     vm.create = create;
@@ -29,15 +29,17 @@
     }
 
     function getOne(id) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       id = id || Auth.getCurrentUser().company;
-      dataCompany.getOne(id).then(function(item) {
+      dataCompany.getOne(id)
+      .then(function(item) {
         vm.item = item;
-      }).catch(vm.tracto.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function create(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
@@ -47,43 +49,49 @@
           _creator: user._id,
           members: [user._id]
         });
-        dataCompany.create(vm.item).then(function(item) {
+        dataCompany.create(vm.item)
+        .then(function(item) {
           Auth.reloadUser(function() { // update user role in Auth
             $state.go('companyMembers');
           });
-        }).catch(vm.tracto.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
     function update(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
-        return dataCompany.update(vm.item).then(function(item) {
-          vm.tracto.good = 'Successfully updated';
-        }).catch(vm.tracto.handle);
+        dataCompany.update(vm.item)
+        .then(function(item) {
+          vm.glitch.setSuccess('Successfully updated');
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
     function remove(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       if (!form.$valid) {
         invalid();
       } else {
-        dataCompany.remove(vm.item).then(function() {
+        dataCompany.remove(vm.item)
+        .then(function() {
           vm.item = {};
           Auth.reloadUser(function() { // update user role in Auth
             $state.go('main');
           });
-        }).catch(vm.tracto.handle);
+        })
+        .catch(vm.glitch.handle);
       }
     }
 
     function invalid() {
       vm.submitted = true;
-      vm.tracto.bad = 'Form is invalid';
+      vm.glitch.setError('Form is invalid');
     }
   }
 })();

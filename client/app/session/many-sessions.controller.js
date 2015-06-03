@@ -5,13 +5,13 @@
   .module('webApp')
   .controller('ManySessionsCtrl', ManySessionsCtrl);
 
-  ManySessionsCtrl.$inject = ['dataSession', 'tracto', 'socket', 'Auth'];
+  ManySessionsCtrl.$inject = ['dataSession', 'glitch', 'socket', 'Auth'];
 
-  function ManySessionsCtrl(dataSession, tracto, socket, Auth) {
+  function ManySessionsCtrl(dataSession, glitch, socket, Auth) {
     var vm = this;
 
     vm.items = [];
-    vm.tracto = tracto;
+    vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
     vm.getFewUser = getFewUser;
@@ -27,30 +27,35 @@
     }
 
     function getMany() {
-      vm.tracto.reset();
-      dataSession.getMany().then(function(items) {
+      vm.glitch.reset();
+      dataSession.getMany()
+      .then(function(items) {
         vm.items = items;
-      }).catch(vm.tracto.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function remove(item) {
-      vm.tracto.reset();
-      dataSession.remove(item).then(function() {
+      vm.glitch.reset();
+      dataSession.remove(item)
+      .then(function() {
         vm.items.forEach(function(elem, i, array) {
           if (array[i]._id === item._id) {
             array.splice(i, 1);
           }
         });
-        vm.tracto.good = 'Successfully deleted item';
-      }).catch(vm.tracto.handle);
+        vm.glitch.setSuccess('Successfully deleted item');
+      })
+      .catch(vm.glitch.handle);
     }
 
     function getFewUser() {
-      vm.tracto.reset();
+      vm.glitch.reset();
       dataSession.getFewUser(Auth.getCurrentUser()._id)
       .then(function(items) {
         vm.items = items;
-      }).catch(vm.tracto.handle);
+      })
+      .catch(vm.glitch.handle);
     }
   }
 })();

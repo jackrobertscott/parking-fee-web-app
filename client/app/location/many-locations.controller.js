@@ -5,13 +5,13 @@
   .module('webApp')
   .controller('ManyLocationsCtrl', ManyLocationsCtrl);
 
-  ManyLocationsCtrl.$inject = ['dataLocation', 'tracto', 'socket', '$state', 'Auth'];
+  ManyLocationsCtrl.$inject = ['dataLocation', 'glitch', 'socket', '$state', 'Auth'];
 
-  function ManyLocationsCtrl(dataLocation, tracto, socket, $state, Auth) {
+  function ManyLocationsCtrl(dataLocation, glitch, socket, $state, Auth) {
     var vm = this;
 
     vm.items = [];
-    vm.tracto = tracto;
+    vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
     vm.getFew = getFew;
@@ -28,29 +28,34 @@
     }
 
     function getMany() {
-      vm.tracto.reset();
-      dataLocation.getMany().then(function(items) {
+      vm.glitch.reset();
+      dataLocation.getMany()
+      .then(function(items) {
         vm.items = items;
-      }).catch(vm.tracto.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function remove(item) {
-      vm.tracto.reset();
-      dataLocation.remove(item).then(function() {
+      vm.glitch.reset();
+      dataLocation.remove(item)
+      .then(function() {
         vm.items.forEach(function(elem, i, array) {
           if (array[i]._id === item._id) {
             array.splice(i, 1);
           }
         });
-        vm.tracto.good = 'Successfully deleted item';
-      }).catch(vm.tracto.handle);
+        vm.glitch.setSuccess('Successfully deleted item');
+      })
+      .catch(vm.glitch.handle);
     }
 
     function getFew() {
       dataLocation.getCompanyLocations(Auth.getCurrentUser().company)
       .then(function(items) {
         vm.items = items;
-      }).catch(vm.tracto.handle);
+      })
+      .catch(vm.glitch.handle);
     }
 
     function toSettings(item) {
