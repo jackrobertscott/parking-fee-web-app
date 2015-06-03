@@ -1,7 +1,7 @@
 <div ng-controller="ThemeCtrl as vm">
   <ul class="list-inline menu-labels">
     <span ng-repeat="item in vm.menu">
-      <a ng-if="item.direction != ''" ng-href="{{ item.direction }}">
+      <a ng-if="item.direction != ''" ui-sref="{{ item.direction }}">
         <li>{{ item.label }}</li>
       </a>
       <li ng-if="item.direction == ''" ng-click="vm.toggleChildren($index)">{{ item.label }}</li>
