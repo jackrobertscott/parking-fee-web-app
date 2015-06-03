@@ -28,8 +28,8 @@
                   <strong>{{location.name}}</strong><br>
                   <span class="text-muted">Rate/hr: {{location.rate}},</span>
                   <span class="text-muted">Lots: {{location.lots}},</span>
-                  <span class="text-muted">Start: {{location.start}},</span>
-                  <span class="text-muted">End: {{location.end}}</span>
+                  <span class="text-muted">Start: {{location.start | date:'shortTime'}},</span>
+                  <span class="text-muted">End: {{location.end | date:'shortTime'}}</span>
                   <a ng-click="vm.remove(location)" class="trash pull-right">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>

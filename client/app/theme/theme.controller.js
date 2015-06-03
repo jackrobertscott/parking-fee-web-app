@@ -39,6 +39,7 @@
         {label: 'Overview', direction: 'company'},
         {label: 'Settings', direction: 'companySettings'},
         {label: 'Members', direction: 'companyRegister'},
+        {label: 'Inspections', direction: 'inspectionCompany'},
       ]});
       menu.addItem({label: 'All Locations', direction: 'location'});
       menu.addItem({label: 'Locations', minRole: 'company', children: [
@@ -57,7 +58,7 @@
       menu.addItem({label: 'Infringements', minRole: 'user', children: [
         {label: 'Overview', direction: 'infringement', minRole: 'admin'},
         {label: 'Company Infringements', direction: 'infringementCompany', minRole: 'company'},
-        {label: 'My Infringements', direction: 'infringementUser'},
+        {label: 'My Infringements', direction: 'inspectionUser'},
       ]});
       menu.addItem({label: 'Logout', direction: 'userLogout', minRole: 'user'});
       return menu.getItems();

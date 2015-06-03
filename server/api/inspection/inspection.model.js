@@ -6,13 +6,13 @@ var mongoose = require('mongoose'),
 var InspectionSchema = new Schema({
   info: String,
   plate: String, // inserted for vehicle plates not in system
-  vehicle: {
-    type: Schema.Types.ObjectId,
-    ref: 'Vehicle'
-  },
   infringement: {
     type: Schema.Types.ObjectId,
     ref: 'Infringement'
+  },
+  paid: {
+    type: Boolean,
+    default: false
   },
   _creator: {
     type: Schema.Types.ObjectId,

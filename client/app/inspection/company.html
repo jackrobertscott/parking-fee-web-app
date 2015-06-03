@@ -8,7 +8,7 @@
       <div class="col-md-9">
         <h1>
           <!-- title start -->
-          Locations
+          Company Inspections
           <!-- title end -->
         </h1>
         <div class="row hidden-md hidden-lg">
@@ -19,19 +19,18 @@
         <hr class="hidden-xs hidden-sm">
         <div class="row">
           <div class="col-sm-8 center">
-            <!-- main content start -->
+            <!-- inspection content start -->
             <div ng-show="vm.glitch.bad" class="alert alert-danger" role="alert">{{ vm.glitch.bad }}</div>
             <div ng-show="vm.glitch.good" class="alert alert-success" role="alert">{{ vm.glitch.good }}</div>
-            <ul class="list-group" ng-init="vm.getMany()">
-              <li class="list-group-item" ng-repeat="location in vm.items">
-                  <strong>{{location.name}}</strong><br>
-                  <span class="text-muted">Rate/hr: {{location.rate}},</span>
-                  <span class="text-muted">Lots: {{location.lots}},</span>
-                  <span class="text-muted">Start: {{location.start | date:'shortTime'}},</span>
-                  <span class="text-muted">End: {{location.end | date:'shortTime'}}</span>
+            <ul class="list-group" ng-init="vm.getFewCompany()">
+              <li class="list-group-item" ng-repeat="inspection in vm.items">
+                  <strong>{{inspection.plate}}</strong><br>
+                  <span class="text-muted">Time: {{inspection.time | date:'medium'}}, </span>
+                  <span class="text-muted">Payment Due: {{inspection.infringement.payment | currency}}, </span>
+                  <span class="text-muted">Paid: {{inspection.paid}}</span>
               </li>
             </ul>
-            <!-- main content end -->
+            <!-- inspection content end -->
           </div>
           <div class="col-sm-4 right">
             <hr class="hidden-sm hidden-md hidden-lg">

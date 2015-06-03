@@ -13,4 +13,8 @@ router.put('/:id', auth.hasRole('inspector'), controller.update);
 router.patch('/:id', auth.hasRole('inspector'), controller.update);
 router.delete('/:id', auth.hasRole('inspector'), controller.destroy);
 
+// Added routes
+
+router.get('/:id/user', auth.isAuthenticated(), controller.getUserInfringed);
+
 module.exports = router;
