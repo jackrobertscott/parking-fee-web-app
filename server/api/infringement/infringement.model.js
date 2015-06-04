@@ -5,16 +5,27 @@ var mongoose = require('mongoose'),
 
 // Generic infringements companies may apply
 var InfringementSchema = new Schema({
-  name: String,
-  payment: Number,
-  info: String,
+  name: {
+    type: String,
+    required: true
+  },
+  payment: {
+    type: Number,
+    required: true
+  },
+  info: {
+    type: String,
+    required: true
+  },
   company: {
     type: Schema.Types.ObjectId,
-    ref: 'Company'
+    ref: 'Company',
+    required: true
   },
   _creator: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   created: {
     type: Date,

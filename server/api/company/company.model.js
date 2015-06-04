@@ -4,11 +4,23 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var CompanySchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   info: String,
-  email: String,
-  phone: Number,
-  abn: Number,
+  email: {
+    type: String,
+    required: true
+  },
+  phone: {
+    type: Number,
+    required: true
+  },
+  abn: {
+    type: Number,
+    required: true
+  },
   members: [{
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -25,7 +37,8 @@ var CompanySchema = new Schema({
   },
   _creator: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   created: {
     type: Date,

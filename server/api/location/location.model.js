@@ -4,15 +4,28 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var LocationSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   info: String,
-  rate: Number, // Hourly parking rate in cents
+  rate: { // Hourly parking rate in cents
+    type: Number,
+    required: true
+  },
   lots: Number, // Number of parking lots
-  start: Date, // Charging start time (seconds into day)
-  end: Date, // Charing end time (seconds into day)
+  start: { // Charging start time (seconds into day)
+    type: Date,
+    required: true
+  },
+  end: { // Charing end time (seconds into day)
+    type: Date,
+    required: true
+  },
   company: {
     type: Schema.Types.ObjectId,
-    ref: 'Company'
+    ref: 'Company',
+    required: true
   },
   _creator: {
     type: Schema.Types.ObjectId,
