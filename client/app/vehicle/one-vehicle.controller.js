@@ -18,23 +18,21 @@
     vm.update = update;
     vm.remove = remove;
 
-    // replace these with real values
-    vm.makes = ['Ford', 'Holden', 'Mazda', 'Suburu', 'Ferrari', 'Other'];
-    vm.types = ['Sedan', 'Hatchback', 'Utility', 'Bus'];
-    vm.colors = ['Red', 'Blue', 'Yellow', 'Green', 'Orange', 'Purple', 'White', 'Black'];
-    vm.item.make = vm.makes[0];
-    vm.item.type = vm.types[0];
-    vm.item.color = vm.colors[0];
-
     ////////////
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // replace these with real values
+      vm.makes = ['Ford', 'Holden', 'Mazda', 'Suburu', 'Ferrari', 'Other'];
+      vm.types = ['Sedan', 'Hatchback', 'Utility', 'Bus'];
+      vm.colors = ['Red', 'Blue', 'Yellow', 'Green', 'Orange', 'Purple', 'White', 'Black'];
+      vm.item.make = vm.makes[0];
+      vm.item.type = vm.types[0];
+      vm.item.color = vm.colors[0];
     }
+
+    ////////////
 
     function getOne(id) {
       vm.glitch.reset();

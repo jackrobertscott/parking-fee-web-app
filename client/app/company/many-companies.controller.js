@@ -27,11 +27,11 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
+
+    ////////////
 
     function getMany() {
       vm.glitch.reset();

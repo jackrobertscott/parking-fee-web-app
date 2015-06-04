@@ -10,10 +10,18 @@
   function MainCtrl() {
     var vm = this;
 
-    activate();
-    
-    function activate() {
+    ////////////
 
+    activate();
+
+    function activate() {
+      // code...
+    }
+
+    ////////////
+
+    function example() {
+      // code...
     }
   }
 })();

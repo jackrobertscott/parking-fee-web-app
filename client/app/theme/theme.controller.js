@@ -13,13 +13,15 @@
     vm.isActive = isActive;
     vm.menu = [];
 
+    ////////////
+
     activate();
 
     function activate() {
-      Auth.isLoggedInAsync(function(isLoggedIn) {
-        vm.menu = createMenu();
-      });
+      vm.menu = createMenu();
     }
+
+    ////////////
 
     function isActive(route) {
       return $state.is(route);
