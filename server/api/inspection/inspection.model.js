@@ -14,6 +14,10 @@ var InspectionSchema = new Schema({
     type: Boolean,
     default: false
   },
+  location: {
+    type: Schema.Types.ObjectId,
+    ref: 'Location'
+  },
   _creator: {
     type: Schema.Types.ObjectId,
     ref: 'User'
