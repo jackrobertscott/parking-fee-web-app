@@ -11,6 +11,8 @@
     var vm = this;
 
     vm.isActive = isActive;
+    vm.isBeforeOrEqual = Auth.isBeforeOrEqual;
+    vm.isAfterOrEqual = Auth.isAfterOrEqual;
     vm.menu = [];
 
     ////////////

@@ -39,6 +39,7 @@
         direction: object.direction || '',
         minRole: setRole(object.minRole),
         maxRole: setRole(object.maxRole),
+        data: object.data || {},
         children: []
       };
       return item;

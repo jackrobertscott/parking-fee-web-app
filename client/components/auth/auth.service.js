@@ -110,6 +110,10 @@
       return $cookieStore.get('token');
     }
 
+    function loginOauth(provider) {
+      $window.location.href = ENV.apiEndpoint + 'auth/' + provider;
+    }
+
     function getUserRoles() {
       // These should mirror roles on server side environment
       return ['guest', 'user', 'inspector', 'company', 'admin'];
@@ -126,8 +130,14 @@
         });
     }
 
-    function loginOauth(provider) {
-      $window.location.href = ENV.apiEndpoint + 'auth/' + provider;
+    function isBeforeOrEqual(role) {
+      var roles = getUserRoles();
+      return roles.indexOf(currentUser.role) >= roles.indexOf(role);
+    }
+
+    function isAfterOrEqual(role) {
+      var roles = getUserRoles();
+      return roles.indexOf(currentUser.role) <= roles.indexOf(role);
     }
   }
 })();

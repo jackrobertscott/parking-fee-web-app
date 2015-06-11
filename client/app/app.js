@@ -43,7 +43,7 @@
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if (response.status === 401) {
-          $location.path('/login');
+          $location.path('/user/login');
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
@@ -64,7 +64,7 @@
         if (toState.data && toState.data.role && toState.data.role !== 'guest') {
           var userRoles = Auth.getUserRoles();
           if (!loggedIn) {
-            $location.path('/login');
+            $location.path('/user/login');
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
             $location.path('/');

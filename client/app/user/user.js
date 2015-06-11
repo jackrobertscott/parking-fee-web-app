@@ -9,14 +9,11 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('user', {
+      .state('app.user', {
         url: '/user',
-        templateUrl: 'app/user/overview.html',
+        templateUrl: 'app/user/user.html',
         controller: 'ManyUsersCtrl',
         controllerAs: 'vm',
-        data: {
-          role: 'admin'
-        }
       })
       .state('userAdmin', {
         url: '/user/admin',
@@ -33,7 +30,7 @@
         controller: 'OneUserCtrl',
         controllerAs: 'vm'
       })
-      .state('userLogin', {
+      .state('app.user.login', {
         url: '/login',
         templateUrl: 'app/user/login.html',
         controller: 'OneUserCtrl',

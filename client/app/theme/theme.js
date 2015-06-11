@@ -9,10 +9,10 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('main', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl',
+      .state('app', {
+        abstract: true,
+        templateUrl: 'app/theme/theme.html',
+        controller: 'ThemeCtrl',
         controllerAs: 'vm'
       });
   }
