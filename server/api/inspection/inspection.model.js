@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 var InspectionSchema = new Schema({
   plate: { // inserted for vehicle plates not in system
