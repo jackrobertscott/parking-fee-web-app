@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('ManyInspectionsCtrl', ManyInspectionsCtrl);
+    .module('webApp')
+    .controller('ManyInspectionsCtrl', ManyInspectionsCtrl);
 
   ManyInspectionsCtrl.$inject = ['dataInspection', 'glitch', 'socket', 'Auth', '$state'];
 
@@ -31,24 +31,24 @@
     function getMany() {
       vm.glitch.reset();
       dataInspection.getMany()
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(items) {
+          vm.items = items;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function remove(item) {
       vm.glitch.reset();
       dataInspection.remove(item)
-      .then(function() {
-        vm.items.forEach(function(elem, i, array) {
-          if (array[i]._id === item._id) {
-            array.splice(i, 1);
-          }
-        });
-        vm.glitch.setSuccess('Successfully deleted item');
-      })
-      .catch(vm.glitch.handle);
+        .then(function() {
+          vm.items.forEach(function(elem, i, array) {
+            if (array[i]._id === item._id) {
+              array.splice(i, 1);
+            }
+          });
+          vm.glitch.setSuccess('Successfully deleted item');
+        })
+        .catch(vm.glitch.handle);
     }
 
     function toSettings(item) {
@@ -60,19 +60,19 @@
     function getFewCompany() {
       vm.glitch.reset();
       dataInspection.getFewCompany(Auth.getCurrentUser().company)
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(items) {
+          vm.items = items;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function getUserInfringed() {
       vm.glitch.reset();
       dataInspection.getUserInfringed(Auth.getCurrentUser()._id)
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(items) {
+          vm.items = items;
+        })
+        .catch(vm.glitch.handle);
     }
   }
 })();

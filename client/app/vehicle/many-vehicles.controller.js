@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('ManyVehiclesCtrl', ManyVehiclesCtrl);
+    .module('webApp')
+    .controller('ManyVehiclesCtrl', ManyVehiclesCtrl);
 
   ManyVehiclesCtrl.$inject = ['dataVehicle', 'glitch', 'socket', '$state', 'Auth'];
 
@@ -30,32 +30,32 @@
     function getMany() {
       vm.glitch.reset();
       dataVehicle.getMany()
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(items) {
+          vm.items = items;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function remove(item) {
       vm.glitch.reset();
       dataVehicle.remove(item)
-      .then(function() {
-        vm.items.forEach(function(elem, i, array) {
-          if (array[i]._id === item._id) {
-            array.splice(i, 1);
-          }
-        });
-        vm.glitch.setSuccess('Successfully deleted item');
-      })
-      .catch(vm.glitch.handle);
+        .then(function() {
+          vm.items.forEach(function(elem, i, array) {
+            if (array[i]._id === item._id) {
+              array.splice(i, 1);
+            }
+          });
+          vm.glitch.setSuccess('Successfully deleted item');
+        })
+        .catch(vm.glitch.handle);
     }
 
     function getFewUser() {
       dataVehicle.getUserVehicles(Auth.getCurrentUser()._id)
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(items) {
+          vm.items = items;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function toSettings(item) {

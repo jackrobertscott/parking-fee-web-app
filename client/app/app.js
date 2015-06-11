@@ -2,21 +2,21 @@
   'use strict';
 
   angular
-  .module('webApp', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'socket',
-    'ui.router',
-    'config',
-    'glitch',
-    'dataServices',
-    'auth',
-    'menu'
-  ])
-  .config(config)
-  .factory('authInterceptor', authInterceptor)
-  .run(allowAccess);
+    .module('webApp', [
+      'ngCookies',
+      'ngResource',
+      'ngSanitize',
+      'socket',
+      'ui.router',
+      'config',
+      'glitch',
+      'dataServices',
+      'auth',
+      'menu'
+    ])
+    .config(config)
+    .factory('authInterceptor', authInterceptor)
+    .run(allowAccess);
 
   config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
@@ -32,7 +32,7 @@
   function authInterceptor($rootScope, $q, $cookieStore, $location) {
     return {
       // Add authorization token to headers
-      request: function (config) {
+      request: function(config) {
         config.headers = config.headers || {};
         if ($cookieStore.get('token')) {
           config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
@@ -47,8 +47,7 @@
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
-        }
-        else {
+        } else {
           return $q.reject(response);
         }
       }

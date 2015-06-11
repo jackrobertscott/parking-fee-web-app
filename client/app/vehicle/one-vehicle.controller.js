@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneVehicleCtrl', OneVehicleCtrl);
+    .module('webApp')
+    .controller('OneVehicleCtrl', OneVehicleCtrl);
 
   OneVehicleCtrl.$inject = ['dataVehicle', 'glitch', '$state', 'Auth', '$stateParams'];
 
@@ -38,10 +38,10 @@
       vm.glitch.reset();
       id = id || $stateParams.id;
       dataVehicle.getOne(id)
-      .then(function(item) {
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(item) {
+          vm.item = item;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -56,10 +56,10 @@
           users: [user._id]
         });
         dataVehicle.create(vm.item)
-        .then(function(item) {
-          $state.go('vehicleUser');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            $state.go('vehicleUser');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -70,10 +70,10 @@
         invalid();
       } else {
         dataVehicle.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -83,11 +83,11 @@
         invalid();
       } else {
         dataVehicle.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('vehicleUser');
-        })
-        .catch(vm.glitch.handle);
+          .then(function() {
+            vm.item = {};
+            $state.go('vehicleUser');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

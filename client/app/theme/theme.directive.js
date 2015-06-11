@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .directive('sidebarResize', sidebarResize);
+    .module('webApp')
+    .directive('sidebarResize', sidebarResize);
 
   function sidebarResize() {
     var directive = {
@@ -14,14 +14,14 @@
     return directive;
 
     function linkFunc(scope, elem, attr, ctrl) {
-      scope.$watch(function () {
-        elem.css({
-          height: elem.parent().parent().height()
-        });
-      },
-      function () {}, //listener
-      true //deep watch
-    );
+      scope.$watch(function() {
+          elem.css({
+            height: elem.parent().parent().height()
+          });
+        },
+        function() {}, //listener
+        true //deep watch
+      );
+    }
   }
-}
 })();

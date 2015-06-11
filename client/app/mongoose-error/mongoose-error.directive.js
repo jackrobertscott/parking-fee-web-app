@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .directive('mongooseError', mongooseError);
+    .module('webApp')
+    .directive('mongooseError', mongooseError);
 
   function mongooseError() {
     var directive = {

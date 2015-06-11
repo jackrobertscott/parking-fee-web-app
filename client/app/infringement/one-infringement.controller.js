@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneInfringementCtrl', OneInfringementCtrl);
+    .module('webApp')
+    .controller('OneInfringementCtrl', OneInfringementCtrl);
 
   OneInfringementCtrl.$inject = ['dataInfringement', 'glitch', '$state', '$stateParams', 'Auth'];
 
@@ -32,10 +32,10 @@
       vm.glitch.reset();
       id = id || $stateParams.id;
       dataInfringement.getOne(id)
-      .then(function(item) {
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(item) {
+          vm.item = item;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -50,10 +50,10 @@
           company: user.company
         });
         dataInfringement.create(vm.item)
-        .then(function(item) {
-          $state.go('infringement');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            $state.go('infringement');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -64,10 +64,10 @@
         invalid();
       } else {
         dataInfringement.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -77,11 +77,11 @@
         invalid();
       } else {
         dataInfringement.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('infringement');
-        })
-        .catch(vm.glitch.handle);
+          .then(function() {
+            vm.item = {};
+            $state.go('infringement');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneSessionCtrl', OneSessionCtrl);
+    .module('webApp')
+    .controller('OneSessionCtrl', OneSessionCtrl);
 
   OneSessionCtrl.$inject = ['dataSession', 'glitch', '$state'];
 
@@ -31,10 +31,10 @@
     function getOne(id) {
       vm.glitch.reset();
       dataSession.getOne(id)
-      .then(function(item) {
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(item) {
+          vm.item = item;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -44,10 +44,10 @@
         invalid();
       } else {
         dataSession.create(vm.item)
-        .then(function(item) {
-          $state.go('session');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            $state.go('session');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -58,10 +58,10 @@
         invalid();
       } else {
         dataSession.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -71,11 +71,11 @@
         invalid();
       } else {
         dataSession.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('session');
-        })
-        .catch(vm.glitch.handle);
+          .then(function() {
+            vm.item = {};
+            $state.go('session');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

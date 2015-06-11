@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .config(config);
+    .module('webApp')
+    .config(config);
 
   config.$inject = ['$stateProvider'];
 

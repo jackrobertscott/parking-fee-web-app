@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('MainCtrl', MainCtrl);
+    .module('webApp')
+    .controller('MainCtrl', MainCtrl);
 
   MainCtrl.$inject = [];
 

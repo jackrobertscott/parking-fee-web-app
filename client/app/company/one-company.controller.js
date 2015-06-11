@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneCompanyCtrl', OneCompanyCtrl);
+    .module('webApp')
+    .controller('OneCompanyCtrl', OneCompanyCtrl);
 
   OneCompanyCtrl.$inject = ['dataCompany', 'glitch', '$state', 'Auth'];
 
@@ -32,10 +32,10 @@
       vm.glitch.reset();
       id = id || Auth.getCurrentUser().company;
       dataCompany.getOne(id)
-      .then(function(item) {
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(item) {
+          vm.item = item;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -50,12 +50,12 @@
           members: [user._id]
         });
         dataCompany.create(vm.item)
-        .then(function(item) {
-          Auth.reloadUser(function() { // update user role in Auth
-            $state.go('companyMembers');
-          });
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            Auth.reloadUser(function() { // update user role in Auth
+              $state.go('companyMembers');
+            });
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -66,10 +66,10 @@
         invalid();
       } else {
         dataCompany.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -79,13 +79,13 @@
         invalid();
       } else {
         dataCompany.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          Auth.reloadUser(function() { // update user role in Auth
-            $state.go('main');
-          });
-        })
-        .catch(vm.glitch.handle);
+          .then(function() {
+            vm.item = {};
+            Auth.reloadUser(function() { // update user role in Auth
+              $state.go('main');
+            });
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

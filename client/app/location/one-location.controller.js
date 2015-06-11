@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneLocationCtrl', OneLocationCtrl);
+    .module('webApp')
+    .controller('OneLocationCtrl', OneLocationCtrl);
 
   OneLocationCtrl.$inject = ['dataLocation', 'glitch', '$state', 'Auth', '$stateParams'];
 
@@ -32,12 +32,12 @@
       vm.glitch.reset();
       id = id || $stateParams.id;
       dataLocation.getOne(id)
-      .then(function(item) {
-        item.start = new Date(item.start);
-        item.end = new Date(item.end);
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(item) {
+          item.start = new Date(item.start);
+          item.end = new Date(item.end);
+          vm.item = item;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -52,10 +52,10 @@
           company: user.company
         });
         dataLocation.create(vm.item)
-        .then(function(item) {
-          $state.go('locationCompany');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            $state.go('locationCompany');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -66,10 +66,10 @@
         invalid();
       } else {
         dataLocation.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -79,11 +79,11 @@
         invalid();
       } else {
         dataLocation.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('locationCompany');
-        })
-        .catch(vm.glitch.handle);
+          .then(function() {
+            vm.item = {};
+            $state.go('locationCompany');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

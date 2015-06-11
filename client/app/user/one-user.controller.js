@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneUserCtrl', OneUserCtrl);
+    .module('webApp')
+    .controller('OneUserCtrl', OneUserCtrl);
 
   OneUserCtrl.$inject = ['dataUser', 'glitch', '$state', 'Auth'];
 
@@ -36,10 +36,10 @@
       vm.glitch.reset();
       id = id || Auth.getCurrentUser()._id;
       dataUser.getOne(id)
-      .then(function(item) {
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(item) {
+          vm.item = item;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -49,17 +49,17 @@
         invalid();
       } else {
         Auth.createUser(vm.item)
-        .then(function() {
-          $state.go('vehicleRegister');
-        })
-        .catch(function(err) {
-          err = err.data;
-          // Update validity of form fields that match the mongoose errors
-          angular.forEach(err.errors, function(error, field) {
-            form[field].$setValidity('mongoose', false);
-            vm.glitch.setError(error.message);
+          .then(function() {
+            $state.go('vehicleRegister');
+          })
+          .catch(function(err) {
+            err = err.data;
+            // Update validity of form fields that match the mongoose errors
+            angular.forEach(err.errors, function(error, field) {
+              form[field].$setValidity('mongoose', false);
+              vm.glitch.setError(error.message);
+            });
           });
-        });
       }
     }
 
@@ -70,10 +70,10 @@
         invalid();
       } else {
         dataUser.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(item) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -83,11 +83,11 @@
         invalid();
       } else {
         dataUser.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('main');
-        })
-        .catch(vm.glitch.handle);
+          .then(function() {
+            vm.item = {};
+            $state.go('main');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -98,12 +98,12 @@
         invalid();
       } else {
         Auth.login(vm.item)
-        .then(function() {
-          $state.go('main');
-        })
-        .catch(function(err) {
-          vm.glitch.setError(err.message);
-        });
+          .then(function() {
+            $state.go('main');
+          })
+          .catch(function(err) {
+            vm.glitch.setError(err.message);
+          });
       }
     }
 
@@ -123,13 +123,13 @@
         invalid();
       } else {
         Auth.changePassword(vm.item.oldPassword, vm.item.newPassword)
-        .then(function() {
-          vm.glitch.setSuccess('Password successfully changed.');
-        })
-        .catch(function() {
-          form.password.$setValidity('mongoose', false);
-          vm.glitch.setError('Incorrect password');
-        });
+          .then(function() {
+            vm.glitch.setSuccess('Password successfully changed.');
+          })
+          .catch(function() {
+            form.password.$setValidity('mongoose', false);
+            vm.glitch.setError('Incorrect password');
+          });
       }
     }
 
