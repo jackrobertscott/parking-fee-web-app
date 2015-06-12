@@ -9,11 +9,17 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('session', {
+      .state('app.session', {
         url: '/session',
-        templateUrl: 'app/session/overview.html',
+        templateUrl: 'app/session/session.html',
         controller: 'ManySessionsCtrl',
         controllerAs: 'vmMain'
+      })
+      .state('app.session.detail', {
+        url: '/detail',
+        templateUrl: 'app/session/detail.html',
+        controller: 'OneSessionCtrl',
+        controllerAs: 'vm'
       });
   }
 })();

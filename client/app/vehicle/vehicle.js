@@ -9,13 +9,13 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('vehicle', {
+      .state('app.vehicle', {
         url: '/vehicle',
         templateUrl: 'app/vehicle/vehicle.html',
         controller: 'ManyVehiclesCtrl',
         controllerAs: 'vmMain'
       })
-      .state('vehicleRegister', {
+      .state('app.vehicle.register', {
         url: '/register',
         templateUrl: 'app/vehicle/register.html',
         controller: 'OneVehicleCtrl',
@@ -24,7 +24,7 @@
           role: 'user'
         }
       })
-      .state('vehicleSettings', {
+      .state('app.vehicle.settings', {
         url: '/settings/:id',
         templateUrl: 'app/vehicle/settings.html',
         controller: 'OneVehicleCtrl',

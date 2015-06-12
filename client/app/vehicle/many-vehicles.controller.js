@@ -59,7 +59,7 @@
     }
 
     function toSettings(item) {
-      $state.go('vehicleSettings', {
+      $state.go('app.vehicle.settings', {
         id: item._id
       });
     }

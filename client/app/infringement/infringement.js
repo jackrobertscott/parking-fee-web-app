@@ -9,11 +9,17 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('infringement', {
+      .state('app.infringement', {
         url: '/infringement',
         templateUrl: 'app/infringement/infringement.html',
         controller: 'ManyInfringementsCtrl',
         controllerAs: 'vmMain'
+      })
+      .state('app.infringement.detail', {
+        url: '/detail',
+        templateUrl: 'app/infringement/detail.html',
+        controller: 'OneInfringementCtrl',
+        controllerAs: 'vm'
       });
   }
 })();

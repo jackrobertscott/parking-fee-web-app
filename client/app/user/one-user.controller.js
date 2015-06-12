@@ -50,7 +50,7 @@
       } else {
         Auth.createUser(vm.item)
           .then(function() {
-            $state.go('vehicleRegister');
+            $state.go('app.vehicle.register');
           })
           .catch(function(err) {
             err = err.data;

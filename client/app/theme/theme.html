@@ -6,39 +6,12 @@
       <h2 class="text-center">WICKED</h2>
       <h1 class="text-center">NAME</h1>
       <hr>
-      <h3>Category</h3>
+      <h3>INFORMATION</h3>
       <ul class="list-unstyled">
-        <a ui-sref="main">
-          <li>
-            <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
-            Example
-          </li>
-        </a>
-        <a ui-sref="main">
-          <li>
-            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-            Example
-          </li>
-        </a>
-        <a ui-sref="main">
-          <li>
-            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-            Example
-          </li>
-        </a>
-        <a ui-sref="main">
-          <li>
-            <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
-            Example
-          </li>
-        </a>
-      </ul>
-      <hr>
-      <ul class="list-unstyled">
-        <a ui-sref="logout">
-          <li>
-            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-            Logout
+        <a ng-repeat="item in vmApp.menu" ui-sref="{{item.direction}}">
+          <li ng-class="{'active': vmApp.isActive(item.direction)}">
+            <span class="glyphicon {{'glyphicon-'+item.data.glyphicon}}" aria-hidden="true"></span>
+            {{item.label}}
           </li>
         </a>
       </ul>

@@ -21,12 +21,15 @@
 <div class="right container-fluid">
   <div class="row">
     <div class="col-xs-12">
-      <ul class="list-inline">
-        <!-- start:menu -->
-        <li class="{'active': vmApp.isActive('app.user.settings')}"><a ui-sref="app.user.settings">Settings</a></li>
-        <li class="{'active': vmApp.isActive('app.user.password')}"><a ui-sref="app.user.password">Change Password</a></li>
-        <!-- end:menu -->
+      <!-- start:menu -->
+      <ul class="list-inline" ng-repeat="items in vmApp.menu | filter: {direction: 'app.inspection'}">
+        <li ng-repeat="item in items.children" ng-class="{'active': vmApp.isActive(item.direction)}">
+          <a ui-sref="{{item.direction}}">
+            {{item.label}}
+          </a>
+        </li>
       </ul>
+      <!-- end:menu -->
       <div class="alert alert-danger" role="alert">Check yourself before you <strong>wreck</strong> yourself.</div>
       <!-- view:detail -->
       <div ui-view=""></div>

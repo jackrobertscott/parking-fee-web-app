@@ -25,130 +25,116 @@
 
     ////////////
 
-    function isActive(route) {
-      return $state.is(route);
+    function isActive(route, exact) {
+      if (exact) {
+        return $state.is(route);
+      } else {
+        return $state.includes(route);
+      }
     }
 
     function createMenu() {
       menu.reset();
       menu.addItem({
-        label: 'Home',
-        direction: 'main'
-      });
-      menu.addItem({
-        label: 'Login',
-        direction: 'login',
-        maxRole: 'guest'
-      });
-      menu.addItem({
-        label: 'Register',
-        direction: 'register',
-        maxRole: 'guest'
-      });
-      menu.addItem({
-        label: 'Change Password',
-        direction: 'app.user.password',
-        minRole: 'user'
-      });
-      menu.addItem({
-        label: 'Profile Settings',
-        direction: 'app.user.settings',
-        minRole: 'user'
-      });
-      menu.addItem({
-        label: 'Admin',
-        direction: 'userAdmin',
-        minRole: 'admin'
-      });
-      menu.addItem({
-        label: 'Register Company',
-        direction: 'app.company.register',
+        label: 'Profile',
         minRole: 'user',
-        maxRole: 'user'
+        direction: 'app.user.settings',
+        data: {
+          glyphicon: 'user'
+        },
+        children: [{
+          label: 'Settings',
+          direction: 'app.user.settings'
+        }, {
+          label: 'Change Password',
+          direction: 'app.user.password'
+        }]
       });
       menu.addItem({
         label: 'Company',
         minRole: 'company',
+        direction: 'app.company.register',
+        data: {
+          glyphicon: 'briefcase'
+        },
         children: [{
-          label: 'Admin',
-          direction: 'companyAdmin',
-          minRole: 'admin'
-        }, {
-          label: 'Overview',
-          direction: 'company'
+          label: 'Register',
+          direction: 'app.company.register'
         }, {
           label: 'Settings',
           direction: 'app.company.settings'
-        }, {
-          label: 'Members',
-          direction: 'app.company.register'
-        }, {
-          label: 'Inspections',
-          direction: 'inspectionCompany'
-        }, ]
-      });
-      menu.addItem({
-        label: 'All Locations',
-        direction: 'location'
+        }]
       });
       menu.addItem({
         label: 'Locations',
         minRole: 'company',
+        direction: 'app.location.register',
+        data: {
+          glyphicon: 'globe'
+        },
         children: [{
-          label: 'My Locations',
-          direction: 'locationCompany'
-        }, {
-          label: 'New Location',
-          direction: 'locationRegister'
-        }, ]
+          label: 'Register',
+          direction: 'app.location.register'
+        }]
       });
       menu.addItem({
         label: 'Vehicles',
         minRole: 'user',
+        direction: 'app.vehicle.register',
+        data: {
+          glyphicon: 'bed'
+        },
         children: [{
-          label: 'Overview',
-          direction: 'vehicle',
-          minRole: 'admin'
+          label: 'Register',
+          direction: 'app.vehicle.register'
         }, {
-          label: 'My Vehicles',
-          direction: 'vehicleUser'
-        }, {
-          label: 'Register New',
-          direction: 'vehicleRegister'
-        }, ]
-      });
-      menu.addItem({
-        label: 'Sessions',
-        minRole: 'user',
-        children: [{
-          label: 'Overview',
-          direction: 'session',
-          minRole: 'admin'
-        }, {
-          label: 'User Sessions',
-          direction: 'sessionUser'
-        }, ]
+          label: 'Settings',
+          direction: 'app.vehicle.settings'
+        }]
       });
       menu.addItem({
         label: 'Infringements',
         minRole: 'user',
+        direction: 'app.infringement.detail',
+        data: {
+          glyphicon: 'exclamation-sign'
+        },
         children: [{
-          label: 'Overview',
-          direction: 'infringement',
-          minRole: 'admin'
-        }, {
-          label: 'Company Infringements',
-          direction: 'app.infringement.company',
-          minRole: 'company'
-        }, {
-          label: 'My Infringements',
-          direction: 'inspectionUser'
-        }, ]
+          label: 'Detail',
+          direction: 'app.infringement.detail',
+        }]
+      });
+      menu.addItem({
+        label: 'Sessions',
+        minRole: 'user',
+        direction: 'app.session.detail',
+        data: {
+          glyphicon: 'calendar'
+        },
+        children: [{
+          label: 'Detail',
+          direction: 'app.session.detail',
+        }]
+      });
+      menu.addItem({
+        label: 'Inspections',
+        minRole: 'inspector',
+        direction: 'app.inspection.detail',
+        data: {
+          glyphicon: 'eye-open'
+        },
+        children: [{
+          label: 'Detail',
+          direction: 'app.inspection.detail',
+        }]
       });
       menu.addItem({
         label: 'Logout',
         direction: 'logout',
-        minRole: 'user'
+        minRole: 'user',
+        data: {
+          glyphicon: 'off'
+        }
       });
       return menu.getItems();
     }

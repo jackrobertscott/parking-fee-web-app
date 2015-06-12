@@ -9,7 +9,7 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('company', {
+      .state('app.company', {
         url: '/company',
         templateUrl: 'app/company/company.html',
         controller: 'ManyCompaniesCtrl',

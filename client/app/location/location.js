@@ -9,13 +9,13 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('location', {
+      .state('app.location', {
         url: '/location',
         templateUrl: 'app/location/location.html',
         controller: 'ManyLocationsCtrl',
         controllerAs: 'vmMain'
       })
-      .state('locationRegister', {
+      .state('app.location.register', {
         url: '/register',
         templateUrl: 'app/location/register.html',
         controller: 'OneLocationCtrl',
@@ -24,7 +24,7 @@
           role: 'company'
         }
       })
-      .state('locationSettings', {
+      .state('app.location.settings', {
         url: '/settings/:id',
         templateUrl: 'app/location/settings.html',
         controller: 'OneLocationCtrl',

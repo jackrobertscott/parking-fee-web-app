@@ -9,11 +9,17 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('inspection', {
+      .state('app.inspection', {
         url: '/inspection',
         templateUrl: 'app/inspection/inspection.html',
         controller: 'ManyInspectionsCtrl',
         controllerAs: 'vmMain'
+      })
+      .state('app.inspection.detail', {
+        url: '/detail',
+        templateUrl: 'app/inspection/detail.html',
+        controller: 'OneInspectionCtrl',
+        controllerAs: 'vm'
       });
   }
 })();
