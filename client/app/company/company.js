@@ -11,32 +11,14 @@
     $stateProvider
       .state('company', {
         url: '/company',
-        templateUrl: 'app/company/overview.html',
+        templateUrl: 'app/company/company.html',
         controller: 'ManyCompaniesCtrl',
-        controllerAs: 'vm',
+        controllerAs: 'vmMain',
         data: {
           role: 'company'
         }
       })
-      .state('companyAdmin', {
-        url: '/company/admin',
-        templateUrl: 'app/company/admin.html',
-        controller: 'ManyCompaniesCtrl',
-        controllerAs: 'vm',
-        data: {
-          role: 'admin'
-        }
-      })
-      .state('companyMembers', {
-        url: '/company/members',
-        templateUrl: 'app/company/members.html',
-        controller: 'ManyCompaniesCtrl',
-        controllerAs: 'vm',
-        data: {
-          role: 'company'
-        }
-      })
-      .state('companyRegister', {
+      .state('app.company.register', {
         url: '/company/register',
         templateUrl: 'app/company/register.html',
         controller: 'OneCompanyCtrl',
@@ -45,7 +27,7 @@
           role: 'user'
         }
       })
-      .state('companySettings', {
+      .state('app.company.settings', {
         url: '/company/settings',
         templateUrl: 'app/company/settings.html',
         controller: 'OneCompanyCtrl',

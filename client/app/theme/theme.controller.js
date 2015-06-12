@@ -62,7 +62,7 @@
       });
       menu.addItem({
         label: 'Register Company',
-        direction: 'companyRegister',
+        direction: 'app.company.register',
         minRole: 'user',
         maxRole: 'user'
       });
@@ -78,10 +78,10 @@
           direction: 'company'
         }, {
           label: 'Settings',
-          direction: 'companySettings'
+          direction: 'app.company.settings'
         }, {
           label: 'Members',
-          direction: 'companyRegister'
+          direction: 'app.company.register'
         }, {
           label: 'Inspections',
           direction: 'inspectionCompany'

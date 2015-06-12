@@ -1,0 +1,89 @@
+<!-- start:middle -->
+<div class="middle container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- start:content -->
+      <p>Add members</p>
+      <div class="form-group">
+        <label for="companyPhone" class="sr-only">Search people</label>
+        <input type="text" class="form-control" placeholder="Search people" ng-model="search">
+      </div>
+      <ul class="list-group" ng-init="vm.getUsers()">
+        <li class="list-group-item" ng-repeat="user in vm.users | filter: {$:search, role:'!admin', company:'null'} | limitTo: 5">
+            <strong>{{user.name}}</strong><br>
+            <span class="text-muted">{{user.email}}</span>
+            <a ng-click="vm.companyAddCompany(user)" class="trash pull-right">
+              Company Admin
+              <span ng-show="user.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
+            </a>
+            <a ng-click="vm.companyAddInspector(user)" class="trash pull-right">
+              Inspector
+              <span ng-show="user.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
+            </a>
+            <a ng-click="vm.companyRemoveMember(user)" class="trash pull-right">
+              User
+              <span ng-show="user.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
+            </a>
+        </li>
+      </ul>
+      <hr>
+      <p>Current members</p>
+      <ul class="list-group" ng-init="vm.getCompanyMembers()">
+        <li class="list-group-item" ng-repeat="member in vm.items">
+            <strong>{{member.name}}</strong><br>
+            <span class="text-muted">{{member.email}}</span>
+            <a ng-click="vm.companyAddCompany(member)" class="trash pull-right">
+              Company Admin
+              <span ng-show="member.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
+            </a>
+            <a ng-click="vm.companyAddInspector(member)" class="trash pull-right">
+              Inspector
+              <span ng-show="member.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
+            </a>
+            <a ng-click="vm.companyRemoveMember(member)" class="trash pull-right">
+              User
+              <span ng-show="member.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
+            </a>
+        </li>
+      </ul>
+      <nav>
+        <ul class="pagination">
+          <li>
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- end:content -->
+    </div>
+  </div>
+</div>
+<!-- end:middle -->
+<!-- start:right -->
+<div class="right container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="list-inline">
+        <!-- start:menu -->
+        <li class="{'active': vmApp.isActive('app.user.settings')}"><a ui-sref="app.user.settings">Settings</a></li>
+        <li class="{'active': vmApp.isActive('app.user.password')}"><a ui-sref="app.user.password">Change Password</a></li>
+        <!-- end:menu -->
+      </ul>
+      <div class="alert alert-danger" role="alert">Check yourself before you <strong>wreck</strong> yourself.</div>
+      <!-- view:detail -->
+      <div ui-view=""></div>
+    </div>
+  </div>
+</div>
+<!-- end:right -->
