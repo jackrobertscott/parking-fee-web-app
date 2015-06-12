@@ -11,30 +11,9 @@
     $stateProvider
       .state('inspection', {
         url: '/inspection',
-        templateUrl: 'app/inspection/overview.html',
+        templateUrl: 'app/inspection/inspection.html',
         controller: 'ManyInspectionsCtrl',
-        controllerAs: 'vm',
-        data: {
-          role: 'admin'
-        }
-      })
-      .state('inspectionCompany', {
-        url: '/inspection/company',
-        templateUrl: 'app/inspection/company.html',
-        controller: 'ManyInspectionsCtrl',
-        controllerAs: 'vm',
-        data: {
-          role: 'company'
-        }
-      })
-      .state('inspectionUser', {
-        url: '/inspection/user',
-        templateUrl: 'app/inspection/user.html',
-        controller: 'ManyInspectionsCtrl',
-        controllerAs: 'vm',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmMain'
       });
   }
 })();

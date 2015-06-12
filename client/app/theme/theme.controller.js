@@ -138,7 +138,7 @@
           minRole: 'admin'
         }, {
           label: 'Company Infringements',
-          direction: 'infringementCompany',
+          direction: 'app.infringement.company',
           minRole: 'company'
         }, {
           label: 'My Infringements',

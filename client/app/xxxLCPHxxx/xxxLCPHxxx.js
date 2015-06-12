@@ -12,7 +12,7 @@
     $stateProvider
     .state('xxxLCPHxxx', {
       url: '/',
-      templateUrl: 'app/xxxLCPHxxx/overview.html',
+      templateUrl: 'app/xxxLCPHxxx/xxxLCPHxxx.html',
       controller: 'ManyXxxUCPHxxxsCtrl',
       controllerAs: 'vm'
     });

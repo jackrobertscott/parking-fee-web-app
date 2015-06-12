@@ -11,24 +11,12 @@
     $stateProvider
       .state('vehicle', {
         url: '/vehicle',
-        templateUrl: 'app/vehicle/overview.html',
+        templateUrl: 'app/vehicle/vehicle.html',
         controller: 'ManyVehiclesCtrl',
-        controllerAs: 'vm',
-        data: {
-          role: 'admin'
-        }
-      })
-      .state('vehicleUser', {
-        url: '/vehicle/user',
-        templateUrl: 'app/vehicle/user.html',
-        controller: 'ManyVehiclesCtrl',
-        controllerAs: 'vm',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmMain'
       })
       .state('vehicleRegister', {
-        url: '/vehicle/register',
+        url: '/register',
         templateUrl: 'app/vehicle/register.html',
         controller: 'OneVehicleCtrl',
         controllerAs: 'vm',
@@ -37,7 +25,7 @@
         }
       })
       .state('vehicleSettings', {
-        url: '/vehicle/settings/:id',
+        url: '/settings/:id',
         templateUrl: 'app/vehicle/settings.html',
         controller: 'OneVehicleCtrl',
         controllerAs: 'vm',

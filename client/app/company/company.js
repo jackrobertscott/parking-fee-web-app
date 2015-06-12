@@ -13,13 +13,10 @@
         url: '/company',
         templateUrl: 'app/company/company.html',
         controller: 'ManyCompaniesCtrl',
-        controllerAs: 'vmMain',
-        data: {
-          role: 'company'
-        }
+        controllerAs: 'vmMain'
       })
       .state('app.company.register', {
-        url: '/company/register',
+        url: '/register',
         templateUrl: 'app/company/register.html',
         controller: 'OneCompanyCtrl',
         controllerAs: 'vm',
@@ -28,7 +25,7 @@
         }
       })
       .state('app.company.settings', {
-        url: '/company/settings',
+        url: '/settings',
         templateUrl: 'app/company/settings.html',
         controller: 'OneCompanyCtrl',
         controllerAs: 'vm',

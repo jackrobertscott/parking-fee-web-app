@@ -13,19 +13,7 @@
         url: '/session',
         templateUrl: 'app/session/overview.html',
         controller: 'ManySessionsCtrl',
-        controllerAs: 'vm',
-        data: {
-          role: 'admin'
-        }
-      })
-      .state('sessionUser', {
-        url: '/session/user',
-        templateUrl: 'app/session/user.html',
-        controller: 'ManySessionsCtrl',
-        controllerAs: 'vm',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmMain'
       });
   }
 })();

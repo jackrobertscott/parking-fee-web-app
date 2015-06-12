@@ -1,15 +1,15 @@
-<ul class="list-group" ng-init="vm.getMany()">
-  <li class="list-group-item" ng-repeat="company in vm.items">
-      <strong>{{company.name}}</strong><br>
-      <span class="text-muted">Email: {{company.email}},</span>
-      <span class="text-muted">Phone: {{company.phone}}</span>
-      <a ng-hide="company.authenticated" ng-click="vm.authenticate(company)" class="trash pull-right">
-        authenticated
-        <span class="glyphicon glyphicon-remove-circle"></span>
-      </a>
-      <a ng-show="company.authenticated" ng-click="vm.unauthenticate(company)" class="trash pull-right">
-        unauthenticated
-        <span class="glyphicon glyphicon-ok-circle"></span>
-      </a>
+<ul class="list-group" ng-init="vmMain.getMany()">
+  <li class="list-group-item" ng-repeat="company in vmMain.items">
+    <strong>{{company.name}}</strong><br>
+    <span class="text-muted">Email: {{company.email}},</span>
+    <span class="text-muted">Phone: {{company.phone}}</span>
+    <a class="trash pull-right" ng-click="vmMain.authenticate(company)" ng-hide="company.authenticated">
+      authenticated
+      <span class="glyphicon glyphicon-remove-circle"></span>
+    </a>
+    <a class="trash pull-right" ng-click="vmMain.unauthenticate(company)" ng-show="company.authenticated">
+      unauthenticated
+      <span class="glyphicon glyphicon-ok-circle"></span>
+    </a>
   </li>
 </ul>
