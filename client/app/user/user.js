@@ -9,40 +9,31 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('app.user', {
-        url: '/user',
-        templateUrl: 'app/user/user.html',
-        controller: 'ManyUsersCtrl',
-        controllerAs: 'vm',
-      })
-      .state('userAdmin', {
-        url: '/user/admin',
-        templateUrl: 'app/user/admin.html',
-        controller: 'ManyUsersCtrl',
-        controllerAs: 'vm',
-        data: {
-          role: 'admin'
-        }
-      })
-      .state('userRegister', {
+      .state('register', {
         url: '/register',
         templateUrl: 'app/user/register.html',
         controller: 'OneUserCtrl',
         controllerAs: 'vm'
       })
-      .state('app.user.login', {
+      .state('login', {
         url: '/login',
         templateUrl: 'app/user/login.html',
         controller: 'OneUserCtrl',
         controllerAs: 'vm'
       })
-      .state('userLogout', {
+      .state('logout', {
         url: '/logout',
         templateUrl: 'app/user/logout.html',
         controller: 'OneUserCtrl',
         controllerAs: 'vm'
       })
-      .state('userPassword', {
+      .state('app.user', {
+        url: '/user',
+        templateUrl: 'app/user/user.html',
+        controller: 'ManyUsersCtrl',
+        controllerAs: 'vmContent',
+      })
+      .state('app.user.password', {
         url: '/password',
         templateUrl: 'app/user/password.html',
         controller: 'OneUserCtrl',
@@ -51,7 +42,7 @@
           role: 'user'
         }
       })
-      .state('userSettings', {
+      .state('app.user.settings', {
         url: '/settings',
         templateUrl: 'app/user/settings.html',
         controller: 'OneUserCtrl',

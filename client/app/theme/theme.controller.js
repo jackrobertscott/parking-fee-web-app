@@ -37,22 +37,22 @@
       });
       menu.addItem({
         label: 'Login',
-        direction: 'userLogin',
+        direction: 'login',
         maxRole: 'guest'
       });
       menu.addItem({
         label: 'Register',
-        direction: 'userRegister',
+        direction: 'register',
         maxRole: 'guest'
       });
       menu.addItem({
         label: 'Change Password',
-        direction: 'userPassword',
+        direction: 'app.user.password',
         minRole: 'user'
       });
       menu.addItem({
         label: 'Profile Settings',
-        direction: 'userSettings',
+        direction: 'app.user.settings',
         minRole: 'user'
       });
       menu.addItem({
@@ -147,7 +147,7 @@
       });
       menu.addItem({
         label: 'Logout',
-        direction: 'userLogout',
+        direction: 'logout',
         minRole: 'user'
       });
       return menu.getItems();

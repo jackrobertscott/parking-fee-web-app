@@ -13,7 +13,7 @@
         abstract: true,
         templateUrl: 'app/theme/theme.html',
         controller: 'ThemeCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vmApp'
       });
   }
 })();

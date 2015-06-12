@@ -113,7 +113,7 @@
 
     function logout() {
       Auth.logout();
-      $state.go('userLogin');
+      $state.go('login');
     }
 
     function changePassword(form) {

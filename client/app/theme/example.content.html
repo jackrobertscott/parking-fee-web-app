@@ -1,8 +1,8 @@
 <!-- start:middle -->
 <div class="middle container-fluid">
-  <div id="underlay"></div>
   <div class="row">
     <div class="col-xs-12">
+      <!-- start:content -->
       <input type="text" class="form-control" placeholder="Search">
       <table class="table table-hover">
         <thead>
@@ -59,6 +59,7 @@
           </li>
         </ul>
       </nav>
+      <!-- end:content -->
     </div>
   </div>
 </div>
@@ -68,9 +69,10 @@
   <div class="row">
     <div class="col-xs-12">
       <ul class="list-inline">
-        <li><a href="#">Example</a></li>
-        <li class="active"><a href="#">Example</a></li>
-        <li><a href="#">Example</a></li>
+        <!-- start:menu -->
+        <li class="{'active': vmApp.isActive('app.user.settings')}"><a ui-sref="app.user.settings">Settings</a></li>
+        <li class="{'active': vmApp.isActive('app.user.password')}"><a ui-sref="app.user.password">Change Password</a></li>
+        <!-- end:menu -->
       </ul>
       <div class="alert alert-danger" role="alert">Check yourself before you <strong>wreck</strong> yourself.</div>
       <!-- view:detail -->
