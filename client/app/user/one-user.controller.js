@@ -85,7 +85,7 @@
         dataUser.remove(vm.item)
           .then(function() {
             vm.item = {};
-            $state.go('main');
+            logout();
           })
           .catch(vm.glitch.handle);
       }
@@ -99,7 +99,7 @@
       } else {
         Auth.login(vm.item)
           .then(function() {
-            $state.go('main');
+            $state.go('app.vehicle.register');
           })
           .catch(function(err) {
             vm.glitch.setError(err.message);

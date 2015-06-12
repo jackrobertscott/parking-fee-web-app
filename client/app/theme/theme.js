@@ -13,7 +13,16 @@
         abstract: true,
         templateUrl: 'app/theme/theme.html',
         controller: 'ThemeCtrl',
-        controllerAs: 'vmApp'
+        controllerAs: 'vmApp',
+        resolve: {
+          currentUser: currentUser
+        }
       });
+  }
+
+  currentUser.$inject = ['Auth'];
+
+  function currentUser(Auth) {
+    return Auth.getCurrentUser().$promise;
   }
 })();

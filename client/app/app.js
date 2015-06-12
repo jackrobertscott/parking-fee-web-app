@@ -44,6 +44,7 @@
       responseError: function(response) {
         if (response.status === 401) {
           $location.path('/user/login');
+          console.log('unauthorised: api');
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
@@ -65,9 +66,11 @@
           var userRoles = Auth.getUserRoles();
           if (!loggedIn) {
             $location.path('/user/login');
+            console.log('unauthorised: not logged in');
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
             $location.path('/');
+            console.log('unauthorised: role no access');
           }
         }
       });
