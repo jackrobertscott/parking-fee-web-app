@@ -13,7 +13,7 @@
         url: '/location',
         templateUrl: 'app/location/location.html',
         controller: 'ManyLocationsCtrl',
-        controllerAs: 'vmMain'
+        controllerAs: 'vm'
       })
       .state('app.location.register', {
         url: '/register',

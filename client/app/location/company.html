@@ -1,11 +1,11 @@
-<ul class="list-group" ng-init="vmMain.getFew()">
-  <li class="list-group-item" ng-repeat="location in vmMain.items" ng-click="vmMain.toSettings(location)">
+<ul class="list-group" ng-init="vm.getFew()">
+  <li class="list-group-item" ng-repeat="location in vm.items" ng-click="vm.toSettings(location)">
       <strong>{{location.name}}</strong><br>
       <span class="text-muted">Rate/hr: {{location.rate}},</span>
       <span class="text-muted">Lots: {{location.lots}},</span>
       <span class="text-muted">Start: {{location.start | date:'shortTime'}},</span>
       <span class="text-muted">End: {{location.end | date:'shortTime'}}</span>
-      <a ng-click="vmMain.remove(location)" class="trash pull-right">
+      <a ng-click="vm.remove(location)" class="trash pull-right">
         <span class="glyphicon glyphicon-trash"></span>
       </a>
   </li>

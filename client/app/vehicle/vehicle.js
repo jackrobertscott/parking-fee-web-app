@@ -13,7 +13,7 @@
         url: '/vehicle',
         templateUrl: 'app/vehicle/vehicle.html',
         controller: 'ManyVehiclesCtrl',
-        controllerAs: 'vmMain'
+        controllerAs: 'vm'
       })
       .state('app.vehicle.register', {
         url: '/register',

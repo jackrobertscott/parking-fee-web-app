@@ -13,7 +13,7 @@
         url: '/session',
         templateUrl: 'app/session/session.html',
         controller: 'ManySessionsCtrl',
-        controllerAs: 'vmMain'
+        controllerAs: 'vm'
       })
       .state('app.session.detail', {
         url: '/detail',

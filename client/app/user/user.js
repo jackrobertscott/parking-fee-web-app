@@ -31,7 +31,7 @@
         url: '/user',
         templateUrl: 'app/user/user.html',
         controller: 'ManyUsersCtrl',
-        controllerAs: 'vmMain',
+        controllerAs: 'vm',
       })
       .state('app.user.password', {
         url: '/password',
