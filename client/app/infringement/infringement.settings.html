@@ -1,14 +1,14 @@
 <form class="form" name="form" ng-submit="vm.update(form)" novalidate>
   <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted, 'has-error': form.name.$invalid && vm.submitted }">
     <label for="infrintementName">Infringement Title</label>
-    <input class="form-control" id="infrintementName" name="name" ng-model="vm.item.name" placeholder="Location Name" required type="text">
+    <input class="form-control" id="infrintementName" name="name" ng-model="vm.infringement.name" placeholder="Location Name" required type="text">
     <p class="help-block" ng-show="form.name.$error.required && vm.submitted">
       An infringement title is required
     </p>
   </div>
   <div class="form-group" ng-class="{ 'has-success': form.payment.$valid && vm.submitted, 'has-error': form.payment.$invalid && vm.submitted }">
     <label for="payment">Ticket Parking Rate</label>
-    <input class="form-control" id="payment" min="0" name="payment" ng-model="vm.item.payment" placeholder="Cents" required type="number">
+    <input class="form-control" id="payment" min="0" name="payment" ng-model="vm.infringement.payment" placeholder="Cents" required type="number">
     <p class="help-block" ng-show="form.payment.$error.required && vm.submitted">
       An infringement payment amount is required
     </p>
@@ -18,7 +18,7 @@
   </div>
   <div class="form-group">
     <label for="locationInfo">Infringement Description</label>
-    <textarea class="form-control" id="locationInfo" ng-model="vm.item.info" rows="3">A description of the infringement</textarea>
+    <textarea class="form-control" id="locationInfo" ng-model="vm.infringement.info" rows="3">A description of the infringement</textarea>
   </div>
   <button class="btn btn-default" type="submit">Submit</button>
 </form>

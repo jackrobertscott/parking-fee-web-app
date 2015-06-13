@@ -1,0 +1,6 @@
+<ul class="list-group" ng-init="vm.getFewCompany()">
+  <li class="list-group-item" ng-click="vm.toSettings(infringement)" ng-repeat="infringement in vm.infringements">
+    <strong>{{infringement.name}}</strong><br>
+    <span class="text-muted">Payment: {{infringement.payment}}</span>
+  </li>
+</ul>

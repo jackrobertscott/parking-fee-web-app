@@ -12,14 +12,12 @@
       .state('app.infringement', {
         url: '/infringement',
         templateUrl: 'app/infringement/infringement.html',
-        controller: 'ManyInfringementsCtrl',
-        controllerAs: 'vmMain'
+        controller: 'InfringementCtrl',
+        controllerAs: 'vm'
       })
       .state('app.infringement.detail', {
         url: '/detail',
-        templateUrl: 'app/infringement/detail.html',
-        controller: 'OneInfringementCtrl',
-        controllerAs: 'vm'
+        templateUrl: 'app/infringement/infringement.detail.html',
       });
   }
 })();
