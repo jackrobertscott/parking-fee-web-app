@@ -6,7 +6,7 @@
       <input type="text" class="form-control" placeholder="Search" ng-model="search">
       <a href="/vehicle/register">Register a new vehicle</a>
       <ul class="list-group" ng-init="vm.getMany()">
-        <li class="list-group-item" ng-repeat="vehicle in vm.items">
+        <li class="list-group-item" ng-repeat="vehicle in vm.vehicles">
             <strong>{{vehicle.plate}}</strong><br>
             <span class="text-muted">Make: {{vehicle.make}},</span>
             <span class="text-muted">Colour: {{vehicle.color}},</span>

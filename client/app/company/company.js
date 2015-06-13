@@ -13,7 +13,10 @@
         url: '/company',
         templateUrl: 'app/company/company.html',
         controller: 'CompanyCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          role: 'user'
+        }
       })
       .state('app.company.register', {
         url: '/register',

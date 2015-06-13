@@ -12,23 +12,22 @@
       .state('app.vehicle', {
         url: '/vehicle',
         templateUrl: 'app/vehicle/vehicle.html',
-        controller: 'ManyVehiclesCtrl',
-        controllerAs: 'vm'
+        controller: 'VehicleCtrl',
+        controllerAs: 'vm',
+        data: {
+          role: 'user'
+        }
       })
       .state('app.vehicle.register', {
         url: '/register',
-        templateUrl: 'app/vehicle/register.html',
-        controller: 'OneVehicleCtrl',
-        controllerAs: 'vm',
+        templateUrl: 'app/vehicle/vehicle.register.html',
         data: {
           role: 'user'
         }
       })
       .state('app.vehicle.settings', {
         url: '/settings/:id',
-        templateUrl: 'app/vehicle/settings.html',
-        controller: 'OneVehicleCtrl',
-        controllerAs: 'vm',
+        templateUrl: 'app/vehicle/vehicle.settings.html',
         data: {
           role: 'user'
         }

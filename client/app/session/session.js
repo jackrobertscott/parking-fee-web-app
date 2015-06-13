@@ -13,11 +13,17 @@
         url: '/session',
         templateUrl: 'app/session/session.html',
         controller: 'SessionCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          role: 'user'
+        }
       })
       .state('app.session.detail', {
         url: '/detail',
-        templateUrl: 'app/session/detail.html',
+        templateUrl: 'app/session/session.detail.html',
+        data: {
+          role: 'user'
+        }
       });
   }
 })();

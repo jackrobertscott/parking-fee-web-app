@@ -13,11 +13,17 @@
         url: '/inspection',
         templateUrl: 'app/inspection/inspection.html',
         controller: 'InspectionCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          role: 'inspector'
+        }
       })
       .state('app.inspection.detail', {
         url: '/detail',
         templateUrl: 'app/inspection/inspection.detail.html',
+        data: {
+          role: 'inspector'
+        }
       });
   }
 })();

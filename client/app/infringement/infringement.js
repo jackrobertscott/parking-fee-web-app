@@ -18,6 +18,9 @@
       .state('app.infringement.detail', {
         url: '/detail',
         templateUrl: 'app/infringement/infringement.detail.html',
+        data: {
+          role: 'user'
+        }
       });
   }
 })();
