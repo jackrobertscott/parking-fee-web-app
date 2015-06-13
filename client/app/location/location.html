@@ -5,7 +5,7 @@
       <!-- start:content -->
       <input type="text" class="form-control" placeholder="Search" ng-model="search">
       <ul class="list-group" ng-init="vm.getMany()">
-        <li class="list-group-item" ng-repeat="location in vm.items">
+        <li class="list-group-item" ng-repeat="location in vm.locations">
             <strong>{{location.name}}</strong><br>
             <span class="text-muted">Rate/hr: {{location.rate}},</span>
             <span class="text-muted">Lots: {{location.lots}},</span>
