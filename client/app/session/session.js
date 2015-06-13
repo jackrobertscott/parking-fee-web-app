@@ -12,14 +12,12 @@
       .state('app.session', {
         url: '/session',
         templateUrl: 'app/session/session.html',
-        controller: 'ManySessionsCtrl',
+        controller: 'SessionCtrl',
         controllerAs: 'vm'
       })
       .state('app.session.detail', {
         url: '/detail',
         templateUrl: 'app/session/detail.html',
-        controller: 'OneSessionCtrl',
-        controllerAs: 'vm'
       });
   }
 })();

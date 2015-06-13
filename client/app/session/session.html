@@ -5,7 +5,7 @@
       <!-- start:content -->
       <input type="text" class="form-control" placeholder="Search" ng-model="search">
       <ul class="list-group" ng-init="vm.getFewUser()">
-        <li class="list-group-item" ng-repeat="session in vm.items">
+        <li class="list-group-item" ng-repeat="session in vm.sessions">
           <strong>{{session.name}}</strong><br>
           <span class="text-muted">Payment: {{session.payment}}</span>
         </li>
