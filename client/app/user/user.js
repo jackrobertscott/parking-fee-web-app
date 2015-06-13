@@ -35,14 +35,14 @@
       })
       .state('app.user.password', {
         url: '/password',
-        templateUrl: 'app/user/password.html',
+        templateUrl: 'app/user/user.password.html',
         data: {
           role: 'user'
         }
       })
       .state('app.user.settings', {
         url: '/settings',
-        templateUrl: 'app/user/settings.html',
+        templateUrl: 'app/user/user.settings.html',
         data: {
           role: 'user'
         }

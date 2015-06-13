@@ -35,7 +35,7 @@
       .state('app.members', {
         url: '/company',
         templateUrl: 'app/company/members.html',
-        controller: 'CompanyCtrl',
+        controller: 'MembersCtrl',
         controllerAs: 'vm'
       })
       .state('app.members.detail', {

@@ -38,7 +38,7 @@
       menu.addItem({
         label: 'Profile',
         minRole: 'user',
-        direction: 'app.user.settings',
+        direction: 'app.user',
         data: {
           glyphicon: 'user'
         },

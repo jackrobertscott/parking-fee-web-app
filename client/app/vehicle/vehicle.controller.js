@@ -14,6 +14,9 @@
     vm.vehicles = [];
     vm.submitted = false;
     vm.glitch = glitch;
+    vm.makes = [];
+    vm.types = [];
+    vm.colors = [];
     vm.getMany = getMany;
     vm.getFewUser = getFewUser;
     vm.toSettings = toSettings;
@@ -27,7 +30,13 @@
     activate();
 
     function activate() {
-      // code...
+      // replace these with real values
+      vm.makes = ['Ford', 'Holden', 'Mazda', 'Suburu', 'Ferrari', 'Other'];
+      vm.types = ['Sedan', 'Hatchback', 'Utility', 'Bus'];
+      vm.colors = ['Red', 'Blue', 'Yellow', 'Green', 'Orange', 'Purple', 'White', 'Black'];
+      vm.vehicle.make = vm.makes[0];
+      vm.vehicle.type = vm.types[0];
+      vm.vehicle.color = vm.colors[0];
     }
 
     ////////////
