@@ -13,7 +13,7 @@
     .state('xxxLCPHxxx', {
       url: '/',
       templateUrl: 'app/xxxLCPHxxx/xxxLCPHxxx.html',
-      controller: 'ManyXxxUCPHxxxsCtrl',
+      controller: 'XxxUCPHxxxCtrl',
       controllerAs: 'vm'
     });
     */
