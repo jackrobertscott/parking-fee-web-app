@@ -12,14 +12,12 @@
       .state('app.inspection', {
         url: '/inspection',
         templateUrl: 'app/inspection/inspection.html',
-        controller: 'ManyInspectionsCtrl',
-        controllerAs: 'vmMain'
+        controller: 'InspectionCtrl',
+        controllerAs: 'vm'
       })
       .state('app.inspection.detail', {
         url: '/detail',
-        templateUrl: 'app/inspection/detail.html',
-        controller: 'OneInspectionCtrl',
-        controllerAs: 'vm'
+        templateUrl: 'app/inspection/inspection.detail.html',
       });
   }
 })();

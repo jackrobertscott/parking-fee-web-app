@@ -1,8 +1,7 @@
-<ul class="list-group" ng-init="vmMain.getFewCompany()">
-  <li class="list-group-item" ng-repeat="inspection in vmMain.items">
+<ul class="list-group" ng-init="vm.getUserInfringed()">
+  <li class="list-group-item" ng-repeat="inspection in vm.inspections">
       <strong>{{inspection.plate}}</strong><br>
       <span class="text-muted">Time: {{inspection.time | date:'medium'}}, </span>
       <span class="text-muted">Payment Due: {{inspection.infringement.payment | currency}}, </span>
-      <span class="text-muted">Paid: {{inspection.paid}}</span>
   </li>
 </ul>
