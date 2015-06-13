@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-// Generic infringements companies may apply
+// Generic infringements companys may apply
 var InfringementSchema = new Schema({
   name: {
     type: String,

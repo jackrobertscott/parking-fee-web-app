@@ -53,7 +53,7 @@
       menu.addItem({
         label: 'Company',
         minRole: 'company',
-        direction: 'app.company.register',
+        direction: 'app.company',
         data: {
           glyphicon: 'briefcase'
         },
@@ -66,9 +66,21 @@
         }]
       });
       menu.addItem({
+        label: 'Company Members',
+        minRole: 'company',
+        direction: 'app.members',
+        data: {
+          glyphicon: 'list-alt'
+        },
+        children: [{
+          label: 'Members',
+          direction: 'app.members.detail'
+        }]
+      });
+      menu.addItem({
         label: 'Locations',
         minRole: 'company',
-        direction: 'app.location.register',
+        direction: 'app.location',
         data: {
           glyphicon: 'globe'
         },
@@ -80,7 +92,7 @@
       menu.addItem({
         label: 'Vehicles',
         minRole: 'user',
-        direction: 'app.vehicle.register',
+        direction: 'app.vehicle',
         data: {
           glyphicon: 'bed'
         },
@@ -95,7 +107,7 @@
       menu.addItem({
         label: 'Infringements',
         minRole: 'user',
-        direction: 'app.infringement.detail',
+        direction: 'app.infringement',
         data: {
           glyphicon: 'exclamation-sign'
         },
@@ -107,7 +119,7 @@
       menu.addItem({
         label: 'Sessions',
         minRole: 'user',
-        direction: 'app.session.detail',
+        direction: 'app.session',
         data: {
           glyphicon: 'calendar'
         },
@@ -119,7 +131,7 @@
       menu.addItem({
         label: 'Inspections',
         minRole: 'inspector',
-        direction: 'app.inspection.detail',
+        direction: 'app.inspection',
         data: {
           glyphicon: 'eye-open'
         },

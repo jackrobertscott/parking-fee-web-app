@@ -6,13 +6,13 @@ var User = require('../user/user.model');
 var Location = require('../location/location.model');
 var config = require('../../config/environment');
 
-// Get list of companies
+// Get list of companys
 exports.index = function(req, res) {
-  Company.find(function(err, companies) {
+  Company.find(function(err, companys) {
     if (err) {
       return handleError(res, err);
     }
-    return res.json(200, companies);
+    return res.json(200, companys);
   });
 };
 

@@ -3,25 +3,22 @@
 
   angular
     .module('webApp')
-    .controller('ManyCompaniesCtrl', ManyCompaniesCtrl);
+    .controller('MembersCtrl', MembersCtrl);
 
-  ManyCompaniesCtrl.$inject = ['dataCompany', 'glitch', 'socket', '$state', 'Auth', 'dataUser'];
+  MembersCtrl.$inject = ['dataUser', 'glitch', 'socket', '$state', 'Auth'];
 
-  function ManyCompaniesCtrl(dataCompany, glitch, socket, $state, Auth, dataUser) {
+  function MembersCtrl(dataUser, glitch, socket, $state, Auth) {
     var vm = this;
 
-    vm.items = [];
+    vm.member = {};
+    vm.members = [];
     vm.users = [];
     vm.glitch = glitch;
-    vm.getMany = getMany;
-    vm.remove = remove;
     vm.getUsers = getUsers;
     vm.getCompanyMembers = getCompanyMembers;
     vm.companyAddCompany = companyAddCompany;
     vm.companyAddInspector = companyAddInspector;
     vm.companyRemoveMember = companyRemoveMember;
-    vm.authenticate = authenticate;
-    vm.unauthenticate = unauthenticate;
 
     ////////////
 
@@ -32,29 +29,6 @@
     }
 
     ////////////
-
-    function getMany() {
-      vm.glitch.reset();
-      dataCompany.getMany()
-        .then(function(items) {
-          vm.items = items;
-        })
-        .catch(vm.glitch.handle);
-    }
-
-    function remove(item) {
-      vm.glitch.reset();
-      dataCompany.remove(item)
-        .then(function() {
-          vm.items.forEach(function(elem, i, array) {
-            if (array[i]._id === item._id) {
-              array.splice(i, 1);
-            }
-          });
-          vm.glitch.setSuccess('Successfully deleted item');
-        })
-        .catch(vm.glitch.handle);
-    }
 
     function getUsers() {
       vm.glitch.reset();
@@ -68,8 +42,9 @@
     function getCompanyMembers() {
       vm.glitch.reset();
       dataUser.getCompanyMembers(Auth.getCurrentUser().company)
-        .then(function(items) {
-          vm.items = items;
+        .then(function(members) {
+          vm.members = members;
+          vm.member = members[0];
         })
         .catch(vm.glitch.handle);
     }
@@ -123,26 +98,6 @@
           })
           .catch(vm.glitch.handle);
       }
-    }
-
-    function authenticate(item) {
-      vm.glitch.reset();
-      item.authenticated = true;
-      dataCompany.update(item)
-        .then(function() {
-          vm.glitch.setSuccess('Successfully authenticated company');
-        })
-        .catch(vm.glitch.handle);
-    }
-
-    function unauthenticate(item) {
-      vm.glitch.reset();
-      item.authenticated = false;
-      dataCompany.update(item)
-        .then(function() {
-          vm.glitch.setSuccess('Successfully unauthenticated company');
-        })
-        .catch(vm.glitch.handle);
     }
   }
 })();
