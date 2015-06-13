@@ -12,32 +12,30 @@
       .state('register', {
         url: '/register',
         templateUrl: 'app/user/register.html',
-        controller: 'OneUserCtrl',
+        controller: 'UserCtrl',
         controllerAs: 'vm'
       })
       .state('login', {
         url: '/login',
         templateUrl: 'app/user/login.html',
-        controller: 'OneUserCtrl',
+        controller: 'UserCtrl',
         controllerAs: 'vm'
       })
       .state('logout', {
         url: '/logout',
         templateUrl: 'app/user/logout.html',
-        controller: 'OneUserCtrl',
+        controller: 'UserCtrl',
         controllerAs: 'vm'
       })
       .state('app.user', {
         url: '/user',
         templateUrl: 'app/user/user.html',
-        controller: 'ManyUsersCtrl',
+        controller: 'UserCtrl',
         controllerAs: 'vm',
       })
       .state('app.user.password', {
         url: '/password',
         templateUrl: 'app/user/password.html',
-        controller: 'OneUserCtrl',
-        controllerAs: 'vm',
         data: {
           role: 'user'
         }
@@ -45,8 +43,6 @@
       .state('app.user.settings', {
         url: '/settings',
         templateUrl: 'app/user/settings.html',
-        controller: 'OneUserCtrl',
-        controllerAs: 'vm',
         data: {
           role: 'user'
         }

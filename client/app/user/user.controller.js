@@ -3,24 +3,26 @@
 
   angular
     .module('webApp')
-    .controller('OneUserCtrl', OneUserCtrl);
+    .controller('UserCtrl', UserCtrl);
 
-  OneUserCtrl.$inject = ['dataUser', 'glitch', '$state', 'Auth'];
+  UserCtrl.$inject = ['dataUser', 'glitch', '$state', 'Auth'];
 
-  function OneUserCtrl(dataUser, glitch, $state, Auth) {
+  function UserCtrl(dataUser, glitch, $state, Auth) {
     var vm = this;
 
-    vm.item = {};
-    vm.glitch = glitch;
+    vm.user = {};
+    vm.users = [];
     vm.submitted = false;
+    vm.glitch = glitch;
+    vm.getMany = getMany;
     vm.getOne = getOne;
     vm.create = create;
     vm.update = update;
-    vm.remove = remove;
     vm.login = login;
     vm.loginOauth = loginOauth;
     vm.logout = logout;
     vm.changePassword = changePassword;
+    // vm.remove = remove;
 
     ////////////
 
@@ -32,12 +34,21 @@
 
     ////////////
 
+    function getMany() {
+      vm.glitch.reset();
+      dataUser.getMany()
+        .then(function(users) {
+          vm.users = users;
+        })
+        .catch(vm.glitch.handle);
+    }
+
     function getOne(id) {
       vm.glitch.reset();
       id = id || Auth.getCurrentUser()._id;
       dataUser.getOne(id)
-        .then(function(item) {
-          vm.item = item;
+        .then(function(user) {
+          vm.user = user;
         })
         .catch(vm.glitch.handle);
     }
@@ -48,7 +59,7 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.createUser(vm.item)
+        Auth.createUser(vm.user)
           .then(function() {
             $state.go('app.vehicle.register');
           })
@@ -69,27 +80,41 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataUser.update(vm.item)
-          .then(function(item) {
+        dataUser.update(vm.user)
+          .then(function(user) {
             vm.glitch.setSuccess('Successfully updated');
           })
           .catch(vm.glitch.handle);
       }
     }
 
-    function remove(form) {
-      vm.glitch.reset();
-      if (!form.$valid) {
-        invalid();
-      } else {
-        dataUser.remove(vm.item)
-          .then(function() {
-            vm.item = {};
-            logout();
-          })
-          .catch(vm.glitch.handle);
-      }
-    }
+    // function remove(user) {
+    //   vm.glitch.reset();
+    //   dataUser.remove(user)
+    //     .then(function() {
+    //       vm.users.forEach(function(elem, i, array) {
+    //         if (array[i]._id === user._id) {
+    //           array.splice(i, 1);
+    //         }
+    //       });
+    //       vm.glitch.setSuccess('Successfully deleted user');
+    //     })
+    //     .catch(vm.glitch.handle);
+    // }
+    //
+    // function remove(form) {
+    //   vm.glitch.reset();
+    //   if (!form.$valid) {
+    //     invalid();
+    //   } else {
+    //     dataUser.remove(vm.user)
+    //       .then(function() {
+    //         vm.user = {};
+    //         logout();
+    //       })
+    //       .catch(vm.glitch.handle);
+    //   }
+    // }
 
     function login(form) {
       vm.glitch.reset();
@@ -97,7 +122,7 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.login(vm.item)
+        Auth.login(vm.user)
           .then(function() {
             $state.go('app.vehicle.register');
           })
@@ -122,7 +147,7 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.changePassword(vm.item.oldPassword, vm.item.newPassword)
+        Auth.changePassword(vm.user.oldPassword, vm.user.newPassword)
           .then(function() {
             vm.glitch.setSuccess('Password successfully changed.');
           })
