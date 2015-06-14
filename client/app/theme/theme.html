@@ -3,13 +3,13 @@
   <div class="row">
     <div class="col-xs-12">
       <!-- start:content -->
-      <h2 class="text-center">WICKED</h2>
-      <h1 class="text-center">NAME</h1>
+      <h2 class="text-center">UMAMI</h2>
+      <h1 class="text-center">PARK</h1>
       <hr>
-      <h3>INFORMATION</h3>
+      <h3>DETAILS</h3>
       <ul class="list-unstyled">
         <a ng-repeat="item in vmApp.menu" ui-sref="{{item.direction}}">
-          <li ng-class="{'active': vmApp.isActive(item.direction)}">
+          <li ng-class="{'active': vmApp.isActive(item.data.route)}">
             <span class="glyphicon {{'glyphicon-'+item.data.glyphicon}}" aria-hidden="true"></span>
             {{item.label}}
           </li>

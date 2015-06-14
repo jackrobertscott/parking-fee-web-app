@@ -38,9 +38,10 @@
       menu.addItem({
         label: 'Profile',
         minRole: 'user',
-        direction: 'app.user',
+        direction: 'app.user.settings',
         data: {
-          glyphicon: 'user'
+          glyphicon: 'user',
+          route: 'app.user'
         },
         children: [{
           label: 'Settings',
@@ -56,9 +57,10 @@
       menu.addItem({
         label: 'Company',
         minRole: 'company',
-        direction: 'app.company',
+        direction: 'app.company.settings',
         data: {
-          glyphicon: 'briefcase'
+          glyphicon: 'briefcase',
+          route: 'app.company'
         },
         children: [{
           label: 'Settings',
@@ -68,9 +70,10 @@
       menu.addItem({
         label: 'Locations',
         minRole: 'company',
-        direction: 'app.location',
+        direction: 'app.location.register',
         data: {
-          glyphicon: 'globe'
+          glyphicon: 'globe',
+          route: 'app.location'
         },
         children: [{
           label: 'Register',
@@ -80,9 +83,10 @@
       menu.addItem({
         label: 'Infringements',
         minRole: 'company',
-        direction: 'app.infringement',
+        direction: 'app.infringement.register',
         data: {
-          glyphicon: 'exclamation-sign'
+          glyphicon: 'exclamation-sign',
+          route: 'app.infringement'
         },
         children: [{
           label: 'Register',
@@ -94,7 +98,8 @@
         minRole: 'user',
         direction: 'app.session',
         data: {
-          glyphicon: 'calendar'
+          glyphicon: 'calendar',
+          route: 'app.session'
         }
       });
       menu.addItem({
@@ -102,7 +107,8 @@
         minRole: 'inspector',
         direction: 'app.inspection',
         data: {
-          glyphicon: 'eye-open'
+          glyphicon: 'eye-open',
+          route: 'app.inspection'
         }
       });
       menu.addItem({
