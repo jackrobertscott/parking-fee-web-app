@@ -34,6 +34,9 @@
               </a>
             </td>
           </tr>
+          <tr ng-if="!vmMany.users.length">
+            <td colspan="3">No results</td>
+          </tr>
         </tbody>
       </table>
       <hr>
@@ -64,6 +67,9 @@
                 <span ng-show="member.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
               </a>
             </td>
+          </tr>
+          <tr ng-if="!vmMany.members.length">
+            <td colspan="3">No results</td>
           </tr>
         </tbody>
       </table>

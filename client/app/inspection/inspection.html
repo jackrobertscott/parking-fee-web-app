@@ -17,12 +17,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="inspection in vmMany.inspection | filter: search" ui-sref="app.inspection.detail({id: inspection._id})">
+          <tr ng-repeat="inspection in vmMany.inspections | filter: search" ui-sref="app.inspection.detail({id: inspection._id})">
             <td>{{inspection.plate}}</td>
             <td>{{inspection.infringement.name}}</td>
             <td>{{inspection.infringement.payment | currency}}</td>
             <td>{{inspection.created | date:'medium'}}</td>
             <td>{{inspection.paid}}</td>
+          </tr>
+          <tr ng-if="!vmMany.inspections.length">
+            <td colspan="5">No results</td>
           </tr>
         </tbody>
       </table>

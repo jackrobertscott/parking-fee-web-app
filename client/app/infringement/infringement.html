@@ -18,6 +18,9 @@
             <td>{{infringement.name}}</td>
             <td>{{infringement.payment | currency}}</td>
           </tr>
+          <tr ng-if="!vmMany.infringements.length">
+            <td colspan="2">No results</td>
+          </tr>
         </tbody>
       </table>
       <!-- end:content -->

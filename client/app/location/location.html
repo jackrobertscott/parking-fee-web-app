@@ -25,6 +25,9 @@
             <td>{{location.start | date:'shortTime'}}</td>
             <td>{{location.end | date:'shortTime'}}</td>
           </tr>
+          <tr ng-if="!vmMany.locations.length">
+            <td colspan="5">No results</td>
+          </tr>
         </tbody>
       </table>
       <!-- end:content -->
