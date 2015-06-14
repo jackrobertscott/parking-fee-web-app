@@ -79,7 +79,7 @@
       });
       menu.addItem({
         label: 'Infringements',
-        minRole: 'user',
+        minRole: 'company',
         direction: 'app.infringement',
         data: {
           glyphicon: 'exclamation-sign'
@@ -95,11 +95,7 @@
         direction: 'app.session',
         data: {
           glyphicon: 'calendar'
-        },
-        children: [{
-          label: 'Detail',
-          direction: 'app.session.detail',
-        }]
+        }
       });
       menu.addItem({
         label: 'Inspections',
@@ -107,11 +103,7 @@
         direction: 'app.inspection',
         data: {
           glyphicon: 'eye-open'
-        },
-        children: [{
-          label: 'Detail',
-          direction: 'app.inspection.detail',
-        }]
+        }
       });
       menu.addItem({
         label: 'Logout',

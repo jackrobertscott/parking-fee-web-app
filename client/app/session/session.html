@@ -3,13 +3,23 @@
   <div class="row">
     <div class="col-xs-12">
       <!-- start:content -->
+      <h2>Sessions</h2>
+      <hr>
       <input type="text" class="form-control" placeholder="Search" ng-model="search">
-      <ul class="list-group" ng-init="vm.getFewUser()">
-        <li class="list-group-item" ng-repeat="session in vm.sessions">
-          <strong>{{session.name}}</strong><br>
-          <span class="text-muted">Payment: {{session.payment}}</span>
-        </li>
-      </ul>
+      <table class="table table-hover" ng-init="vmMany.getFewUser()">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="session in vmMany.session | filter: search" ui-sref="app.session.detail({id: session._id})">
+            <td>{{session.name}}</td>
+            <td>{{session.payment | currency}}</td>
+          </tr>
+        </tbody>
+      </table>
       <!-- end:content -->
     </div>
   </div>

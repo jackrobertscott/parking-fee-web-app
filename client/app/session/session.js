@@ -12,18 +12,15 @@
       .state('app.session', {
         url: '/session',
         templateUrl: 'app/session/session.html',
-        controller: 'SessionCtrl',
-        controllerAs: 'vm',
+        controller: 'ManySessionsCtrl',
+        controllerAs: 'vmMany',
         data: {
           role: 'user'
         }
       })
       .state('app.session.detail', {
-        url: '/detail',
-        templateUrl: 'app/session/session.detail.html',
-        data: {
-          role: 'user'
-        }
+        url: '/detail/:id',
+        templateUrl: 'app/session/session.detail.html'
       });
   }
 })();
