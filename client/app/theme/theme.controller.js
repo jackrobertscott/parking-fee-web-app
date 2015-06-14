@@ -85,8 +85,8 @@
           glyphicon: 'exclamation-sign'
         },
         children: [{
-          label: 'Detail',
-          direction: 'app.infringement.detail',
+          label: 'Register',
+          direction: 'app.infringement.register',
         }]
       });
       menu.addItem({

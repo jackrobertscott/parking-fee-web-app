@@ -3,16 +3,30 @@
   <div class="row">
     <div class="col-xs-12">
       <!-- start:content -->
+      <h2>Locations</h2>
+      <hr>
+      <p>All Locations</p>
       <input type="text" class="form-control" placeholder="Search" ng-model="search">
-      <ul class="list-group" ng-init="vmMany.getMany()">
-        <li class="list-group-item" ng-repeat="location in vmMany.locations">
-            <strong>{{location.name}}</strong><br>
-            <span class="text-muted">Rate/hr: {{location.rate}},</span>
-            <span class="text-muted">Lots: {{location.lots}},</span>
-            <span class="text-muted">Start: {{location.start | date:'shortTime'}},</span>
-            <span class="text-muted">End: {{location.end | date:'shortTime'}}</span>
-        </li>
-      </ul>
+      <table class="table table-hover" ng-init="vmMany.getMany()">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Rate/hr</th>
+            <th>Lots</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="location in vmMany.locations | filter: search">
+            <td>{{location.name}}</td>
+            <td>{{location.rate | currency}}</td>
+            <td>{{location.lots}}</td>
+            <td>{{location.start | date:'shortTime'}}</td>
+            <td>{{location.end | date:'shortTime'}}</td>
+          </tr>
+        </tbody>
+      </table>
       <!-- end:content -->
     </div>
   </div>

@@ -14,7 +14,7 @@
     vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
-    vm.getFew = getFew;
+    vm.getFewCompany = getFewCompany;
     vm.toSettings = toSettings;
 
     ////////////
@@ -50,7 +50,7 @@
         .catch(vm.glitch.handle);
     }
 
-    function getFew() {
+    function getFewCompany() {
       dataLocation.getCompanyLocations(Auth.getCurrentUser().company)
         .then(function(locations) {
           vm.locations = locations;

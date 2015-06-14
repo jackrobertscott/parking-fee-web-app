@@ -3,13 +3,23 @@
   <div class="row">
     <div class="col-xs-12">
       <!-- start:content -->
+      <h2>Infringement</h2>
+      <hr>
       <input type="text" class="form-control" placeholder="Search" ng-model="search">
-      <ul class="list-group" ng-init="vmMany.getMany()">
-        <li class="list-group-item" ng-repeat="infringement in vmMany.infringements">
-            <strong>{{infringement.name}}</strong><br>
-            <span class="text-muted">Payment: {{infringement.payment}}</span>
-        </li>
-      </ul>
+      <table class="table table-hover" ng-init="vmMany.getFewCompany()">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="infringement in vmMany.infringements | filter: search" ui-sref="app.infringement.settings({id: vehicle._id})">
+            <td>{{vehicle.name}}</td>
+            <td>{{vehicle.payment | currency}}</td>
+          </tr>
+        </tbody>
+      </table>
       <!-- end:content -->
     </div>
   </div>

@@ -15,9 +15,15 @@
         controller: 'ManyInfringementsCtrl',
         controllerAs: 'vmMany'
       })
-      .state('app.infringement.detail', {
-        url: '/detail/:id',
-        templateUrl: 'app/infringement/infringement.detail.html',
+      .state('app.infringement.register', {
+        url: '/register',
+        templateUrl: 'app/infringement/infringement.register.html',
+        controller: 'OneInfringementCtrl',
+        controllerAs: 'vmOne'
+      })
+      .state('app.infringement.settings', {
+        url: '/settings/:id',
+        templateUrl: 'app/infringement/infringement.settings.html',
         controller: 'OneInfringementCtrl',
         controllerAs: 'vmOne'
       });
