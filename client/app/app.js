@@ -69,7 +69,7 @@
             console.log('unauthorised: not logged in');
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
-            $location.path('/');
+            $location.path('/user/settings');
             console.log('unauthorised: role no access');
           }
         }

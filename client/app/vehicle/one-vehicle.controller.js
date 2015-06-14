@@ -57,7 +57,7 @@
         });
         dataVehicle.create(vm.vehicle)
           .then(function(vehicle) {
-            $state.go('vehicleUser');
+            $state.go('app.user.settings');
           })
           .catch(vm.glitch.handle);
       }
@@ -72,6 +72,7 @@
         dataVehicle.update(vm.vehicle)
           .then(function(vehicle) {
             vm.glitch.setSuccess('Successfully updated');
+            vm.submitted = false;
           })
           .catch(vm.glitch.handle);
       }
@@ -85,7 +86,7 @@
         dataVehicle.remove(vm.vehicle)
           .then(function() {
             vm.vehicle = {};
-            $state.go('vehicleUser');
+            $state.go('app.user.settings');
           })
           .catch(vm.glitch.handle);
       }

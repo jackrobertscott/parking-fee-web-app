@@ -43,11 +43,14 @@
           glyphicon: 'user'
         },
         children: [{
-          label: 'Settings',
+          label: 'User Settings',
           direction: 'app.user.settings'
         }, {
           label: 'Change Password',
           direction: 'app.user.password'
+        }, {
+          label: 'New Vehicle',
+          direction: 'app.user.register'
         }]
       });
       menu.addItem({
@@ -87,21 +90,6 @@
         children: [{
           label: 'Register',
           direction: 'app.location.register'
-        }]
-      });
-      menu.addItem({
-        label: 'Vehicles',
-        minRole: 'user',
-        direction: 'app.vehicle',
-        data: {
-          glyphicon: 'bed'
-        },
-        children: [{
-          label: 'Register',
-          direction: 'app.vehicle.register'
-        }, {
-          label: 'Settings',
-          direction: 'app.vehicle.settings'
         }]
       });
       menu.addItem({

@@ -10,7 +10,7 @@
   function OneUserCtrl(dataUser, glitch, $state, Auth) {
     var vm = this;
 
-    vm.session = {};
+    vm.user = {};
     vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
@@ -36,8 +36,8 @@
       vm.glitch.reset();
       id = id || Auth.getCurrentUser()._id;
       dataUser.getOne(id)
-        .then(function(session) {
-          vm.session = session;
+        .then(function(user) {
+          vm.user = user;
         })
         .catch(vm.glitch.handle);
     }
@@ -48,7 +48,7 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.createUser(vm.session)
+        Auth.createUser(vm.user)
           .then(function() {
             $state.go('app.vehicle.register');
           })
@@ -69,8 +69,8 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataUser.update(vm.session)
-          .then(function(session) {
+        dataUser.update(vm.user)
+          .then(function(user) {
             vm.glitch.setSuccess('Successfully updated');
           })
           .catch(vm.glitch.handle);
@@ -82,9 +82,9 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataUser.remove(vm.session)
+        dataUser.remove(vm.user)
           .then(function() {
-            vm.session = {};
+            vm.user = {};
             logout();
           })
           .catch(vm.glitch.handle);
@@ -97,7 +97,7 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.login(vm.session)
+        Auth.login(vm.user)
           .then(function() {
             $state.go('app.vehicle.register');
           })
@@ -122,7 +122,7 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.changePassword(vm.session.oldPassword, vm.session.newPassword)
+        Auth.changePassword(vm.user.oldPassword, vm.user.newPassword)
           .then(function() {
             vm.glitch.setSuccess('Password successfully changed.');
           })

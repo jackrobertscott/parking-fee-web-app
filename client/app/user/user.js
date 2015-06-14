@@ -12,30 +12,32 @@
       .state('register', {
         url: '/register',
         templateUrl: 'app/user/register.html',
-        controller: 'UserCtrl',
+        controller: 'OneUserCtrl',
         controllerAs: 'vm'
       })
       .state('login', {
         url: '/login',
         templateUrl: 'app/user/login.html',
-        controller: 'UserCtrl',
+        controller: 'OneUserCtrl',
         controllerAs: 'vm'
       })
       .state('logout', {
         url: '/logout',
         templateUrl: 'app/user/logout.html',
-        controller: 'UserCtrl',
+        controller: 'OneUserCtrl',
         controllerAs: 'vm'
       })
       .state('app.user', {
         url: '/user',
         templateUrl: 'app/user/user.html',
-        controller: 'UserCtrl',
-        controllerAs: 'vm',
+        controller: 'ManyVehiclesCtrl',
+        controllerAs: 'vmMany'
       })
       .state('app.user.password', {
         url: '/password',
         templateUrl: 'app/user/user.password.html',
+        controller: 'OneUserCtrl',
+        controllerAs: 'vmOne',
         data: {
           role: 'user'
         }
@@ -43,6 +45,26 @@
       .state('app.user.settings', {
         url: '/settings',
         templateUrl: 'app/user/user.settings.html',
+        controller: 'OneUserCtrl',
+        controllerAs: 'vmOne',
+        data: {
+          role: 'user'
+        }
+      })
+      .state('app.user.register', {
+        url: '/vehicle/register',
+        templateUrl: 'app/vehicle/vehicle.register.html',
+        controller: 'OneVehicleCtrl',
+        controllerAs: 'vmOne',
+        data: {
+          role: 'user'
+        }
+      })
+      .state('app.user.vehicle', {
+        url: '/vehicle/:id',
+        templateUrl: 'app/vehicle/vehicle.settings.html',
+        controller: 'OneVehicleCtrl',
+        controllerAs: 'vmOne',
         data: {
           role: 'user'
         }

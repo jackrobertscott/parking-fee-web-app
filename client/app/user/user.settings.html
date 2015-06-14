@@ -1,19 +1,19 @@
-<div class="alert alert-danger" ng-show="vm.glitch.getError()" role="alert">{{ vm.glitch.getError() }}</div>
-<div class="alert alert-success" ng-show="vm.glitch.getSuccess()" role="alert">{{ vm.glitch.getSuccess() }}</div>
-<form class="form" name="form" ng-init="vm.getOne()" ng-submit="vm.update(form)" novalidate>
-  <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted, 'has-error': form.name.$invalid && vm.submitted }">
+<div class="alert alert-danger" ng-show="vmOne.glitch.getError()" role="alert">{{ vmOne.glitch.getError() }}</div>
+<div class="alert alert-success" ng-show="vmOne.glitch.getSuccess()" role="alert">{{ vmOne.glitch.getSuccess() }}</div>
+<form class="form" name="form" ng-init="vmOne.getOne()" ng-submit="vmOne.update(form)" novalidate>
+  <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vmOne.submitted, 'has-error': form.name.$invalid && vmOne.submitted }">
     <label for="fullName">Full Name</label>
-    <input class="form-control" id="fullName" name="name" ng-model="vm.user.name" placeholder="Full Name" required type="text">
-    <p class="help-block" ng-show="form.name.$error.required && vm.submitted">
+    <input class="form-control" id="fullName" name="name" ng-model="vmOne.user.name" placeholder="Full Name" required type="text">
+    <p class="help-block" ng-show="form.name.$error.required && vmOne.submitted">
       A name is required
     </p>
   </div>
-  <div class="form-group" ng-class="{ 'has-success': form.phone.$valid && vm.submitted, 'has-error': form.phone.$invalid && vm.submitted }">
+  <div class="form-group" ng-class="{ 'has-success': form.phone.$valid && vmOne.submitted, 'has-error': form.phone.$invalid && vmOne.submitted }">
     <label for="phone">Contact Phone Number</label>
-    <input class="form-control" id="phone" name="phone" ng-model="vm.user.phone" placeholder="Phone Number" type="number">
-    <p class="help-block" ng-show="form.phone.$error.number && vm.submitted">
+    <input class="form-control" id="phone" name="phone" ng-model="vmOne.user.phone" placeholder="Phone Number" type="number">
+    <p class="help-block" ng-show="form.phone.$error.number && vmOne.submitted">
       Please use only numeric characters (0-9)
     </p>
   </div>
-  <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+  <button class="btn btn-primary" type="submit">Save changes</button>
 </form>
