@@ -51,7 +51,7 @@
         });
         dataInfringement.create(vm.infringement)
           .then(function(infringement) {
-            $state.go('infringement');
+            $state.go('app.infringement');
           })
           .catch(vm.glitch.handle);
       }
@@ -66,6 +66,7 @@
         dataInfringement.update(vm.infringement)
           .then(function(infringement) {
             vm.glitch.setSuccess('Successfully updated');
+            vm.submitted = false;
           })
           .catch(vm.glitch.handle);
       }
@@ -79,7 +80,7 @@
         dataInfringement.remove(vm.infringement)
           .then(function() {
             vm.infringement = {};
-            $state.go('infringement');
+            $state.go('app.infringement');
           })
           .catch(vm.glitch.handle);
       }

@@ -1,4 +1,4 @@
-<form class="form" name="form" ng-submit="vmOne.update(form)" novalidate>
+<form class="form" name="form" ng-init="vmOne.getOne()" ng-submit="vmOne.update(form)" novalidate>
   <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vmOne.submitted, 'has-error': form.name.$invalid && vmOne.submitted }">
     <label for="infrintementName">Infringement Title</label>
     <input class="form-control" id="infrintementName" name="name" ng-model="vmOne.infringement.name" placeholder="Location Name" required type="text">

@@ -14,9 +14,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="infringement in vmMany.infringements | filter: search" ui-sref="app.infringement.settings({id: vehicle._id})">
-            <td>{{vehicle.name}}</td>
-            <td>{{vehicle.payment | currency}}</td>
+          <tr ng-repeat="infringement in vmMany.infringements | filter: search" ui-sref="app.infringement.settings({id: infringement._id})">
+            <td>{{infringement.name}}</td>
+            <td>{{infringement.payment | currency}}</td>
           </tr>
         </tbody>
       </table>
