@@ -62,9 +62,7 @@
       } else {
         dataUser.addCompanyMember(member, Auth.getCurrentUser().company, 'company')
           .then(function() {
-            // could be slow
-            getCompanyMembers();
-            getUsers();
+            // reset!
           })
           .catch(vm.glitch.handle);
       }
@@ -79,9 +77,7 @@
       } else {
         dataUser.addCompanyMember(member, Auth.getCurrentUser().company, 'inspector')
           .then(function() {
-            // could be slow
-            getCompanyMembers();
-            getUsers();
+            // reset!
           })
           .catch(vm.glitch.handle);
       }
@@ -96,9 +92,7 @@
       } else {
         dataUser.removeCompanyMember(member)
           .then(function() {
-            // could be slow
-            getCompanyMembers();
-            getUsers();
+            // reset!
           })
           .catch(vm.glitch.handle);
       }

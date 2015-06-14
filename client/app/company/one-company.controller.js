@@ -17,7 +17,7 @@
     vm.create = create;
     vm.update = update;
     vm.remove = remove;
-
+console.log(Auth.getCurrentUser());
     ////////////
 
     activate();
