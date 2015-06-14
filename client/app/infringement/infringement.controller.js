@@ -37,7 +37,6 @@
       dataInfringement.getMany()
         .then(function(infringements) {
           vm.infringements = infringements;
-          vm.infringement = infringements[0];
         })
         .catch(vm.glitch.handle);
     }
@@ -47,7 +46,6 @@
       dataInfringement.getFewCompany(Auth.getCurrentUser().company)
         .then(function(infringements) {
           vm.infringements = infringements;
-          vm.infringement = infringements[0];
         })
         .catch(vm.glitch.handle);
     }

@@ -12,6 +12,7 @@
 
     vm.user = {};
     vm.users = [];
+    vm.members = [];
     vm.submitted = false;
     vm.glitch = glitch;
     vm.getMany = getMany;
@@ -57,7 +58,6 @@
       dataUser.getCompanyMembers(Auth.getCurrentUser().company)
         .then(function(members) {
           vm.members = members;
-          vm.member = members[0];
         })
         .catch(vm.glitch.handle);
     }

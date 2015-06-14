@@ -38,7 +38,6 @@
       dataCompany.getMany()
         .then(function(companys) {
           vm.companys = companys;
-          vm.company = companys[0] || {};
         })
         .catch(vm.glitch.handle);
     }

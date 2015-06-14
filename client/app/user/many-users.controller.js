@@ -10,7 +10,8 @@
   function ManyUsersCtrl(dataUser, glitch, Auth) {
     var vm = this;
 
-    vm.sessions = [];
+    vm.users = [];
+    vm.members = [];
     vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
@@ -28,8 +29,8 @@
     function getMany() {
       vm.glitch.reset();
       dataUser.getMany()
-        .then(function(sessions) {
-          vm.sessions = sessions;
+        .then(function(users) {
+          vm.users = users;
         })
         .catch(vm.glitch.handle);
     }
@@ -48,7 +49,6 @@
       dataUser.getCompanyMembers(Auth.getCurrentUser().company)
         .then(function(members) {
           vm.members = members;
-          vm.member = members[0];
         })
         .catch(vm.glitch.handle);
     }
@@ -104,16 +104,16 @@
       }
     }
 
-    function remove(session) {
+    function remove(user) {
       vm.glitch.reset();
-      dataUser.remove(session)
+      dataUser.remove(user)
         .then(function() {
-          vm.sessions.forEach(function(elem, i, array) {
-            if (array[i]._id === session._id) {
+          vm.users.forEach(function(elem, i, array) {
+            if (array[i]._id === user._id) {
               array.splice(i, 1);
             }
           });
-          vm.glitch.setSuccess('Successfully deleted session');
+          vm.glitch.setSuccess('Successfully deleted user');
         })
         .catch(vm.glitch.handle);
     }
