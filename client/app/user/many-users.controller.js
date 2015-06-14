@@ -3,22 +3,17 @@
 
   angular
     .module('webApp')
-    .controller('MembersCtrl', MembersCtrl);
+    .controller('ManyUsersCtrl', ManyUsersCtrl);
 
-  MembersCtrl.$inject = ['dataUser', 'glitch', 'socket', '$state', 'Auth'];
+  ManyUsersCtrl.$inject = ['dataUser', 'glitch', 'Auth'];
 
-  function MembersCtrl(dataUser, glitch, socket, $state, Auth) {
+  function ManyUsersCtrl(dataUser, glitch, Auth) {
     var vm = this;
 
-    vm.member = {};
-    vm.members = [];
-    vm.users = [];
+    vm.sessions = [];
     vm.glitch = glitch;
-    vm.getUsers = getUsers;
-    vm.getCompanyMembers = getCompanyMembers;
-    vm.companyAddCompany = companyAddCompany;
-    vm.companyAddInspector = companyAddInspector;
-    vm.companyRemoveMember = companyRemoveMember;
+    vm.getMany = getMany;
+    vm.remove = remove;
 
     ////////////
 
@@ -29,6 +24,15 @@
     }
 
     ////////////
+
+    function getMany() {
+      vm.glitch.reset();
+      dataUser.getMany()
+        .then(function(sessions) {
+          vm.sessions = sessions;
+        })
+        .catch(vm.glitch.handle);
+    }
 
     function getUsers() {
       vm.glitch.reset();
@@ -98,6 +102,20 @@
           })
           .catch(vm.glitch.handle);
       }
+    }
+
+    function remove(session) {
+      vm.glitch.reset();
+      dataUser.remove(session)
+        .then(function() {
+          vm.sessions.forEach(function(elem, i, array) {
+            if (array[i]._id === session._id) {
+              array.splice(i, 1);
+            }
+          });
+          vm.glitch.setSuccess('Successfully deleted session');
+        })
+        .catch(vm.glitch.handle);
     }
   }
 })();
