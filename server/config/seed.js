@@ -6,31 +6,51 @@
 'use strict';
 
 var Company = require('../api/company/company.model');
-var Location = require('../api/location/location.model');
 var User = require('../api/user/user.model');
-var Vehicle = require('../api/vehicle/vehicle.model');
 
-Company.find({}).remove();
-Location.find({}).remove();
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
-    name: 'Test User',
+    name: 'User Role',
     email: 'test@test.com',
-    password: 'test'
+    password: 'password'
   }, {
     provider: 'local',
-    name: 'Other User',
-    email: 'other@other.com',
-    password: 'other'
+    role: 'company',
+    name: 'Company Role',
+    email: 'company@company.com',
+    password: 'password'
+  }, {
+    provider: 'local',
+    role: 'inspector',
+    name: 'Inspector Role',
+    email: 'inspector@inspector.com',
+    password: 'password'
   }, {
     provider: 'local',
     role: 'admin',
-    name: 'Admin',
+    name: 'Admin Role',
     email: 'admin@admin.com',
-    password: 'admin'
-  }, function() {
+    password: 'password'
+  }, function(err, testUser, companyUser, inspectorUser, adminUser) {
+    if (err) console.log(err);
     console.log('finished populating users');
+    Company.find({}).remove(function() {
+      Company.create({
+        name: 'Test Company',
+        email: 'test@company.com',
+        phone: 3123553,
+        abn: 3574513589,
+        authenticated: true,
+        members: [companyUser._id, inspectorUser._id],
+        _creator: companyUser._id
+      }, function(err, testCompany) {
+        if (err) console.log(err);
+        companyUser.company = testCompany._id;
+        companyUser.save();
+        inspectorUser.company = testCompany._id;
+        inspectorUser.save();
+      });
+    });
   });
 });
-Vehicle.find({}).remove();
