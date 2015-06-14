@@ -43,7 +43,7 @@
           glyphicon: 'user'
         },
         children: [{
-          label: 'User Settings',
+          label: 'Settings',
           direction: 'app.user.settings'
         }, {
           label: 'Change Password',
@@ -61,23 +61,8 @@
           glyphicon: 'briefcase'
         },
         children: [{
-          label: 'Register',
-          direction: 'app.company.register'
-        }, {
           label: 'Settings',
           direction: 'app.company.settings'
-        }]
-      });
-      menu.addItem({
-        label: 'Company Members',
-        minRole: 'company',
-        direction: 'app.members',
-        data: {
-          glyphicon: 'list-alt'
-        },
-        children: [{
-          label: 'Members',
-          direction: 'app.members.detail'
         }]
       });
       menu.addItem({

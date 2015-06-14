@@ -3,62 +3,70 @@
   <div class="row">
     <div class="col-xs-12">
       <!-- start:content -->
-      <input type="text" class="form-control" placeholder="Search" ng-model="search">
-      <table class="table table-hover">
+      <h2>Company</h2>
+      <hr>
+      <p>Add new members</p>
+      <input type="text" class="form-control" placeholder="Search Users" ng-model="search">
+      <table class="table table-hover" ng-init="vmMany.getUsers()">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Number</th>
             <th>Name</th>
-            <th>Thing</th>
+            <th>Email</th>
+            <th>Role</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>0</td>
-            <td>ASDF432</td>
-            <td>Example Person</td>
-            <td>Other</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>ASDF432</td>
-            <td>Example Pertson</td>
-            <td>Other</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>ASDF432</td>
-            <td>Example Pertson</td>
-            <td>Other</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>ASDF432</td>
-            <td>Example Pertson</td>
-            <td>Other</td>
+          <tr ng-repeat="user in vmMany.users | filter: {$:search, role:'!admin', company:'null'} | limitTo: 5">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+              <a ng-click="vmMany.companyAddCompany(user)" class="trash pull-right">
+                Company Admin
+                <span ng-show="user.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+              <a ng-click="vmMany.companyAddInspector(user)" class="trash pull-right">
+                Inspector
+                <span ng-show="user.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+              <a ng-click="vmMany.companyRemoveMember(user)" class="trash pull-right">
+                User
+                <span ng-show="user.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>
-      <nav>
-        <ul class="pagination">
-          <li>
-            <a href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li>
-            <a href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <hr>
+      <p>Current company members</p>
+      <table class="table table-hover" ng-init="vmMany.getCompanyMembers()">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="member in vmMany.members">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+              <a ng-click="vmMany.companyAddCompany(member)" class="trash pull-right">
+                Company Admin
+                <span ng-show="member.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+              <a ng-click="vmMany.companyAddInspector(member)" class="trash pull-right">
+                Inspector
+                <span ng-show="member.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+              <a ng-click="vmMany.companyRemoveMember(member)" class="trash pull-right">
+                User
+                <span ng-show="member.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <!-- end:content -->
     </div>
   </div>
@@ -77,7 +85,8 @@
         </li>
       </ul>
       <!-- end:menu -->
-      <div class="alert alert-danger" role="alert">Check yourself before you <strong>wreck</strong> yourself.</div>
+      <div ng-if="vmMany.glitch.getError() != ''" class="alert alert-danger" role="alert">{{vmMany.glitch.getError()}}</div>
+      <div ng-if="vmMany.glitch.getSuccess() != ''" class="alert alert-success" role="alert">{{vmMany.glitch.getSuccess()}}</div>
       <!-- view:detail -->
       <div ui-view=""></div>
     </div>

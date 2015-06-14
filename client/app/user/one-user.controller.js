@@ -99,7 +99,7 @@
       } else {
         Auth.login(vm.user)
           .then(function() {
-            $state.go('app.vehicle.register');
+            $state.go('app.user.settings');
           })
           .catch(function(err) {
             vm.glitch.setError(err.message);

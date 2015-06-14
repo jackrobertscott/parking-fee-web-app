@@ -28,7 +28,8 @@
         </li>
       </ul>
       <!-- end:menu -->
-      <div class="alert alert-danger" role="alert">Check yourself before you <strong>wreck</strong> yourself.</div>
+      <div ng-if="vmMany.glitch.getError() != ''" class="alert alert-danger" role="alert">{{vmMany.glitch.getError()}}</div>
+      <div ng-if="vmMany.glitch.getSuccess() != ''" class="alert alert-success" role="alert">{{vmMany.glitch.getSuccess()}}</div>
       <!-- view:detail -->
       <div ui-view=""></div>
     </div>

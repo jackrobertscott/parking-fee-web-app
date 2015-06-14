@@ -1,5 +1,3 @@
-<div class="alert alert-danger" ng-show="vmOne.glitch.getError()" role="alert">{{ vmOne.glitch.getError() }}</div>
-<div class="alert alert-success" ng-show="vmOne.glitch.getSuccess()" role="alert">{{ vmOne.glitch.getSuccess() }}</div>
 <form class="form" name="form" ng-init="vmOne.getOne()" ng-submit="vmOne.update(form)" novalidate>
   <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vmOne.submitted, 'has-error': form.name.$invalid && vmOne.submitted }">
     <label for="fullName">Full Name</label>

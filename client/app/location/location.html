@@ -4,8 +4,8 @@
     <div class="col-xs-12">
       <!-- start:content -->
       <input type="text" class="form-control" placeholder="Search" ng-model="search">
-      <ul class="list-group" ng-init="vm.getMany()">
-        <li class="list-group-item" ng-repeat="location in vm.locations">
+      <ul class="list-group" ng-init="vmMany.getMany()">
+        <li class="list-group-item" ng-repeat="location in vmMany.locations">
             <strong>{{location.name}}</strong><br>
             <span class="text-muted">Rate/hr: {{location.rate}},</span>
             <span class="text-muted">Lots: {{location.lots}},</span>
@@ -31,7 +31,8 @@
         </li>
       </ul>
       <!-- end:menu -->
-      <div class="alert alert-danger" role="alert">Check yourself before you <strong>wreck</strong> yourself.</div>
+      <div ng-if="vmMany.glitch.getError() != ''" class="alert alert-danger" role="alert">{{vmMany.glitch.getError()}}</div>
+      <div ng-if="vmMany.glitch.getSuccess() != ''" class="alert alert-success" role="alert">{{vmMany.glitch.getSuccess()}}</div>
       <!-- view:detail -->
       <div ui-view=""></div>
     </div>

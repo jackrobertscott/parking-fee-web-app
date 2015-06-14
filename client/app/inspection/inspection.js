@@ -12,18 +12,17 @@
       .state('app.inspection', {
         url: '/inspection',
         templateUrl: 'app/inspection/inspection.html',
-        controller: 'InspectionCtrl',
-        controllerAs: 'vm',
+        controller: 'ManyInspectionsCtrl',
+        controllerAs: 'vmMany',
         data: {
           role: 'inspector'
         }
       })
       .state('app.inspection.detail', {
-        url: '/detail',
+        url: '/detail/:id',
         templateUrl: 'app/inspection/inspection.detail.html',
-        data: {
-          role: 'inspector'
-        }
+        controller: 'OneInspectionCtrl',
+        controllerAs: 'vmOne'
       });
   }
 })();

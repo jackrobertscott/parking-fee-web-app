@@ -12,15 +12,17 @@
       .state('app.company', {
         url: '/company',
         templateUrl: 'app/company/company.html',
-        controller: 'CompanyCtrl',
-        controllerAs: 'vm',
+        controller: 'ManyUsersCtrl',
+        controllerAs: 'vmMany',
         data: {
           role: 'user'
         }
       })
-      .state('app.company.register', {
-        url: '/register',
-        templateUrl: 'app/company/company.register.html',
+      .state('company', {
+        url: '/company/register',
+        templateUrl: 'app/company/register.html',
+        controller: 'OneCompanyCtrl',
+        controllerAs: 'vmOne',
         data: {
           role: 'user'
         }
@@ -28,19 +30,8 @@
       .state('app.company.settings', {
         url: '/settings',
         templateUrl: 'app/company/company.settings.html',
-        data: {
-          role: 'company'
-        }
-      })
-      .state('app.members', {
-        url: '/company',
-        templateUrl: 'app/company/members.html',
-        controller: 'MembersCtrl',
-        controllerAs: 'vm'
-      })
-      .state('app.members.detail', {
-        url: '/detail',
-        templateUrl: 'app/company/members.detail.html',
+        controller: 'OneCompanyCtrl',
+        controllerAs: 'vmOne',
         data: {
           role: 'company'
         }
