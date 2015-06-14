@@ -14,6 +14,10 @@
     vm.members = [];
     vm.glitch = glitch;
     vm.getMany = getMany;
+    vm.getCompanyMembers = getCompanyMembers;
+    vm.companyAddCompany = companyAddCompany;
+    vm.companyAddInspector = companyAddInspector;
+    vm.companyRemoveMember = companyRemoveMember;
     vm.remove = remove;
 
     ////////////
@@ -27,15 +31,6 @@
     ////////////
 
     function getMany() {
-      vm.glitch.reset();
-      dataUser.getMany()
-        .then(function(users) {
-          vm.users = users;
-        })
-        .catch(vm.glitch.handle);
-    }
-
-    function getUsers() {
       vm.glitch.reset();
       dataUser.getMany()
         .then(function(users) {
