@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="location in vmMany.locations | filter: search">
+          <tr ng-repeat="location in vmMany.locations | filter: search" ui-sref="app.location.detail({id: location._id})">
             <td>{{location.name}}</td>
             <td>{{location.rate | currency}}</td>
             <td>{{location.lots}}</td>

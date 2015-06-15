@@ -32,6 +32,15 @@
         data: {
           role: 'company'
         }
+      })
+      .state('app.location.detail', {
+        url: '/detail/:id',
+        templateUrl: 'app/location/location.detail.html',
+        controller: 'OneLocationCtrl',
+        controllerAs: 'vmOne',
+        data: {
+          role: 'company'
+        }
       });
   }
 })();
