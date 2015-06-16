@@ -8,11 +8,11 @@ var LocationSchema = new Schema({
     type: String,
     required: true
   },
-  lat: {
+  latitude: {
     type: Number,
     required: true
   },
-  lng: {
+  longitude: {
     type: Number,
     required: true
   },

@@ -1,11 +1,11 @@
 // Colors
-@light: #ffffff;
-@dark:  #000000;
+@light: #fff;
+@dark: #000;
 @red: #d9534f;
 @blue: #337ab7;
-@left:  #0f1213;
-@middle:  @light;
-@right:  darken(@light, 3%);
+@left: #0f1213;
+@middle: @light;
+@right: darken(@light, 3%);
 
 // Padding
 @padding-xl: 18px;
@@ -88,7 +88,9 @@
   right: 400px;
   overflow-y: scroll;
   padding: @padding-xl;
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     margin-top: 0;
   }
   * {
@@ -129,6 +131,11 @@
   button {
     margin: @padding-sm 0 0;
   }
+  .angular-google-map-container {
+    height: 300px;
+    margin-bottom: @padding-lg;
+    border: 1px solid #cccccc;
+  }
 }
 
 // Media
@@ -146,7 +153,11 @@
 }
 
 // Globals
-input, button, textarea, select, form {
+input,
+button,
+textarea,
+select,
+form {
   box-shadow: none !important;
   .border-top-radius(0) !important;
   .border-bottom-radius(0) !important;
@@ -165,7 +176,10 @@ a {
     color: inherit;
   }
 }
-a, div, ul, li {
+a,
+div,
+ul,
+li {
   .border-top-radius(0) !important;
   .border-bottom-radius(0) !important;
 }

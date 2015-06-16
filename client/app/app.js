@@ -6,6 +6,7 @@
       'ngCookies',
       'ngResource',
       'ngSanitize',
+      'uiGmapgoogle-maps',
       'socket',
       'ui.router',
       'config',
@@ -18,13 +19,18 @@
     .factory('authInterceptor', authInterceptor)
     .run(allowAccess);
 
-  config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
+  config.$inject = ['$urlRouterProvider', '$locationProvider', '$httpProvider', 'uiGmapGoogleMapApiProvider'];
 
-  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  function config($urlRouterProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
+    uiGmapGoogleMapApiProvider.configure({
+      // key: 'your api key',
+      v: '3.17',
+      // libraries: 'visualization'
+    });
   }
 
   authInterceptor.$inject = ['$rootScope', '$q', '$cookieStore', '$location'];
