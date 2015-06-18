@@ -41,6 +41,11 @@
         maxRole: 'guest'
       });
       menu.addItem({
+        label: 'Dashboard',
+        direction: 'app.user.register',
+        minRole: 'user'
+      });
+      menu.addItem({
         label: 'Sign-up',
         direction: 'ext.register',
         maxRole: 'guest'

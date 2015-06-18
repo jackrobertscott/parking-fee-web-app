@@ -44,14 +44,14 @@
           route: 'app.user'
         },
         children: [{
+          label: 'New Vehicle',
+          direction: 'app.user.register'
+        }, {
           label: 'Settings',
           direction: 'app.user.settings'
         }, {
           label: 'Change Password',
           direction: 'app.user.password'
-        }, {
-          label: 'New Vehicle',
-          direction: 'app.user.register'
         }]
       });
       menu.addItem({

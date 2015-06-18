@@ -49,7 +49,7 @@
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if (response.status === 401) {
-          $location.path('/user/login');
+          $location.path('/login');
           console.log('unauthorised: api');
           // remove any stale tokens
           $cookieStore.remove('token');
@@ -71,7 +71,7 @@
         if (toState.data && toState.data.role && toState.data.role !== 'guest') {
           var userRoles = Auth.getUserRoles();
           if (!loggedIn) {
-            $location.path('/user/login');
+            $location.path('/login');
             console.log('unauthorised: not logged in');
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
