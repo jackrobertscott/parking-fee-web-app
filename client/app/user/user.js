@@ -9,23 +9,23 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('register', {
+      .state('ext.register', {
         url: '/register',
         templateUrl: 'app/user/register.html',
         controller: 'OneUserCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vmOne'
       })
-      .state('login', {
+      .state('ext.login', {
         url: '/login',
         templateUrl: 'app/user/login.html',
         controller: 'OneUserCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vmOne'
       })
       .state('logout', {
         url: '/logout',
         templateUrl: 'app/user/logout.html',
         controller: 'OneUserCtrl',
-        controllerAs: 'vm'
+        controllerAs: 'vmOne'
       })
       .state('app.user', {
         url: '/user',

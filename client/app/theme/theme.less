@@ -1,4 +1,7 @@
 // Colors
+@ext: #0f1213;
+@ext-font: #ffffff;
+@ext-height: 100vh;
 @light: #fff;
 @dark: #000;
 @red: #d9534f;
@@ -15,6 +18,61 @@
 @padding-xs: 6px;
 
 // Styling
+.external {
+  background-color: @ext;
+  color: @ext-font;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: @ext-height;
+  .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-55%);
+    .left {
+      h1 {
+        font-size: 88px;
+        margin-top: 0;
+        padding-top: 0;
+
+      }
+      h2 {
+        font-size: 110px;
+        margin: -10px 0 60px;
+      }
+    }
+    .right {
+      input {
+        padding: 24px;
+        margin: 0 0 30px;
+        font-size: 16px;
+      }
+      button {
+        padding: 14px 20px;
+        font-size: 16px;
+      }
+    }
+  }
+  .down-arrow {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-60px);
+    font-size: 40px;
+  }
+}
+.footer {
+  margin-top: @ext-height;
+  .container {
+    padding: 100px 0;
+    color: lighten(@ext, 50%);
+    li:hover {
+      color: lighten(@ext, 40%);
+    }
+  }
+}
 .internal {
   .left {
     position: absolute;

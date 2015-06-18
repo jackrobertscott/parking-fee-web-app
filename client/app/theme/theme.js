@@ -9,9 +9,18 @@
 
   function config($stateProvider) {
     $stateProvider
+      .state('ext', {
+        abstract: true,
+        templateUrl: 'app/theme/theme.external.html',
+        controller: 'ThemeCtrl',
+        controllerAs: 'vmApp',
+        resolve: {
+          currentUser: currentUser
+        }
+      })
       .state('app', {
         abstract: true,
-        templateUrl: 'app/theme/theme.html',
+        templateUrl: 'app/theme/theme.internal.html',
         controller: 'ThemeCtrl',
         controllerAs: 'vmApp',
         resolve: {
