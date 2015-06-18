@@ -15,140 +15,141 @@
 @padding-xs: 6px;
 
 // Styling
-.left {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 240px;
-  overflow-y: scroll;
-  padding: @padding-xl;
-  background-color: @left;
-  color: lighten(@left, 30%);
-  h2 {
-    color: @light;
-    font-size: 32px;
-    margin: 18px 0 0;
-    padding: 0;
-  }
-  h1 {
-    color: @light;
-    font-size: 40px;
-    margin: 0 0 30px;
-    padding: 0;
-  }
-  h3 {
+.internal {
+  .left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    overflow-y: scroll;
+    padding: @padding-xl;
+    background-color: @left;
     color: lighten(@left, 30%);
-    font-size: 13px;
-    padding: 0 @padding-sm;
-    font-weight: normal;
-  }
-  p {
-    font-size: 11px;
-  }
-  hr {
-    border-top: 1px solid lighten(@left, 15%);
-    margin: @padding-lg @padding-sm;
-  }
-  ul {
-    margin: 0 -@padding-xl;
-    font-size: 13px;
-    li {
-      color: lighten(@left, 35%);
-      padding: @padding-md @padding-xl;
-      &:hover {
+    h2 {
+      color: @light;
+      font-size: 32px;
+      margin: 18px 0 0;
+      padding: 0;
+    }
+    h1 {
+      color: @light;
+      font-size: 40px;
+      margin: 0 0 30px;
+      padding: 0;
+    }
+    h3 {
+      color: lighten(@left, 30%);
+      font-size: 13px;
+      padding: 0 @padding-sm;
+      font-weight: normal;
+    }
+    p {
+      font-size: 11px;
+    }
+    hr {
+      border-top: 1px solid lighten(@left, 15%);
+      margin: @padding-lg @padding-sm;
+    }
+    ul {
+      margin: 0 -@padding-xl;
+      font-size: 13px;
+      li {
+        color: lighten(@left, 35%);
+        padding: @padding-md @padding-xl;
+        &:hover {
+          color: lighten(@left, 65%);
+          background-color: darken(@left, 10%);
+        }
+        span {
+          padding: 0 @padding-sm;
+        }
+      }
+      .active {
         color: lighten(@left, 65%);
         background-color: darken(@left, 10%);
+        border-left: 6px solid lighten(@blue, 10%);
+        padding: @padding-md @padding-sm;
       }
-      span {
-        padding: 0 @padding-sm;
-      }
-    }
-    .active {
-      color: lighten(@left, 65%);
-      background-color: darken(@left, 10%);
-      border-left: 6px solid lighten(@blue, 10%);
-      padding: @padding-md @padding-sm;
     }
   }
-}
-#underlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: @middle;
-}
-.middle {
-  position: absolute;
-  top: 0;
-  left: 240px;
-  bottom: 0;
-  right: 400px;
-  overflow-y: scroll;
-  padding: @padding-xl;
-  h1,
-  h2,
-  h3 {
-    margin-top: 0;
-  }
-  * {
-    border-color: darken(@middle, 15%) !important;
-  }
-  table {
-    margin-top: @padding-xl;
-    border: 1px solid #000;
-  }
-  tbody > tr {
-    cursor: pointer;
-  }
-  .pagination {
-    margin-top: 0;
-  }
-}
-.right {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 400px;
-  border-left: 1px solid darken(@right, 20%);
-  overflow-y: scroll;
-  padding: @padding-xl;
-  background-color: @right;
-  ul {
-    border-bottom: 1px solid @blue;
-    margin: 0 0 @padding-lg;
-    li {
-      padding: 0 @padding-sm @padding-xs;
-      font-size: 12px;
-    }
-    .active {
-      border-bottom: 6px solid @blue;
-    }
-  }
-  button {
-    margin: @padding-sm 0 0;
-  }
-  .angular-google-map-container {
-    height: 300px;
-    margin-bottom: @padding-lg;
-    border: 1px solid #cccccc;
-  }
-}
-
-// Media
-@media (max-width: 1200px) {
-  .left {
-    width: 200px;
+  #underlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: @middle;
   }
   .middle {
-    left: 200px;
-    right: 300px;
+    position: absolute;
+    top: 0;
+    left: 240px;
+    bottom: 0;
+    right: 400px;
+    overflow-y: scroll;
+    padding: @padding-xl;
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+    }
+    * {
+      border-color: darken(@middle, 15%) !important;
+    }
+    table {
+      margin-top: @padding-xl;
+      border: 1px solid #000;
+    }
+    tbody > tr {
+      cursor: pointer;
+    }
+    .pagination {
+      margin-top: 0;
+    }
   }
   .right {
-    width: 300px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    border-left: 1px solid darken(@right, 20%);
+    overflow-y: scroll;
+    padding: @padding-xl;
+    background-color: @right;
+    ul {
+      border-bottom: 1px solid @blue;
+      margin: 0 0 @padding-lg;
+      li {
+        padding: 0 @padding-sm @padding-xs;
+        font-size: 12px;
+      }
+      .active {
+        border-bottom: 6px solid @blue;
+      }
+    }
+    button {
+      margin: @padding-sm 0 0;
+    }
+    .angular-google-map-container {
+      height: 300px;
+      margin-bottom: @padding-lg;
+      border: 1px solid #cccccc;
+    }
+  }
+  // Media
+  @media (max-width: 1200px) {
+    .left {
+      width: 200px;
+    }
+    .middle {
+      left: 200px;
+      right: 300px;
+    }
+    .right {
+      width: 300px;
+    }
   }
 }
 
