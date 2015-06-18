@@ -27,22 +27,25 @@
     </p>
   </div>
   <div>
-  <button class="btn btn-default col-xs-7" type="submit" type="submit">Sign up</button>
+  <button class="btn btn-default col-xs-7" type="submit" type="submit">Sign-up</button>
   <button class="btn btn-default col-xs-4 col-xs-offset-1" type="submit" ui-sref="ext.login">Login</button>
   <br>
   <br>
   <br>
   <br>
-  <a class="btn btn-facebook" href="" ng-click="vmOne.loginOauth('facebook')">
-    <i class="fa fa-facebook"></i>
-    Connect with Facebook
-  </a>
-  <a class="btn btn-google-plus" href="" ng-click="vmOne.loginOauth('google')">
-    <i class="fa fa-google-plus"></i>
-    Connect with Google+
-  </a>
-  <a class="btn btn-twitter" href="" ng-click="vmOne.loginOauth('twitter')">
-    <i class="fa fa-twitter"></i>
-    Connect with Twitter
-  </a>
+  <div class="text-center">
+    <p>or Sign-up with</p>
+    <a class="btn btn-facebook" ng-click="vmOne.loginOauth('facebook')">
+      <i class="fa fa-facebook"></i>
+      Facebook
+    </a>
+    <a class="btn btn-google-plus" ng-click="vmOne.loginOauth('google')">
+      <i class="fa fa-google-plus"></i>
+      Google+
+    </a>
+    <a class="btn btn-twitter" ng-click="vmOne.loginOauth('twitter')">
+      <i class="fa fa-twitter"></i>
+      Twitter
+    </a>
+  </div>
 </form>

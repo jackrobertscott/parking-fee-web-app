@@ -1,6 +1,7 @@
 // Colors
 @ext: #0f1213;
-@ext-font: #ffffff;
+@ext-font: #fff;
+@ext-min: 680px;
 @ext-height: 100vh;
 @light: #fff;
 @dark: #000;
@@ -25,6 +26,7 @@
   top: 0;
   left: 0;
   right: 0;
+  min-height: @ext-min;
   height: @ext-height;
   .container {
     position: absolute;
@@ -36,7 +38,6 @@
         font-size: 88px;
         margin-top: 0;
         padding-top: 0;
-
       }
       h2 {
         font-size: 110px;
@@ -63,13 +64,21 @@
     font-size: 40px;
   }
 }
+.external-ph {
+  min-height: @ext-min;
+  height: @ext-height;
+}
 .footer {
-  margin-top: @ext-height;
   .container {
     padding: 100px 0;
     color: lighten(@ext, 50%);
-    li:hover {
-      color: lighten(@ext, 40%);
+    li {
+      cursor: pointer;
+      margin: 0 @padding-md;
+      font-size: 16px;
+      &:hover {
+        color: lighten(@ext, 40%);
+      }
     }
   }
 }
@@ -193,9 +202,10 @@
     .angular-google-map-container {
       height: 300px;
       margin-bottom: @padding-lg;
-      border: 1px solid #cccccc;
+      border: 1px solid #ccc;
     }
   }
+
   // Media
   @media (max-width: 1200px) {
     .left {

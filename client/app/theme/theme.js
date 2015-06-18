@@ -11,8 +11,8 @@
     $stateProvider
       .state('ext', {
         abstract: true,
-        templateUrl: 'app/theme/theme.external.html',
-        controller: 'ThemeCtrl',
+        templateUrl: 'app/theme/theme-external.html',
+        controller: 'ThemeExternalCtrl',
         controllerAs: 'vmApp',
         resolve: {
           currentUser: currentUser
@@ -20,8 +20,8 @@
       })
       .state('app', {
         abstract: true,
-        templateUrl: 'app/theme/theme.internal.html',
-        controller: 'ThemeCtrl',
+        templateUrl: 'app/theme/theme-internal.html',
+        controller: 'ThemeInternalCtrl',
         controllerAs: 'vmApp',
         resolve: {
           currentUser: currentUser

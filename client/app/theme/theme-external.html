@@ -17,16 +17,17 @@
   </div>
   <span class="glyphicon glyphicon-menu-down down-arrow" aria-hidden="true"></span>
 </div>
+<div class="external-ph"></div>
 <div class="footer">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 text-center">
         <ul class="list-inline">
-          <li><a href="#">OPTION</a></li>
-          <li><a href="#">OPTION</a></li>
-          <li><a href="#">OPTION</a></li>
-          <li><a href="#">OPTION</a></li>
-          <li><a href="#">OPTION</a></li>
+          <li ng-repeat="item in vmApp.menu" ng-class="{'active': vmApp.isActive(item.data.route)}">
+            <a ui-sref="{{item.direction}}">
+              {{item.label}}
+            </a>
+          </li>
         </ul>
         <br>
         <p>Made with love by UP team</p>

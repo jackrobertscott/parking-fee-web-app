@@ -3,11 +3,11 @@
 
   angular
     .module('webApp')
-    .controller('ThemeCtrl', ThemeCtrl);
+    .controller('ThemeInternalCtrl', ThemeInternalCtrl);
 
-  ThemeCtrl.$inject = ['$state', 'Auth', 'menu'];
+  ThemeInternalCtrl.$inject = ['$state', 'Auth', 'menu'];
 
-  function ThemeCtrl($state, Auth, menu) {
+  function ThemeInternalCtrl($state, Auth, menu) {
     var vm = this;
 
     vm.isActive = isActive;
