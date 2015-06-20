@@ -18,7 +18,7 @@
           role: 'user'
         }
       })
-      .state('company', {
+      .state('app.company.register', {
         url: '/company/register',
         templateUrl: 'app/company/register.html',
         controller: 'OneCompanyCtrl',

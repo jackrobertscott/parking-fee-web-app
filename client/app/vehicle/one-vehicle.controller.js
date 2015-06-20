@@ -57,7 +57,7 @@
         });
         dataVehicle.create(vm.vehicle)
           .then(function(vehicle) {
-            $state.go('app.user.settings');
+            $state.go('app.user.settings', {}, {reload: true});
           })
           .catch(vm.glitch.handle);
       }

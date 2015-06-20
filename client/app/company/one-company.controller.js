@@ -17,7 +17,7 @@
     vm.create = create;
     vm.update = update;
     vm.remove = remove;
-console.log(Auth.getCurrentUser());
+
     ////////////
 
     activate();
@@ -52,7 +52,7 @@ console.log(Auth.getCurrentUser());
         dataCompany.create(vm.company)
           .then(function(company) {
             Auth.reloadUser(function() { // update user role in Auth
-              $state.go('companyMembers');
+              $state.go('app.company.settings');
             });
           })
           .catch(vm.glitch.handle);

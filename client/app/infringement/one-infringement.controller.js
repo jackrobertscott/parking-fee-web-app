@@ -51,7 +51,7 @@
         });
         dataInfringement.create(vm.infringement)
           .then(function(infringement) {
-            $state.go('app.infringement');
+            $state.go('app.infringement.register', {}, {reload: true});
           })
           .catch(vm.glitch.handle);
       }
@@ -80,7 +80,7 @@
         dataInfringement.remove(vm.infringement)
           .then(function() {
             vm.infringement = {};
-            $state.go('app.infringement');
+            $state.go('app.infringement.register', {}, {reload: true});
           })
           .catch(vm.glitch.handle);
       }

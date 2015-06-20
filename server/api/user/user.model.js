@@ -19,13 +19,6 @@ var UserSchema = new Schema({
     default: 'user'
   },
   phone: Number,
-  hashedPassword: String,
-  provider: String,
-  salt: String,
-  facebook: {},
-  twitter: {},
-  google: {},
-  github: {},
   vehicles: [{
     type: Schema.Types.ObjectId,
     ref: 'Vehicle',
@@ -42,7 +35,16 @@ var UserSchema = new Schema({
   active: {
     type: Boolean,
     default: true
-  }
+  },
+  // Auth
+  hashedPassword: String,
+  provider: String,
+  salt: String,
+  // Third parties
+  facebook: {},
+  twitter: {},
+  google: {},
+  github: {}
 });
 
 /**
