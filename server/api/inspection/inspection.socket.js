@@ -7,10 +7,10 @@
 var Inspection = require('./inspection.model');
 
 exports.register = function(socket) {
-  Inspection.schema.post('save', function (doc) {
+  Inspection.schema.post('save', function(doc) {
     onSave(socket, doc);
   });
-  Inspection.schema.post('remove', function (doc) {
+  Inspection.schema.post('remove', function(doc) {
     onRemove(socket, doc);
   });
 }

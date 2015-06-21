@@ -2,15 +2,15 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('ManyInspectionsCtrl', ManyInspectionsCtrl);
+    .module('webApp')
+    .controller('ManyInspectionsCtrl', ManyInspectionsCtrl);
 
   ManyInspectionsCtrl.$inject = ['dataInspection', 'glitch', 'socket', 'Auth', '$state'];
 
   function ManyInspectionsCtrl(dataInspection, glitch, socket, Auth, $state) {
     var vm = this;
 
-    vm.items = [];
+    vm.inspections = [];
     vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
@@ -22,57 +22,57 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
+
+    ////////////
 
     function getMany() {
       vm.glitch.reset();
       dataInspection.getMany()
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(inspections) {
+          vm.inspections = inspections;
+        })
+        .catch(vm.glitch.handle);
     }
 
-    function remove(item) {
+    function remove(inspection) {
       vm.glitch.reset();
-      dataInspection.remove(item)
-      .then(function() {
-        vm.items.forEach(function(elem, i, array) {
-          if (array[i]._id === item._id) {
-            array.splice(i, 1);
-          }
-        });
-        vm.glitch.setSuccess('Successfully deleted item');
-      })
-      .catch(vm.glitch.handle);
+      dataInspection.remove(inspection)
+        .then(function() {
+          vm.inspections.forEach(function(elem, i, array) {
+            if (array[i]._id === inspection._id) {
+              array.splice(i, 1);
+            }
+          });
+          vm.glitch.setSuccess('Successfully deleted inspection');
+        })
+        .catch(vm.glitch.handle);
     }
 
-    function toSettings(item) {
+    function toSettings(inspection) {
       $state.go('inspectionSettings', {
-        id: item._id
+        id: inspection._id
       });
     }
 
     function getFewCompany() {
       vm.glitch.reset();
       dataInspection.getFewCompany(Auth.getCurrentUser().company)
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(inspections) {
+          vm.inspections = inspections;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function getUserInfringed() {
       vm.glitch.reset();
       dataInspection.getUserInfringed(Auth.getCurrentUser()._id)
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(inspections) {
+          vm.inspections = inspections;
+        })
+        .catch(vm.glitch.handle);
     }
   }
 })();

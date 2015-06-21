@@ -7,10 +7,10 @@
 var Session = require('./session.model');
 
 exports.register = function(socket) {
-  Session.schema.post('save', function (doc) {
+  Session.schema.post('save', function(doc) {
     onSave(socket, doc);
   });
-  Session.schema.post('remove', function (doc) {
+  Session.schema.post('remove', function(doc) {
     onRemove(socket, doc);
   });
 }

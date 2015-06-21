@@ -2,15 +2,15 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneUserCtrl', OneUserCtrl);
+    .module('webApp')
+    .controller('OneUserCtrl', OneUserCtrl);
 
   OneUserCtrl.$inject = ['dataUser', 'glitch', '$state', 'Auth'];
 
   function OneUserCtrl(dataUser, glitch, $state, Auth) {
     var vm = this;
 
-    vm.item = {};
+    vm.user = {};
     vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
@@ -26,20 +26,20 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
+
+    ////////////
 
     function getOne(id) {
       vm.glitch.reset();
       id = id || Auth.getCurrentUser()._id;
       dataUser.getOne(id)
-      .then(function(item) {
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(user) {
+          vm.user = user;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -48,18 +48,18 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.createUser(vm.item)
-        .then(function() {
-          $state.go('vehicleRegister');
-        })
-        .catch(function(err) {
-          err = err.data;
-          // Update validity of form fields that match the mongoose errors
-          angular.forEach(err.errors, function(error, field) {
-            form[field].$setValidity('mongoose', false);
-            vm.glitch.setError(error.message);
+        Auth.createUser(vm.user)
+          .then(function() {
+            $state.go('app.vehicle.register');
+          })
+          .catch(function(err) {
+            err = err.data;
+            // Update validity of form fields that match the mongoose errors
+            angular.forEach(err.errors, function(error, field) {
+              form[field].$setValidity('mongoose', false);
+              vm.glitch.setError(error.message);
+            });
           });
-        });
       }
     }
 
@@ -69,11 +69,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataUser.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+        dataUser.update(vm.user)
+          .then(function(user) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -82,12 +82,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataUser.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('main');
-        })
-        .catch(vm.glitch.handle);
+        dataUser.remove(vm.user)
+          .then(function() {
+            vm.user = {};
+            logout();
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -97,13 +97,13 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.login(vm.item)
-        .then(function() {
-          $state.go('main');
-        })
-        .catch(function(err) {
-          vm.glitch.setError(err.message);
-        });
+        Auth.login(vm.user)
+          .then(function() {
+            $state.go('app.user.settings');
+          })
+          .catch(function(err) {
+            vm.glitch.setError(err.message);
+          });
       }
     }
 
@@ -113,7 +113,7 @@
 
     function logout() {
       Auth.logout();
-      $state.go('userLogin');
+      $state.go('ext.login');
     }
 
     function changePassword(form) {
@@ -122,14 +122,14 @@
       if (!form.$valid) {
         invalid();
       } else {
-        Auth.changePassword(vm.item.oldPassword, vm.item.newPassword)
-        .then(function() {
-          vm.glitch.setSuccess('Password successfully changed.');
-        })
-        .catch(function() {
-          form.password.$setValidity('mongoose', false);
-          vm.glitch.setError('Incorrect password');
-        });
+        Auth.changePassword(vm.user.oldPassword, vm.user.newPassword)
+          .then(function() {
+            vm.glitch.setSuccess('Password successfully changed.');
+          })
+          .catch(function() {
+            form.password.$setValidity('mongoose', false);
+            vm.glitch.setError('Incorrect password');
+          });
       }
     }
 

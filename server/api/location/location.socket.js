@@ -7,10 +7,10 @@
 var Location = require('./location.model');
 
 exports.register = function(socket) {
-  Location.schema.post('save', function (doc) {
+  Location.schema.post('save', function(doc) {
     onSave(socket, doc);
   });
-  Location.schema.post('remove', function (doc) {
+  Location.schema.post('remove', function(doc) {
     onRemove(socket, doc);
   });
 }

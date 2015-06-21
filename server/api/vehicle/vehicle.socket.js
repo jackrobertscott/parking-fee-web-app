@@ -7,10 +7,10 @@
 var Vehicle = require('./vehicle.model');
 
 exports.register = function(socket) {
-  Vehicle.schema.post('save', function (doc) {
+  Vehicle.schema.post('save', function(doc) {
     onSave(socket, doc);
   });
-  Vehicle.schema.post('remove', function (doc) {
+  Vehicle.schema.post('remove', function(doc) {
     onRemove(socket, doc);
   });
 }

@@ -2,48 +2,30 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .config(config);
+    .module('webApp')
+    .config(config);
 
   config.$inject = ['$stateProvider'];
 
   function config($stateProvider) {
     $stateProvider
-    .state('infringement', {
-      url: '/infringement',
-      templateUrl: 'app/infringement/overview.html',
-      controller: 'ManyInfringementsCtrl',
-      controllerAs: 'vm',
-      data: {
-        role: 'admin'
-      }
-    })
-    .state('infringementCompany', {
-      url: '/infringement/company',
-      templateUrl: 'app/infringement/company.html',
-      controller: 'ManyInfringementsCtrl',
-      controllerAs: 'vm',
-      data: {
-        role: 'company'
-      }
-    })
-    .state('infringementRegister', {
-      url: '/infringement/register',
-      templateUrl: 'app/infringement/register.html',
-      controller: 'ManyInfringementsCtrl',
-      controllerAs: 'vm',
-      data: {
-        role: 'company'
-      }
-    })
-    .state('infringementSettings', {
-      url: '/infringement/settings/:id',
-      templateUrl: 'app/infringement/settings.html',
-      controller: 'ManyInfringementsCtrl',
-      controllerAs: 'vm',
-      data: {
-        role: 'company'
-      }
-    });
+      .state('app.infringement', {
+        url: '/infringement',
+        templateUrl: 'app/infringement/infringement.html',
+        controller: 'ManyInfringementsCtrl',
+        controllerAs: 'vmMany'
+      })
+      .state('app.infringement.register', {
+        url: '/register',
+        templateUrl: 'app/infringement/infringement.register.html',
+        controller: 'OneInfringementCtrl',
+        controllerAs: 'vmOne'
+      })
+      .state('app.infringement.settings', {
+        url: '/settings/:id',
+        templateUrl: 'app/infringement/infringement.settings.html',
+        controller: 'OneInfringementCtrl',
+        controllerAs: 'vmOne'
+      });
   }
 })();

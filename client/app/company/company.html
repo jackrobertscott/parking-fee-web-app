@@ -1,0 +1,101 @@
+<!-- start:middle -->
+<div class="middle container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- start:content -->
+      <h2>Company</h2>
+      <hr>
+      <p>Add new members</p>
+      <input type="text" class="form-control" placeholder="Search Users" ng-model="search">
+      <table class="table table-hover" ng-init="vmMany.getMany()">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in vmMany.users | filter: {$:search, role:'!admin'} | limitTo: 5">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+              <a ng-click="vmMany.companyAddCompany(user)" class="trash pull-right">
+                Company Admin
+                <span ng-show="user.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+              <a ng-click="vmMany.companyAddInspector(user)" class="trash pull-right">
+                Inspector
+                <span ng-show="user.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+              <a ng-click="vmMany.companyRemoveMember(user)" class="trash pull-right">
+                User
+                <span ng-show="user.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+            </td>
+          </tr>
+          <tr ng-if="!vmMany.users.length">
+            <td colspan="3">No results</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <p>Current company members</p>
+      <table class="table table-hover" ng-init="vmMany.getCompanyMembers()">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="member in vmMany.members">
+            <td>{{member.name}}</td>
+            <td>{{member.email}}</td>
+            <td>
+              <a ng-click="vmMany.companyAddCompany(member)" class="trash pull-right">
+                Company Admin
+                <span ng-show="member.role === 'company'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+              <a ng-click="vmMany.companyAddInspector(member)" class="trash pull-right">
+                Inspector
+                <span ng-show="member.role === 'inspector'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+              <a ng-click="vmMany.companyRemoveMember(member)" class="trash pull-right">
+                User
+                <span ng-show="member.role === 'user'" class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+            </td>
+          </tr>
+          <tr ng-if="!vmMany.members.length">
+            <td colspan="3">No results</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- end:content -->
+    </div>
+  </div>
+</div>
+<!-- end:middle -->
+<!-- start:right -->
+<div class="right container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- start:menu -->
+      <ul class="list-inline" ng-repeat="items in vmApp.menu | filter: {direction: 'app.company'}">
+        <li ng-repeat="item in items.children" ng-class="{'active': vmApp.isActive(item.direction)}">
+          <a ui-sref="{{item.direction}}">
+            {{item.label}}
+          </a>
+        </li>
+      </ul>
+      <!-- end:menu -->
+      <div ng-if="vmMany.glitch.getError() != ''" class="alert alert-danger" role="alert">{{vmMany.glitch.getError()}}</div>
+      <div ng-if="vmMany.glitch.getSuccess() != ''" class="alert alert-success" role="alert">{{vmMany.glitch.getSuccess()}}</div>
+      <!-- view:detail -->
+      <div ui-view=""></div>
+    </div>
+  </div>
+</div>
+<!-- end:right -->

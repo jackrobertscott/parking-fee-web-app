@@ -2,15 +2,17 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneLocationCtrl', OneLocationCtrl);
+    .module('webApp')
+    .controller('OneLocationCtrl', OneLocationCtrl);
 
-  OneLocationCtrl.$inject = ['dataLocation', 'glitch', '$state', 'Auth', '$stateParams'];
+  OneLocationCtrl.$inject = ['dataLocation', 'glitch', '$state', 'Auth', '$stateParams', 'uiGmapGoogleMapApi'];
 
-  function OneLocationCtrl(dataLocation, glitch, $state, Auth, $stateParams) {
+  function OneLocationCtrl(dataLocation, glitch, $state, Auth, $stateParams, uiGmapGoogleMapApi) {
     var vm = this;
 
-    vm.item = {};
+    vm.location = {};
+    vm.map = {};
+    vm.marker = {};
     vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
@@ -22,40 +24,60 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      vm.map = {
+        center: {
+          latitude: 45,
+          longitude: -73
+        },
+        zoom: 8,
+        events: {
+          click: function(map, event, args) {
+            angular.extend(vm.location, {
+              latitude: args[0].latLng.k,
+              longitude: args[0].latLng.D
+            });
+          }
+        }
+      };
     }
+
+    ////////////
 
     function getOne(id) {
       vm.glitch.reset();
       id = id || $stateParams.id;
       dataLocation.getOne(id)
-      .then(function(item) {
-        item.start = new Date(item.start);
-        item.end = new Date(item.end);
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(location) {
+          location.start = new Date(location.start);
+          location.end = new Date(location.end);
+          angular.extend(vm.map.center, {
+            latitude: location.latitude,
+            longitude: location.longitude
+          });
+          vm.location = location;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
       vm.glitch.reset();
       vm.submitted = true;
-      if (!form.$valid) {
+      if (!form.$valid || !vm.location.latitude || !vm.location.longitude) {
         invalid();
       } else {
         var user = Auth.getCurrentUser();
-        angular.extend(vm.item, {
+        angular.extend(vm.location, {
           _creator: user._id,
-          company: user.company
+          company: user.company,
+          lat: vm.marker.coords.latitude,
+          lng: vm.marker.coords.longitude
         });
-        dataLocation.create(vm.item)
-        .then(function(item) {
-          $state.go('locationCompany');
-        })
-        .catch(vm.glitch.handle);
+        dataLocation.create(vm.location)
+          .then(function(location) {
+            $state.go('app.location.register', {}, {reload: true});
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -65,11 +87,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataLocation.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+        dataLocation.update(vm.location)
+          .then(function(location) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -78,12 +100,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataLocation.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('locationCompany');
-        })
-        .catch(vm.glitch.handle);
+        dataLocation.remove(vm.location)
+          .then(function() {
+            vm.location = {};
+            $state.go('app.location.register', {}, {reload: true});
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

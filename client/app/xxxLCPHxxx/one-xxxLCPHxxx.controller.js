@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneXxxUCPHxxxCtrl', OneXxxUCPHxxxCtrl);
+    .module('webApp')
+    .controller('OneXxxUCPHxxxCtrl', OneXxxUCPHxxxCtrl);
 
   OneXxxUCPHxxxCtrl.$inject = ['dataXxxUCPHxxx', 'glitch', '$state', '$stateParams'];
 
@@ -22,20 +22,20 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
+
+    ////////////
 
     function getOne(id) {
       vm.glitch.reset();
       id = id || $stateParams.id;
       dataXxxUCPHxxx.getOne(id)
-      .then(function(xxxLCPHxxx) {
-        vm.xxxLCPHxxx = xxxLCPHxxx;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(xxxLCPHxxx) {
+          vm.xxxLCPHxxx = xxxLCPHxxx;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -45,10 +45,10 @@
         invalid();
       } else {
         dataXxxUCPHxxx.create(vm.xxxLCPHxxx)
-        .then(function(xxxLCPHxxx) {
-          $state.go('xxxLCPHxxx');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(xxxLCPHxxx) {
+            $state.go('xxxLCPHxxx');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -59,10 +59,10 @@
         invalid();
       } else {
         dataXxxUCPHxxx.update(vm.xxxLCPHxxx)
-        .then(function(xxxLCPHxxx) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+          .then(function(xxxLCPHxxx) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -72,11 +72,11 @@
         invalid();
       } else {
         dataXxxUCPHxxx.remove(vm.xxxLCPHxxx)
-        .then(function() {
-          vm.xxxLCPHxxx = {};
-          $state.go('xxxLCPHxxx');
-        })
-        .catch(vm.glitch.handle);
+          .then(function() {
+            vm.xxxLCPHxxx = {};
+            $state.go('xxxLCPHxxx');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

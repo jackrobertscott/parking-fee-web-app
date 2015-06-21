@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .config(config);
+    .module('webApp')
+    .config(config);
 
   config.$inject = ['$stateProvider'];
 
@@ -12,8 +12,8 @@
     $stateProvider
     .state('xxxLCPHxxx', {
       url: '/',
-      templateUrl: 'app/xxxLCPHxxx/overview.html',
-      controller: 'ManyXxxUCPHxxxsCtrl',
+      templateUrl: 'app/xxxLCPHxxx/xxxLCPHxxx.html',
+      controller: 'XxxUCPHxxxCtrl',
       controllerAs: 'vm'
     });
     */

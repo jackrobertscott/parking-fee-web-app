@@ -2,15 +2,15 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneInfringementCtrl', OneInfringementCtrl);
+    .module('webApp')
+    .controller('OneInfringementCtrl', OneInfringementCtrl);
 
   OneInfringementCtrl.$inject = ['dataInfringement', 'glitch', '$state', '$stateParams', 'Auth'];
 
   function OneInfringementCtrl(dataInfringement, glitch, $state, $stateParams, Auth) {
     var vm = this;
 
-    vm.item = {};
+    vm.infringement = {};
     vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
@@ -22,20 +22,20 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
+
+    ////////////
 
     function getOne(id) {
       vm.glitch.reset();
       id = id || $stateParams.id;
       dataInfringement.getOne(id)
-      .then(function(item) {
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(infringement) {
+          vm.infringement = infringement;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -45,15 +45,15 @@
         invalid();
       } else {
         var user = Auth.getCurrentUser();
-        angular.extend(vm.item, {
+        angular.extend(vm.infringement, {
           _creator: user._id,
           company: user.company
         });
-        dataInfringement.create(vm.item)
-        .then(function(item) {
-          $state.go('infringement');
-        })
-        .catch(vm.glitch.handle);
+        dataInfringement.create(vm.infringement)
+          .then(function(infringement) {
+            $state.go('app.infringement.register', {}, {reload: true});
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -63,11 +63,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataInfringement.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+        dataInfringement.update(vm.infringement)
+          .then(function(infringement) {
+            vm.glitch.setSuccess('Successfully updated');
+            vm.submitted = false;
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -76,12 +77,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataInfringement.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('infringement');
-        })
-        .catch(vm.glitch.handle);
+        dataInfringement.remove(vm.infringement)
+          .then(function() {
+            vm.infringement = {};
+            $state.go('app.infringement.register', {}, {reload: true});
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

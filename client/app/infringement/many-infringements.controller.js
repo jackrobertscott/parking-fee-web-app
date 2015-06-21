@@ -2,15 +2,15 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('ManyInfringementsCtrl', ManyInfringementsCtrl);
+    .module('webApp')
+    .controller('ManyInfringementsCtrl', ManyInfringementsCtrl);
 
   ManyInfringementsCtrl.$inject = ['dataInfringement', 'glitch', 'socket', 'Auth', '$state'];
 
   function ManyInfringementsCtrl(dataInfringement, glitch, socket, Auth, $state) {
     var vm = this;
 
-    vm.items = [];
+    vm.infringements = [];
     vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
@@ -21,48 +21,48 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
+
+    ////////////
 
     function getMany() {
       vm.glitch.reset();
       dataInfringement.getMany()
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(infringements) {
+          vm.infringements = infringements;
+        })
+        .catch(vm.glitch.handle);
     }
 
-    function remove(item) {
+    function remove(infringement) {
       vm.glitch.reset();
-      dataInfringement.remove(item)
-      .then(function() {
-        vm.items.forEach(function(elem, i, array) {
-          if (array[i]._id === item._id) {
-            array.splice(i, 1);
-          }
-        });
-        vm.glitch.setSuccess('Successfully deleted item');
-      })
-      .catch(vm.glitch.handle);
+      dataInfringement.remove(infringement)
+        .then(function() {
+          vm.infringements.forEach(function(elem, i, array) {
+            if (array[i]._id === infringement._id) {
+              array.splice(i, 1);
+            }
+          });
+          vm.glitch.setSuccess('Successfully deleted infringement');
+        })
+        .catch(vm.glitch.handle);
     }
 
-    function toSettings(item) {
-      $state.go('infringementSettings', {
-        id: item._id
+    function toSettings(infringement) {
+      $state.go('app.infringement.settings', {
+        id: infringement._id
       });
     }
 
     function getFewCompany() {
       vm.glitch.reset();
       dataInfringement.getFewCompany(Auth.getCurrentUser().company)
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(infringements) {
+          vm.infringements = infringements;
+        })
+        .catch(vm.glitch.handle);
     }
   }
 })();

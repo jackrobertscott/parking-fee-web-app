@@ -2,45 +2,45 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .config(config);
+    .module('webApp')
+    .config(config);
 
   config.$inject = ['$stateProvider'];
 
   function config($stateProvider) {
     $stateProvider
-    .state('location', {
-      url: '/location',
-      templateUrl: 'app/location/overview.html',
-      controller: 'ManyLocationsCtrl',
-      controllerAs: 'vm'
-    })
-    .state('locationCompany', {
-      url: '/location/company',
-      templateUrl: 'app/location/company.html',
-      controller: 'ManyLocationsCtrl',
-      controllerAs: 'vm',
-      data: {
-        role: 'company'
-      }
-    })
-    .state('locationRegister', {
-      url: '/location/register',
-      templateUrl: 'app/location/register.html',
-      controller: 'OneLocationCtrl',
-      controllerAs: 'vm',
-      data: {
-        role: 'company'
-      }
-    })
-    .state('locationSettings', {
-      url: '/location/settings/:id',
-      templateUrl: 'app/location/settings.html',
-      controller: 'OneLocationCtrl',
-      controllerAs: 'vm',
-      data: {
-        role: 'company'
-      }
-    });
+      .state('app.location', {
+        url: '/location',
+        templateUrl: 'app/location/location.html',
+        controller: 'ManyLocationsCtrl',
+        controllerAs: 'vmMany'
+      })
+      .state('app.location.register', {
+        url: '/register',
+        templateUrl: 'app/location/location.register.html',
+        controller: 'OneLocationCtrl',
+        controllerAs: 'vmOne',
+        data: {
+          role: 'company'
+        }
+      })
+      .state('app.location.settings', {
+        url: '/settings/:id',
+        templateUrl: 'app/location/location.settings.html',
+        controller: 'OneLocationCtrl',
+        controllerAs: 'vmOne',
+        data: {
+          role: 'company'
+        }
+      })
+      .state('app.location.detail', {
+        url: '/detail/:id',
+        templateUrl: 'app/location/location.detail.html',
+        controller: 'OneLocationCtrl',
+        controllerAs: 'vmOne',
+        data: {
+          role: 'company'
+        }
+      });
   }
 })();

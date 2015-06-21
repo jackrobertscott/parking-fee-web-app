@@ -2,15 +2,15 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneSessionCtrl', OneSessionCtrl);
+    .module('webApp')
+    .controller('OneSessionCtrl', OneSessionCtrl);
 
   OneSessionCtrl.$inject = ['dataSession', 'glitch', '$state'];
 
   function OneSessionCtrl(dataSession, glitch, $state) {
     var vm = this;
 
-    vm.item = {};
+    vm.session = {};
     vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
@@ -22,19 +22,19 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
+
+    ////////////
 
     function getOne(id) {
       vm.glitch.reset();
       dataSession.getOne(id)
-      .then(function(item) {
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(session) {
+          vm.session = session;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -43,11 +43,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataSession.create(vm.item)
-        .then(function(item) {
-          $state.go('session');
-        })
-        .catch(vm.glitch.handle);
+        dataSession.create(vm.session)
+          .then(function(session) {
+            $state.go('session');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -57,11 +57,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataSession.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+        dataSession.update(vm.session)
+          .then(function(session) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -70,12 +70,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataSession.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('session');
-        })
-        .catch(vm.glitch.handle);
+        dataSession.remove(vm.session)
+          .then(function() {
+            vm.session = {};
+            $state.go('session');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

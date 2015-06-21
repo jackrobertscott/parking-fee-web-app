@@ -2,15 +2,15 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneVehicleCtrl', OneVehicleCtrl);
+    .module('webApp')
+    .controller('OneVehicleCtrl', OneVehicleCtrl);
 
   OneVehicleCtrl.$inject = ['dataVehicle', 'glitch', '$state', 'Auth', '$stateParams'];
 
   function OneVehicleCtrl(dataVehicle, glitch, $state, Auth, $stateParams) {
     var vm = this;
 
-    vm.item = {};
+    vm.vehicle = {};
     vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
@@ -18,32 +18,30 @@
     vm.update = update;
     vm.remove = remove;
 
-    // replace these with real values
-    vm.makes = ['Ford', 'Holden', 'Mazda', 'Suburu', 'Ferrari', 'Other'];
-    vm.types = ['Sedan', 'Hatchback', 'Utility', 'Bus'];
-    vm.colors = ['Red', 'Blue', 'Yellow', 'Green', 'Orange', 'Purple', 'White', 'Black'];
-    vm.item.make = vm.makes[0];
-    vm.item.type = vm.types[0];
-    vm.item.color = vm.colors[0];
-
     ////////////
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // replace these with real values
+      vm.makes = ['Ford', 'Holden', 'Mazda', 'Suburu', 'Ferrari', 'Other'];
+      vm.types = ['Sedan', 'Hatchback', 'Utility', 'Bus'];
+      vm.colors = ['Red', 'Blue', 'Yellow', 'Green', 'Orange', 'Purple', 'White', 'Black'];
+      vm.vehicle.make = vm.makes[0];
+      vm.vehicle.type = vm.types[0];
+      vm.vehicle.color = vm.colors[0];
     }
+
+    ////////////
 
     function getOne(id) {
       vm.glitch.reset();
       id = id || $stateParams.id;
       dataVehicle.getOne(id)
-      .then(function(item) {
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(vehicle) {
+          vm.vehicle = vehicle;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -53,15 +51,15 @@
         invalid();
       } else {
         var user = Auth.getCurrentUser();
-        angular.extend(vm.item, {
+        angular.extend(vm.vehicle, {
           _creator: user._id,
           users: [user._id]
         });
-        dataVehicle.create(vm.item)
-        .then(function(item) {
-          $state.go('vehicleUser');
-        })
-        .catch(vm.glitch.handle);
+        dataVehicle.create(vm.vehicle)
+          .then(function(vehicle) {
+            $state.go('app.user.settings', {}, {reload: true});
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -71,11 +69,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataVehicle.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+        dataVehicle.update(vm.vehicle)
+          .then(function(vehicle) {
+            vm.glitch.setSuccess('Successfully updated');
+            vm.submitted = false;
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -84,12 +83,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataVehicle.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('vehicleUser');
-        })
-        .catch(vm.glitch.handle);
+        dataVehicle.remove(vm.vehicle)
+          .then(function() {
+            vm.vehicle = {};
+            $state.go('app.user.settings');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

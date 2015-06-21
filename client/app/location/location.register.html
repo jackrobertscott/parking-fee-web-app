@@ -1,0 +1,51 @@
+<form class="form" name="form" ng-submit="vmOne.create(form)" novalidate>
+  <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vmOne.submitted, 'has-error': form.name.$invalid && vmOne.submitted }">
+    <label for="locationName">Location Name</label>
+    <input class="form-control" id="locationName" name="name" ng-model="vmOne.location.name" placeholder="Location Name" required type="text">
+    <p class="help-block" ng-show="form.name.$error.required && vmOne.submitted">
+      A location name is required
+    </p>
+  </div>
+  <div class="form-group" ng-class="{ 'has-error': (!vmOne.location.latitude || !vmOne.location.longitude) && vmOne.submitted }">
+    <label>Mark Location</label>
+    <ui-gmap-google-map center="vmOne.map.center" zoom="vmOne.map.zoom" events="vmOne.map.events">
+      <ui-gmap-marker coords="vmOne.location" idkey="0"></ui-gmap-marker>
+    </ui-gmap-google-map>
+    <p class="help-block" ng-show="(!vmOne.location.latitude || !vmOne.location.longitude) && vmOne.submitted">
+      Please select a location
+    </p>
+  </div>
+  <div class="form-group" ng-class="{ 'has-success': form.rate.$valid && vmOne.submitted, 'has-error': form.rate.$invalid && vmOne.submitted }">
+    <label for="locationRate">Ticket Parking Rate</label>
+    <input class="form-control" id="locationRate" max="1000" min="0" name="rate" ng-model="vmOne.location.rate" placeholder="Cents/Hour" required type="number">
+    <p class="help-block" ng-show="form.rate.$error.required && vmOne.submitted">
+      A location rate is required
+    </p>
+    <p class="help-block" ng-show="form.rate.$error.number && vmOne.submitted">
+      The location rate must be less than $10.00/hr
+    </p>
+  </div>
+  <div class="form-group" ng-class="{ 'has-success': form.start.$valid && vmOne.submitted, 'has-error': form.start.$invalid && vmOne.submitted }">
+    <label for="locationStart">Ticket Parking Start Time</label>
+    <input class="form-control" id="locationStart" name="start" ng-model="vmOne.location.start" placeholder="HH:mm:ss" required type="time">
+    <p class="help-block" ng-show="form.start.$error.required && vmOne.submitted">
+      A location start time is required
+    </p>
+  </div>
+  <div class="form-group" ng-class="{ 'has-success': form.end.$valid && vmOne.submitted, 'has-error': form.end.$invalid && vmOne.submitted }">
+    <label for="locationEnd">Ticket Parking End Time</label>
+    <input class="form-control" id="locationEnd" name="end" ng-model="vmOne.location.end" placeholder="HH:mm:ss" required type="time">
+    <p class="help-block" ng-show="form.end.$error.required && vmOne.submitted">
+      A location end time is required
+    </p>
+  </div>
+  <div class="form-group" ng-class="{ 'has-success': form.lots.$valid && vmOne.submitted, 'has-error': form.lots.$invalid && vmOne.submitted }">
+    <label for="locationLots">(Optional) Number of Available Lots</label>
+    <input class="form-control" id="locationLots" name="lots" ng-model="vmOne.location.lots" placeholder="Lots" type="number">
+  </div>
+  <div class="form-group">
+    <label for="locationInfo">Location Information</label>
+    <textarea class="form-control" id="locationInfo" ng-model="vmOne.location.info" rows="3">Any extra information about the location</textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>

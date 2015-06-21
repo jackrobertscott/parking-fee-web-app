@@ -2,15 +2,15 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('ManyVehiclesCtrl', ManyVehiclesCtrl);
+    .module('webApp')
+    .controller('ManyVehiclesCtrl', ManyVehiclesCtrl);
 
   ManyVehiclesCtrl.$inject = ['dataVehicle', 'glitch', 'socket', '$state', 'Auth'];
 
   function ManyVehiclesCtrl(dataVehicle, glitch, socket, $state, Auth) {
     var vm = this;
 
-    vm.items = [];
+    vm.vehicles = [];
     vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
@@ -21,46 +21,46 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
+
+    ////////////
 
     function getMany() {
       vm.glitch.reset();
       dataVehicle.getMany()
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(vehicles) {
+          vm.vehicles = vehicles;
+        })
+        .catch(vm.glitch.handle);
     }
 
-    function remove(item) {
+    function remove(vehicle) {
       vm.glitch.reset();
-      dataVehicle.remove(item)
-      .then(function() {
-        vm.items.forEach(function(elem, i, array) {
-          if (array[i]._id === item._id) {
-            array.splice(i, 1);
-          }
-        });
-        vm.glitch.setSuccess('Successfully deleted item');
-      })
-      .catch(vm.glitch.handle);
+      dataVehicle.remove(vehicle)
+        .then(function() {
+          vm.vehicles.forEach(function(elem, i, array) {
+            if (array[i]._id === vehicle._id) {
+              array.splice(i, 1);
+            }
+          });
+          vm.glitch.setSuccess('Successfully deleted vehicle');
+        })
+        .catch(vm.glitch.handle);
     }
 
     function getFewUser() {
       dataVehicle.getUserVehicles(Auth.getCurrentUser()._id)
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(vehicles) {
+          vm.vehicles = vehicles;
+        })
+        .catch(vm.glitch.handle);
     }
 
-    function toSettings(item) {
-      $state.go('vehicleSettings', {
-        id: item._id
+    function toSettings(vehicle) {
+      $state.go('app.vehicle.settings', {
+        id: vehicle._id
       });
     }
   }

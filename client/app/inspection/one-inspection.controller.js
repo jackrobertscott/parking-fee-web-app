@@ -2,15 +2,15 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneInspectionCtrl', OneInspectionCtrl);
+    .module('webApp')
+    .controller('OneInspectionCtrl', OneInspectionCtrl);
 
   OneInspectionCtrl.$inject = ['dataInspection', 'glitch', '$state', '$stateParams', 'Auth'];
 
   function OneInspectionCtrl(dataInspection, glitch, $state, $stateParams, Auth) {
     var vm = this;
 
-    vm.item = {};
+    vm.inspection = {};
     vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
@@ -22,20 +22,20 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
+
+    ////////////
 
     function getOne(id) {
       vm.glitch.reset();
       id = id || $stateParams.id;
       dataInspection.getOne(id)
-      .then(function(item) {
-        vm.item = item;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(inspection) {
+          vm.inspection = inspection;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -45,15 +45,15 @@
         invalid();
       } else {
         var user = Auth.getCurrentUser();
-        angular.extend(vm.item, {
+        angular.extend(vm.inspection, {
           _creator: user._id,
           company: user.company
         });
-        dataInspection.create(vm.item)
-        .then(function(item) {
-          $state.go('inspection');
-        })
-        .catch(vm.glitch.handle);
+        dataInspection.create(vm.inspection)
+          .then(function(inspection) {
+            $state.go('inspection');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -63,11 +63,11 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataInspection.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
+        dataInspection.update(vm.inspection)
+          .then(function(inspection) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
@@ -76,12 +76,12 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataInspection.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('inspection');
-        })
-        .catch(vm.glitch.handle);
+        dataInspection.remove(vm.inspection)
+          .then(function() {
+            vm.inspection = {};
+            $state.go('inspection');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 

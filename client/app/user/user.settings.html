@@ -1,0 +1,17 @@
+<form class="form" name="form" ng-init="vmOne.getOne()" ng-submit="vmOne.update(form)" novalidate>
+  <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vmOne.submitted, 'has-error': form.name.$invalid && vmOne.submitted }">
+    <label for="fullName">Full Name</label>
+    <input class="form-control" id="fullName" name="name" ng-model="vmOne.user.name" placeholder="Full Name" required type="text">
+    <p class="help-block" ng-show="form.name.$error.required && vmOne.submitted">
+      A name is required
+    </p>
+  </div>
+  <div class="form-group" ng-class="{ 'has-success': form.phone.$valid && vmOne.submitted, 'has-error': form.phone.$invalid && vmOne.submitted }">
+    <label for="phone">Contact Phone Number</label>
+    <input class="form-control" id="phone" name="phone" ng-model="vmOne.user.phone" placeholder="Phone Number" type="number">
+    <p class="help-block" ng-show="form.phone.$error.number && vmOne.submitted">
+      Please use only numeric characters (0-9)
+    </p>
+  </div>
+  <button class="btn btn-primary" type="submit">Save changes</button>
+</form>
