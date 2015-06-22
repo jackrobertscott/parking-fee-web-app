@@ -116,7 +116,7 @@
 
     function getUserRoles() {
       // These should mirror roles on server side environment
-      return ['guest', 'user', 'inspector', 'company', 'admin'];
+      return ['guest', 'user', 'independent', 'inspector', 'company', 'admin'];
     }
 
     function reloadUser(cb) {
