@@ -14,7 +14,6 @@
     vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
-    vm.toSettings = toSettings;
 
     ////////////
 
@@ -47,12 +46,6 @@
           vm.glitch.setSuccess('Successfully deleted xxxLCPHxxx');
         })
         .catch(vm.glitch.handle);
-    }
-
-    function toSettings(xxxLCPHxxx) {
-      $state.go('app.infringement.settings', {
-        id: xxxLCPHxxx._id
-      });
     }
   }
 })();

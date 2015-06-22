@@ -8,14 +8,13 @@
   config.$inject = ['$stateProvider'];
 
   function config($stateProvider) {
-    /* Remove comments and add states
-    $stateProvider
-    .state('xxxLCPHxxx', {
-      url: '/',
-      templateUrl: 'app/xxxLCPHxxx/xxxLCPHxxx.html',
-      controller: 'XxxUCPHxxxCtrl',
-      controllerAs: 'vm'
-    });
-    */
+    // Remove comments and add states
+    // $stateProvider
+    //   .state('app.xxxLCPHxxx', {
+    //     url: '/xxxLCPHxxx',
+    //     templateUrl: 'app/xxxLCPHxxx/xxxLCPHxxx.html',
+    //     controller: 'ManyXxxUCPHxxxCtrl',
+    //     controllerAs: 'vmMany'
+    //   });
   }
 })();
