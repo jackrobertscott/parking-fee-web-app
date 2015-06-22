@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in vmMany.users | filter: {$:search, role:'!admin'} | limitTo: 5">
+          <tr ng-repeat="user in vmMany.users | filter: {$:search, role:'!admin || !independent'} | limitTo: 5">
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>

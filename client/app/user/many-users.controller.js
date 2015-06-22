@@ -5,6 +5,7 @@
     .module('webApp')
     .controller('ManyUsersCtrl', ManyUsersCtrl);
 
+  // Note: users do not have and end point socket
   ManyUsersCtrl.$inject = ['dataUser', 'glitch', 'Auth'];
 
   function ManyUsersCtrl(dataUser, glitch, Auth) {
@@ -50,7 +51,7 @@
 
     function companyAddCompany(member) {
       vm.glitch.reset();
-      if (member.role === 'admin') {
+      if (member.role === 'admin' || member.role === 'independent') {
         vm.glitch.setError('Can not edit admins');
       } else if (member._id === Auth.getCurrentUser()._id) {
         vm.glitch.setError('Can not edit self');
@@ -65,7 +66,7 @@
 
     function companyAddInspector(member) {
       vm.glitch.reset();
-      if (member.role === 'admin') {
+      if (member.role === 'admin' || member.role === 'independent') {
         vm.glitch.setError('Can not edit admins');
       } else if (member._id === Auth.getCurrentUser()._id) {
         vm.glitch.setError('Can not edit self');
@@ -80,7 +81,7 @@
 
     function companyRemoveMember(member) {
       vm.glitch.reset();
-      if (member.role === 'admin') {
+      if (member.role === 'admin' || member.role === 'independent') {
         vm.glitch.setError('Can not edit admins');
       } else if (member._id === Auth.getCurrentUser()._id) {
         vm.glitch.setError('Can not edit self');
