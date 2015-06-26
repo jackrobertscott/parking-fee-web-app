@@ -26,6 +26,12 @@
         templateUrl: 'app/main/terms.html',
         controller: 'MainCtrl',
         controllerAs: 'vm'
+      })
+      .state('barred.contact', {
+        url: '/contact',
+        templateUrl: 'app/main/contact.html',
+        controller: 'MainCtrl',
+        controllerAs: 'vm'
       });
   }
 })();

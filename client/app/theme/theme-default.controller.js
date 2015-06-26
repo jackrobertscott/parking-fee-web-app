@@ -46,15 +46,20 @@
         minRole: 'user'
       });
       menu.addItem({
-        label: 'Park Owner',
-        minRole: 'user',
-        maxRole: 'user',
-        direction: 'barred.independent'
-      });
-      menu.addItem({
         label: 'Sign-up',
         direction: 'barred.register',
         maxRole: 'guest'
+      });
+      menu.addItem({
+        label: 'Park Owner',
+        direction: 'barred.register',
+        maxRole: 'guest',
+      });
+      menu.addItem({
+        label: 'Park Owner',
+        direction: 'barred.independent',
+        minRole: 'user',
+        maxRole: 'user'
       });
       menu.addItem({
         label: 'About',
@@ -67,6 +72,10 @@
       menu.addItem({
         label: 'Terms',
         direction: 'barred.terms'
+      });
+      menu.addItem({
+        label: 'Contact',
+        direction: 'barred.contact'
       });
       menu.addItem({
         label: 'Logout',
