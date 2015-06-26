@@ -114,7 +114,7 @@
       });
       menu.addItem({
         label: 'Inspections',
-        minRole: 'inspector',
+        minRole: 'company',
         direction: 'dashboard.inspection',
         data: {
           glyphicon: 'eye-open',
