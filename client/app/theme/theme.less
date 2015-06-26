@@ -1,8 +1,8 @@
 // Colors
-@ext: #0f1213;
-@ext-font: #fff;
-@ext-min: 800px;
-@ext-height: 100vh;
+@splash: #0f1213;
+@splash-font: #fff;
+@splash-min: 300px;
+@splash-height: 100vh;
 @light: #fff;
 @dark: #000;
 @red: #d9534f;
@@ -19,31 +19,32 @@
 @padding-xs: 6px;
 
 // Styling
-.external {
-  background-color: @ext;
-  color: @ext-font;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+.splash {
+  background-color: @splash;
+  color: @splash-font;
+  position: relative;
+  width: 100%;
+  height: @splash-height;
+  min-height: @splash-min;
   .container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-55%);
-    .left {
+    .content {
       h1 {
-        font-size: 88px;
+        font-size: 100px;
         margin-top: 0;
         padding-top: 0;
       }
       h2 {
-        font-size: 110px;
+        font-size: 24px;
         margin: -10px 0 60px;
       }
     }
     .right {
-      input, textarea {
+      input,
+      textarea {
         padding: 24px;
         margin: 0 0 30px;
         font-size: 16px;
@@ -62,25 +63,21 @@
     font-size: 40px;
   }
 }
-.full-height {
-  min-height: @ext-min;
-  height: @ext-height;
-}
 .footer {
   .container {
     padding: 100px 0;
-    color: lighten(@ext, 50%);
+    color: lighten(@splash, 50%);
     li {
       cursor: pointer;
       margin: 0 @padding-md;
       font-size: 16px;
       &:hover {
-        color: lighten(@ext, 40%);
+        color: lighten(@splash, 40%);
       }
     }
   }
 }
-.internal {
+.dashboard {
   .left {
     position: absolute;
     top: 0;
@@ -93,14 +90,14 @@
     color: lighten(@left, 30%);
     h2 {
       color: @light;
-      font-size: 32px;
-      margin: 18px 0 0;
+      font-size: 70px;
+      margin: 10px 0 0;
       padding: 0;
     }
     h1 {
       color: @light;
-      font-size: 40px;
-      margin: 0 0 30px;
+      font-size: 16px;
+      margin: 0 0 34px;
       padding: 0;
     }
     h3 {

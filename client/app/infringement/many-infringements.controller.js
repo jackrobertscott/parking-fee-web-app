@@ -51,7 +51,7 @@
     }
 
     function toSettings(infringement) {
-      $state.go('app.infringement.settings', {
+      $state.go('dashboard.infringement.settings', {
         id: infringement._id
       });
     }

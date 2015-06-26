@@ -9,13 +9,13 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('ext.register', {
+      .state('splash.register', {
         url: '/register',
         templateUrl: 'app/user/register.html',
         controller: 'OneUserCtrl',
         controllerAs: 'vmOne'
       })
-      .state('ext.login', {
+      .state('splash.login', {
         url: '/login',
         templateUrl: 'app/user/login.html',
         controller: 'OneUserCtrl',
@@ -27,13 +27,13 @@
         controller: 'OneUserCtrl',
         controllerAs: 'vmOne'
       })
-      .state('app.user', {
+      .state('dashboard.user', {
         url: '/user',
         templateUrl: 'app/user/user.html',
         controller: 'ManyVehiclesCtrl',
         controllerAs: 'vmMany'
       })
-      .state('app.user.password', {
+      .state('dashboard.user.password', {
         url: '/password',
         templateUrl: 'app/user/user.password.html',
         controller: 'OneUserCtrl',
@@ -42,7 +42,7 @@
           role: 'user'
         }
       })
-      .state('app.user.settings', {
+      .state('dashboard.user.settings', {
         url: '/settings',
         templateUrl: 'app/user/user.settings.html',
         controller: 'OneUserCtrl',
@@ -51,7 +51,7 @@
           role: 'user'
         }
       })
-      .state('app.user.register', {
+      .state('dashboard.user.register', {
         url: '/vehicle/register',
         templateUrl: 'app/vehicle/vehicle.register.html',
         controller: 'OneVehicleCtrl',
@@ -60,7 +60,7 @@
           role: 'user'
         }
       })
-      .state('app.user.vehicle', {
+      .state('dashboard.user.vehicle', {
         url: '/vehicle/:id',
         templateUrl: 'app/vehicle/vehicle.settings.html',
         controller: 'OneVehicleCtrl',

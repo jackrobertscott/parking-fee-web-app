@@ -52,7 +52,7 @@
         dataCompany.create(vm.company)
           .then(function(company) {
             Auth.reloadUser(function() { // update user role in Auth
-              $state.go('app.company.settings');
+              $state.go('dashboard.company.settings');
             });
           })
           .catch(vm.glitch.handle);

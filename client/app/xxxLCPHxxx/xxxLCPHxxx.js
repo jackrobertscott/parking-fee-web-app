@@ -10,7 +10,7 @@
   function config($stateProvider) {
     // Remove comments and add states
     // $stateProvider
-    //   .state('app.xxxLCPHxxx', {
+    //   .state('dashboard.xxxLCPHxxx', {
     //     url: '/xxxLCPHxxx',
     //     templateUrl: 'app/xxxLCPHxxx/xxxLCPHxxx.html',
     //     controller: 'ManyXxxUCPHxxxsCtrl',

@@ -9,19 +9,19 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('ext', {
+      .state('splash', {
         abstract: true,
-        templateUrl: 'app/theme/theme-external.html',
-        controller: 'ThemeExternalCtrl',
+        templateUrl: 'app/theme/theme-splash.html',
+        controller: 'ThemeSplashCtrl',
         controllerAs: 'vmApp',
         resolve: {
           currentUser: currentUser
         }
       })
-      .state('app', {
+      .state('dashboard', {
         abstract: true,
-        templateUrl: 'app/theme/theme-internal.html',
-        controller: 'ThemeInternalCtrl',
+        templateUrl: 'app/theme/theme-dashboard.html',
+        controller: 'ThemeDashboardCtrl',
         controllerAs: 'vmApp',
         resolve: {
           currentUser: currentUser

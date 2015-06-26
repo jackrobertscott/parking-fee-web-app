@@ -9,7 +9,7 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('app.inspection', {
+      .state('dashboard.inspection', {
         url: '/inspection',
         templateUrl: 'app/inspection/inspection.html',
         controller: 'ManyInspectionsCtrl',
@@ -18,7 +18,7 @@
           role: 'inspector'
         }
       })
-      .state('app.inspection.detail', {
+      .state('dashboard.inspection.detail', {
         url: '/detail/:id',
         templateUrl: 'app/inspection/inspection.detail.html',
         controller: 'OneInspectionCtrl',

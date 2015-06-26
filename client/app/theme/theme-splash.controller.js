@@ -3,11 +3,11 @@
 
   angular
     .module('webApp')
-    .controller('ThemeExternalCtrl', ThemeExternalCtrl);
+    .controller('ThemeSplashCtrl', ThemeSplashCtrl);
 
-  ThemeExternalCtrl.$inject = ['$state', 'Auth', 'menu'];
+  ThemeSplashCtrl.$inject = ['$state', 'Auth', 'menu'];
 
-  function ThemeExternalCtrl($state, Auth, menu) {
+  function ThemeSplashCtrl($state, Auth, menu) {
     var vm = this;
 
     vm.isActive = isActive;
@@ -37,36 +37,36 @@
       menu.reset();
       menu.addItem({
         label: 'Login',
-        direction: 'ext.login',
+        direction: 'splash.login',
         maxRole: 'guest'
       });
       menu.addItem({
         label: 'Dashboard',
-        direction: 'app.user.register',
+        direction: 'dashboard.user.register',
         minRole: 'user'
       });
       menu.addItem({
         label: 'Park Owner',
         minRole: 'user',
         maxRole: 'user',
-        direction: 'ext.independent'
+        direction: 'splash.independent'
       });
       menu.addItem({
         label: 'Sign-up',
-        direction: 'ext.register',
+        direction: 'splash.register',
         maxRole: 'guest'
       });
       menu.addItem({
         label: 'About',
-        direction: 'ext.about'
+        direction: 'splash.about'
       });
       menu.addItem({
         label: 'FAQ',
-        direction: 'ext.faq'
+        direction: 'splash.faq'
       });
       menu.addItem({
         label: 'Terms',
-        direction: 'ext.terms'
+        direction: 'splash.terms'
       });
       menu.addItem({
         label: 'Logout',

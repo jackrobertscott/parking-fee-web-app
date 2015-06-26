@@ -1,5 +1,5 @@
 <form class="form" name="form" ng-submit="vmOne.create(form)" novalidate>
-  <p>Independent park owners register <a ui-sref="ext.independent">HERE</a>.</p>
+  <p>Independent park owners register <a ui-sref="splash.independent">HERE</a>.</p>
   <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vmOne.submitted, 'has-error': form.name.$invalid && vmOne.submitted }">
     <input class="form-control" id="companyName" name="name" ng-model="vmOne.company.name" placeholder="Company Name" required type="text">
     <p class="help-block" ng-show="form.name.$error.required && vmOne.submitted">

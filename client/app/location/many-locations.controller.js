@@ -59,7 +59,7 @@
     }
 
     function toSettings(location) {
-      $state.go('app.location.settings', {
+      $state.go('dashboard.location.settings', {
         id: location._id
       });
     }

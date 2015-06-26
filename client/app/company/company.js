@@ -9,7 +9,7 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('app.company', {
+      .state('dashboard.company', {
         url: '/company',
         templateUrl: 'app/company/company.html',
         controller: 'ManyUsersCtrl',
@@ -18,7 +18,7 @@
           role: 'user'
         }
       })
-      .state('ext.company', { // not a subview of many company state
+      .state('splash.company', { // not a subview of many company state
         url: '/company/register',
         templateUrl: 'app/company/register.html',
         controller: 'OneCompanyCtrl',
@@ -27,7 +27,7 @@
           role: 'user'
         }
       })
-      .state('app.company.settings', {
+      .state('dashboard.company.settings', {
         url: '/settings',
         templateUrl: 'app/company/company.settings.html',
         controller: 'OneCompanyCtrl',

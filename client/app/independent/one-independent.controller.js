@@ -51,7 +51,7 @@
         dataIndependent.create(vm.independent)
           .then(function(independent) {
             Auth.reloadUser(function() { // update user role in Auth
-              $state.go('app.location');
+              $state.go('dashboard.location');
             });
           })
           .catch(vm.glitch.handle);

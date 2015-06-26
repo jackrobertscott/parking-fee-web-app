@@ -57,7 +57,7 @@
         });
         dataVehicle.create(vm.vehicle)
           .then(function(vehicle) {
-            $state.go('app.user.settings', {}, {reload: true});
+            $state.go('dashboard.user.settings', {}, {reload: true});
           })
           .catch(vm.glitch.handle);
       }
@@ -86,7 +86,7 @@
         dataVehicle.remove(vm.vehicle)
           .then(function() {
             vm.vehicle = {};
-            $state.go('app.user.settings');
+            $state.go('dashboard.user.settings');
           })
           .catch(vm.glitch.handle);
       }

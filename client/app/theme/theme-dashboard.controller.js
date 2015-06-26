@@ -3,11 +3,11 @@
 
   angular
     .module('webApp')
-    .controller('ThemeInternalCtrl', ThemeInternalCtrl);
+    .controller('ThemeDashboardCtrl', ThemeDashboardCtrl);
 
-  ThemeInternalCtrl.$inject = ['$state', 'Auth', 'menu'];
+  ThemeDashboardCtrl.$inject = ['$state', 'Auth', 'menu'];
 
-  function ThemeInternalCtrl($state, Auth, menu) {
+  function ThemeDashboardCtrl($state, Auth, menu) {
     var vm = this;
 
     vm.isActive = isActive;
@@ -38,27 +38,27 @@
       menu.addItem({
         label: 'Profile',
         minRole: 'user',
-        direction: 'app.user.settings',
+        direction: 'dashboard.user.settings',
         data: {
           glyphicon: 'user',
-          route: 'app.user'
+          route: 'dashboard.user'
         },
         children: [{
           label: 'New Vehicle',
-          direction: 'app.user.register'
+          direction: 'dashboard.user.register'
         }, {
           label: 'Settings',
-          direction: 'app.user.settings'
+          direction: 'dashboard.user.settings'
         }, {
           label: 'Change Password',
-          direction: 'app.user.password'
+          direction: 'dashboard.user.password'
         }]
       });
       menu.addItem({
         label: 'Park Owner',
         minRole: 'user',
         maxRole: 'user',
-        direction: 'ext.independent',
+        direction: 'splash.independent',
         data: {
           glyphicon: 'briefcase'
         }
@@ -66,59 +66,59 @@
       menu.addItem({
         label: 'Company',
         minRole: 'company',
-        direction: 'app.company.settings',
+        direction: 'dashboard.company.settings',
         data: {
           glyphicon: 'briefcase',
-          route: 'app.company'
+          route: 'dashboard.company'
         },
         children: [{
           label: 'Settings',
-          direction: 'app.company.settings'
+          direction: 'dashboard.company.settings'
         }]
       });
       menu.addItem({
         label: 'Locations',
         minRole: 'user',
-        direction: 'app.location',
+        direction: 'dashboard.location',
         data: {
           glyphicon: 'globe',
-          route: 'app.location'
+          route: 'dashboard.location'
         },
         // Role order confliction: independent should not register but independent and company should
         // children: [{
         //   label: 'Register',
-        //   direction: 'app.location.register'
+        //   direction: 'dashboard.location.register'
         // }]
       });
       menu.addItem({
         label: 'Infringements',
         minRole: 'company',
-        direction: 'app.infringement.register',
+        direction: 'dashboard.infringement.register',
         data: {
           glyphicon: 'exclamation-sign',
-          route: 'app.infringement'
+          route: 'dashboard.infringement'
         },
         children: [{
           label: 'Register',
-          direction: 'app.infringement.register',
+          direction: 'dashboard.infringement.register',
         }]
       });
       menu.addItem({
         label: 'Sessions',
         minRole: 'user',
-        direction: 'app.session',
+        direction: 'dashboard.session',
         data: {
           glyphicon: 'calendar',
-          route: 'app.session'
+          route: 'dashboard.session'
         }
       });
       menu.addItem({
         label: 'Inspections',
         minRole: 'inspector',
-        direction: 'app.inspection',
+        direction: 'dashboard.inspection',
         data: {
           glyphicon: 'eye-open',
-          route: 'app.inspection'
+          route: 'dashboard.inspection'
         }
       });
       menu.addItem({

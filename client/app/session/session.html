@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="session in vmMany.sessions | filter: search" ui-sref="app.session.detail({id: session._id})">
+          <tr ng-repeat="session in vmMany.sessions | filter: search" ui-sref="dashboard.session.detail({id: session._id})">
             <td>{{session.name}}</td>
             <td>{{session.payment | currency}}</td>
           </tr>
@@ -33,7 +33,7 @@
   <div class="row">
     <div class="col-xs-12">
       <!-- start:menu -->
-       <ul class="list-inline" ng-if="items.children.length" ng-repeat="items in vmApp.menu | filter: {direction: 'app.session'}">
+       <ul class="list-inline" ng-if="items.children.length" ng-repeat="items in vmApp.menu | filter: {direction: 'dashboard.session'}">
         <li ng-repeat="item in items.children" ng-class="{'active': vmApp.isActive(item.direction)}">
           <a ui-sref="{{item.direction}}">
             {{item.label}}

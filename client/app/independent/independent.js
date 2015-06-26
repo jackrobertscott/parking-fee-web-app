@@ -9,13 +9,13 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('app.independent', {
+      .state('dashboard.independent', {
         url: '/independent',
         templateUrl: 'app/independent/independent.html',
         controller: 'ManyLocationsCtrl',
         controllerAs: 'vmMany'
       })
-      .state('ext.independent', { // not a subview of many independent state
+      .state('splash.independent', { // not a subview of many independent state
         url: '/independent/register',
         templateUrl: 'app/independent/register.html',
         controller: 'OneIndependentCtrl',
