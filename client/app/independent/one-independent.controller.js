@@ -5,9 +5,9 @@
     .module('webApp')
     .controller('OneIndependentCtrl', OneIndependentCtrl);
 
-  OneIndependentCtrl.$inject = ['dataIndependent', 'glitch', '$state', '$stateParams'];
+  OneIndependentCtrl.$inject = ['dataIndependent', 'glitch', '$state', '$stateParams', 'Auth'];
 
-  function OneIndependentCtrl(dataIndependent, glitch, $state, $stateParams) {
+  function OneIndependentCtrl(dataIndependent, glitch, $state, $stateParams, Auth) {
     var vm = this;
 
     vm.independent = {};
@@ -44,9 +44,15 @@
       if (!form.$valid) {
         invalid();
       } else {
+        var user = Auth.getCurrentUser();
+        angular.extend(vm.independent, {
+          _creator: user._id
+        });
         dataIndependent.create(vm.independent)
           .then(function(independent) {
-            $state.go('independent');
+            Auth.reloadUser(function() { // update user role in Auth
+              $state.go('app.location');
+            });
           })
           .catch(vm.glitch.handle);
       }

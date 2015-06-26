@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Independent = require('./independent.model');
+var User = require('../user/user.model');
+var config = require('../../config/environment');
 
 // Get list of independents
 exports.index = function(req, res) {
@@ -32,7 +34,24 @@ exports.create = function(req, res) {
     if (err) {
       return handleError(res, err);
     }
-    return res.json(201, independent);
+    User.findById(independent._creator, function(err, user) {
+      if (err) {
+        return handleError(res, err);
+      }
+      if (!user) {
+        return res.send(401);
+      } // check
+      user.company = independent._id;
+      if (config.userRoles.indexOf('independent') > config.userRoles.indexOf(user.role)) {
+        user.role = 'independent';
+      }
+      user.save(function(err) {
+        if (err) {
+          return handleError(res, err);
+        }
+        return res.json(201, independent);
+      });
+    });
   });
 };
 

@@ -18,7 +18,7 @@
           role: 'user'
         }
       })
-      .state('app.company.register', {
+      .state('ext.company', { // not a subview of many company state
         url: '/company/register',
         templateUrl: 'app/company/register.html',
         controller: 'OneCompanyCtrl',

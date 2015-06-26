@@ -55,6 +55,15 @@
         }]
       });
       menu.addItem({
+        label: 'Park Owner',
+        minRole: 'user',
+        maxRole: 'user',
+        direction: 'ext.independent',
+        data: {
+          glyphicon: 'briefcase'
+        }
+      });
+      menu.addItem({
         label: 'Company',
         minRole: 'company',
         direction: 'app.company.settings',
@@ -69,16 +78,17 @@
       });
       menu.addItem({
         label: 'Locations',
-        minRole: 'company',
-        direction: 'app.location.register',
+        minRole: 'user',
+        direction: 'app.location',
         data: {
           glyphicon: 'globe',
           route: 'app.location'
         },
-        children: [{
-          label: 'Register',
-          direction: 'app.location.register'
-        }]
+        // Role order confliction: independent should not register but independent and company should
+        // children: [{
+        //   label: 'Register',
+        //   direction: 'app.location.register'
+        // }]
       });
       menu.addItem({
         label: 'Infringements',

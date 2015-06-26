@@ -1,7 +1,7 @@
 // Colors
 @ext: #0f1213;
 @ext-font: #fff;
-@ext-min: 680px;
+@ext-min: 800px;
 @ext-height: 100vh;
 @light: #fff;
 @dark: #000;
@@ -26,8 +26,6 @@
   top: 0;
   left: 0;
   right: 0;
-  min-height: @ext-min;
-  height: @ext-height;
   .container {
     position: absolute;
     top: 50%;
@@ -45,7 +43,7 @@
       }
     }
     .right {
-      input {
+      input, textarea {
         padding: 24px;
         margin: 0 0 30px;
         font-size: 16px;
@@ -64,7 +62,7 @@
     font-size: 40px;
   }
 }
-.external-ph {
+.full-height {
   min-height: @ext-min;
   height: @ext-height;
 }

@@ -46,6 +46,12 @@
         minRole: 'user'
       });
       menu.addItem({
+        label: 'Park Owner',
+        minRole: 'user',
+        maxRole: 'user',
+        direction: 'ext.independent'
+      });
+      menu.addItem({
         label: 'Sign-up',
         direction: 'ext.register',
         maxRole: 'guest'
