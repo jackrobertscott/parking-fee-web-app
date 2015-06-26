@@ -9,25 +9,19 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('splash.main', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'vm'
-      })
-      .state('splash.about', {
+      .state('barred.about', {
         url: '/about',
         templateUrl: 'app/main/about.html',
         controller: 'MainCtrl',
         controllerAs: 'vm'
       })
-      .state('splash.faq', {
+      .state('barred.faq', {
         url: '/faq',
         templateUrl: 'app/main/faq.html',
         controller: 'MainCtrl',
         controllerAs: 'vm'
       })
-      .state('splash.terms', {
+      .state('barred.terms', {
         url: '/terms',
         templateUrl: 'app/main/terms.html',
         controller: 'MainCtrl',

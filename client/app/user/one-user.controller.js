@@ -113,7 +113,7 @@
 
     function logout() {
       Auth.logout();
-      $state.go('splash.login');
+      $state.go('barred.login');
     }
 
     function changePassword(form) {

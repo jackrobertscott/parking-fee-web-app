@@ -10,9 +10,18 @@
   function config($stateProvider) {
     $stateProvider
       .state('splash', {
-        abstract: true,
+        url: '/',
         templateUrl: 'app/theme/theme-splash.html',
-        controller: 'ThemeSplashCtrl',
+        controller: 'ThemeDefaultCtrl',
+        controllerAs: 'vmApp',
+        resolve: {
+          currentUser: currentUser
+        }
+      })
+      .state('barred', {
+        abstract: true,
+        templateUrl: 'app/theme/theme-barred.html',
+        controller: 'ThemeDefaultCtrl',
         controllerAs: 'vmApp',
         resolve: {
           currentUser: currentUser

@@ -9,13 +9,13 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('splash.register', {
+      .state('barred.register', {
         url: '/register',
         templateUrl: 'app/user/register.html',
         controller: 'OneUserCtrl',
         controllerAs: 'vmOne'
       })
-      .state('splash.login', {
+      .state('barred.login', {
         url: '/login',
         templateUrl: 'app/user/login.html',
         controller: 'OneUserCtrl',

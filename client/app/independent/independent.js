@@ -15,7 +15,7 @@
         controller: 'ManyLocationsCtrl',
         controllerAs: 'vmMany'
       })
-      .state('splash.independent', { // not a subview of many independent state
+      .state('barred.independent', { // not a subview of many independent state
         url: '/independent/register',
         templateUrl: 'app/independent/register.html',
         controller: 'OneIndependentCtrl',

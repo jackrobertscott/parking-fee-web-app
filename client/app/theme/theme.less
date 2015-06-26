@@ -31,7 +31,7 @@
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-55%);
-    .content {
+    .logo {
       h1 {
         font-size: 100px;
         margin-top: 0;
@@ -40,18 +40,6 @@
       h2 {
         font-size: 24px;
         margin: -10px 0 60px;
-      }
-    }
-    .right {
-      input,
-      textarea {
-        padding: 24px;
-        margin: 0 0 30px;
-        font-size: 16px;
-      }
-      button {
-        padding: 14px 20px;
-        font-size: 16px;
       }
     }
   }
@@ -64,8 +52,9 @@
   }
 }
 .footer {
+  border-top: 1px solid lighten(@splash, 80%);
   .container {
-    padding: 100px 0;
+    padding: 50px 0;
     color: lighten(@splash, 50%);
     li {
       cursor: pointer;
@@ -75,6 +64,21 @@
         color: lighten(@splash, 40%);
       }
     }
+  }
+}
+.barred {
+  .top-bar {
+    background-color: @splash;
+    margin: 0 0 14px;
+    h1 {
+      margin: 0;
+      padding: 14px 0;
+      color: @splash-font;
+      font-size: 20px;
+    }
+  }
+  .content {
+    margin: 20px 0 30px;
   }
 }
 .dashboard {
@@ -200,19 +204,19 @@
       border: 1px solid #ccc;
     }
   }
+}
 
-  // Media
-  @media (max-width: 1200px) {
-    .left {
-      width: 200px;
-    }
-    .middle {
-      left: 200px;
-      right: 300px;
-    }
-    .right {
-      width: 300px;
-    }
+// Media
+@media (max-width: 1200px) {
+  .left {
+    width: 200px;
+  }
+  .middle {
+    left: 200px;
+    right: 300px;
+  }
+  .right {
+    width: 300px;
   }
 }
 

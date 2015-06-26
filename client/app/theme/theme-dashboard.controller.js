@@ -58,7 +58,7 @@
         label: 'Park Owner',
         minRole: 'user',
         maxRole: 'user',
-        direction: 'splash.independent',
+        direction: 'barred.independent',
         data: {
           glyphicon: 'briefcase'
         }
