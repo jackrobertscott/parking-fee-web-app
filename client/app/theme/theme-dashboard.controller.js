@@ -84,11 +84,11 @@
           glyphicon: 'globe',
           route: 'dashboard.location'
         },
-        // Role order confliction: independent should not register but independent and company should
-        // children: [{
-        //   label: 'Register',
-        //   direction: 'dashboard.location.register'
-        // }]
+        children: [{
+          label: 'Register',
+          minRole: 'independent',
+          direction: 'dashboard.location.register'
+        }]
       });
       menu.addItem({
         label: 'Infringements',

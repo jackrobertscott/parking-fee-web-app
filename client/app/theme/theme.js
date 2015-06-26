@@ -32,6 +32,9 @@
         templateUrl: 'app/theme/theme-dashboard.html',
         controller: 'ThemeDashboardCtrl',
         controllerAs: 'vmApp',
+        data: {
+          role: 'user'
+        },
         resolve: {
           currentUser: currentUser
         }

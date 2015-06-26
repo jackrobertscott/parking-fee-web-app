@@ -13,10 +13,7 @@
         url: '/company',
         templateUrl: 'app/company/company.html',
         controller: 'ManyUsersCtrl',
-        controllerAs: 'vmMany',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmMany'
       })
       .state('barred.company', { // not a subview of many company state
         url: '/company/register',

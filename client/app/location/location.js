@@ -21,7 +21,7 @@
         controller: 'OneLocationCtrl',
         controllerAs: 'vmOne',
         data: {
-          role: 'company'
+          role: 'independent'
         }
       })
       .state('dashboard.location.settings', {
@@ -30,7 +30,7 @@
         controller: 'OneLocationCtrl',
         controllerAs: 'vmOne',
         data: {
-          role: 'company'
+          role: 'independent'
         }
       })
       .state('dashboard.location.detail', {
@@ -39,7 +39,7 @@
         controller: 'OneLocationCtrl',
         controllerAs: 'vmOne',
         data: {
-          role: 'company'
+          role: 'independent'
         }
       });
   }

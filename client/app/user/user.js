@@ -28,7 +28,7 @@
         controllerAs: 'vmOne'
       })
       .state('dashboard.user', {
-        url: '/user',
+        url: '/profile',
         templateUrl: 'app/user/user.html',
         controller: 'ManyVehiclesCtrl',
         controllerAs: 'vmMany'
@@ -37,37 +37,25 @@
         url: '/password',
         templateUrl: 'app/user/user.password.html',
         controller: 'OneUserCtrl',
-        controllerAs: 'vmOne',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmOne'
       })
       .state('dashboard.user.settings', {
         url: '/settings',
         templateUrl: 'app/user/user.settings.html',
         controller: 'OneUserCtrl',
-        controllerAs: 'vmOne',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmOne'
       })
       .state('dashboard.user.register', {
         url: '/vehicle/register',
         templateUrl: 'app/vehicle/vehicle.register.html',
         controller: 'OneVehicleCtrl',
-        controllerAs: 'vmOne',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmOne'
       })
       .state('dashboard.user.vehicle', {
         url: '/vehicle/:id',
         templateUrl: 'app/vehicle/vehicle.settings.html',
         controller: 'OneVehicleCtrl',
-        controllerAs: 'vmOne',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmOne'
       });
   }
 })();

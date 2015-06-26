@@ -13,10 +13,7 @@
         url: '/session',
         templateUrl: 'app/session/session.html',
         controller: 'ManySessionsCtrl',
-        controllerAs: 'vmMany',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmMany'
       })
       .state('dashboard.session.detail', {
         url: '/detail/:id',
