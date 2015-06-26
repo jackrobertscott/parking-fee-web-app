@@ -1,5 +1,7 @@
+<h2>Register as Company Park Owner</h2>
+<hr>
 <form class="form" name="form" ng-submit="vmOne.create(form)" novalidate>
-  <p>Independent park owners register <a ui-sref="barred.independent">HERE</a>.</p>
+  <p>Independent park owners register <a ui-sref="barred.independent"><strong>HERE</strong></a>.</p>
   <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vmOne.submitted, 'has-error': form.name.$invalid && vmOne.submitted }">
     <label>Company Name</label>
     <input class="form-control" id="companyName" name="name" ng-model="vmOne.company.name" placeholder="Nice Company" required type="text">

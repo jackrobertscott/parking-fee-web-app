@@ -15,7 +15,7 @@
         controller: 'ManyInspectionsCtrl',
         controllerAs: 'vmMany',
         data: {
-          role: 'inspector'
+          role: 'company'
         }
       })
       .state('dashboard.inspection.detail', {

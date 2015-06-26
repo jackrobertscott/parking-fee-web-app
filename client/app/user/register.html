@@ -1,3 +1,5 @@
+<h2>Sign-up</h2>
+<hr>
 <form class="form" name="form" ng-submit="vmOne.create(form)" novalidate>
   <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vmOne.submitted, 'has-error': form.name.$invalid && vmOne.submitted }">
     <label>Full Name</label>
@@ -36,7 +38,7 @@
   <br>
   <br>
   <div class="text-center">
-    <p>or Sign-up with</p>
+    <p>or sign-up with</p>
     <a class="btn btn-facebook" ng-click="vmOne.loginOauth('facebook')">
       <i class="fa fa-facebook"></i>
       Facebook
