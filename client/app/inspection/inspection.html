@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="inspection in vmMany.inspections | filter: search" ui-sref="dashboard.inspection.detail({id: inspection._id})">
+          <tr ng-repeat="inspection in vmMany.inspections | filter: search | limitTo: limit: begin" ui-sref="dashboard.inspection.detail({id: inspection._id})">
             <td>{{inspection.plate}}</td>
             <td>{{inspection.infringement.name}}</td>
             <td>{{inspection.infringement.payment | currency}}</td>
@@ -29,6 +29,7 @@
           </tr>
         </tbody>
       </table>
+      <pagination length="vmMany.inspections.length" limit="limit" begin="begin"></pagination>
       <!-- end:content -->
     </div>
   </div>

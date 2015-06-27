@@ -22,7 +22,7 @@
 
     function linkFunc(scope, el, attr, ctrl) {
       scope.begin = scope.begin || 0;
-      scope.limit = scope.limit || 20;
+      scope.limit = scope.limit || 15;
       scope.increment = increment;
       scope.decrement = decrement;
       scope.jump = jump;

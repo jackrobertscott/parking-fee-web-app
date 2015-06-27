@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in vmMany.users | filter: {$:search, role:'!admin || !independent'} | limitTo: 5">
+          <tr ng-repeat="user in vmMany.users | filter: {$:search, role:'!admin || !independent'} | limitTo: limit: begin">
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>
@@ -50,7 +50,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="member in vmMany.members">
+          <tr ng-repeat="member in vmMany.members | limitTo: limit2: begin2">
             <td>{{member.name}}</td>
             <td>{{member.email}}</td>
             <td>
@@ -73,6 +73,7 @@
           </tr>
         </tbody>
       </table>
+      <pagination length="vmMany.members.length" limit="limit2" begin="begin2"></pagination>
       <!-- end:content -->
     </div>
   </div>

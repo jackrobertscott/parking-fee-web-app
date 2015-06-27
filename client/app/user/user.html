@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="vehicle in vmMany.vehicles | filter: search" ui-sref="dashboard.user.vehicle({id: vehicle._id})">
+          <tr ng-repeat="vehicle in vmMany.vehicles | filter: search | limitTo: limit: begin" ui-sref="dashboard.user.vehicle({id: vehicle._id})">
             <td>{{vehicle.plate}}</td>
             <td>{{vehicle.make}}</td>
             <td>{{vehicle.color}}</td>
@@ -27,6 +27,7 @@
           <td colspan="4">No results</td>
         </tr>
       </table>
+      <pagination length="vmMany.vehicles.length" limit="limit" begin="begin"></pagination>
       <!-- end:content -->
     </div>
   </div>
