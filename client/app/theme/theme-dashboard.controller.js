@@ -10,10 +10,10 @@
   function ThemeDashboardCtrl($state, Auth, menu) {
     var vm = this;
 
+    vm.menu = [];
     vm.isActive = isActive;
     vm.isBeforeOrEqual = Auth.isBeforeOrEqual;
     vm.isAfterOrEqual = Auth.isAfterOrEqual;
-    vm.menu = [];
 
     ////////////
 
