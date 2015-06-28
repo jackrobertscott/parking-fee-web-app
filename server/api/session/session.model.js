@@ -8,15 +8,14 @@ var SessionSchema = new Schema({
     type: Date,
     required: true
   },
-  end: { // Charing end time (seconds into day)
-    type: Date,
+  time: { // Time spent parking (seconds)
+    type: Number,
     required: true
   },
   payment: {
     type: Number,
     required: true
   },
-  info: String,
   vehicle: {
     type: Schema.Types.ObjectId,
     ref: 'Vehicle',
