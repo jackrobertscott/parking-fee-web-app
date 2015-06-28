@@ -3,11 +3,11 @@
 
   angular
     .module('webApp')
-    .controller('ThemeExternalCtrl', ThemeExternalCtrl);
+    .controller('ThemeDefaultCtrl', ThemeDefaultCtrl);
 
-  ThemeExternalCtrl.$inject = ['$state', 'Auth', 'menu'];
+  ThemeDefaultCtrl.$inject = ['$state', 'Auth', 'menu'];
 
-  function ThemeExternalCtrl($state, Auth, menu) {
+  function ThemeDefaultCtrl($state, Auth, menu) {
     var vm = this;
 
     vm.isActive = isActive;
@@ -37,30 +37,45 @@
       menu.reset();
       menu.addItem({
         label: 'Login',
-        direction: 'ext.login',
+        direction: 'barred.login',
         maxRole: 'guest'
       });
       menu.addItem({
         label: 'Dashboard',
-        direction: 'app.user.register',
+        direction: 'dashboard.user.register',
         minRole: 'user'
       });
       menu.addItem({
         label: 'Sign-up',
-        direction: 'ext.register',
+        direction: 'barred.register',
         maxRole: 'guest'
       });
       menu.addItem({
+        label: 'Park Owner',
+        direction: 'barred.register',
+        maxRole: 'guest',
+      });
+      menu.addItem({
+        label: 'Park Owner',
+        direction: 'barred.independent',
+        minRole: 'user',
+        maxRole: 'user'
+      });
+      menu.addItem({
         label: 'About',
-        direction: 'ext.about'
+        direction: 'barred.about'
       });
       menu.addItem({
         label: 'FAQ',
-        direction: 'ext.faq'
+        direction: 'barred.faq'
       });
       menu.addItem({
         label: 'Terms',
-        direction: 'ext.terms'
+        direction: 'barred.terms'
+      });
+      menu.addItem({
+        label: 'Contact',
+        direction: 'barred.contact'
       });
       menu.addItem({
         label: 'Logout',

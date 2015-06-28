@@ -9,16 +9,13 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('app.session', {
+      .state('dashboard.session', {
         url: '/session',
         templateUrl: 'app/session/session.html',
         controller: 'ManySessionsCtrl',
-        controllerAs: 'vmMany',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmMany'
       })
-      .state('app.session.detail', {
+      .state('dashboard.session.detail', {
         url: '/detail/:id',
         templateUrl: 'app/session/session.detail.html'
       });

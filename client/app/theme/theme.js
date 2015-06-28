@@ -9,20 +9,32 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('ext', {
-        abstract: true,
-        templateUrl: 'app/theme/theme-external.html',
-        controller: 'ThemeExternalCtrl',
+      .state('splash', {
+        url: '/',
+        templateUrl: 'app/theme/theme-splash.html',
+        controller: 'ThemeDefaultCtrl',
         controllerAs: 'vmApp',
         resolve: {
           currentUser: currentUser
         }
       })
-      .state('app', {
+      .state('barred', {
         abstract: true,
-        templateUrl: 'app/theme/theme-internal.html',
-        controller: 'ThemeInternalCtrl',
+        templateUrl: 'app/theme/theme-barred.html',
+        controller: 'ThemeDefaultCtrl',
         controllerAs: 'vmApp',
+        resolve: {
+          currentUser: currentUser
+        }
+      })
+      .state('dashboard', {
+        abstract: true,
+        templateUrl: 'app/theme/theme-dashboard.html',
+        controller: 'ThemeDashboardCtrl',
+        controllerAs: 'vmApp',
+        data: {
+          role: 'user'
+        },
         resolve: {
           currentUser: currentUser
         }

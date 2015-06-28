@@ -21,6 +21,7 @@ var CompanySchema = new Schema({
     type: Number,
     required: true
   },
+  // financials: {},
   members: [{
     type: Schema.Types.ObjectId,
     ref: 'User',

@@ -69,7 +69,7 @@
   <div class="row">
     <div class="col-xs-12">
       <!-- start:menu -->
-      <ul class="list-inline" ng-repeat="items in vmApp.menu | filter: {direction: 'app.EDIT_HERE'}">
+       <ul class="list-inline" ng-if="items.children.length" ng-repeat="items in vmApp.menu | filter: {direction: 'dashboard.EDIT_HERE'}">
         <li ng-repeat="item in items.children" ng-class="{'active': vmApp.isActive(item.direction)}">
           <a ui-sref="{{item.direction}}">
             {{item.label}}

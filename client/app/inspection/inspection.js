@@ -9,16 +9,16 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('app.inspection', {
+      .state('dashboard.inspection', {
         url: '/inspection',
         templateUrl: 'app/inspection/inspection.html',
         controller: 'ManyInspectionsCtrl',
         controllerAs: 'vmMany',
         data: {
-          role: 'inspector'
+          role: 'company'
         }
       })
-      .state('app.inspection.detail', {
+      .state('dashboard.inspection.detail', {
         url: '/detail/:id',
         templateUrl: 'app/inspection/inspection.detail.html',
         controller: 'OneInspectionCtrl',

@@ -50,7 +50,7 @@
       } else {
         Auth.createUser(vm.user)
           .then(function() {
-            $state.go('app.vehicle.register');
+            $state.go('dashboard.vehicle.register');
           })
           .catch(function(err) {
             err = err.data;
@@ -99,7 +99,7 @@
       } else {
         Auth.login(vm.user)
           .then(function() {
-            $state.go('app.user.settings');
+            $state.go('dashboard.user.settings');
           })
           .catch(function(err) {
             vm.glitch.setError(err.message);
@@ -113,7 +113,7 @@
 
     function logout() {
       Auth.logout();
-      $state.go('ext.login');
+      $state.go('barred.login');
     }
 
     function changePassword(form) {

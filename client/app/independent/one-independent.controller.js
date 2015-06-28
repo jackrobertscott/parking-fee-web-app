@@ -3,14 +3,14 @@
 
   angular
     .module('webApp')
-    .controller('OneCompanyCtrl', OneCompanyCtrl);
+    .controller('OneIndependentCtrl', OneIndependentCtrl);
 
-  OneCompanyCtrl.$inject = ['dataCompany', 'glitch', '$state', 'Auth'];
+  OneIndependentCtrl.$inject = ['dataIndependent', 'glitch', '$state', '$stateParams', 'Auth'];
 
-  function OneCompanyCtrl(dataCompany, glitch, $state, Auth) {
+  function OneIndependentCtrl(dataIndependent, glitch, $state, $stateParams, Auth) {
     var vm = this;
 
-    vm.company = {};
+    vm.independent = {};
     vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
@@ -30,10 +30,10 @@
 
     function getOne(id) {
       vm.glitch.reset();
-      id = id || Auth.getCurrentUser().company;
-      dataCompany.getOne(id)
-        .then(function(company) {
-          vm.company = company;
+      id = id || $stateParams.id;
+      dataIndependent.getOne(id)
+        .then(function(independent) {
+          vm.independent = independent;
         })
         .catch(vm.glitch.handle);
     }
@@ -45,14 +45,13 @@
         invalid();
       } else {
         var user = Auth.getCurrentUser();
-        angular.extend(vm.company, {
-          _creator: user._id,
-          members: [user._id]
+        angular.extend(vm.independent, {
+          _creator: user._id
         });
-        dataCompany.create(vm.company)
-          .then(function(company) {
+        dataIndependent.create(vm.independent)
+          .then(function(independent) {
             Auth.reloadUser(function() { // update user role in Auth
-              $state.go('dashboard.company.settings');
+              $state.go('dashboard.location');
             });
           })
           .catch(vm.glitch.handle);
@@ -65,8 +64,8 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataCompany.update(vm.company)
-          .then(function(company) {
+        dataIndependent.update(vm.independent)
+          .then(function(independent) {
             vm.glitch.setSuccess('Successfully updated');
           })
           .catch(vm.glitch.handle);
@@ -78,12 +77,10 @@
       if (!form.$valid) {
         invalid();
       } else {
-        dataCompany.remove(vm.company)
+        dataIndependent.remove(vm.independent)
           .then(function() {
-            vm.company = {};
-            Auth.reloadUser(function() { // update user role in Auth
-              $state.go('main');
-            });
+            vm.independent = {};
+            $state.go('independent');
           })
           .catch(vm.glitch.handle);
       }

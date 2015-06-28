@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="infringement in vmMany.infringements | filter: search" ui-sref="app.infringement.settings({id: infringement._id})">
+          <tr ng-repeat="infringement in vmMany.infringements | filter: search | limitTo: limit: begin" ui-sref="dashboard.infringement.settings({id: infringement._id})">
             <td>{{infringement.name}}</td>
             <td>{{infringement.payment | currency}}</td>
           </tr>
@@ -23,6 +23,7 @@
           </tr>
         </tbody>
       </table>
+      <pagination length="vmMany.infringements.length" limit="limit" begin="begin"></pagination>
       <!-- end:content -->
     </div>
   </div>
@@ -33,7 +34,7 @@
   <div class="row">
     <div class="col-xs-12">
       <!-- start:menu -->
-      <ul class="list-inline" ng-repeat="items in vmApp.menu | filter: {direction: 'app.infringement'}">
+       <ul class="list-inline" ng-if="items.children.length" ng-repeat="items in vmApp.menu | filter: {direction: 'dashboard.infringement'}">
         <li ng-repeat="item in items.children" ng-class="{'active': vmApp.isActive(item.direction)}">
           <a ui-sref="{{item.direction}}">
             {{item.label}}

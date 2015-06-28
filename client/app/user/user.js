@@ -9,13 +9,13 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('ext.register', {
+      .state('barred.register', {
         url: '/register',
         templateUrl: 'app/user/register.html',
         controller: 'OneUserCtrl',
         controllerAs: 'vmOne'
       })
-      .state('ext.login', {
+      .state('barred.login', {
         url: '/login',
         templateUrl: 'app/user/login.html',
         controller: 'OneUserCtrl',
@@ -27,47 +27,35 @@
         controller: 'OneUserCtrl',
         controllerAs: 'vmOne'
       })
-      .state('app.user', {
-        url: '/user',
+      .state('dashboard.user', {
+        url: '/profile',
         templateUrl: 'app/user/user.html',
         controller: 'ManyVehiclesCtrl',
         controllerAs: 'vmMany'
       })
-      .state('app.user.password', {
+      .state('dashboard.user.password', {
         url: '/password',
         templateUrl: 'app/user/user.password.html',
         controller: 'OneUserCtrl',
-        controllerAs: 'vmOne',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmOne'
       })
-      .state('app.user.settings', {
+      .state('dashboard.user.settings', {
         url: '/settings',
         templateUrl: 'app/user/user.settings.html',
         controller: 'OneUserCtrl',
-        controllerAs: 'vmOne',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmOne'
       })
-      .state('app.user.register', {
+      .state('dashboard.user.register', {
         url: '/vehicle/register',
         templateUrl: 'app/vehicle/vehicle.register.html',
         controller: 'OneVehicleCtrl',
-        controllerAs: 'vmOne',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmOne'
       })
-      .state('app.user.vehicle', {
+      .state('dashboard.user.vehicle', {
         url: '/vehicle/:id',
         templateUrl: 'app/vehicle/vehicle.settings.html',
         controller: 'OneVehicleCtrl',
-        controllerAs: 'vmOne',
-        data: {
-          role: 'user'
-        }
+        controllerAs: 'vmOne'
       });
   }
 })();

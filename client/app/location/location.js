@@ -9,37 +9,34 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('app.location', {
+      .state('dashboard.location', {
         url: '/location',
         templateUrl: 'app/location/location.html',
         controller: 'ManyLocationsCtrl',
         controllerAs: 'vmMany'
       })
-      .state('app.location.register', {
+      .state('dashboard.location.detail', {
+        url: '/detail/:id',
+        templateUrl: 'app/location/location.detail.html',
+        controller: 'OneLocationCtrl',
+        controllerAs: 'vmOne'
+      })
+      .state('dashboard.location.register', {
         url: '/register',
         templateUrl: 'app/location/location.register.html',
         controller: 'OneLocationCtrl',
         controllerAs: 'vmOne',
         data: {
-          role: 'company'
+          role: 'independent'
         }
       })
-      .state('app.location.settings', {
+      .state('dashboard.location.settings', {
         url: '/settings/:id',
         templateUrl: 'app/location/location.settings.html',
         controller: 'OneLocationCtrl',
         controllerAs: 'vmOne',
         data: {
-          role: 'company'
-        }
-      })
-      .state('app.location.detail', {
-        url: '/detail/:id',
-        templateUrl: 'app/location/location.detail.html',
-        controller: 'OneLocationCtrl',
-        controllerAs: 'vmOne',
-        data: {
-          role: 'company'
+          role: 'independent'
         }
       });
   }

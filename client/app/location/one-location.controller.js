@@ -75,7 +75,7 @@
         });
         dataLocation.create(vm.location)
           .then(function(location) {
-            $state.go('app.location.register', {}, {reload: true});
+            $state.go('dashboard.location.register', {}, {reload: true});
           })
           .catch(vm.glitch.handle);
       }
@@ -103,7 +103,7 @@
         dataLocation.remove(vm.location)
           .then(function() {
             vm.location = {};
-            $state.go('app.location.register', {}, {reload: true});
+            $state.go('dashboard.location.register', {}, {reload: true});
           })
           .catch(vm.glitch.handle);
       }

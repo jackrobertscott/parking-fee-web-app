@@ -8,13 +8,13 @@ var router = express.Router();
 
 router.get('/', auth.isAuthenticated(), controller.index);
 router.get('/:id', auth.isAuthenticated(), controller.show);
-router.post('/', auth.hasRole('inspector'), controller.create);
-router.put('/:id', auth.hasRole('inspector'), controller.update);
-router.patch('/:id', auth.hasRole('inspector'), controller.update);
-router.delete('/:id', auth.hasRole('inspector'), controller.destroy);
+router.post('/', auth.hasRole('company'), controller.create);
+router.put('/:id', auth.hasRole('company'), controller.update);
+router.patch('/:id', auth.hasRole('company'), controller.update);
+router.delete('/:id', auth.hasRole('company'), controller.destroy);
 
 // Added routes
 
-router.get('/:id/company', auth.hasRole('inspector'), controller.getFewCompany);
+router.get('/:id/company', auth.hasRole('company'), controller.getFewCompany);
 
 module.exports = router;
