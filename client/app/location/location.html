@@ -1,0 +1,59 @@
+<!-- start:middle -->
+<div class="middle container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- start:content -->
+      <h2>Locations</h2>
+      <hr>
+      <p>All Locations</p>
+      <input type="text" class="form-control" placeholder="Search" ng-model="search">
+      <table class="table table-hover" ng-init="vmMany.getMany()">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Rate/hr</th>
+            <th>Lots</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="location in vmMany.locations | filter: search | limitTo: limit: begin" ui-sref="dashboard.location.detail({id: location._id})">
+            <td>{{location.name}}</td>
+            <td>{{location.rate | currency}}</td>
+            <td>{{location.lots}}</td>
+            <td>{{location.start | date:'shortTime'}}</td>
+            <td>{{location.end | date:'shortTime'}}</td>
+          </tr>
+          <tr ng-if="!vmMany.locations.length">
+            <td colspan="5">No results</td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination length="vmMany.locations.length" limit="limit" begin="begin"></pagination>
+      <!-- end:content -->
+    </div>
+  </div>
+</div>
+<!-- end:middle -->
+<!-- start:right -->
+<div class="right container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- start:menu -->
+       <ul class="list-inline" ng-if="items.children.length" ng-repeat="items in vmApp.menu | filter: {direction: 'dashboard.location'}">
+        <li ng-repeat="item in items.children" ng-class="{'active': vmApp.isActive(item.direction)}">
+          <a ui-sref="{{item.direction}}">
+            {{item.label}}
+          </a>
+        </li>
+      </ul>
+      <!-- end:menu -->
+      <div ng-if="vmMany.glitch.getError() != ''" class="alert alert-danger" role="alert">{{vmMany.glitch.getError()}}</div>
+      <div ng-if="vmMany.glitch.getSuccess() != ''" class="alert alert-success" role="alert">{{vmMany.glitch.getSuccess()}}</div>
+      <!-- view:detail -->
+      <div ui-view=""></div>
+    </div>
+  </div>
+</div>
+<!-- end:right -->

@@ -6,15 +6,41 @@ var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
-  name: String,
-  email: { type: String, lowercase: true },
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    lowercase: true
+  },
   role: {
     type: String,
     default: 'user'
   },
+  phone: Number,
+  vehicles: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Vehicle',
+    default: []
+  }],
+  company: {
+    type: Schema.Types.ObjectId,
+    ref: 'Company'
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  active: {
+    type: Boolean,
+    default: true
+  },
+  // Auth
   hashedPassword: String,
   provider: String,
   salt: String,
+  // Third parties
   facebook: {},
   twitter: {},
   google: {},
@@ -80,15 +106,17 @@ UserSchema
   .path('email')
   .validate(function(value, respond) {
     var self = this;
-    this.constructor.findOne({email: value}, function(err, user) {
-      if(err) throw err;
-      if(user) {
-        if(self.id === user.id) return respond(true);
+    this.constructor.findOne({
+      email: value
+    }, function(err, user) {
+      if (err) throw err;
+      if (user) {
+        if (self.id === user.id) return respond(true);
         return respond(false);
       }
       respond(true);
     });
-}, 'The specified email address is already in use.');
+  }, 'The specified email address is already in use.');
 
 var validatePresenceOf = function(value) {
   return value && value.length;

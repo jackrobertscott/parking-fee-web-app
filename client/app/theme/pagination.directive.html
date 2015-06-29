@@ -1,0 +1,16 @@
+<div ng-transclude></div>
+<nav ng-if="length / limit > 1">
+  <ul class="pagination">
+    <li ng-click="decrement()">
+      <a aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li ng-repeat="step in getNumber(length / limit) track by $index" ng-click="jump($index)"><a>{{ $index + 1 }}</a></li>
+    <li ng-click="increment(length)">
+      <a aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

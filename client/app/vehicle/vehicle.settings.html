@@ -1,0 +1,35 @@
+<form class="form" name="form" ng-init="vmOne.getOne()" ng-submit="vmOne.update(form)" novalidate>
+  <div class="form-group" ng-class="{ 'has-success': form.plate.$valid && vmOne.submitted, 'has-error': form.plate.$invalid && vmOne.submitted }">
+    <label for="vehiclePlate">Plate Number</label>
+    <input class="form-control" id="vehiclePlate" name="plate" ng-model="vmOne.vehicle.plate" placeholder="Vehicle Plate" required type="text">
+    <p class="help-block" ng-show="form.plate.$error.required && vmOne.submitted">
+      A vehicle plate number is required
+    </p>
+  </div>
+  <div class="form-group" ng-class="{ 'has-success': form.make.$valid && vmOne.submitted, 'has-error': form.make.$invalid && vmOne.submitted }">
+    <label for="vehicleMake">Make</label>
+    <select class="form-control" id="vehicleMake" name="make" ng-model="vmOne.vehicle.make" ng-options="make for make in vmOne.makes" required></select>
+    <p class="help-block" ng-show="form.make.$error.required && vmOne.submitted">
+      A vehicle make is required
+    </p>
+  </div>
+  <div class="form-group" ng-class="{ 'has-success': form.type.$valid && vmOne.submitted, 'has-error': form.type.$invalid && vmOne.submitted }">
+    <label for="vehicleType">Type</label>
+    <select class="form-control" id="vehicleType" name="type" ng-model="vmOne.vehicle.type" ng-options="type for type in vmOne.types" required></select>
+    <p class="help-block" ng-show="form.type.$error.required && vmOne.submitted">
+      A vehicle type is required
+    </p>
+  </div>
+  <div class="form-group" ng-class="{ 'has-success': form.color.$valid && vmOne.submitted, 'has-error': form.color.$invalid && vmOne.submitted }">
+    <label for="vehicleColor">Colour</label>
+    <select class="form-control" id="vehicleColor" name="color" ng-model="vmOne.vehicle.color" ng-options="color for color in vmOne.colors" required></select>
+    <p class="help-block" ng-show="form.color.$error.required && vmOne.submitted">
+      A vehicle colour is required
+    </p>
+  </div>
+  <div class="form-group">
+    <label for="vehicleInfo">Extra Information</label>
+    <textarea class="form-control" id="vehicleInfo" ng-model="vmOne.vehicle.info" rows="3">Any extra information about the vehicle</textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Update</button>
+</form>

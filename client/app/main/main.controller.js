@@ -1,27 +1,27 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('webApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+  angular
+    .module('webApp')
+    .controller('MainCtrl', MainCtrl);
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
-    });
+  MainCtrl.$inject = [];
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
+  function MainCtrl() {
+    var vm = this;
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
+    ////////////
 
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
-  });
+    activate();
+
+    function activate() {
+      // code...
+    }
+
+    ////////////
+
+    function example() {
+      // code...
+    }
+  }
+})();

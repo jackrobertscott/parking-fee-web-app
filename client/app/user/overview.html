@@ -1,0 +1,8 @@
+<div class="alert alert-danger" ng-show="vm.glitch.getError()" role="alert">{{ vm.glitch.getError() }}</div>
+<div class="alert alert-success" ng-show="vm.glitch.getSuccess()" role="alert">{{ vm.glitch.getSuccess() }}</div>
+<ul class="list-group" ng-init="vm.getMany()">
+  <li class="list-group-item" ng-repeat="user in vm.users">
+    <strong>{{user.name}}</strong><br>
+    <span class="text-muted">{{user.email}}</span>
+  </li>
+</ul>

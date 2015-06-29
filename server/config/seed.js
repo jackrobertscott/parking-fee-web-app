@@ -5,45 +5,52 @@
 
 'use strict';
 
-var Thing = require('../api/thing/thing.model');
+var Company = require('../api/company/company.model');
 var User = require('../api/user/user.model');
-
-Thing.find({}).remove(function() {
-  Thing.create({
-    name : 'Development Tools',
-    info : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.'
-  }, {
-    name : 'Server and Client integration',
-    info : 'Built with a powerful and fun stack: MongoDB, Express, AngularJS, and Node.'
-  }, {
-    name : 'Smart Build System',
-    info : 'Build system ignores `spec` files, allowing you to keep tests alongside code. Automatic injection of scripts and styles into your index.html'
-  },  {
-    name : 'Modular Structure',
-    info : 'Best practice client and server structures allow for more code reusability and maximum scalability'
-  },  {
-    name : 'Optimized Build',
-    info : 'Build process packs up your templates as a single JavaScript payload, minifies your scripts/css/images, and rewrites asset names for caching.'
-  },{
-    name : 'Deployment Ready',
-    info : 'Easily deploy your app to Heroku or Openshift with the heroku and openshift subgenerators'
-  });
-});
 
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
-    name: 'Test User',
+    name: 'User Role',
     email: 'test@test.com',
-    password: 'test'
+    password: 'password'
+  }, {
+    provider: 'local',
+    role: 'company',
+    name: 'Company Role',
+    email: 'company@company.com',
+    password: 'password'
+  }, {
+    provider: 'local',
+    role: 'inspector',
+    name: 'Inspector Role',
+    email: 'inspector@inspector.com',
+    password: 'password'
   }, {
     provider: 'local',
     role: 'admin',
-    name: 'Admin',
+    name: 'Admin Role',
     email: 'admin@admin.com',
-    password: 'admin'
-  }, function() {
-      console.log('finished populating users');
-    }
-  );
+    password: 'password'
+  }, function(err, testUser, companyUser, inspectorUser, adminUser) {
+    if (err) console.log(err);
+    console.log('finished populating users');
+    Company.find({}).remove(function() {
+      Company.create({
+        name: 'Test Company',
+        email: 'test@company.com',
+        phone: 3123553,
+        abn: 3574513589,
+        authenticated: true,
+        members: [companyUser._id, inspectorUser._id],
+        _creator: companyUser._id
+      }, function(err, testCompany) {
+        if (err) console.log(err);
+        companyUser.company = testCompany._id;
+        companyUser.save();
+        inspectorUser.company = testCompany._id;
+        inspectorUser.save();
+      });
+    });
+  });
 });
