@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Location = require('./location.model');
 var Company = require('../company/company.model');
 var Independent = require('../independent/independent.model');
+var User = require('../user/user.model');
 
 // Get list of locations
 exports.index = function(req, res) {
@@ -34,7 +35,37 @@ exports.create = function(req, res) {
     if (err) {
       return handleError(res, err);
     }
-    return res.json(201, location);
+    User.findById(location._creator, function(user) {
+      if (err) {
+        return handleError(res, err);
+      }
+      if (!user) {
+        return res.json(404);
+      }
+      if (user.role === 'company') {
+        Company.findById(user.company, function(company) {
+          company.locations.push(location._id);
+          company.markModified('locations');
+          company.save(function(err) {
+            if (err) {
+              return handleError(res, err);
+            }
+            return res.json(201, location);
+          });
+        });
+      } else if (user.role === 'independent') {
+        Independent.findById(user.independent, function(independent) {
+          independent.locations.push(location._id);
+          independent.markModified('locations');
+          independent.save(function(err) {
+            if (err) {
+              return handleError(res, err);
+            }
+            return res.json(201, location);
+          });
+        });
+      } // else is admin
+    });
   });
 };
 

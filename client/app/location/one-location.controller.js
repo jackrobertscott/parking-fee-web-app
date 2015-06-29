@@ -68,10 +68,7 @@
       } else {
         var user = Auth.getCurrentUser();
         angular.extend(vm.location, {
-          _creator: user._id,
-          company: user.company._id,
-          lat: vm.marker.coords.latitude,
-          lng: vm.marker.coords.longitude
+          _creator: user._id
         });
         dataLocation.create(vm.location)
           .then(function(location) {
