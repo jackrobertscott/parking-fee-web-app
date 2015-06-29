@@ -49,5 +49,11 @@
         id: id
       }).$promise;
     }
+
+    function getIndependentLocations(id) {
+      return ResourceLocation.getIndependentLocations({
+        id: id
+      }).$promise;
+    }
   }
 })();

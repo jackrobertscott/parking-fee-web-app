@@ -16,5 +16,6 @@ router.delete('/:id', auth.hasRole('independent'), controller.destroy);
 // Added routes
 
 router.get('/:id/company', auth.hasRole('company'), controller.getCompanyLocations);
+router.get('/:id/independent', auth.hasRole('independent'), controller.getIndependentLocations);
 
 module.exports = router;

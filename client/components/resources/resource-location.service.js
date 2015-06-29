@@ -20,6 +20,13 @@
         params: {
           action: 'company'
         }
+      },
+      getIndependentLocations: {
+        method: 'GET',
+        isArray: true,
+        params: {
+          action: 'independent'
+        }
       }
     });
   }

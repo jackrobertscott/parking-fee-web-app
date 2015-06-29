@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Location = require('./location.model');
 var Company = require('../company/company.model');
+var Independent = require('../independent/independent.model');
 
 // Get list of locations
 exports.index = function(req, res) {
@@ -76,7 +77,7 @@ function handleError(res, err) {
   return res.send(500, err);
 }
 
-// Get a company's members
+// Get a company's locations
 exports.getCompanyLocations = function(req, res) {
   Company.findById(req.params.id, function(err, company) {
     if (err) {
@@ -88,6 +89,28 @@ exports.getCompanyLocations = function(req, res) {
     Location.find({
       _id: {
         $in: company.locations
+      }
+    }, function(err, locations) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.json(locations);
+    });
+  });
+};
+
+// Get a independent's locations
+exports.getIndependentLocations = function(req, res) {
+  Independent.findById(req.params.id, function(err, independent) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!independent) {
+      return res.send(404);
+    }
+    Location.find({
+      _id: {
+        $in: independent.locations
       }
     }, function(err, locations) {
       if (err) {

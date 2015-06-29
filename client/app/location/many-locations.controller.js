@@ -58,6 +58,14 @@
         .catch(vm.glitch.handle);
     }
 
+    function getFewIndependent() {
+      dataLocation.getIndependentLocations(Auth.getCurrentUser().independent._id)
+        .then(function(locations) {
+          vm.locations = locations;
+        })
+        .catch(vm.glitch.handle);
+    }
+
     function toSettings(location) {
       $state.go('dashboard.location.settings', {
         id: location._id
