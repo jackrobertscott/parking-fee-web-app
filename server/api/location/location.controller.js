@@ -35,7 +35,7 @@ exports.create = function(req, res) {
     if (err) {
       return handleError(res, err);
     }
-    User.findById(location._creator, function(user) {
+    User.findById(location._creator, function(err, user) {
       if (err) {
         return handleError(res, err);
       }
@@ -43,7 +43,7 @@ exports.create = function(req, res) {
         return res.json(404);
       }
       if (user.role === 'company') {
-        Company.findById(user.company, function(company) {
+        Company.findById(user.company, function(err, company) {
           company.locations.push(location._id);
           company.markModified('locations');
           company.save(function(err) {
@@ -54,7 +54,7 @@ exports.create = function(req, res) {
           });
         });
       } else if (user.role === 'independent') {
-        Independent.findById(user.independent, function(independent) {
+        Independent.findById(user.independent, function(err, independent) {
           independent.locations.push(location._id);
           independent.markModified('locations');
           independent.save(function(err) {

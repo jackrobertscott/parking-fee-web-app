@@ -11,18 +11,24 @@
     var vm = this;
 
     vm.locations = [];
+    vm.map = {};
     vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
     vm.getFewCompany = getFewCompany;
     vm.toSettings = toSettings;
+    vm.markerClick = markerClick;
 
     ////////////
 
     activate();
 
     function activate() {
-      // code...
+      vm.map.center = {
+        latitude: 0,
+        longitude: 0
+      };
+      vm.map.zoom = 1;
     }
 
     ////////////
@@ -69,6 +75,12 @@
     function toSettings(location) {
       $state.go('dashboard.location.settings', {
         id: location._id
+      });
+    }
+
+    function markerClick(marker, event, object) {
+      $state.go('dashboard.location.detail', {
+        id: object._id
       });
     }
   }

@@ -25,19 +25,17 @@
     activate();
 
     function activate() {
-      vm.map = {
-        center: {
-          latitude: 45,
-          longitude: -73
-        },
-        zoom: 8,
-        events: {
-          click: function(map, event, args) {
-            angular.extend(vm.location, {
-              latitude: args[0].latLng.k,
-              longitude: args[0].latLng.D
-            });
-          }
+      vm.map.center = {
+        latitude: 0,
+        longitude: 0
+      };
+      vm.map.zoom = 1;
+      vm.map.events = {
+        click: function(map, event, args) {
+          angular.extend(vm.location, {
+            latitude: args[0].latLng.k,
+            longitude: args[0].latLng.D
+          });
         }
       };
     }
@@ -72,7 +70,9 @@
         });
         dataLocation.create(vm.location)
           .then(function(location) {
-            $state.go('dashboard.location.register', {}, {reload: true});
+            $state.go('dashboard.location.register', {}, {
+              reload: true
+            });
           })
           .catch(vm.glitch.handle);
       }
@@ -100,7 +100,9 @@
         dataLocation.remove(vm.location)
           .then(function() {
             vm.location = {};
-            $state.go('dashboard.location.register', {}, {reload: true});
+            $state.go('dashboard.location.register', {}, {
+              reload: true
+            });
           })
           .catch(vm.glitch.handle);
       }
