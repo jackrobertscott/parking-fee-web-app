@@ -6,25 +6,29 @@ var Company = require('../company/company.model');
 
 // Get list of infringements
 exports.index = function(req, res) {
-  Infringement.find(function(err, infringements) {
-    if (err) {
-      return handleError(res, err);
-    }
-    return res.json(200, infringements);
-  });
+  Infringement.find()
+    .populate('company')
+    .exec(function(err, infringements) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.json(200, infringements);
+    });
 };
 
 // Get a single infringement
 exports.show = function(req, res) {
-  Infringement.findById(req.params.id, function(err, infringement) {
-    if (err) {
-      return handleError(res, err);
-    }
-    if (!infringement) {
-      return res.send(404);
-    }
-    return res.json(infringement);
-  });
+  Infringement.findById(req.params.id)
+    .populate('company')
+    .exec(function(err, infringement) {
+      if (err) {
+        return handleError(res, err);
+      }
+      if (!infringement) {
+        return res.send(404);
+      }
+      return res.json(infringement);
+    });
 };
 
 // Creates a new infringement in the DB.
@@ -80,13 +84,15 @@ exports.destroy = function(req, res) {
 // Get a single infringement
 exports.getFewCompany = function(req, res) {
   Infringement.find({
-    company: req.params.id
-  }, function(err, infringements) {
-    if (err) {
-      return handleError(res, err);
-    }
-    return res.json(infringements);
-  });
+      company: req.params.id
+    })
+    .populate('company')
+    .exec(function(err, infringements) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.json(infringements);
+    });
 };
 
 function handleError(res, err) {

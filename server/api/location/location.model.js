@@ -28,12 +28,11 @@ var LocationSchema = new Schema({
     type: Date,
     required: true
   },
-  lots: Number, // Optional: number of parking lots
-  info: String,
-  company: {
-    type: Schema.Types.ObjectId,
-    ref: 'Company',
-    required: true
+  lots: {
+    type: Number
+  },
+  info: {
+    type: String
   },
   _creator: {
     type: Schema.Types.ObjectId,

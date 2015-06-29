@@ -41,7 +41,7 @@ exports.create = function(req, res) {
       if (!user) {
         return res.send(401);
       } // check
-      user.company = independent._id;
+      user.independent = independent._id;
       if (config.userRoles.indexOf('independent') > config.userRoles.indexOf(user.role)) {
         user.role = 'independent';
       }
@@ -68,6 +68,7 @@ exports.update = function(req, res) {
       return res.send(404);
     }
     var updated = _.merge(independent, req.body);
+    updated.markModified('locations');
     updated.save(function(err) {
       if (err) {
         return handleError(res, err);

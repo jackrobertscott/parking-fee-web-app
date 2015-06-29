@@ -7,6 +7,8 @@ var User = require('../user/user.model');
 // Get list of inspections
 exports.index = function(req, res) {
   Inspection.find()
+    .populate('vehicle')
+    .populate('location')
     .populate('infringement')
     .exec(function(err, inspections) {
       if (err) {
@@ -19,6 +21,8 @@ exports.index = function(req, res) {
 // Get a single inspection
 exports.show = function(req, res) {
   Inspection.findById(req.params.id)
+    .populate('vehicle')
+    .populate('location')
     .populate('infringement')
     .exec(function(err, inspection) {
       if (err) {
@@ -103,6 +107,8 @@ exports.getUserInfringed = function(req, res) {
         },
         paid: false
       })
+      .populate('vehicle')
+      .populate('location')
       .populate('infringement')
       .exec(function(err, inspections) {
         if (err) {
@@ -118,6 +124,8 @@ exports.getUserInfringed = function(req, res) {
   Inspection.find({
       company: req.params.id
     })
+    .populate('vehicle')
+    .populate('location')
     .populate('infringement')
     .exec(function(err, inspections) {
       if (err) {

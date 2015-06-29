@@ -35,13 +35,14 @@ exports.create = function(req, res) {
     if (err) {
       return handleError(res, err);
     }
+    // Update the user's role and company
     User.findById(company._creator, function(err, user) {
       if (err) {
         return handleError(res, err);
       }
       if (!user) {
         return res.send(401);
-      } // check
+      }
       user.company = company._id;
       if (config.userRoles.indexOf('company') > config.userRoles.indexOf(user.role)) {
         user.role = 'company';
@@ -69,6 +70,8 @@ exports.update = function(req, res) {
       return res.send(404);
     }
     var updated = _.merge(company, req.body);
+    updated.markModified('members');
+    updated.markModified('locations');
     updated.save(function(err) {
       if (err) {
         return handleError(res, err);
@@ -87,6 +90,7 @@ exports.destroy = function(req, res) {
     if (!company) {
       return res.send(404);
     }
+    // Depreciate associated users
     User.find({
       company: company._id
     }, function(err, users) {
@@ -106,13 +110,6 @@ exports.destroy = function(req, res) {
         });
       });
     });
-    Location.find({
-      company: company._id
-    }).remove(function(err) {
-      if (err) {
-        return handleError(res, err);
-      }
-    }); // not sure works
     company.remove(function(err) {
       if (err) {
         return handleError(res, err);

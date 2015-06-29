@@ -4,17 +4,19 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var IndependentSchema = new Schema({
-  info: String,
+  info: {
+    type: String
+  },
+  authenticated: {
+    type: Boolean,
+    default: false
+  },
   // financials: {},
   locations: [{
     type: Schema.Types.ObjectId,
     ref: 'Location',
     default: []
   }],
-  authenticated: {
-    type: Boolean,
-    default: false
-  },
   _creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',

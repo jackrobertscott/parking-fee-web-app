@@ -21,6 +21,11 @@ var SessionSchema = new Schema({
     ref: 'Vehicle',
     required: true
   },
+  location: {
+    type: Schema.Types.ObjectId,
+    ref: 'Location',
+    required: true
+  },
   _creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',

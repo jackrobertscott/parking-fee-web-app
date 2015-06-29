@@ -8,7 +8,9 @@ var CompanySchema = new Schema({
     type: String,
     required: true
   },
-  info: String,
+  info: {
+    type: String
+  },
   email: {
     type: String,
     required: true
@@ -21,6 +23,10 @@ var CompanySchema = new Schema({
     type: Number,
     required: true
   },
+  authenticated: {
+    type: Boolean,
+    default: false
+  },
   // financials: {},
   members: [{
     type: Schema.Types.ObjectId,
@@ -32,10 +38,6 @@ var CompanySchema = new Schema({
     ref: 'Location',
     default: []
   }],
-  authenticated: {
-    type: Boolean,
-    default: false
-  },
   _creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',

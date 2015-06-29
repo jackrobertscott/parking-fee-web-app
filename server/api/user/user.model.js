@@ -18,7 +18,9 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
-  phone: Number,
+  phone: {
+    type: Number
+  },
   vehicles: [{
     type: Schema.Types.ObjectId,
     ref: 'Vehicle',
@@ -27,6 +29,10 @@ var UserSchema = new Schema({
   company: {
     type: Schema.Types.ObjectId,
     ref: 'Company'
+  },
+  independent: {
+    type: Schema.Types.ObjectId,
+    ref: 'Independent'
   },
   created: {
     type: Date,

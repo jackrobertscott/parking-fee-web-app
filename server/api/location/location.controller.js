@@ -33,22 +33,7 @@ exports.create = function(req, res) {
     if (err) {
       return handleError(res, err);
     }
-    Company.findById(location.company, function(err, company) {
-      if (err) {
-        return handleError(res, err);
-      }
-      if (!company) {
-        return res.send(404);
-      }
-      company.locations.push(location._id);
-      company.markModified('locations');
-      company.save(function(err) {
-        if (err) {
-          return handleError(res, err);
-        }
-        return res.json(201, location);
-      });
-    });
+    return res.json(201, location);
   });
 };
 
@@ -83,27 +68,7 @@ exports.destroy = function(req, res) {
     if (!location) {
       return res.send(404);
     }
-    Company.findById(location.company, function(err, company) {
-      if (err) {
-        return handleError(res, err);
-      }
-      if (!company) {
-        return res.send(404);
-      }
-      _.remove(company.locations, location._id);
-      company.markModified('locations');
-      company.save(function(err) {
-        if (err) {
-          return handleError(res, err);
-        }
-        location.remove(function(err) {
-          if (err) {
-            return handleError(res, err);
-          }
-          return res.send(204);
-        });
-      });
-    });
+    return res.send(204);
   });
 };
 
