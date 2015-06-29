@@ -12,12 +12,14 @@
 
     vm.locations = [];
     vm.map = {};
+    vm.user = Auth.getCurrentUser();
     vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
     vm.getFewCompany = getFewCompany;
     vm.toSettings = toSettings;
     vm.markerClick = markerClick;
+    vm.optionChange = optionChange;
 
     ////////////
 
@@ -29,6 +31,13 @@
         longitude: 0
       };
       vm.map.zoom = 1;
+      // if (navigator.geolocation) {
+      //   navigator.geolocation.getCurrentPosition(function(position) {
+      //     vm.map.center.latitude = position.coords.latitude;
+      //     vm.map.center.longitude = position.coords.longitude;
+      //     vm.map.zoom = 8;
+      //   });
+      // }
     }
 
     ////////////
@@ -82,6 +91,20 @@
       $state.go('dashboard.location.detail', {
         id: object._id
       });
+    }
+
+    function optionChange() {
+      switch (vm.option) {
+        case 'many':
+          getMany();
+          break;
+        case 'comp':
+          getFewCompany();
+          break;
+        case 'inde':
+          getFewIndependent();
+          break;
+      }
     }
   }
 })();

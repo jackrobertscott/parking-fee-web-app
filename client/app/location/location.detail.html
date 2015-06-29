@@ -5,4 +5,5 @@
   <p><strong>Number of lots available:</strong> {{vmOne.location.lots}}</p>
   <p><strong>Start time:</strong> {{vmOne.location.start | date:'shortTime'}}</p>
   <p><strong>End time:</strong> {{vmOne.location.end | date:'shortTime'}}</p>
+  <a class="btn btn-primary" type="submit" ng-if="vmOne.location.edit" ui-sref="dashboard.location.settings({id: vmOne.location._id})">Edit</a>
 </span>

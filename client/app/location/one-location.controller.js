@@ -25,17 +25,19 @@
     activate();
 
     function activate() {
-      vm.map.center = {
-        latitude: 0,
-        longitude: 0
-      };
-      vm.map.zoom = 1;
-      vm.map.events = {
-        click: function(map, event, args) {
-          angular.extend(vm.location, {
-            latitude: args[0].latLng.k,
-            longitude: args[0].latLng.D
-          });
+      vm.map = {
+        center: {
+          latitude: 0,
+          longitude: 0
+        },
+        zoom: 1,
+        events: {
+          click: function(map, event, args) {
+            angular.extend(vm.location, {
+              latitude: args[0].latLng.k,
+              longitude: args[0].latLng.D
+            });
+          }
         }
       };
     }
@@ -47,13 +49,25 @@
       id = id || $stateParams.id;
       dataLocation.getOne(id)
         .then(function(location) {
+          var user = Auth.getCurrentUser();
+          if (user.company && user.company.locations.indexOf(location._id) !== -1 ||
+            user.independent && user.independent.locations.indexOf(location._id) !== -1) {
+            location.edit = true;
+          } else {
+            location.edit = false;
+            // Not allowed to edit
+            // Need to make a better check system for all pages
+            if ($state.is('dashboard.location.settings')) {
+              $state.go('dashboard.location');
+            }
+          }
           location.start = new Date(location.start);
           location.end = new Date(location.end);
+          vm.location = location;
           angular.extend(vm.map.center, {
             latitude: location.latitude,
             longitude: location.longitude
           });
-          vm.location = location;
         })
         .catch(vm.glitch.handle);
     }
