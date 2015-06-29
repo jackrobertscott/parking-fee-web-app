@@ -58,7 +58,7 @@
 
     function getFewCompany() {
       vm.glitch.reset();
-      dataInfringement.getFewCompany(Auth.getCurrentUser().company)
+      dataInfringement.getFewCompany(Auth.getCurrentUser().company._id)
         .then(function(infringements) {
           vm.infringements = infringements;
         })

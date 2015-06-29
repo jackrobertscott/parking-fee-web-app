@@ -47,7 +47,7 @@
         var user = Auth.getCurrentUser();
         angular.extend(vm.infringement, {
           _creator: user._id,
-          company: user.company
+          company: user.company._id
         });
         dataInfringement.create(vm.infringement)
           .then(function(infringement) {

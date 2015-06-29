@@ -69,7 +69,7 @@
         var user = Auth.getCurrentUser();
         angular.extend(vm.location, {
           _creator: user._id,
-          company: user.company,
+          company: user.company._id,
           lat: vm.marker.coords.latitude,
           lng: vm.marker.coords.longitude
         });

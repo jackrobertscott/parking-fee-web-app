@@ -42,7 +42,7 @@
 
     function getCompanyMembers() {
       vm.glitch.reset();
-      dataUser.getCompanyMembers(Auth.getCurrentUser().company)
+      dataUser.getCompanyMembers(Auth.getCurrentUser().company._id)
         .then(function(members) {
           vm.members = members;
         })
@@ -56,7 +56,7 @@
       } else if (member._id === Auth.getCurrentUser()._id) {
         vm.glitch.setError('Can not edit self');
       } else {
-        dataUser.addCompanyMember(member, Auth.getCurrentUser().company, 'company')
+        dataUser.addCompanyMember(member, Auth.getCurrentUser().company._id, 'company')
           .then(function() {
             // reset!
           })
@@ -71,7 +71,7 @@
       } else if (member._id === Auth.getCurrentUser()._id) {
         vm.glitch.setError('Can not edit self');
       } else {
-        dataUser.addCompanyMember(member, Auth.getCurrentUser().company, 'inspector')
+        dataUser.addCompanyMember(member, Auth.getCurrentUser().company._id, 'inspector')
           .then(function() {
             // reset!
           })

@@ -30,7 +30,7 @@
 
     function getOne(id) {
       vm.glitch.reset();
-      id = id || Auth.getCurrentUser().company;
+      id = id || Auth.getCurrentUser().company._id;
       dataCompany.getOne(id)
         .then(function(company) {
           vm.company = company;

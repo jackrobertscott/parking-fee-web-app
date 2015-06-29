@@ -51,7 +51,7 @@
     }
 
     function getFewCompany() {
-      dataLocation.getCompanyLocations(Auth.getCurrentUser().company)
+      dataLocation.getCompanyLocations(Auth.getCurrentUser().company._id)
         .then(function(locations) {
           vm.locations = locations;
         })

@@ -59,7 +59,7 @@
 
     function getFewCompany() {
       vm.glitch.reset();
-      dataInspection.getFewCompany(Auth.getCurrentUser().company)
+      dataInspection.getFewCompany(Auth.getCurrentUser().company._id)
         .then(function(inspections) {
           vm.inspections = inspections;
         })

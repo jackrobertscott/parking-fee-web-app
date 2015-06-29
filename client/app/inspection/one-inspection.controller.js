@@ -47,7 +47,7 @@
         var user = Auth.getCurrentUser();
         angular.extend(vm.inspection, {
           _creator: user._id,
-          company: user.company
+          company: user.company._id
         });
         dataInspection.create(vm.inspection)
           .then(function(inspection) {
