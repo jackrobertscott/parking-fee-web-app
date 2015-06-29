@@ -13,8 +13,7 @@ var jwt = require('jsonwebtoken');
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  User.find()
-    .project('-salt -hashedPassword')
+  User.find({}, '-salt -hashedPassword')
     .populate('company')
     .populate('independent')
     .exec(function(err, users) {
@@ -50,8 +49,7 @@ exports.create = function(req, res, next) {
  */
 exports.show = function(req, res, next) {
   var userId = req.params.id;
-  User.findById(userId)
-    .project('-salt -hashedPassword')
+  User.findById(userId, '-salt -hashedPassword')
     .populate('company')
     .populate('independent')
     .exec(function(err, user) {
@@ -81,8 +79,7 @@ exports.changePassword = function(req, res, next) {
   var userId = req.user._id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
-  User.findById(userId)
-    .project('-salt -hashedPassword')
+  User.findById(userId, '-salt -hashedPassword')
     .populate('company')
     .populate('independent')
     .exec(function(err, user) {
@@ -105,8 +102,7 @@ exports.me = function(req, res, next) {
   var userId = req.user._id;
   User.findOne({
       _id: userId
-    })
-    .project('-salt -hashedPassword')
+    }, '-salt -hashedPassword')
     .populate('company')
     .populate('independent')
     .exec(function(err, user) { // don't ever give out the password or salt
@@ -138,21 +134,24 @@ exports.update = function(req, res) {
   if (req.body.hashedPassword) {
     delete req.body.hashedPassword;
   }
-  User.findById(req.params.id, '-salt -hashedPassword', function(err, user) {
-    if (err) {
-      return handleError(res, err);
-    }
-    if (!user) {
-      return res.send(404);
-    }
-    var updated = _.merge(user, req.body);
-    updated.save(function(err) {
+  User.findById(req.params.id, '-salt -hashedPassword')
+    .populate('company')
+    .populate('independent')
+    .exec(function(err, user) {
       if (err) {
         return handleError(res, err);
       }
-      return res.json(200, user);
+      if (!user) {
+        return res.send(404);
+      }
+      var updated = _.merge(user, req.body);
+      updated.save(function(err) {
+        if (err) {
+          return handleError(res, err);
+        }
+        return res.json(200, user);
+      });
     });
-  });
 };
 
 /**
@@ -188,8 +187,7 @@ exports.addCompanyMember = function(req, res) {
   if (!companyId || !role || config.userRoles.indexOf(role) === -1) {
     return res.send(404);
   }
-  User.findById(req.params.id)
-    .project('-salt -hashedPassword')
+  User.findById(req.params.id, '-salt -hashedPassword')
     .populate('company')
     .populate('independent')
     .exec(function(err, user) {
@@ -231,8 +229,7 @@ exports.addCompanyMember = function(req, res) {
  * Remove user from company members
  */
 exports.removeCompanyMember = function(req, res) {
-  User.findById(req.params.id)
-    .project('-salt -hashedPassword')
+  User.findById(req.params.id, '-salt -hashedPassword')
     .populate('company')
     .populate('independent')
     .exec(function(err, user) {
