@@ -2,28 +2,35 @@
   'use strict';
 
   angular
-  .module('webApp', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'socket',
-    'ui.router',
-    'config',
-    'tracto',
-    'dataServices',
-    'auth'
-  ])
-  .config(config)
-  .factory('authInterceptor', authInterceptor)
-  .run(run);
+    .module('webApp', [
+      'ngCookies',
+      'ngResource',
+      'ngSanitize',
+      'uiGmapgoogle-maps',
+      'socket',
+      'ui.router',
+      'config',
+      'glitch',
+      'dataServices',
+      'auth',
+      'menu'
+    ])
+    .config(config)
+    .factory('authInterceptor', authInterceptor)
+    .run(allowAccess);
 
-  config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
+  config.$inject = ['$urlRouterProvider', '$locationProvider', '$httpProvider', 'uiGmapGoogleMapApiProvider'];
 
-  function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  function config($urlRouterProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
+    uiGmapGoogleMapApiProvider.configure({
+      // key: 'your api key',
+      v: '3.17',
+      // libraries: 'visualization'
+    });
   }
 
   authInterceptor.$inject = ['$rootScope', '$q', '$cookieStore', '$location'];
@@ -31,7 +38,7 @@
   function authInterceptor($rootScope, $q, $cookieStore, $location) {
     return {
       // Add authorization token to headers
-      request: function (config) {
+      request: function(config) {
         config.headers = config.headers || {};
         if ($cookieStore.get('token')) {
           config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
@@ -43,31 +50,33 @@
       responseError: function(response) {
         if (response.status === 401) {
           $location.path('/login');
+          console.log('unauthorised: api');
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
-        }
-        else {
+        } else {
           return $q.reject(response);
         }
       }
     };
   }
 
-  run.$inject = ['$rootScope', '$location', 'Auth', 'tracto'];
+  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'glitch'];
 
-  function run($rootScope, $location, Auth, tracto) {
+  function allowAccess($rootScope, $location, Auth, glitch) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      tracto.reset();
+      glitch.reset();
       Auth.isLoggedInAsync(function(loggedIn) {
         if (toState.data && toState.data.role && toState.data.role !== 'guest') {
           var userRoles = Auth.getUserRoles();
           if (!loggedIn) {
             $location.path('/login');
+            console.log('unauthorised: not logged in');
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
-            $location.path('/');
+            $location.path('/user/settings');
+            console.log('unauthorised: role no access');
           }
         }
       });

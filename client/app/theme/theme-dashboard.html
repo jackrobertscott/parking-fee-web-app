@@ -1,0 +1,35 @@
+<div class="dashboard">
+  <!-- start:left -->
+  <div class="left container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <!-- start:content -->
+        <a ui-sref="splash">
+          <h2 class="text-center">UP</h2>
+          <h1 class="text-center">UmamiPark</h1>
+        </a>
+        <hr>
+        <!-- <h3>EXAMPLE DIVIDER</h3> -->
+        <ul class="list-unstyled">
+          <a ng-repeat="item in vmApp.menu" ui-sref="{{item.direction}}">
+            <li ng-class="{'active': vmApp.isActive(item.data.route)}">
+              <span class="glyphicon {{'glyphicon-'+item.data.glyphicon}}" aria-hidden="true"></span>
+              {{item.label}}
+            </li>
+          </a>
+        </ul>
+        <hr>
+        <p class="text-center">
+          <a ui-sref="barred.about">About</a> .
+          <a ui-sref="barred.faq">FAQ</a> .
+          <a ui-sref="barred.terms">Terms</a> .
+          <a ui-sref="barred.contact">Contact</a>
+        </p>
+        <!-- start:content -->
+      </div>
+    </div>
+  </div>
+  <!-- end:left -->
+  <!-- view:content -->
+  <div ui-view=""></div>
+</div>

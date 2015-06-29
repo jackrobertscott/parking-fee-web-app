@@ -6,12 +6,12 @@ var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
-router.get('/', auth.isAuthenticated(), controller.index);
+router.get('/', controller.index);
 router.get('/:id', auth.isAuthenticated(), controller.show);
-router.post('/', auth.hasRole('company'), controller.create);
-router.put('/:id', auth.hasRole('company'), controller.update);
-router.patch('/:id', auth.hasRole('company'), controller.update);
-router.delete('/:id', auth.hasRole('company'), controller.destroy);
+router.post('/', auth.hasRole('independent'), controller.create);
+router.put('/:id', auth.hasRole('independent'), controller.update);
+router.patch('/:id', auth.hasRole('independent'), controller.update);
+router.delete('/:id', auth.hasRole('independent'), controller.destroy);
 
 // Added routes
 

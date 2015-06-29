@@ -6,17 +6,23 @@ var Company = require('../company/company.model');
 
 // Get list of locations
 exports.index = function(req, res) {
-  Location.find(function (err, locations) {
-    if (err) { return handleError(res, err); }
+  Location.find(function(err, locations) {
+    if (err) {
+      return handleError(res, err);
+    }
     return res.json(200, locations);
   });
 };
 
 // Get a single location
 exports.show = function(req, res) {
-  Location.findById(req.params.id, function (err, location) {
-    if (err) { return handleError(res, err); }
-    if (!location) { return res.send(404); }
+  Location.findById(req.params.id, function(err, location) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!location) {
+      return res.send(404);
+    }
     return res.json(location);
   });
 };
@@ -24,14 +30,22 @@ exports.show = function(req, res) {
 // Creates a new location in the DB.
 exports.create = function(req, res) {
   Location.create(req.body, function(err, location) {
-    if (err) { return handleError(res, err); }
+    if (err) {
+      return handleError(res, err);
+    }
     Company.findById(location.company, function(err, company) {
-      if (err) { return handleError(res, err); }
-      if (!company) { return res.send(404); }
+      if (err) {
+        return handleError(res, err);
+      }
+      if (!company) {
+        return res.send(404);
+      }
       company.locations.push(location._id);
       company.markModified('locations');
       company.save(function(err) {
-        if (err) { return handleError(res, err); }
+        if (err) {
+          return handleError(res, err);
+        }
         return res.json(201, location);
       });
     });
@@ -40,13 +54,21 @@ exports.create = function(req, res) {
 
 // Updates an existing location in the DB.
 exports.update = function(req, res) {
-  if (req.body._id) { delete req.body._id; }
-  Location.findById(req.params.id, function (err, location) {
-    if (err) { return handleError(res, err); }
-    if (!location) { return res.send(404); }
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  Location.findById(req.params.id, function(err, location) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!location) {
+      return res.send(404);
+    }
     var updated = _.merge(location, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
+    updated.save(function(err) {
+      if (err) {
+        return handleError(res, err);
+      }
       return res.json(200, location);
     });
   });
@@ -54,18 +76,30 @@ exports.update = function(req, res) {
 
 // Deletes a location from the DB.
 exports.destroy = function(req, res) {
-  Location.findById(req.params.id, function (err, location) {
-    if (err) { return handleError(res, err); }
-    if (!location) { return res.send(404); }
+  Location.findById(req.params.id, function(err, location) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!location) {
+      return res.send(404);
+    }
     Company.findById(location.company, function(err, company) {
-      if (err) { return handleError(res, err); }
-      if (!company) { return res.send(404); }
+      if (err) {
+        return handleError(res, err);
+      }
+      if (!company) {
+        return res.send(404);
+      }
       _.remove(company.locations, location._id);
       company.markModified('locations');
       company.save(function(err) {
-        if (err) { return handleError(res, err); }
+        if (err) {
+          return handleError(res, err);
+        }
         location.remove(function(err) {
-          if (err) { return handleError(res, err); }
+          if (err) {
+            return handleError(res, err);
+          }
           return res.send(204);
         });
       });
@@ -79,11 +113,21 @@ function handleError(res, err) {
 
 // Get a company's members
 exports.getCompanyLocations = function(req, res) {
-  Company.findById(req.params.id, function (err, company) {
-    if (err) { return handleError(res, err); }
-    if (!company) { return res.send(404); }
-    Location.find({ _id: { $in: company.locations } }, function (err, locations) {
-      if (err) { return handleError(res, err); }
+  Company.findById(req.params.id, function(err, company) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!company) {
+      return res.send(404);
+    }
+    Location.find({
+      _id: {
+        $in: company.locations
+      }
+    }, function(err, locations) {
+      if (err) {
+        return handleError(res, err);
+      }
       return res.json(locations);
     });
   });

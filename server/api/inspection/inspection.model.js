@@ -1,18 +1,26 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 var InspectionSchema = new Schema({
-  info: String,
-  plate: String, // inserted for vehicle plates not in system
-  vehicle: {
-    type: Schema.Types.ObjectId,
-    ref: 'Vehicle'
+  plate: { // inserted for vehicle plates not in system
+    type: String,
+    required: true
   },
+  info: String,
   infringement: {
     type: Schema.Types.ObjectId,
     ref: 'Infringement'
+  },
+  paid: { // only nessessary if infringement is set
+    type: Boolean,
+    default: false
+  },
+  location: {
+    type: Schema.Types.ObjectId,
+    ref: 'Location',
+    required: true
   },
   _creator: {
     type: Schema.Types.ObjectId,

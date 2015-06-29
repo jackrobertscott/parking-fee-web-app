@@ -1,20 +1,30 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 var SessionSchema = new Schema({
-  start: Date,
-  end: Date,
-  payment: Number,
-  info: String,
+  start: { // Charging start time (seconds into day)
+    type: Date,
+    required: true
+  },
+  time: { // Time spent parking (seconds)
+    type: Number,
+    required: true
+  },
+  payment: {
+    type: Number,
+    required: true
+  },
   vehicle: {
     type: Schema.Types.ObjectId,
-    ref: 'Vehicle'
+    ref: 'Vehicle',
+    required: true
   },
   _creator: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   created: {
     type: Date,

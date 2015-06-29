@@ -1,16 +1,26 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 var VehicleSchema = new Schema({
   plate: {
     type: String,
+    required: true,
     unique: true
   },
-  make: String,
-  color: String,
-  type: String,
+  make: {
+    type: String,
+    required: true
+  },
+  color: {
+    type: String,
+    required: true
+  },
+  type: {
+    type: String,
+    required: true
+  },
   info: String,
   users: [{
     type: Schema.Types.ObjectId,
@@ -19,7 +29,8 @@ var VehicleSchema = new Schema({
   }],
   _creator: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   created: {
     type: Date,

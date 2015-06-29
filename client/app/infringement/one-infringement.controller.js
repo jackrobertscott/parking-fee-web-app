@@ -2,16 +2,16 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneInfringementCtrl', OneInfringementCtrl);
+    .module('webApp')
+    .controller('OneInfringementCtrl', OneInfringementCtrl);
 
-  OneInfringementCtrl.$inject = ['dataInfringement', 'tracto', '$state', '$stateParams', 'Auth'];
+  OneInfringementCtrl.$inject = ['dataInfringement', 'glitch', '$state', '$stateParams', 'Auth'];
 
-  function OneInfringementCtrl(dataInfringement, tracto, $state, $stateParams, Auth) {
+  function OneInfringementCtrl(dataInfringement, glitch, $state, $stateParams, Auth) {
     var vm = this;
 
-    vm.item = {};
-    vm.tracto = tracto;
+    vm.infringement = {};
+    vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
     vm.create = create;
@@ -22,64 +22,73 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
 
+    ////////////
+
     function getOne(id) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       id = id || $stateParams.id;
-      dataInfringement.getOne(id).then(function(item) {
-        vm.item = item;
-      }).catch(vm.tracto.handle);
+      dataInfringement.getOne(id)
+        .then(function(infringement) {
+          vm.infringement = infringement;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
         var user = Auth.getCurrentUser();
-        angular.extend(vm.item, {
+        angular.extend(vm.infringement, {
           _creator: user._id,
           company: user.company
         });
-        dataInfringement.create(vm.item).then(function(item) {
-          $state.go('infringement');
-        }).catch(vm.tracto.handle);
+        dataInfringement.create(vm.infringement)
+          .then(function(infringement) {
+            $state.go('dashboard.infringement.register', {}, {reload: true});
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
     function update(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
-        return dataInfringement.update(vm.item).then(function(item) {
-          vm.tracto.good = 'Successfully updated';
-        }).catch(vm.tracto.handle);
+        dataInfringement.update(vm.infringement)
+          .then(function(infringement) {
+            vm.glitch.setSuccess('Successfully updated');
+            vm.submitted = false;
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
     function remove(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       if (!form.$valid) {
         invalid();
       } else {
-        dataInfringement.remove(vm.item).then(function() {
-          vm.item = {};
-          $state.go('infringement');
-        }).catch(vm.tracto.handle);
+        dataInfringement.remove(vm.infringement)
+          .then(function() {
+            vm.infringement = {};
+            $state.go('dashboard.infringement.register', {}, {reload: true});
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
     function invalid() {
       vm.submitted = true;
-      vm.tracto.bad = 'Form is invalid';
+      vm.glitch.setError('Form is invalid');
     }
   }
 })();

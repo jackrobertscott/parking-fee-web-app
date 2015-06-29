@@ -2,13 +2,13 @@
   'use strict';
 
   angular
-  .module('auth', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'ui.router',
-    'config',
-    'tracto',
-    'dataServices'
-  ]);
+    .module('auth', [
+      'ngCookies',
+      'ngResource',
+      'ngSanitize',
+      'ui.router',
+      'config',
+      'glitch',
+      'dataServices'
+    ]);
 })();

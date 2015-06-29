@@ -7,10 +7,10 @@
 var Company = require('./company.model');
 
 exports.register = function(socket) {
-  Company.schema.post('save', function (doc) {
+  Company.schema.post('save', function(doc) {
     onSave(socket, doc);
   });
-  Company.schema.post('remove', function (doc) {
+  Company.schema.post('remove', function(doc) {
     onRemove(socket, doc);
   });
 }

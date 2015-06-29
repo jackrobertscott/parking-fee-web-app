@@ -2,16 +2,16 @@
   'use strict';
 
   angular
-  .module('webApp')
-  .controller('OneSessionCtrl', OneSessionCtrl);
+    .module('webApp')
+    .controller('OneSessionCtrl', OneSessionCtrl);
 
-  OneSessionCtrl.$inject = ['dataSession', 'tracto', '$state'];
+  OneSessionCtrl.$inject = ['dataSession', 'glitch', '$state'];
 
-  function OneSessionCtrl(dataSession, tracto, $state) {
+  function OneSessionCtrl(dataSession, glitch, $state) {
     var vm = this;
 
-    vm.item = {};
-    vm.tracto = tracto;
+    vm.session = {};
+    vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
     vm.create = create;
@@ -22,58 +22,66 @@
 
     activate();
 
-    ////////////
-
     function activate() {
-      // code
+      // code...
     }
 
+    ////////////
+
     function getOne(id) {
-      vm.tracto.reset();
-      dataSession.getOne(id).then(function(item) {
-        vm.item = item;
-      }).catch(vm.tracto.handle);
+      vm.glitch.reset();
+      dataSession.getOne(id)
+        .then(function(session) {
+          vm.session = session;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
-        dataSession.create(vm.item).then(function(item) {
-          $state.go('session');
-        }).catch(vm.tracto.handle);
+        dataSession.create(vm.session)
+          .then(function(session) {
+            $state.go('session');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
     function update(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       vm.submitted = true;
       if (!form.$valid) {
         invalid();
       } else {
-        return dataSession.update(vm.item).then(function(item) {
-          vm.tracto.good = 'Successfully updated';
-        }).catch(vm.tracto.handle);
+        dataSession.update(vm.session)
+          .then(function(session) {
+            vm.glitch.setSuccess('Successfully updated');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
     function remove(form) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       if (!form.$valid) {
         invalid();
       } else {
-        dataSession.remove(vm.item).then(function() {
-          vm.item = {};
-          $state.go('session');
-        }).catch(vm.tracto.handle);
+        dataSession.remove(vm.session)
+          .then(function() {
+            vm.session = {};
+            $state.go('session');
+          })
+          .catch(vm.glitch.handle);
       }
     }
 
     function invalid() {
       vm.submitted = true;
-      vm.tracto.bad = 'Form is invalid';
+      vm.glitch.setError('Form is invalid');
     }
   }
 })();

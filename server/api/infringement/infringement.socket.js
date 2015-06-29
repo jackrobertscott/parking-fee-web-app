@@ -7,10 +7,10 @@
 var Infringement = require('./infringement.model');
 
 exports.register = function(socket) {
-  Infringement.schema.post('save', function (doc) {
+  Infringement.schema.post('save', function(doc) {
     onSave(socket, doc);
   });
-  Infringement.schema.post('remove', function (doc) {
+  Infringement.schema.post('remove', function(doc) {
     onRemove(socket, doc);
   });
 }
