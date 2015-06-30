@@ -27,10 +27,10 @@
     function activate() {
       vm.map = {
         center: {
-          latitude: 0,
-          longitude: 0
+          latitude: -31.9546529,
+          longitude: 115.852662
         },
-        zoom: 1,
+        zoom: 10,
         events: {
           click: function(map, event, args) {
             angular.extend(vm.location, {

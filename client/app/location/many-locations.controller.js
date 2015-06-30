@@ -26,11 +26,13 @@
     activate();
 
     function activate() {
-      vm.map.center = {
-        latitude: 0,
-        longitude: 0
+      vm.map = {
+        center: {
+          latitude: -31.9546529,
+          longitude: 115.852662
+        },
+        zoom: 10
       };
-      vm.map.zoom = 1;
       // if (navigator.geolocation) {
       //   navigator.geolocation.getCurrentPosition(function(position) {
       //     vm.map.center.latitude = position.coords.latitude;
