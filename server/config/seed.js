@@ -6,6 +6,7 @@
 'use strict';
 
 var Company = require('../api/company/company.model');
+var Independent = require('../api/independent/independent.model');
 var User = require('../api/user/user.model');
 
 User.find({}).remove(function() {
@@ -38,9 +39,19 @@ User.find({}).remove(function() {
     name: 'Admin Role',
     email: 'admin@admin.com',
     password: 'password'
-  }, function(err, testUser, companyUser, inspectorUser, adminUser) {
+  }, function(err, testUser, inspectorUser, independentUser, companyUser, adminUser) {
     if (err) console.log(err);
     console.log('finished populating users');
+    Independent.find({}).remove(function() {
+      Independent.create({
+        authenticated: true,
+        _creator: independentUser._id
+      }, function(err, testIndependent) {
+          if (err) console.log(err);
+          independentUser.independent = testIndependent._id;
+          independentUser.save();
+      });
+    });
     Company.find({}).remove(function() {
       Company.create({
         name: 'Test Company',

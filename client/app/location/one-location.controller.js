@@ -50,8 +50,8 @@
       dataLocation.getOne(id)
         .then(function(location) {
           var user = Auth.getCurrentUser();
-          if (user.company && user.company.locations.indexOf(location._id) !== -1 ||
-            user.independent && user.independent.locations.indexOf(location._id) !== -1) {
+          if ((user.company && user.company.locations.indexOf(location._id) !== -1) ||
+            (user.independent && user.independent.locations.indexOf(location._id) !== -1)) {
             location.edit = true;
           } else {
             location.edit = false;
@@ -100,7 +100,9 @@
       } else {
         dataLocation.update(vm.location)
           .then(function(location) {
-            vm.glitch.setSuccess('Successfully updated');
+            $state.go('dashboard.location.detail', {
+              id: location._id
+            });
           })
           .catch(vm.glitch.handle);
       }

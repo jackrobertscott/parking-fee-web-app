@@ -14,7 +14,8 @@
       create: create,
       update: update,
       remove: remove,
-      getCompanyLocations: getCompanyLocations
+      getCompanyLocations: getCompanyLocations,
+      getIndependentLocations: getIndependentLocations
     };
 
     return service;

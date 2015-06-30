@@ -1,5 +1,8 @@
 <span ng-init="vmOne.getOne()">
   <h3>Details</h3>
+  <ui-gmap-google-map center="vmOne.map.center" zoom="vmOne.map.zoom" events="vmOne.map.events">
+    <ui-gmap-marker coords="vmOne.location" idkey="0"></ui-gmap-marker>
+  </ui-gmap-google-map>
   <p><strong>Location:</strong> {{vmOne.location.name}}</p>
   <p><strong>Payment rate:</strong> {{vmOne.location.rate | currency}}</p>
   <p><strong>Number of lots available:</strong> {{vmOne.location.lots}}</p>
