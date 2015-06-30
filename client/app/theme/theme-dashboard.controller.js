@@ -85,7 +85,7 @@
           route: 'dashboard.location'
         },
         children: [{
-          label: 'New',
+          label: 'New Location',
           minRole: 'independent',
           maxRole: 'company',
           direction: 'dashboard.location.register'
