@@ -16,15 +16,21 @@ User.find({}).remove(function() {
     password: 'password'
   }, {
     provider: 'local',
-    role: 'company',
-    name: 'Company Role',
-    email: 'company@company.com',
-    password: 'password'
-  }, {
-    provider: 'local',
     role: 'inspector',
     name: 'Inspector Role',
     email: 'inspector@inspector.com',
+    password: 'password'
+  }, {
+    provider: 'local',
+    role: 'independent',
+    name: 'Independent Role',
+    email: 'independent@independent.com',
+    password: 'password'
+  }, {
+    provider: 'local',
+    role: 'company',
+    name: 'Company Role',
+    email: 'company@company.com',
     password: 'password'
   }, {
     provider: 'local',
