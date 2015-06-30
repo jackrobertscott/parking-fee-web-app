@@ -43,7 +43,7 @@
       };
       for (var i = 0; i <= 24; i++) { // need to make sure not longer than limits
         vm.times.push({
-          label: (i)? String(i * 30 + ' mins'): 'Unlimited',
+          label: i ? String(i * 30 + ' mins'): 'Unlimited',
           value: i * 30 * 60 * 1000 // Milliseconds (like from Date object)
         });
       }
