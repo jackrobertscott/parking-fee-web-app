@@ -17,7 +17,9 @@
       })
       .state('dashboard.session.detail', {
         url: '/detail/:id',
-        templateUrl: 'app/session/session.detail.html'
+        templateUrl: 'app/session/session.detail.html',
+        controller: 'OneSessionCtrl',
+        controllerAs: 'vmOne'
       });
   }
 })();

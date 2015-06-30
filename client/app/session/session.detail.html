@@ -1,0 +1,6 @@
+<h3 ng-init="vmOne.getOne()">Details</h3>
+<p><strong>Vehicle:</strong> {{ vmOne.session.vehicle.plate }}</p>
+<p><strong>Started:</strong> {{ vmOne.session.start | date: "short" }}</p>
+<p><strong>Ended:</strong> {{ vmOne.session.end | date: "short" }}</p>
+<p><strong>Location:</strong> {{ vmOne.session.location.name }}</p>
+<p><strong>Payment:</strong> {{ vmOne.session.payment | currency }}</p>

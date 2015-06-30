@@ -8,8 +8,8 @@ var SessionSchema = new Schema({
     type: Date,
     required: true
   },
-  time: { // Time spent parking (seconds)
-    type: Number,
+  end: { // Time spent parking (seconds)
+    type: Date,
     required: true
   },
   payment: {

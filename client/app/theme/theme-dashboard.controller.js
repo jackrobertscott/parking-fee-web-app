@@ -85,8 +85,9 @@
           route: 'dashboard.location'
         },
         children: [{
-          label: 'Register',
+          label: 'New',
           minRole: 'independent',
+          maxRole: 'company',
           direction: 'dashboard.location.register'
         }]
       });

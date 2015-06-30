@@ -9,14 +9,18 @@
       <table class="table table-hover" ng-init="vmMany.getFewUser()">
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Vehicle</th>
+            <th>Started</th>
+            <th>Ended</th>
             <th>Payment</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="session in vmMany.sessions | filter: search | limitTo: limit: begin" ui-sref="dashboard.session.detail({id: session._id})">
-            <td>{{session.name}}</td>
-            <td>{{session.payment | currency}}</td>
+            <td>{{ session.vehicle.plate }}</td>
+            <td>{{ session.start | date: "short" }}</td>
+            <td>{{ session.end | date: "short" }}</td>
+            <td>{{ session.payment | currency }}</td>
           </tr>
           <tr ng-if="!vmMany.sessions.length">
             <td colspan="2">No results</td>

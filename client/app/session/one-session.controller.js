@@ -5,9 +5,9 @@
     .module('webApp')
     .controller('OneSessionCtrl', OneSessionCtrl);
 
-  OneSessionCtrl.$inject = ['dataSession', 'glitch', '$state'];
+  OneSessionCtrl.$inject = ['dataSession', 'glitch', '$state', '$stateParams'];
 
-  function OneSessionCtrl(dataSession, glitch, $state) {
+  function OneSessionCtrl(dataSession, glitch, $state, $stateParams) {
     var vm = this;
 
     vm.session = {};
@@ -30,6 +30,7 @@
 
     function getOne(id) {
       vm.glitch.reset();
+      id = id || $stateParams.id;
       dataSession.getOne(id)
         .then(function(session) {
           vm.session = session;
