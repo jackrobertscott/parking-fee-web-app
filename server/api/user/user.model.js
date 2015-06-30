@@ -19,7 +19,7 @@ var UserSchema = new Schema({
     default: 'user'
   },
   phone: {
-    type: Number
+    type: String
   },
   vehicles: [{
     type: Schema.Types.ObjectId,

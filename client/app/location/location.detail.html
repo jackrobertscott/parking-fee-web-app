@@ -11,6 +11,6 @@
   <p ng-if="vmOne.location.limit !== 0"><strong>Parking time limit:</strong> {{vmOne.location.limit / (1000 * 3600)}} hours</p>
   <p><strong>Payment rate:</strong> {{vmOne.location.rate | currency}}</p>
   <p><strong>Number of lots available:</strong> {{vmOne.location.lots}}</p>
-  <p><strong>Extra information:</strong> {{vmOne.location.info}}</p>
+  <p ng-if="vmOne.location.info"><strong>Extra information:</strong> {{vmOne.location.info}}</p>
   <a class="btn btn-primary" type="submit" ng-if="vmOne.location.edit" ui-sref="dashboard.location.settings({id: vmOne.location._id})">Edit</a>
 </span>
