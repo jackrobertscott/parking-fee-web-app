@@ -3,10 +3,14 @@
   <ui-gmap-google-map center="vmOne.map.center" zoom="vmOne.map.zoom" events="vmOne.map.events">
     <ui-gmap-marker coords="vmOne.location" idkey="0"></ui-gmap-marker>
   </ui-gmap-google-map>
-  <p><strong>Location:</strong> {{vmOne.location.name}}</p>
-  <p><strong>Payment rate:</strong> {{vmOne.location.rate | currency}}</p>
-  <p><strong>Number of lots available:</strong> {{vmOne.location.lots}}</p>
+  <p><strong>Suburb:</strong> {{vmOne.location.suburb}}</p>
+  <p><strong>Address:</strong> {{vmOne.location.address}}</p>
+  <p><strong>Postal code:</strong> {{vmOne.location.post}}</p>
   <p><strong>Start time:</strong> {{vmOne.location.start | date:'shortTime'}}</p>
   <p><strong>End time:</strong> {{vmOne.location.end | date:'shortTime'}}</p>
+  <p><strong>Parking time limit:</strong> {{vmOne.location.limit / (1000 * 3600)}} hours</p>
+  <p><strong>Payment rate:</strong> {{vmOne.location.rate | currency}}</p>
+  <p><strong>Number of lots available:</strong> {{vmOne.location.lots}}</p>
+  <p><strong>Extra information:</strong> {{vmOne.location.info}}</p>
   <a class="btn btn-primary" type="submit" ng-if="vmOne.location.edit" ui-sref="dashboard.location.settings({id: vmOne.location._id})">Edit</a>
 </span>

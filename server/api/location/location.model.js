@@ -4,10 +4,6 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var LocationSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
   latitude: {
     type: Number,
     required: true
@@ -16,20 +12,37 @@ var LocationSchema = new Schema({
     type: Number,
     required: true
   },
+  suburb: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
+  post: {
+    type: Number,
+    required: true
+  },
   rate: { // Hourly parking rate in cents
     type: Number,
     required: true
   },
-  start: { // Charging start time (seconds into day)
+  start: { // Park opening time
     type: Date,
     required: true
   },
-  end: { // Charing end time (seconds into day)
+  end: { // Park closing time
     type: Date,
+    required: true
+  },
+  limit: { // Time max allowed to park (milliseconds)
+    type: Number,
     required: true
   },
   lots: {
-    type: Number
+    type: Number,
+    required: true
   },
   info: {
     type: String

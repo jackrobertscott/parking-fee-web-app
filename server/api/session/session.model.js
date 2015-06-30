@@ -4,11 +4,11 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var SessionSchema = new Schema({
-  start: { // Charging start time (seconds into day)
+  start: {
     type: Date,
     required: true
   },
-  end: { // Time spent parking (seconds)
+  end: {
     type: Date,
     required: true
   },

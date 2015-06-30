@@ -6,9 +6,13 @@
 'use strict';
 
 var Company = require('../api/company/company.model');
+var Location = require('../api/location/location.model');
+var Vehicle = require('../api/vehicle/vehicle.model');
 var Independent = require('../api/independent/independent.model');
 var User = require('../api/user/user.model');
 
+// Location.find({}).remove().exec();
+// Vehicle.find({}).remove().exec();
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
