@@ -33,9 +33,9 @@
     });
   }
 
-  authInterceptor.$inject = ['$rootScope', '$q', '$cookieStore', '$location'];
+  authInterceptor.$inject = ['$rootScope', '$q', '$cookieStore', '$injector'];
 
-  function authInterceptor($rootScope, $q, $cookieStore, $location) {
+  function authInterceptor($rootScope, $q, $cookieStore, $injector) {
     return {
       // Add authorization token to headers
       request: function(config) {
@@ -49,10 +49,10 @@
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if (response.status === 401) {
-          $location.path('/login');
           console.log('unauthorised: api');
           // remove any stale tokens
           $cookieStore.remove('token');
+          $injector.get('$state').go('barred.login');
           return $q.reject(response);
         } else {
           return $q.reject(response);
@@ -61,9 +61,9 @@
     };
   }
 
-  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'glitch'];
+  allowAccess.$inject = ['$rootScope', '$state', 'Auth', 'glitch'];
 
-  function allowAccess($rootScope, $location, Auth, glitch) {
+  function allowAccess($rootScope, $state, Auth, glitch) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       glitch.reset();
@@ -71,11 +71,11 @@
         if (toState.data && toState.data.role && toState.data.role !== 'guest') {
           var userRoles = Auth.getUserRoles();
           if (!loggedIn) {
-            $location.path('/login');
+            $state.go('barred.login');
             console.log('unauthorised: not logged in');
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
-            $location.path('/user/settings');
+            $state.go('dashboard.user.settings');
             console.log('unauthorised: role no access');
           }
         }
