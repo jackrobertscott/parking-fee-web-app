@@ -63,6 +63,13 @@
     </p>
   </div>
   <hr>
+  <img src="{{ vmOne.location.photo }}" class="img-responsive">
+  <div class="form-group">
+    <label for="photo">File input</label>
+    <input type="file" id="photo" ng-image-model="vmOne.location.photo">
+    <p class="help-block">Upload photos of the parking location.</p>
+  </div>
+  <hr>
   <div class="form-group" ng-class="{ 'has-success': form.lots.$valid && vmOne.submitted, 'has-error': form.lots.$invalid && vmOne.submitted }">
     <label for="lots">Number of Available Lots</label>
     <input class="form-control" id="lots" name="lots" ng-model="vmOne.location.lots" placeholder="Lots" type="number" required>
