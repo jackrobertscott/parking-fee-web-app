@@ -63,10 +63,15 @@
     </p>
   </div>
   <hr>
-  <img src="{{ vmOne.location.photo }}" class="img-responsive">
+  <div class="row">
+    <div class="col-xs-4" ng-repeat="photo in vmOne.location.photo">
+      <img src="{{ photo }}" class="img-responsive">
+    </div>
+  </div>
+  <br ng-if="vmOne.location.photo.length">
   <div class="form-group">
     <label for="photo">File input</label>
-    <input type="file" id="photo" ng-image-model="vmOne.location.photo">
+    <input type="file" id="photo" ng-image-model="vmOne.location.photo" multiple>
     <p class="help-block">Upload photos of the parking location.</p>
   </div>
   <hr>
