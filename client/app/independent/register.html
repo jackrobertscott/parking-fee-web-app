@@ -1,14 +1,13 @@
 <h2>Lease Parking Locations</h2>
 <hr>
-<form class="form" name="form" ng-submit="vmOne.create(form)" novalidate>
-  <p>Large company park owners register <a ui-sref="barred.company"><strong>HERE</strong></a>.</p>
-  <br>
-  <br>
-  <p>Register as an independent parking area owner. The guidelines for being an independent owner are bellow.</p>
-  <p>Insert guidelines and stuff here...</p>
-  <p>By clicking register you will be registered as a parking area owner and will be given the corresponding permissions.</p>
-  <br>
-  <br>
-  <p>Bank account details form</p>
-  <button class="btn btn-default col-md-10 col-lg-8" type="submit">Register</button>
-</form>
+<div class="row">
+  <div class="col-md-10 col-lg-8">
+    <form class="form" name="form" ng-submit="vmOne.create(form)" novalidate>
+      <p>Multiple person park owners with an ABN should register <a ui-sref="barred.company"><strong>HERE</strong></a>.</p>
+      <br>
+      <p>By selecting the 'Become Park Owner' button, you accept all our related <a ui-sref="barred.terms"><strong>terms and conditions</a></strong>.</p>
+      <br>
+      <button class="btn btn-default button-block col-sm-12" type="submit">Become Park Owner</button>
+    </form>
+  </div>
+</div>

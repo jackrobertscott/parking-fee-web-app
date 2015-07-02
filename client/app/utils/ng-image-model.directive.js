@@ -48,7 +48,7 @@
             c.height = height;
             ctx.drawImage(img, 0, 0, width, height);
             scope.$apply(function() {
-              scope.ngImageModel.push(c.toDataURL('image/png'));
+              scope.ngImageModel.push(c.toDataURL('image/png').replace('data:image/png;base64,', ''));
             });
           };
 

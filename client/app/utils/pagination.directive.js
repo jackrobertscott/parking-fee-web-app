@@ -8,7 +8,7 @@
   function pagination() {
     var directive = {
       restrict: 'EA',
-      templateUrl: 'app/theme/pagination.directive.html',
+      templateUrl: 'app/utils/pagination.directive.html',
       transclude: true,
       scope: {
         length: '=',
