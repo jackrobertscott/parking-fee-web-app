@@ -42,8 +42,8 @@ var all = {
   },
 
   facebook: {
-    clientID: process.env.FACEBOOK_ID || 'id',
-    clientSecret: process.env.FACEBOOK_SECRET || 'secret',
+    clientID: process.env.FACEBOOK_ID || '870265966394513',
+    clientSecret: process.env.FACEBOOK_SECRET || '05df5c7be8ff07efd81f7e1663022830',
     callbackURL: (process.env.DOMAIN || '') + '/auth/facebook/callback'
   },
 

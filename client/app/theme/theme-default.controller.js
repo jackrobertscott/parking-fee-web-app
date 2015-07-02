@@ -10,10 +10,11 @@
   function ThemeDefaultCtrl($state, Auth, menu) {
     var vm = this;
 
+    vm.menu = [];
     vm.isActive = isActive;
     vm.isBeforeOrEqual = Auth.isBeforeOrEqual;
     vm.isAfterOrEqual = Auth.isAfterOrEqual;
-    vm.menu = [];
+    vm.loginOauth = loginOauth;
 
     ////////////
 
@@ -31,6 +32,10 @@
       } else {
         return $state.includes(route);
       }
+    }
+
+    function loginOauth(provider) {
+      Auth.loginOauth(provider);
     }
 
     function createMenu() {
