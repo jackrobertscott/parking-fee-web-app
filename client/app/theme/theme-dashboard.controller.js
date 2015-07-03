@@ -53,8 +53,7 @@
           label: 'Change Password',
           direction: 'dashboard.user.password'
         }]
-      });
-      menu.addItem({
+      }).addItem({
         label: 'Park Owner',
         minRole: 'user',
         maxRole: 'user',
@@ -62,8 +61,7 @@
         data: {
           glyphicon: 'briefcase'
         }
-      });
-      menu.addItem({
+      }).addItem({
         label: 'Company',
         minRole: 'company',
         direction: 'dashboard.company.settings',
@@ -75,8 +73,7 @@
           label: 'Settings',
           direction: 'dashboard.company.settings'
         }]
-      });
-      menu.addItem({
+      }).addItem({
         label: 'Locations',
         minRole: 'user',
         direction: 'dashboard.location',
@@ -90,8 +87,7 @@
           maxRole: 'company',
           direction: 'dashboard.location.register'
         }]
-      });
-      menu.addItem({
+      }).addItem({
         label: 'Infringements',
         minRole: 'company',
         direction: 'dashboard.infringement.register',
@@ -103,8 +99,7 @@
           label: 'Register',
           direction: 'dashboard.infringement.register',
         }]
-      });
-      menu.addItem({
+      }).addItem({
         label: 'Sessions',
         minRole: 'user',
         direction: 'dashboard.session',
@@ -112,8 +107,7 @@
           glyphicon: 'calendar',
           route: 'dashboard.session'
         }
-      });
-      menu.addItem({
+      }).addItem({
         label: 'Inspections',
         minRole: 'company',
         direction: 'dashboard.inspection',
@@ -121,8 +115,7 @@
           glyphicon: 'eye-open',
           route: 'dashboard.inspection'
         }
-      });
-      menu.addItem({
+      }).addItem({
         label: 'Logout',
         direction: 'logout',
         minRole: 'user',

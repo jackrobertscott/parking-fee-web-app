@@ -31,6 +31,7 @@
         });
       }
       items.push(item);
+      return service;
     }
 
     function safeItem(object) {
